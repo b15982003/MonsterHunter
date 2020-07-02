@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    //PO文章
 //    fun addData() {
 //        val articles = FirebaseFirestore.getInstance()
 //            .collection("articles")
