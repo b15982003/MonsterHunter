@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.data.source.MonsterRepository
+import com.ray.monsterhunter.home.HomeViewModel
 
 
 class ViewModelFactory constructor(
@@ -14,6 +15,9 @@ class ViewModelFactory constructor(
         when {
             isAssignableFrom(MainViewModel::class.java) ->
                 MainViewModel(repository)
+
+            isAssignableFrom(HomeViewModel::class.java) ->
+                HomeViewModel(repository)
 
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
