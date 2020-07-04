@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MonsterHunter</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- General -->
+    <string name="chatroom">聊天室</string>
+    <string name="friend">好友</string>
+    <string name="home">Monster Hunter</string>
+    <string name="history">對戰紀錄</string>
+    <string name="profile">個人資訊</string>
 </resources>

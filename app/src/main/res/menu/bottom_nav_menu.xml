@@ -4,22 +4,22 @@
     <item
         android:id="@+id/navigation_chatroom"
         android:icon="@drawable/ic_nav_chatroom_selector"
-        android:title="聊天室" />
+        android:title="茶室" />
 
     <item
         android:id="@+id/navigation_friend"
         android:icon="@drawable/ic_nav_friend_selector"
-        android:title="朋友" />
+        android:title="知音" />
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_nav_home_selector"
-        android:title="祝葉" />
+        android:title="文章" />
 
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_nav_histiry_selector"
-        android:title="歷史" />
+        android:title="紀錄" />
 
     <item
         android:id="@+id/navigation_profile"
