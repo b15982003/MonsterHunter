@@ -10,4 +10,17 @@
     <string name="home">Monster Hunter</string>
     <string name="history">對戰紀錄</string>
     <string name="profile">個人資訊</string>
+    <string name="test">測試post</string>
+
+    <!-- Postdailog -->
+    <string name="roomname">房間名稱</string>
+    <string name="time">開場時間</string>
+    <string name="textcontent">文字內容</string>
+    <string name="sent">送出</string>
+    <string name="armschoose">需要武器 ：</string>
+    <string name="missionType">任務類型 ：</string>
+    <string name="monstername">魔物名稱 ：</string>
+
+    <!-- Error -->
+    <string name="notGood">我也是笑笑的拉</string>
 </resources>

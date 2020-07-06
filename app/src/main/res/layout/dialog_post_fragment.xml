@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ray.monsterhunter.post.DialogPostViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{() -> viewModel.leave(false)}"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="560dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/dailog_background"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_publish"
+                android:layout_width="match_parent"
+                android:layout_height="560dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/post_dialog_image"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/fire_heater"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="157dp"
+                    tools:layout_editor_absoluteY="47dp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/post_dialog_roomName"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColorHint="@color/post_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_image"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/post_dialog_roomName_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:hint="@string/roomname"
+                        android:text="@={viewModel.crawling.roomname}"
+                        android:imeOptions="actionNext"
+                        android:inputType="text"
+                        android:lines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/post_dialog_time"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColorHint="@color/post_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_roomName"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/post_dialog_time_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:hint="@string/time"
+                        android:imeOptions="actionNext"
+                        android:text="@={viewModel.crawling.startTime}"
+                        android:inputType="text"
+                        android:lines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/post_dialog_activityType_text"
+                    style="@style/post_dailog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/missionType"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_time" />
+
+                <TextView
+                    android:id="@+id/post_dialog_activityType_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/dailog_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_activityType_text" />
+
+                <Spinner
+                    android:id="@+id/post_dialog_activityType"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toStartOf="@id/post_dialog_activityType_shape"
+                    app:layout_constraintTop_toTopOf="@+id/post_dialog_activityType_shape" />
+
+                <TextView
+                    android:id="@+id/post_dialog_monster_text"
+                    style="@style/post_dailog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/monstername"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_activityType_shape" />
+
+                <TextView
+                    android:id="@+id/post_dialog_monster_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/dailog_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_monster_text" />
+
+                <Spinner
+                    android:id="@+id/post_dialog_monstername"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toStartOf="@id/post_dialog_monster_shape"
+                    app:layout_constraintTop_toTopOf="@+id/post_dialog_monster_shape" />
+
+                <TextView
+                    android:id="@+id/post_dialog_changeArms_text"
+                    style="@style/post_dailog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/armschoose"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_monster_shape" />
+
+                <TextView
+                    android:id="@+id/post_dialog_changeArms_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/dailog_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_changeArms_text"
+
+                    />
+
+                <Spinner
+                    android:id="@+id/post_dialog_armsA"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toStartOf="@id/post_dialog_changeArms_shape"
+                    app:layout_constraintTop_toTopOf="@+id/post_dialog_changeArms_shape" />
+
+                <Spinner
+                    android:id="@+id/post_dialog_armsB"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toEndOf="@id/post_dialog_armsA"
+                    app:layout_constraintTop_toTopOf="@+id/post_dialog_armsA" />
+
+                <Spinner
+                    android:id="@+id/post_dialog_armsC"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toStartOf="@id/post_dialog_armsA"
+                    app:layout_constraintTop_toBottomOf="@+id/post_dialog_armsA" />
+
+                <Spinner
+                    android:id="@+id/post_dialog_armsD"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp"
+                    android:spinnerMode="dialog"
+                    app:layout_constraintStart_toStartOf="@+id/post_dialog_armsB"
+                    app:layout_constraintTop_toTopOf="@id/post_dialog_armsC" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/post_dialog_textcontent"
+                    style="@style/TextInputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColorHint="@color/post_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_changeArms_shape"
+                    tools:visibility="visible">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/post_dialog_textcontent_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|start"
+                        android:hint="@string/textcontent"
+                        android:text="@={viewModel.crawling.text}"
+                        android:inputType="textMultiLine"
+                        android:lines="4" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/post_dialog_sent"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/sent"
+                    android:onClick="@{() -> viewModel.publish(viewModel.crawling)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_textcontent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

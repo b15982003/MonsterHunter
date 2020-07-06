@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.home.HomeViewModel
+import com.ray.monsterhunter.post.DialogPost
+import com.ray.monsterhunter.post.DialogPostViewModel
 
 
 class ViewModelFactory constructor(
@@ -18,6 +20,10 @@ class ViewModelFactory constructor(
 
             isAssignableFrom(HomeViewModel::class.java) ->
                 HomeViewModel(repository)
+
+            isAssignableFrom(DialogPostViewModel::class.java) ->
+                DialogPostViewModel(repository)
+
 
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

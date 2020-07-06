@@ -1,4 +1,4 @@
-package com.ray.monsterhunter.home
+package com.ray.monsterhunter.post
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,26 +6,33 @@ import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.User
+import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
-import com.ray.monsterhunter.util.ServiceLocator.repository
+import com.ray.monsterhunter.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.ray.monsterhunter.data.source.Result
-import com.ray.monsterhunter.util.Logger
 
-class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
-
-
-    private var _crawlings = MutableLiveData<List<Crawling>>()
-
-    val crawlings : LiveData<List<Crawling>>
-    get() = _crawlings
+class DialogPostViewModel(
+    private val repository: MonsterRepository
+) : ViewModel() {
 
 
+    val _leave = MutableLiveData<Boolean>()
+    val leave: LiveData<Boolean>
+        get() = _leave
 
+    private val _crawling = MutableLiveData<Crawling>().apply {
+        value = Crawling(user = User())
+    }
+    val crawling: LiveData<Crawling>
+        get() = _crawling
+
+
+    // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
@@ -37,59 +44,63 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
     val error: LiveData<String>
         get() = _error
 
-    // status for the loading icon of swl
-    private val _refreshStatus = MutableLiveData<Boolean>()
-
-    val refreshStatus: LiveData<Boolean>
-        get() = _refreshStatus
-
     // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init {
 
+    init {
+        Logger.i("------------------------------------")
+        Logger.i("[${this::class.simpleName}]${this}")
+        Logger.i("------------------------------------")
+        getAuthor()
     }
 
+    fun getAuthor() {
+        _crawling.value?.user?.id = "紙火箭"
+        _crawling.value?.user?.image = "待放"
+    }
 
-
-    fun getCrawlingsResult() {
+    fun publish(crawling: Crawling) {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getCrawlings()
-
-            _crawlings.value = when (result) {
+            when (val result = repository.publish(crawling)) {
                 is Result.Success -> {
-                    Logger.d("success")
+                    Logger.i("ok,${crawling}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    result.data
+                    leave(true)
                 }
                 is Result.Fail -> {
-                    Logger.d("Fail")
+                    Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
-                    null
                 }
                 is Result.Error -> {
-                    Logger.d("Error")
+                    Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
-                    null
                 }
                 else -> {
-                    Logger.d("no")
+                    Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
-                    null
                 }
             }
-            _refreshStatus.value = false
         }
     }
+
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
+
+    fun onLeft() {
+        _leave.value = null
+    }
+
 }

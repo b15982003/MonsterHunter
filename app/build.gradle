@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -24,8 +26,14 @@ android {
 
     buildTypes {
         release {
+            //Logger
+            buildConfigField("Boolean", "LOGGER_VISIABLE", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        //Logger
+        debug {
+            buildConfigField("Boolean", "LOGGER_VISIABLE", "true")
         }
     }
     kotlinOptions {
@@ -88,6 +96,7 @@ dependencies {
 
     // Fragment
     implementation "androidx.fragment:fragment:$version_fragment"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     debugImplementation "androidx.fragment:fragment-testing:$version_fragment"
 
     // ViewModel and LiveData
