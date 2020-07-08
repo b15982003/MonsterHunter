@@ -81,7 +81,7 @@ class DialogPost : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.crawling.value?.type = "null"
+                        0L -> viewModel.crawling.value?.type = "出擊"
                         1L -> viewModel.crawling.value?.type = "任務"
                         2L -> viewModel.crawling.value?.type = "自由"
                         3L -> viewModel.crawling.value?.type = "調查"
@@ -106,7 +106,7 @@ class DialogPost : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.crawling.value?.monsterType = "隨機"
+                        0L -> viewModel.crawling.value?.monsterType = "隨機攻打生物"
                         1L -> viewModel.crawling.value?.monsterType = "滅盡龍"
                         2L -> viewModel.crawling.value?.monsterType = "煌黑龍"
                         3L -> viewModel.crawling.value?.monsterType = "麒麟"
