@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.ray.monsterhunter.data.Crawling" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/home_data_image"
+                    style="@style/home_data_title"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/ic_monster"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/home_data_roomName"
+                    style="@style/home_data_title"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{product.roomname}"
+                    app:layout_constraintStart_toEndOf="@+id/home_data_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/testGo" />
+
+                <TextView
+                    android:id="@+id/home_data_userId"
+                    style="@style/home_data_text"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{product.user.id}"
+                    app:layout_constraintStart_toStartOf="@+id/home_data_roomName"
+                    app:layout_constraintTop_toBottomOf="@id/home_data_roomName"
+                    tools:text="@string/testGo" />
+
+                <TextView
+                    android:id="@+id/home_data_startTime"
+                    style="@style/home_data_text"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{product.startTime}"
+                    app:layout_constraintStart_toStartOf="@+id/home_data_userId"
+                    app:layout_constraintTop_toBottomOf="@+id/home_data_userId"
+                    tools:text="@string/testGo" />
+
+                <TextView
+                    android:id="@+id/home_data_monsterName"
+                    style="@style/home_data_text"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{product.monsterType}"
+                    app:layout_constraintStart_toStartOf="@id/home_data_startTime"
+                    app:layout_constraintTop_toBottomOf="@id/home_data_startTime"
+                    tools:text="@string/testGo" />
+
+                <TextView
+                    android:id="@+id/home_data_type"
+                    style="@style/home_data_button"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_type_background"
+                    android:gravity="center"
+                    android:text="@{product.type}"
+                    app:layout_constraintEnd_toEndOf="@id/home_data_armsD"
+                    app:layout_constraintTop_toTopOf="@id/home_data_roomName"
+                    tools:text="@string/testType" />
+
+                <TextView
+                    android:id="@+id/home_data_armsA"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{product.armsType1}"
+                    app:layout_constraintEnd_toStartOf="@+id/home_data_armsB"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/home_data_monsterName"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/home_data_armsB"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{product.armsType2}"
+                    app:layout_constraintEnd_toStartOf="@+id/home_data_armsC"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/home_data_armsA"
+                    app:layout_constraintTop_toTopOf="@+id/home_data_armsA"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/home_data_armsC"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{product.armsType3}"
+                    app:layout_constraintEnd_toStartOf="@+id/home_data_armsD"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/home_data_armsB"
+                    app:layout_constraintTop_toTopOf="@+id/home_data_armsB"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/home_data_armsD"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{product.armsType4}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/home_data_armsC"
+                    app:layout_constraintTop_toTopOf="@+id/home_data_armsC"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="@string/testArms" />
+
+
+                <Button
+                    android:id="@+id/home_data_attendee"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="60dp"
+                    android:background="@drawable/home_atten_background"
+                    android:gravity="center"
+                    android:text="@string/home_attendee"
+                    app:layout_constraintEnd_toEndOf="@id/home_data_armsD"
+                    app:layout_constraintTop_toBottomOf="@id/home_data_type" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -23,4 +23,12 @@
 
     <!-- Error -->
     <string name="notGood">我也是笑笑的拉</string>
+
+    <!-- Home -->
+    <string name="testGo">我是來測試的自述</string>
+    <string name="testType">活動</string>
+    <string name="testArms">武器</string>
+    <string name="home_sent">送出</string>
+    <string name="home_attendee">參戰</string>
+
 </resources>

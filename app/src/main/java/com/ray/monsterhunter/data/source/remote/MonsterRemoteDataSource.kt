@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
@@ -19,6 +20,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     private val PATH_CRAWLING = "crawling"
     private const val KEY_START_TIME = "startTime"
+    private val PATH_ACTIVITY = "activity"
 
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -33,6 +35,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         Logger.d(document.id + " => " + document.data)
                         val crawling = document.toObject(Crawling::class.java)
                         list.add(crawling)
+                    }
+                    continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_ACTIVITY)
+//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Activity>()
+                    for (document in task.result!!) {
+
+                        Logger.d(document.id + " => " + document.data)
+                        val activity = document.toObject(Activity::class.java)
+                        list.add(activity)
                     }
                     continuation.resume(Result.Success(list))
                 } else {

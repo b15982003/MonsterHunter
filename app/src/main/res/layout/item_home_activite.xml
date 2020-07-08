@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.ray.monsterhunter.data.Activity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_home_image"
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:imageUrl="@{product.image}"
+            tools:src="@drawable/ic_other_fire"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:id="@+id/item_home_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/item_home_image"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/home_activity_background"
+            android:text="@{product.title}"
+            tools:text="@string/testGo"
+            android:gravity="center"
+            style="@style/home_activity"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

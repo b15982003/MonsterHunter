@@ -1,5 +1,6 @@
 package com.ray.monsterhunter.data.source
 
+import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.Crawling
 
 class DefaultMonsterRepository(
@@ -10,6 +11,10 @@ class DefaultMonsterRepository(
 
     override suspend fun getCrawlings(): Result<List<Crawling>> {
        return remoteDataSource.getCrawlings()
+    }
+
+    override suspend fun getActivitys(): Result<List<Activity>> {
+        return remoteDataSource.getActivitys()
     }
 
 

@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
-import com.ray.monsterhunter.util.ServiceLocator.repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,9 +21,14 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
 
     private var _crawlings = MutableLiveData<List<Crawling>>()
 
-    val crawlings : LiveData<List<Crawling>>
-    get() = _crawlings
+    val crawlings: LiveData<List<Crawling>>
+        get() = _crawlings
 
+
+    private var _activityImage = MutableLiveData<List<Activity>>()
+
+    val activityImage: LiveData<List<Activity>>
+        get() = _activityImage
 
 
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -50,9 +55,9 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-
+        getCrawlingsResult()
+        getActivityResult()
     }
-
 
 
     fun getCrawlingsResult() {
@@ -65,25 +70,63 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _crawlings.value = when (result) {
                 is Result.Success -> {
-                    Logger.d("success")
+
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
                 is Result.Fail -> {
-                    Logger.d("Fail")
+
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-                    Logger.d("Error")
+
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
-                    Logger.d("no")
+
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+            _refreshStatus.value = false
+        }
+    }
+
+    fun getActivityResult() {
+
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getActivitys()
+
+            _activityImage.value = when (result) {
+                is Result.Success -> {
+                    Logger.d("00000000000000")
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+                }
+                is Result.Fail -> {
+                    Logger.d("11111111111")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+                    Logger.d("2222222222")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+                    Logger.d("3333333333")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
