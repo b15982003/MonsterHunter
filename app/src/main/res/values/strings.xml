@@ -20,6 +20,9 @@
     <string name="armschoose">需要武器 ：</string>
     <string name="missionType">任務類型 ：</string>
     <string name="monstername">魔物名稱 ：</string>
+    <string name="time_title_text">良辰吉時 ：</string>
+    <string name="chooseDate">選擇日期</string>
+    <string name="chooseTime">選擇時間</string>
 
     <!-- Error -->
     <string name="notGood">我也是笑笑的拉</string>
@@ -30,5 +33,18 @@
     <string name="testArms">武器</string>
     <string name="home_sent">送出</string>
     <string name="home_attendee">參戰</string>
+
+    <!--SignIn -->
+    <string name="google_signIn">Google SignIn</string>
+    <string name="google_sign_in_textPerson">選擇繼續即表示您同意接受我們的</string>
+    <string name="google_sign_in_textAnd">和</string>
+    <string name="google_sign_in_textTerms">服務條款</string>
+    <string name="google_sign_in_textTerms2">隱私權條款</string>
+
+    <!-- SignOut -->
+    <string name="google_signOut">Google SignOut</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

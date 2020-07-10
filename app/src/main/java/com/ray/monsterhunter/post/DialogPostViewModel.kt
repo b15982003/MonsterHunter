@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.FriendList
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -30,6 +32,10 @@ class DialogPostViewModel(
     }
     val crawling: LiveData<Crawling>
         get() = _crawling
+
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User>
+        get() = _user
 
 
     // status: The internal MutableLiveData that stores the status of the most recent request
@@ -55,13 +61,17 @@ class DialogPostViewModel(
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
-        getAuthor()
+        getUserInPost()
+
     }
 
-    fun getAuthor() {
-        _crawling.value?.user?.id = "紙火箭"
-        _crawling.value?.user?.image = "待放"
+    fun getUserInPost() {
+        crawling.value?.user?.id = UserManager.userData.id
+        crawling.value?.user?.image = UserManager.userData.image
+        Logger.d("ppppp${crawling.value?.user?.id}")
+
     }
+
 
     fun publish(crawling: Crawling) {
 
@@ -94,6 +104,7 @@ class DialogPostViewModel(
             }
         }
     }
+
 
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh

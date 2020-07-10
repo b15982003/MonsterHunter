@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LogInActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/google_sing_in_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="180dp"
+            android:src="@drawable/ic_other_fire"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/login_activity_signin_button"
+            android:textAllCaps="false"
+            android:text="@string/google_signIn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            />
+
+        <ImageView
+            android:id="@+id/google_sing_in_icon"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="150dp"
+            android:src="@drawable/ic_google_singin"
+            app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+            app:layout_constraintStart_toStartOf="@+id/google_sign_in_button"
+            app:layout_constraintTop_toTopOf="@+id/google_sign_in_button"
+            app:layout_constraintBottom_toBottomOf="@+id/google_sign_in_button"
+            />
+
+        <TextView
+            android:id="@+id/google_sing_in_textPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/google_signIn_Terms"
+            android:text="@string/google_sign_in_textPerson"
+            app:layout_constraintEnd_toStartOf="@+id/google_sing_in_textTerms"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/google_sign_in_button" />
+
+        <TextView
+            android:id="@+id/google_sing_in_textTerms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/google_sign_in_textTerms"
+            android:textColor="@color/entertext"
+            style="@style/google_signIn_Terms"
+            app:layout_constraintEnd_toStartOf="@+id/google_sing_in_textAnd"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/google_sing_in_textPerson"
+            app:layout_constraintTop_toBottomOf="@id/google_sign_in_button" />
+
+        <TextView
+            android:id="@+id/google_sing_in_textAnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/google_signIn_Terms"
+            android:text="@string/google_sign_in_textAnd"
+            app:layout_constraintEnd_toStartOf="@+id/google_sing_in_textTerms2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/google_sing_in_textTerms"
+            app:layout_constraintTop_toBottomOf="@id/google_sign_in_button" />
+
+        <TextView
+            android:id="@+id/google_sing_in_textTerms2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/google_signIn_Terms"
+            android:text="@string/google_sign_in_textTerms2"
+            android:textColor="@color/entertext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/google_sing_in_textAnd"
+            app:layout_constraintTop_toBottomOf="@id/google_sign_in_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

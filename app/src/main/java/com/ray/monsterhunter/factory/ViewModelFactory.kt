@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.home.HomeViewModel
-import com.ray.monsterhunter.post.DialogPost
 import com.ray.monsterhunter.post.DialogPostViewModel
+import com.ray.monsterhunter.profile.ProfileViewModel
 
 
 class ViewModelFactory constructor(
@@ -23,6 +23,9 @@ class ViewModelFactory constructor(
 
             isAssignableFrom(DialogPostViewModel::class.java) ->
                 DialogPostViewModel(repository)
+
+            isAssignableFrom(ProfileViewModel::class.java) ->
+                ProfileViewModel(repository)
 
 
             else ->

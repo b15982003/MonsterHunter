@@ -23,9 +23,16 @@
         <item name="android:textStyle">italic</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="post_dailog_choose_time">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="DialogPost">
         <item name="android:windowBackground">@color/translucent_80</item>
     </style>
+
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxStrokeColor">@color/entertext</item>
         <item name="boxStrokeWidth">2dp</item>
@@ -52,7 +59,20 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/home_type_background</item>
         <item name="android:textStyle">bold</item>
+    </style>
 
+    <!-- Google signIn -->
+    <style name="google_signIn_Terms">
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/noto_sans</item>
+    </style>
+
+    <!-- Dialog Post -->
+    <style name="post_dailod_profileName">
+        <item name="android:textSize">30sp</item>
+        <item name="fontFamily">@font/noto_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/post_dialog_personName</item>
     </style>
 
 

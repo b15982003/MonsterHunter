@@ -6,5 +6,6 @@ import com.ray.monsterhunter.factory.ViewModelFactory
 
 fun Fragment.getVmFactory(): ViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
+
     return ViewModelFactory(repository)
 }

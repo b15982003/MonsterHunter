@@ -9,9 +9,11 @@ import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -19,6 +21,7 @@ import kotlin.coroutines.suspendCoroutine
 object MonsterRemoteDataSource : MonsterDataSource {
 
     private val PATH_CRAWLING = "crawling"
+    private val PATH_USER = "user"
     private const val KEY_START_TIME = "startTime"
     private val PATH_ACTIVITY = "activity"
 
@@ -72,18 +75,84 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun publish(crawling: Crawling): Result<Boolean> = suspendCoroutine { continuation ->
-        val crawlings = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
-        val document = crawlings.document()
 
-        crawling.id = document.id
-        crawling.createTime = Calendar.getInstance().timeInMillis.toString()
-        document
-            .set(crawling)
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun publish(crawling: Crawling): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val crawlings = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
+            val document = crawlings.document()
+
+            crawling.id = document.id
+            crawling.createTime = Calendar.getInstance().timeInMillis.toString()
+            document
+                .set(crawling)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                    }
+                }
+        }
+
+    override suspend fun pushUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->
+        val users = FirebaseFirestore.getInstance().collection(PATH_USER)
+        val document = users.document()
+
+        user.documentId = document.id
+        users
+            .whereEqualTo("email", UserManager.userData.email)
+            .get()
+            .addOnSuccessListener { task ->
+                if (task.isEmpty) {
+                    Logger.d("wwwwwwwwww${task}")
+                    document
+                        .set(user)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                continuation.resume(Result.Success(true))
+                            } else {
+                                task.exception?.let {
+                                    continuation.resume(Result.Error(it))
+                                    return@addOnCompleteListener
+                                }
+                                continuation.resume(
+                                    Result.Fail(
+                                        MonsterApplication.instance.getString(
+                                            R.string.notGood
+                                        )
+                                    )
+                                )
+                            }
+                        }
+                } else {
+                    document
+                        .update("emiil", UserManager.userData.email)
+                }
+            }
+    }
+
+    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .whereEqualTo("email", UserManager.userData.email)
+            .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    continuation.resume(Result.Success(true))
+                    var user1 = User()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(User::class.java)
+                        user1 = user
+                        Logger.d("geeeeeeeeetttt ${user}")
+
+                    }
+                    continuation.resume(Result.Success(user1))
+
                 } else {
                     task.exception?.let {
                         continuation.resume(Result.Error(it))

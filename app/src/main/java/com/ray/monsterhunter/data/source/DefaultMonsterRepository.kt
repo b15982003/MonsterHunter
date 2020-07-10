@@ -2,6 +2,7 @@ package com.ray.monsterhunter.data.source
 
 import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.User
 
 class DefaultMonsterRepository(
     private val remoteDataSource: MonsterDataSource,
@@ -20,6 +21,14 @@ class DefaultMonsterRepository(
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
         return remoteDataSource.publish(crawling)
+    }
+
+    override suspend fun pushUser(user: User): Result<Boolean> {
+        return remoteDataSource.pushUser(user)
+    }
+
+    override suspend fun getUser(): Result<User> {
+        return remoteDataSource.getUser()
     }
 
 }
