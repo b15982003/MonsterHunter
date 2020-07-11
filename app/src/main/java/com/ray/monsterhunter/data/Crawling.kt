@@ -11,7 +11,7 @@ data class Crawling(
     var roomname : String? = "",
     var type : String? = "",
     var monsterType : String? = "",
-    var startTime : String? = "",
+    var dateTime : DateTime? = null,
     var createTime : String? = "",
     var text : String? = "",
     var armsType1 : String? = "",

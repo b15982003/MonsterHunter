@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ray.monsterhunter.databinding.HomeFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.TimeUtil
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -36,6 +39,7 @@ class HomeFragment : Fragment() {
         binding.homeActivityRecy.adapter = HomeActivityAdapter(HomeActivityAdapter.OnClickListener{
 
         })
+
 
 
         return binding.root

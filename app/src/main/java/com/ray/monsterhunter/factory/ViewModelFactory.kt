@@ -3,6 +3,7 @@ package com.ray.monsterhunter.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ray.monsterhunter.MainViewModel
+import com.ray.monsterhunter.chatroom.ChatRoomViewModel
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.home.HomeViewModel
 import com.ray.monsterhunter.post.DialogPostViewModel
@@ -26,6 +27,9 @@ class ViewModelFactory constructor(
 
             isAssignableFrom(ProfileViewModel::class.java) ->
                 ProfileViewModel(repository)
+
+            isAssignableFrom(ChatRoomViewModel::class.java) ->
+                ChatRoomViewModel(repository)
 
 
             else ->

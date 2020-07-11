@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.DateTime
 import com.ray.monsterhunter.data.FriendList
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.Result
@@ -22,13 +23,16 @@ class DialogPostViewModel(
     private val repository: MonsterRepository
 ) : ViewModel() {
 
+    val dateTime = MutableLiveData<DateTime>().apply {
+        value = DateTime()
+    }
 
     val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
         get() = _leave
 
     private val _crawling = MutableLiveData<Crawling>().apply {
-        value = Crawling(user = User())
+        value = Crawling(user = User(),dateTime = DateTime())
     }
     val crawling: LiveData<Crawling>
         get() = _crawling
@@ -68,12 +72,22 @@ class DialogPostViewModel(
     fun getUserInPost() {
         crawling.value?.user?.id = UserManager.userData.id
         crawling.value?.user?.image = UserManager.userData.image
+        crawling.value?.user?.email = UserManager.userData.email
         Logger.d("ppppp${crawling.value?.user?.id}")
 
     }
 
+    fun putdateTime(){
+        crawling.value?.dateTime?.date = dateTime.value?.date
+        crawling.value?.dateTime?.time = dateTime.value?.time
+    }
+
 
     fun publish(crawling: Crawling) {
+
+        putdateTime()
+
+        Logger.d("rrrrrrrrrrrrrrr${dateTime.value}")
 
         coroutineScope.launch {
 

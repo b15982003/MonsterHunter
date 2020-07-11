@@ -22,7 +22,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     private val PATH_CRAWLING = "crawling"
     private val PATH_USER = "user"
-    private const val KEY_START_TIME = "startTime"
+    private const val KEY_START_TIME = "dateTime"
     private val PATH_ACTIVITY = "activity"
 
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
