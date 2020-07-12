@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.databinding.ItemHomeBinding
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 

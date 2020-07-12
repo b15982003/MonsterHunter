@@ -38,5 +38,13 @@ object TimeUtil {
         return simpleDateFormat.parse(time).time
     }
 
+    @JvmStatic
+    fun AllStampToDate(time:Long,locale: Locale): String {
+
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm",locale)
+
+        return simpleDateFormat.format(Date(time))
+
+    }
 
 }

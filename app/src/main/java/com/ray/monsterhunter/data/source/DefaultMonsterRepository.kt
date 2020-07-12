@@ -1,6 +1,8 @@
 package com.ray.monsterhunter.data.source
 
+import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.Activity
+import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.data.User
 
@@ -18,6 +20,14 @@ class DefaultMonsterRepository(
         return remoteDataSource.getActivitys()
     }
 
+    override suspend fun getUser(): Result<User> {
+        return remoteDataSource.getUser()
+    }
+
+    override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
+        return remoteDataSource.getLiveChatRoom()
+    }
+
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
         return remoteDataSource.publish(crawling)
@@ -27,8 +37,6 @@ class DefaultMonsterRepository(
         return remoteDataSource.pushUser(user)
     }
 
-    override suspend fun getUser(): Result<User> {
-        return remoteDataSource.getUser()
-    }
+
 
 }

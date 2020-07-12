@@ -38,7 +38,7 @@ class MainViewModel(val repository: MonsterRepository): ViewModel() {
     val currentFragmentType = MutableLiveData<CurrentFragmentType>()
 
     fun refresh() {
-        if (!MonsterApplication.instance.isLiveDataDesign()) {
+        if (!MonsterApplication.instance.isLiveChatRoom()) {
             _refresh.value = true
         }
     }

@@ -21,6 +21,6 @@ class MonsterApplication : Application() {
     }
 
 
-    fun isLiveDataDesign() = true
+    fun isLiveChatRoom() = true
 }
 

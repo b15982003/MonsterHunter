@@ -44,6 +44,9 @@
     <!-- SignOut -->
     <string name="google_signOut">Google SignOut</string>
 
+    <!-- ChatRoom -->
+    <string name="chatRoom_test_text">我是來自測試的文字</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

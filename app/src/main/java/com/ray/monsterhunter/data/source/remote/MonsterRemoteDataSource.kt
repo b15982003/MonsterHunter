@@ -3,11 +3,13 @@ package com.ray.monsterhunter.data.source.remote
 import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Activity
+import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterDataSource
@@ -22,8 +24,10 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     private val PATH_CRAWLING = "crawling"
     private val PATH_USER = "user"
-    private const val KEY_START_TIME = "dateTime"
     private val PATH_ACTIVITY = "activity"
+    private val PATH_CHATROOM = "chatRoom"
+    private const val KEY_START_TIME = "dateTime"
+
 
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -48,6 +52,28 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
             }
+    }
+
+    override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
+
+        val liveData = MutableLiveData<List<ChatRoom>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+//           .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, exception ->
+
+                val list = mutableListOf<ChatRoom>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+
+                    val chatroom = document.toObject(ChatRoom::class.java)
+                    list.add(chatroom)
+                }
+
+                liveData.value = list
+            }
+        return liveData
     }
 
     override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->

@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.chatroom.ChatRoomAdapter
 import com.ray.monsterhunter.data.Activity
+import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.home.HomeActivityAdapter
 import com.ray.monsterhunter.home.HomeCrawlingAdapter
@@ -26,6 +28,17 @@ fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
         recyclerView.adapter?.apply {
             when (this) {
                 is HomeCrawlingAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
+@BindingAdapter("chatRoom")
+fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?){
+    chatRoom?.let {
+        recyclerView.adapter?.apply {
+            when (this){
+                is ChatRoomAdapter -> submitList(it)
             }
         }
     }
