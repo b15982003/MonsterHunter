@@ -10,7 +10,8 @@
     <string name="home">Monster Hunter</string>
     <string name="history">對戰紀錄</string>
     <string name="profile">個人資訊</string>
-    <string name="test">測試post</string>
+    <string name="testPostCrawling">測試postCrawling</string>
+    <string name="testChatRoom">測試postChatRoom</string>
 
     <!-- Postdailog -->
     <string name="roomname">房間名稱</string>
@@ -46,6 +47,11 @@
 
     <!-- ChatRoom -->
     <string name="chatRoom_test_text">我是來自測試的文字</string>
+
+    <!-- ChatRoom Post even -->
+    <string name="chatRoom_post_typeName_text">任務類型 ：</string>
+    <string name="chatRoom_post＿monsterName_text">魔物名稱 ：</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

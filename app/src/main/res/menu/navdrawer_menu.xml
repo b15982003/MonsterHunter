@@ -26,7 +26,12 @@
         <item
             android:id="@+id/dialogPostFragment"
             android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/test" />
+            android:title="@string/testPostCrawling" />
+
+        <item
+            android:id="@+id/dialogChatRoomFragment"
+            android:icon="@drawable/ic_comment_black_24dp"
+            android:title="@string/testChatRoom" />
 
     </group>
 

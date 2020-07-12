@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ray.monsterhunter.post.DialogChatRoomViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".post.DialogChatRoom">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/chatroom_post_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/chatRoom_post_image_shape"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/chatroom_post_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <ImageView
+                android:id="@+id/chatRoom_post_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintBottom_toBottomOf="@+id/chatRoom_post_image_shape"
+                app:layout_constraintEnd_toEndOf="@+id/chatRoom_post_image_shape"
+                app:layout_constraintStart_toStartOf="@+id/chatRoom_post_image_shape"
+                app:layout_constraintTop_toTopOf="@+id/chatRoom_post_image_shape" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/chatRoom_post_roomName"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textColorHint="@color/post_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chatRoom_post_image_shape"
+                tools:visibility="visible">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/chatRoom_post_roomName_text_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|start"
+                    android:hint="@string/roomname"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:lines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/chatRoom_post_typeName_text"
+                style="@style/post_dailog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chatRoom_post_typeName_text"
+                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_roomName"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/chatRoom_post_typeName_shape"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/chatroom_post_text_background"
+                android:layout_marginHorizontal="16dp"
+                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_typeName_text"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <Spinner
+                android:id="@+id/chatRoom_list_typeName_text_spin"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintBottom_toBottomOf="@id/chatRoom_post_typeName_shape"
+                app:layout_constraintEnd_toEndOf="@id/chatRoom_post_typeName_shape"
+                app:layout_constraintStart_toStartOf="@id/chatRoom_post_typeName_shape"
+                app:layout_constraintTop_toTopOf="@id/chatRoom_post_typeName_shape" />
+
+            <TextView
+                android:id="@+id/chatRoom_post_monsterName_text"
+                style="@style/post_dailog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chatRoom_post＿monsterName_text"
+                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_typeName_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                />
+
+
+            <TextView
+                android:id="@+id/chatRoom_post_monsterName_shape"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/chatroom_post_text_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chatRoom_post_monsterName_text"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <Spinner
+                android:id="@+id/chatRoom_list_monsterName_text_spin"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintBottom_toBottomOf="@+id/chatRoom_post_monsterName_shape"
+                app:layout_constraintEnd_toEndOf="@+id/chatRoom_post_monsterName_shape"
+                app:layout_constraintStart_toStartOf="@id/chatRoom_post_monsterName_shape"
+                app:layout_constraintTop_toTopOf="@id/chatRoom_post_monsterName_shape" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

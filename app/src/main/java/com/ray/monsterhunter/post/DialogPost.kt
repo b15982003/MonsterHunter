@@ -38,7 +38,7 @@ class DialogPost : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogPost)
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.DialogPost)
     }
 
     override fun onCreateView(
