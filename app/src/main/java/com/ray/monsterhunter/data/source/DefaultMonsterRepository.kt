@@ -37,6 +37,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.pushUser(user)
     }
 
+    override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> {
+        return remoteDataSource.pushChatRoom(chatRoom)
+    }
+
 
 
 }

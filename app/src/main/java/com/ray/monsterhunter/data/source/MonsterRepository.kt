@@ -21,7 +21,7 @@ interface MonsterRepository {
 
     suspend fun pushUser(user: User): Result<Boolean>
 
-    suspend fun pushChatRoom(): Result<Boolean>
+    suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
 
 
 

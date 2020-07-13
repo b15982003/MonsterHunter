@@ -23,6 +23,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getUser(): Result<User> {
+        TODO("Not yet implemented")
+    }
+
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
         TODO("Not yet implemented")
@@ -32,7 +36,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUser(): Result<User> {
+    override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

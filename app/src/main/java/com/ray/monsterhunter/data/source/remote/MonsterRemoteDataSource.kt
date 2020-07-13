@@ -101,6 +101,33 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
+    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .whereEqualTo("email", UserManager.userData.email)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    var user1 = User()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(User::class.java)
+                        user1 = user
+                        Logger.d("geeeeeeeeetttt ${user}")
+
+                    }
+                    continuation.resume(Result.Success(user1))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun publish(crawling: Crawling): Result<Boolean> =
@@ -162,31 +189,33 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_USER)
-            .whereEqualTo("email", UserManager.userData.email)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var user1 = User()
-                    for (document in task.result!!) {
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val chatRooms = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val document = chatRooms.document("gogo")
 
-                        var user = document.toObject(User::class.java)
-                        user1 = user
-                        Logger.d("geeeeeeeeetttt ${user}")
-
+            chatRoom.documentId = document.id
+            chatRoom.createTime = Calendar.getInstance().timeInMillis
+            document
+                .set(chatRoom)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
                     }
-                    continuation.resume(Result.Success(user1))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
 }
