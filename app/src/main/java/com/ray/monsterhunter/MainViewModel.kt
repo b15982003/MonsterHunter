@@ -3,6 +3,7 @@ package com.ray.monsterhunter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ray.monsterhunter.data.MonsterUri
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
@@ -27,6 +28,10 @@ class MainViewModel(val repository: MonsterRepository): ViewModel() {
     private var _user = MutableLiveData<User>()
     val user: LiveData<User>
         get() = _user
+
+    private var _image = MutableLiveData<MonsterUri>()
+    val image: LiveData<MonsterUri>
+        get() = _image
 
 
     private val _refresh = MutableLiveData<Boolean>()
@@ -103,6 +108,45 @@ class MainViewModel(val repository: MonsterRepository): ViewModel() {
             val result = repository.getUser()
 
             _user.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+
+                }
+                is Result.Fail -> {
+
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+//            _refreshStatus.value = false
+        }
+    }
+
+
+    fun getImageMonster() {
+
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getImageMonster()
+
+            _image.value = when (result) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

@@ -2,10 +2,7 @@ package com.ray.monsterhunter.data.source.local
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
-import com.ray.monsterhunter.data.Activity
-import com.ray.monsterhunter.data.ChatRoom
-import com.ray.monsterhunter.data.Crawling
-import com.ray.monsterhunter.data.User
+import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
 
@@ -24,6 +21,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
     }
 
     override suspend fun getUser(): Result<User> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getImageMonster(): Result<MonsterUri> {
         TODO("Not yet implemented")
     }
 

@@ -2,6 +2,7 @@ package com.ray.monsterhunter.post
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 
 class DialogChatRoom : AppCompatDialogFragment() {
 
@@ -40,6 +42,16 @@ class DialogChatRoom : AppCompatDialogFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
+//        binding.chatRoomPostSentButton.setOnClickListener(){
+//            viewModel.event.value?.let { it1 -> viewModel.pushChatRoom(it1) }
+//        }
+
+
+        viewModel.event.observe(viewLifecycleOwner, Observer {
+            it.roomName?.let {
+                Log.d("eeeeeeee","${it}")
+            }
+        })
 
 
         viewModel.postMonster.observe(viewLifecycleOwner, Observer {
@@ -57,6 +69,8 @@ class DialogChatRoom : AppCompatDialogFragment() {
                         else -> R.drawable.ic_monster_roompost
                     }
                 )
+
+                viewModel.event.value?.userId = UserManager.userData.id.toString()
             }
         })
 
@@ -89,13 +103,13 @@ class DialogChatRoom : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.even.value?.typeName  = "出擊"
-                        1L -> viewModel.even.value?.typeName  = "任務"
-                        2L -> viewModel.even.value?.typeName  = "自由"
-                        3L -> viewModel.even.value?.typeName  = "調查"
-                        4L -> viewModel.even.value?.typeName  = "活動"
-                        5L -> viewModel.even.value?.typeName  = "限時活動"
-                        5L -> viewModel.even.value?.typeName  = "採集"
+                        0L -> viewModel.event.value?.typeName  = "出擊"
+                        1L -> viewModel.event.value?.typeName  = "任務"
+                        2L -> viewModel.event.value?.typeName  = "自由"
+                        3L -> viewModel.event.value?.typeName  = "調查"
+                        4L -> viewModel.event.value?.typeName  = "活動"
+                        5L -> viewModel.event.value?.typeName  = "限時活動"
+                        5L -> viewModel.event.value?.typeName  = "採集"
                     }
                 }
             }
@@ -115,31 +129,31 @@ class DialogChatRoom : AppCompatDialogFragment() {
                 ) {
                     when (id) {
                         0L -> {
-                            viewModel.even.value?.image = "隨機攻打生物"
+                            viewModel.event.value?.monsterName = "隨機攻打生物"
                             viewModel.postMonster.value = 0
                         }
                         1L -> {
-                            viewModel.even.value?.image = "滅盡龍"
+                            viewModel.event.value?.monsterName= "滅盡龍"
                             viewModel.postMonster.value = 1
                         }
                         2L -> {
-                            viewModel.even.value?.image = "煌黑龍"
+                            viewModel.event.value?.monsterName = "煌黑龍"
                             viewModel.postMonster.value = 2
                         }
                         3L -> {
-                            viewModel.even.value?.image = "麒麟"
+                            viewModel.event.value?.monsterName = "麒麟"
                             viewModel.postMonster.value = 3
                         }
                         4L -> {
-                            viewModel.even.value?.image = "火龍"
+                            viewModel.event.value?.monsterName= "火龍"
                             viewModel.postMonster.value = 4
                         }
                         5L -> {
-                            viewModel.even.value?.image = "冰牙龍"
+                            viewModel.event.value?.monsterName= "冰牙龍"
                             viewModel.postMonster.value = 5
                         }
                         6L -> {
-                            viewModel.even.value?.image = "冰呪龍"
+                            viewModel.event.value?.monsterName = "冰呪龍"
                             viewModel.postMonster.value = 6
                         }
                     }
@@ -147,12 +161,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             }
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
-            it?.let { needRefresh ->
-                if (needRefresh) {
-                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
-                        refresh()
-                    }
-                }
+            it?.let {
                 findNavController().navigateUp()
                 viewModel.onLeft()
             }

@@ -2,10 +2,7 @@ package com.ray.monsterhunter.data.source
 
 
 import androidx.lifecycle.MutableLiveData
-import com.ray.monsterhunter.data.Activity
-import com.ray.monsterhunter.data.ChatRoom
-import com.ray.monsterhunter.data.Crawling
-import com.ray.monsterhunter.data.User
+import com.ray.monsterhunter.data.*
 
 interface MonsterDataSource {
 
@@ -14,6 +11,8 @@ interface MonsterDataSource {
     suspend fun getActivitys(): Result<List<Activity>>
 
     suspend fun getUser(): Result<User>
+
+    suspend fun getImageMonster(): Result<MonsterUri>
 
     fun getLiveChatRoom() : MutableLiveData<List<ChatRoom>>
 

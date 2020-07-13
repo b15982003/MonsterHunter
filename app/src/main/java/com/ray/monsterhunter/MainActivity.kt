@@ -134,8 +134,10 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-//        viewModel.getUser()
-        Logger.d("actttttt  ${UserManager.userData.id}")
+        viewModel.getUser()
+        viewModel.getImageMonster()
+        Logger.d(viewModel.image.value.toString())
+
     }
 
     private fun setupNavController() {

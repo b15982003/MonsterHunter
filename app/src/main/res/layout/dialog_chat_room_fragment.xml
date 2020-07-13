@@ -14,8 +14,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".post.DialogChatRoom"
-        android:onClick="@{() -> viewModel.leave(false)}">
+        android:onClick="@{() -> viewModel.leave(false)}"
+        tools:context=".post.DialogChatRoom">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -71,7 +71,9 @@
                     android:hint="@string/roomname"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:lines="1" />
+                    android:lines="1"
+                    android:text="@={viewModel.event.roomName}"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -145,14 +147,16 @@
                 app:layout_constraintTop_toTopOf="@id/chatRoom_post_monsterName_shape" />
 
             <Button
+                android:id="@+id/chatRoom_post_sentButton"
+                style="@style/chatRoom_post_button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/chatRoom_post＿button"
-                style="@style/chatRoom_post_button"
-                android:background="@color/chatRoom_post_button"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
+                android:onClick="@{() -> viewModel.pushChatRoom(viewModel.event)}"
+                android:background="@color/chatRoom_post_button"
+                android:text="@string/chatRoom_post＿button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chatRoom_post_monsterName_shape" />

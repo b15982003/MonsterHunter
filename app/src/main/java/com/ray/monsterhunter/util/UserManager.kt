@@ -8,5 +8,5 @@ object UserManager {
 
     var userData = User()
 
-
 }
+
