@@ -47,4 +47,7 @@
     <!-- SinIn -->
     <color name="google_sign_in_button">#EEA9A9</color>
 
+    <!-- ChatRoom Post -->
+    <color name="chatRoom_post_button">#4C6D3A</color>
+
 </resources>

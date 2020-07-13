@@ -13,7 +13,17 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     val even: LiveData<ChatRoom>
         get() = _even
 
+    val _leave = MutableLiveData<Boolean>()
+    val leave: LiveData<Boolean>
+        get() = _leave
+
     val postMonster = MutableLiveData<Int>()
 
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
 
+    fun onLeft() {
+        _leave.value = null
+    }
 }

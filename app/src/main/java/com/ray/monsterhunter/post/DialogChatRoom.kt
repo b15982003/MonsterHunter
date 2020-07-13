@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
@@ -45,13 +48,13 @@ class DialogChatRoom : AppCompatDialogFragment() {
 
                 binding.chatRoomPostImage.setImageResource(
                     when(viewModel.postMonster.value){
-                        1 -> R.drawable.ic_monster
-                        2 -> R.drawable.ic_add
-                        3 -> R.drawable.ic_awaiting_payment
-                        4 -> R.drawable.ic_address
-                        5 -> R.drawable.ic_awaiting_shipment
-                        6 -> R.drawable.ic_success
-                        else -> R.drawable.ic_comment_black_24dp
+                        1 -> R.drawable.ic_monster_roompost
+                        2 -> R.drawable.ic_monster_yellowblack
+                        3 -> R.drawable.ic_monster_unico
+                        4 -> R.drawable.ic_monster_firedragon
+                        5 -> R.drawable.ic_monster_iceteeth
+                        6 -> R.drawable.ic_monster_icehit
+                        else -> R.drawable.ic_monster_roompost
                     }
                 )
             }
@@ -70,10 +73,10 @@ class DialogChatRoom : AppCompatDialogFragment() {
             android.R.layout.simple_spinner_dropdown_item,
             monsterName)
 
-        binding.chatRoomListTypeNameTextSpin.adapter = adapterActivityType
-        binding.chatRoomListMonsterNameTextSpin.adapter = adapterMonsterName
+        binding.chatRoomPostTypeNameTextSpin.adapter = adapterActivityType
+        binding.chatRoomPostMonsterNameTextSpin.adapter = adapterMonsterName
 
-        binding.chatRoomListTypeNameTextSpin.onItemSelectedListener =
+        binding.chatRoomPostTypeNameTextSpin.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
@@ -98,7 +101,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             }
 
 
-        binding.chatRoomListMonsterNameTextSpin.onItemSelectedListener =
+        binding.chatRoomPostMonsterNameTextSpin.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     TODO("Not yet implemented")
@@ -142,6 +145,18 @@ class DialogChatRoom : AppCompatDialogFragment() {
                     }
                 }
             }
+
+        viewModel.leave.observe(viewLifecycleOwner, Observer {
+            it?.let { needRefresh ->
+                if (needRefresh) {
+                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
+                        refresh()
+                    }
+                }
+                findNavController().navigateUp()
+                viewModel.onLeft()
+            }
+        })
 
         return binding.root
     }

@@ -13,14 +13,15 @@ interface MonsterRepository {
 
     suspend fun getActivitys(): Result<List<Activity>>
 
-    suspend fun getUser(): Result<User>
-
     fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>>
 
+    suspend fun getUser(): Result<User>
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
+
+    suspend fun pushChatRoom(): Result<Boolean>
 
 
 

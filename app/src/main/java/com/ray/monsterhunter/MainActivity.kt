@@ -20,6 +20,7 @@ import com.ray.monsterhunter.databinding.ActivityMainBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 
 
 class MainActivity : BaseActivity() {
@@ -123,7 +124,8 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getUser()
+//        viewModel.getUser()
+        Logger.d("actttttt  ${UserManager.userData.id}")
     }
 
     private fun setupNavController() {

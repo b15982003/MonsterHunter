@@ -44,6 +44,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/chatRoom_list_monsterName"
+                    style="@style/chatRoom_data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:text="@{even.monsterName}"
+                    app:layout_constraintStart_toStartOf="@+id/chatRoom_list_monster_image"
+                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_monster_image"
+                    app:layout_constraintEnd_toEndOf="@id/chatRoom_list_monster_image"
+                    tools:text="@string/chatRoom_test_text_short" />
+
+                <TextView
                     android:id="@+id/chatRoom_list_roomName"
                     style="@style/chatRoom_data_title"
                     android:layout_width="wrap_content"
@@ -60,7 +73,7 @@
                     style="@style/chatRoom_data_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="@{even.userId}"
                     app:layout_constraintStart_toStartOf="@+id/chatRoom_list_roomName"
@@ -70,10 +83,10 @@
                 <TextView
                     android:id="@+id/chatRoom_list_startTime"
                     style="@style/chatRoom_data_text"
+                    android:textColor="@color/gray_888888"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/chatRoom_list_monster_image"
+                    app:layout_constraintBottom_toBottomOf="@+id/chatRoom_list_monsterName"
                     app:layout_constraintStart_toStartOf="@id/chatRoom_list_userId"
                     tools:text="@string/chatRoom_test_text" />
 
