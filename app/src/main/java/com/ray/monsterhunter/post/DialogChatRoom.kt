@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.post
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
@@ -33,6 +35,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
         setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogPost)
     }
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -129,32 +132,39 @@ class DialogChatRoom : AppCompatDialogFragment() {
                 ) {
                     when (id) {
                         0L -> {
-                            viewModel.event.value?.monsterName = "隨機攻打生物"
+                            viewModel.event.value?.monsterName = "隨機打"
                             viewModel.postMonster.value = 0
+                            viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
                         }
                         1L -> {
                             viewModel.event.value?.monsterName= "滅盡龍"
                             viewModel.postMonster.value = 1
+                            viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
                         }
                         2L -> {
                             viewModel.event.value?.monsterName = "煌黑龍"
                             viewModel.postMonster.value = 2
+                            viewModel.event.value?.image = ImageManger.imageData.monsterYellowBlack
                         }
                         3L -> {
                             viewModel.event.value?.monsterName = "麒麟"
                             viewModel.postMonster.value = 3
+                            viewModel.event.value?.image = ImageManger.imageData.monsterUnico
                         }
                         4L -> {
                             viewModel.event.value?.monsterName= "火龍"
                             viewModel.postMonster.value = 4
+                            viewModel.event.value?.image = ImageManger.imageData.monsterFireDragon
                         }
                         5L -> {
                             viewModel.event.value?.monsterName= "冰牙龍"
                             viewModel.postMonster.value = 5
+                            viewModel.event.value?.image = ImageManger.imageData.monsterIceteeth
                         }
                         6L -> {
                             viewModel.event.value?.monsterName = "冰呪龍"
                             viewModel.postMonster.value = 6
+                            viewModel.event.value?.image = ImageManger.imageData.monsterIcehit
                         }
                     }
                 }

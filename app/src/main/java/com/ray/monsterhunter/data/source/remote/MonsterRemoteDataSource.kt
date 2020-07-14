@@ -26,12 +26,13 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private const val KEY_START_TIME = "dateTime"
+    private const val KEY_CREAT_TIME = "createTime"
 
 
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_CRAWLING)
-            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -59,7 +60,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-//           .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()

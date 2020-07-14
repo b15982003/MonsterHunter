@@ -29,14 +29,6 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
     val postMonster = MutableLiveData<Int>()
 
-    fun leave(needRefresh: Boolean = false) {
-        _leave.value = needRefresh
-    }
-
-    fun onLeft() {
-        _leave.value = null
-    }
-
     // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -86,5 +78,13 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
                 }
             }
         }
+    }
+
+    fun leave(needRefresh: Boolean = false) {
+        _leave.value = needRefresh
+    }
+
+    fun onLeft() {
+        _leave.value = null
     }
 }
