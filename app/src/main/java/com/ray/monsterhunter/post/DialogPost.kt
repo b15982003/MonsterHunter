@@ -257,7 +257,7 @@ class DialogPost : AppCompatDialogFragment() {
                         3L -> viewModel.crawling.value?.armsType4 = "弓箭"
                         4L -> viewModel.crawling.value?.armsType4 = "充能斧"
                         5L -> viewModel.crawling.value?.armsType4 = "輕弩"
-                        6L -> viewModel.crawling.value?.armsType4 = "雙劍"
+                        6L -> viewModel.crawling.value?.armsType4 = "雙刀"
                         7L -> viewModel.crawling.value?.armsType4 = "操蟲棍"
                         8L -> viewModel.crawling.value?.armsType4 = "重弩"
                         9L -> viewModel.crawling.value?.armsType4 = "大錘"

@@ -24,6 +24,7 @@ import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
@@ -41,28 +42,33 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_chatroom -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_chatRoomFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_friend -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_friendFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_home -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_homeFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_history -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_historyFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_profileFragment)
+                    hiddingToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -188,6 +194,15 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
         }
     }
+
+    fun hiddingToolbar(){
+        toolbar.visibility = View.GONE
+    }
+
+    fun getToolbar(){
+        toolbar.visibility = View.VISIBLE
+    }
+
 
 }
 

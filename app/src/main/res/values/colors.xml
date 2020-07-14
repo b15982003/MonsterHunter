@@ -50,4 +50,8 @@
     <!-- ChatRoom Post -->
     <color name="chatRoom_post_button">#4C6D3A</color>
 
+
+    <!-- Profile -->
+    <color name="profile_background">#D9CD90</color>
+
 </resources>
