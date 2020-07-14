@@ -1,10 +1,7 @@
 package com.ray.monsterhunter.data.source
 
 import androidx.lifecycle.MutableLiveData
-import com.ray.monsterhunter.data.Activity
-import com.ray.monsterhunter.data.ChatRoom
-import com.ray.monsterhunter.data.Crawling
-import com.ray.monsterhunter.data.User
+import com.ray.monsterhunter.data.*
 
 class DefaultMonsterRepository(
     private val remoteDataSource: MonsterDataSource,
@@ -24,6 +21,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUser()
     }
 
+    override suspend fun getImageMonster(): Result<MonsterUri> {
+       return remoteDataSource.getImageMonster()
+    }
+
     override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
         return remoteDataSource.getLiveChatRoom()
     }
@@ -35,6 +36,10 @@ class DefaultMonsterRepository(
 
     override suspend fun pushUser(user: User): Result<Boolean> {
         return remoteDataSource.pushUser(user)
+    }
+
+    override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> {
+        return remoteDataSource.pushChatRoom(chatRoom)
     }
 
 

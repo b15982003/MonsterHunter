@@ -8,12 +8,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
-import com.ray.monsterhunter.data.Activity
-import com.ray.monsterhunter.data.ChatRoom
-import com.ray.monsterhunter.data.Crawling
-import com.ray.monsterhunter.data.User
+import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 import kotlin.coroutines.resume
@@ -24,15 +22,17 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     private val PATH_CRAWLING = "crawling"
     private val PATH_USER = "user"
+    private val PATH_MONSTER = "imagemonster"
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private const val KEY_START_TIME = "dateTime"
+    private const val KEY_CREAT_TIME = "createTime"
 
 
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_CRAWLING)
-            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -60,7 +60,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-//           .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()
@@ -91,6 +91,72 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         list.add(activity)
                     }
                     continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .whereEqualTo("email", UserManager.userData.email)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    var user1 = User()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(User::class.java)
+                        user1 = user
+                        Logger.d("geeeeeeeeetttt ${user}")
+
+                    }
+                    continuation.resume(Result.Success(user1))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getImageMonster(): Result<MonsterUri> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_MONSTER)
+            .whereEqualTo("id", "monster")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    var monsterUri1 = MonsterUri()
+                    for (document in task.result!!) {
+
+                        var monster = document.toObject(MonsterUri::class.java)
+                        monsterUri1 = monster
+                        Logger.d("geeeeeeeeetttt ${monsterUri1}")
+
+                        var monster2 = MonsterUri(
+                            monsterFireDragon = monster.monsterFireDragon,
+                            monsterIcehit = monster.monsterIcehit,
+                            monsterIceteeth = monster.monsterIceteeth,
+                            monsterRoomPost = monster.monsterRoomPost,
+                            monsterUnico = monster.monsterUnico,
+                            monsterYellowBlack = monster.monsterYellowBlack
+                        )
+                        ImageManger.imageData = monster2
+
+                        Logger.d("geeeeeeeeetttt ${ImageManger.imageData}")
+
+                    }
+                    continuation.resume(Result.Success(monsterUri1))
+
                 } else {
                     task.exception?.let {
                         continuation.resume(Result.Error(it))
@@ -162,31 +228,34 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_USER)
-            .whereEqualTo("email", UserManager.userData.email)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var user1 = User()
-                    for (document in task.result!!) {
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val chatRooms = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val document = chatRooms.document()
 
-                        var user = document.toObject(User::class.java)
-                        user1 = user
-                        Logger.d("geeeeeeeeetttt ${user}")
+            chatRoom.documentId = document.id
+            chatRoom.createTime = Calendar.getInstance().timeInMillis
 
+            document
+                .set(chatRoom)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
                     }
-                    continuation.resume(Result.Success(user1))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
 }

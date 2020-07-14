@@ -1,11 +1,16 @@
 package com.ray.monsterhunter.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
 data class ChatRoom (
-    val documentId : String = "",
+    var documentId : String = "",
     var image : String = "",
-    val roomName : String = "",
+    var roomName : String = "",
+    var monsterName : String = "",
     var typeName : String = "",
-    val userId : String = "",
-    val createTime : Long? = null
-) {
-}
+    var userId : String = "",
+    var createTime : Long? = null
+):Parcelable

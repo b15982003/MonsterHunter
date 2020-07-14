@@ -81,7 +81,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:itemIconTint="#132EB6"
-            app:headerLayout="@layout/item_drawer_heater"
             app:menu="@menu/navdrawer_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

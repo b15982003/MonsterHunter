@@ -3,6 +3,8 @@ package com.ray.monsterhunter
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -12,6 +14,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseUser
@@ -20,6 +23,7 @@ import com.ray.monsterhunter.databinding.ActivityMainBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 
 
 class MainActivity : BaseActivity() {
@@ -28,8 +32,6 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-
 
 
     private val onNavigationItemSelectedListener =
@@ -115,6 +117,15 @@ class MainActivity : BaseActivity() {
         binding.bottomNav.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         binding.drawerNavView.setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
 
+
+        val navigationView = findViewById<View>(R.id.drawerNavView) as NavigationView
+        val headerLayout = navigationView.inflateHeaderView(R.layout.item_drawer_heater)
+        var ivHeaderPhoto: ImageView = headerLayout.findViewById(R.id.profile_image)
+        var userName: TextView = headerLayout.findViewById(R.id.profile_userId)
+
+
+        userName.text = UserManager.userData.id
+        Glide.with(navigationView).load(UserManager.userData.image).into(ivHeaderPhoto)
         //addData()
         setupNavController()
         setupDrawer()
@@ -124,6 +135,9 @@ class MainActivity : BaseActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.getUser()
+        viewModel.getImageMonster()
+        Logger.d(viewModel.image.value.toString())
+
     }
 
     private fun setupNavController() {

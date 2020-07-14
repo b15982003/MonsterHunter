@@ -88,4 +88,17 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="chatRoom_post_button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Profile -->
+    <style name="profile_heater_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/gray_888888</item>
+    </style>
+
+
 </resources>
