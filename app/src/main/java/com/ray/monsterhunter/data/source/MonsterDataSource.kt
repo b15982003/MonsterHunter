@@ -20,6 +20,8 @@ interface MonsterDataSource {
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
+    suspend fun sentMessage(message: Message): Result<Boolean>
+
     suspend fun pushUser(user: User): Result<Boolean>
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>

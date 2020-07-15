@@ -21,11 +21,12 @@
             android:id="@+id/chatRoom_detail_textMessage_recy"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:activity="@{}"
+            app:chatRoomMessage="@{viewModel.liveMessage}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/chatRoom_detail_editText_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             tools:listitem="@layout/item_chatroom_message" />
 
         <TextView
@@ -38,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
-            android:id="@+id/chatRoom_"
+            android:id="@+id/chatRoom_detail_item_editText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
@@ -48,6 +49,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/chatRoom_detail_editText_background" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_flout"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/chatRoom_detail_editText_background"
+            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_item_editText"
+            app:layout_constraintBottom_toBottomOf="@+id/chatRoom_detail_item_editText"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

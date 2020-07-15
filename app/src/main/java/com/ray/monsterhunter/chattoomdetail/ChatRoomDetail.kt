@@ -25,6 +25,11 @@ class ChatRoomDetail : Fragment() {
         binding = ChatRoomDetailFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
+
+        })
+
+        binding.sent
 
 
 

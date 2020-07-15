@@ -111,7 +111,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_CHATROOM)
             .document("BYcrqNt3U9gYb203sdxD")
             .collection(PATH_MESSAGE)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+//            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
                 Logger.d("exception=${exception}")
                 Logger.d("snapshot=${snapshot}")
@@ -267,6 +267,38 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             document
                 .set(chatRoom)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun sentMessage(message: Message): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+//            val document = messages.document()
+
+            message.createTime = Calendar.getInstance().timeInMillis.toString()
+
+            messages
+                .document("BYcrqNt3U9gYb203sdxD")
+                .collection(PATH_MESSAGE)
+                .add(message)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))

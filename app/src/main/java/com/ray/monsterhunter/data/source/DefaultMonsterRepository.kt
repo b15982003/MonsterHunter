@@ -38,6 +38,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.publish(crawling)
     }
 
+    override suspend fun sentMessage(message: Message): Result<Boolean> {
+       return remoteDataSource.sentMessage(message)
+    }
+
     override suspend fun pushUser(user: User): Result<Boolean> {
         return remoteDataSource.pushUser(user)
     }

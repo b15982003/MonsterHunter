@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Message(
-    var userId : String = "",
-    var talk : String = ""
-
+    var userId: String = "",
+    var talk: String = "",
+    var createTime: String = ""
 ):Parcelable
