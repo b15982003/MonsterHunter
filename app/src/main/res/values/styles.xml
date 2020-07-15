@@ -116,5 +116,11 @@
         <item name="android:textColor">@color/gray_cccccc</item>
     </style>
 
+    <style name="chatRoom_Detail_toolbar_text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>

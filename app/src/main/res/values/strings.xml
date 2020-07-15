@@ -54,10 +54,11 @@
     <string name="chatRoom_post＿monsterName_text">魔物名稱 ：</string>
     <string name="chatRoom_post＿button">送 出</string>
 
-    <!-- ChatRoom Post even -->
+    <!-- ChatRoom detail -->
     <string name="chatRoom_detail_userId">紙火箭</string>
     <string name="chatRoom_detail_message">安安你好！住哪！幾歲....</string>
     <string name="chatRoom_detail_createTime">2020-07-15-12:00</string>
+    <string name="chatRoom_detail_toolbar">聊天室名稱</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

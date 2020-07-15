@@ -15,7 +15,7 @@ import com.ray.monsterhunter.ext.getVmFactory
 class ChatRoomDetail : Fragment() {
 
 
-    private val viewModel by viewModels<ChatRoomDetailViewModel> { getVmFactory() }
+    private val viewModel by viewModels<ChatRoomDetailViewModel> { getVmFactory(chatRoomArgs.fromBundle(requireArguments()).forum) }
     lateinit var binding : ChatRoomDetailFragmentBinding
 
 

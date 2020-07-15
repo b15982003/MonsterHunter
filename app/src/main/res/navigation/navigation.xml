@@ -15,7 +15,9 @@
         android:id="@+id/chatRoomFragment"
         android:name="com.ray.monsterhunter.chatroom.ChatRoomFragment"
         android:label="chat_room_fragment"
-        tools:layout="@layout/chat_room_fragment" />
+        tools:layout="@layout/chat_room_fragment" >
+
+    </fragment>
     <fragment
         android:id="@+id/friendFragment"
         android:name="com.ray.monsterhunter.friend.FriendFragment"
@@ -52,8 +54,12 @@
         android:id="@+id/chatRoomDetail"
         android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetail"
         android:label="ChatRoomDetail"
-        tools:layout="@layout/chat_room_detail_fragment"
-        />
+        tools:layout="@layout/chat_room_detail_fragment">
+        <argument
+            android:name="chatRoom"
+            app:argType="com.ray.monsterhunter.data.ChatRoom" />
+    </fragment>
+
 
 
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>

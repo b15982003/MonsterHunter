@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ItemChatroomBinding
 import com.ray.monsterhunter.util.TimeUtil
-import com.ray.monsterhunter.util.Util
 import java.util.*
 
-class ChatRoomAdapter(private val onClickListener: OnClickListener ) :
+class ChatRoomAdapter(
+    private val onClickListener: OnClickListener
+) :
     ListAdapter<ChatRoom, RecyclerView.ViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (chatRoom : ChatRoom) -> Unit) {
