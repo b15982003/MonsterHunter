@@ -25,6 +25,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_MONSTER = "imagemonster"
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
+    private val PATH_MESSAGE = "message"
     private const val KEY_START_TIME = "dateTime"
     private const val KEY_CREAT_TIME = "createTime"
 
@@ -42,6 +43,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         Logger.d(document.id + " => " + document.data)
                         val crawling = document.toObject(Crawling::class.java)
                         list.add(crawling)
+                    }
+                    continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_ACTIVITY)
+//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Activity>()
+                    for (document in task.result!!) {
+
+                        Logger.d(document.id + " => " + document.data)
+                        val activity = document.toObject(Activity::class.java)
+                        list.add(activity)
                     }
                     continuation.resume(Result.Success(list))
                 } else {
@@ -76,30 +102,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
         return liveData
     }
 
-    override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_ACTIVITY)
-//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val list = mutableListOf<Activity>()
-                    for (document in task.result!!) {
 
-                        Logger.d(document.id + " => " + document.data)
-                        val activity = document.toObject(Activity::class.java)
-                        list.add(activity)
-                    }
-                    continuation.resume(Result.Success(list))
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+    override fun getLiveMessage(): MutableLiveData<List<Message>> {
+
+        val liveData = MutableLiveData<List<Message>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .document("BYcrqNt3U9gYb203sdxD")
+            .collection(PATH_MESSAGE)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
+
+                val list = mutableListOf<Message>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+
+                    val message = document.toObject(Message::class.java)
+                    list.add(message)
                 }
+
+                liveData.value = list
             }
+        return liveData
     }
+
 
     override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()

@@ -1,16 +1,14 @@
 package com.ray.monsterhunter.chattoomdetail
 
-import androidx.lifecycle.ViewModelProviders
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 
-import com.ray.monsterhunter.R
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+
 
 class ChatRoomDetail : Fragment() {
 
@@ -29,7 +27,23 @@ class ChatRoomDetail : Fragment() {
         binding.viewModel = viewModel
 
 
+
         return binding.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).hiddingBottomnav()
+        (activity as MainActivity).hiddingToolbar()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity as MainActivity).getBottomnav()
+        (activity as MainActivity).getToolbar()
+    }
+
+
+
 
 }

@@ -12,6 +12,8 @@ interface MonsterRepository {
 
     fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>>
 
+    fun getLiveMessage(): MutableLiveData<List<Message>>
+
     suspend fun getUser(): Result<User>
 
     suspend fun getImageMonster(): Result<MonsterUri>

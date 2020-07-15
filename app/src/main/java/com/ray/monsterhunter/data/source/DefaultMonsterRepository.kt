@@ -29,6 +29,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveChatRoom()
     }
 
+    override fun getLiveMessage(): MutableLiveData<List<Message>> {
+        return remoteDataSource.getLiveMessage()
+    }
+
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
         return remoteDataSource.publish(crawling)

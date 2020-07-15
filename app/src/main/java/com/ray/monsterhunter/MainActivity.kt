@@ -199,8 +199,16 @@ class MainActivity : BaseActivity() {
         toolbar.visibility = View.GONE
     }
 
+    fun hiddingBottomnav(){
+        bottomNav.visibility = View.GONE
+    }
+
     fun getToolbar(){
         toolbar.visibility = View.VISIBLE
+    }
+
+    fun getBottomnav(){
+        bottomNav.visibility = View.VISIBLE
     }
 
 

@@ -16,6 +16,8 @@ interface MonsterDataSource {
 
     fun getLiveChatRoom() : MutableLiveData<List<ChatRoom>>
 
+    fun getLiveMessage() : MutableLiveData<List<Message>>
+
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>

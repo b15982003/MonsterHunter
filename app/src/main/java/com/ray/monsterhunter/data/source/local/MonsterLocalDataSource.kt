@@ -20,6 +20,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveMessage(): MutableLiveData<List<Message>> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUser(): Result<User> {
         TODO("Not yet implemented")
     }
