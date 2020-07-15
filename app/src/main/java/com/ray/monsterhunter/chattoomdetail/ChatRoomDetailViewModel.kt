@@ -15,7 +15,7 @@ import kotlinx.coroutines.Job
 
 class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
 
-    var livemessage = MutableLiveData<List<Message>>()
+    var liveMessage = MutableLiveData<List<Message>>()
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -41,8 +41,10 @@ class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
     }
 
     init {
-        if(MonsterApplication.instance.isLiveChatRoom()){
+        if(MonsterApplication.instance.isLiveMessage()){
             getLiveMessageResoult()
+            Logger.d("1234567890")
+
         }else{
             getMessage()
 
@@ -50,9 +52,9 @@ class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
     }
 
     fun getLiveMessageResoult(){
-        livemessage = repository.getLiveMessage()
-        Logger.d("see data live ${livemessage.value}")
-        Logger.d("see data live22 ${repository.getLiveMessage()}")
+        liveMessage = repository.getLiveMessage()
+        Logger.d("liveMessage${liveMessage.value}")
+        Logger.d("liveMessage${repository.getLiveMessage()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 

@@ -14,6 +14,7 @@ import com.ray.monsterhunter.chatroom.ChatRoomAdapter
 import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.data.Message
 import com.ray.monsterhunter.home.HomeActivityAdapter
 import com.ray.monsterhunter.home.HomeCrawlingAdapter
 import com.ray.monsterhunter.network.LoadApiStatus
@@ -36,6 +37,17 @@ fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
 @BindingAdapter("chatRoom")
 fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?){
     chatRoom?.let {
+        recyclerView.adapter?.apply {
+            when (this){
+                is ChatRoomAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
+@BindingAdapter("chatRoomMessage")
+fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,chatRoom: List<Message>?){
+    Message?.let {
         recyclerView.adapter?.apply {
             when (this){
                 is ChatRoomAdapter -> submitList(it)

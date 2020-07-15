@@ -113,16 +113,17 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_MESSAGE)
             .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
-
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
                 val list = mutableListOf<Message>()
                 for (document in snapshot!!) {
                     Logger.d(document.id + " => " + document.data)
-
                     val message = document.toObject(Message::class.java)
                     list.add(message)
                 }
 
                 liveData.value = list
+                Logger.d("liveDatagg${liveData.value}")
             }
         return liveData
     }

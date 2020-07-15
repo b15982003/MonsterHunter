@@ -7,7 +7,7 @@ import com.ray.monsterhunter.BuildConfig
 
 object Logger {
 
-    private const val TAG = "Wayne-Publisher"
+    private const val TAG = "Ray-Monster"
 
     fun v(content: String) { if (BuildConfig.LOGGER_VISIABLE) Log.v(TAG, content) }
     fun d(content: String) { if (BuildConfig.LOGGER_VISIABLE) Log.d(TAG, content) }
