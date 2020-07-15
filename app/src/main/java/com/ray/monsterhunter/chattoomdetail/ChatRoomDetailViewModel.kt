@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.UserManager
 
 class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
 
@@ -59,6 +60,7 @@ class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
             getMessage()
 
         }
+        message.value?.userId = UserManager.userData.id.toString()
     }
 
     fun getLiveMessageResoult(){

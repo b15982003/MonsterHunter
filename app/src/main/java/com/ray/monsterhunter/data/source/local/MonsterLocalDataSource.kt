@@ -37,6 +37,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun sentMessage(message: Message): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun pushUser(user: User): Result<Boolean> {
         TODO("Not yet implemented")
     }

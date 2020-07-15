@@ -2,7 +2,9 @@ package com.ray.monsterhunter.chattoomdetail
 
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
+import androidx.core.os.HandlerCompat.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ray.monsterhunter.MainActivity
@@ -29,7 +31,11 @@ class ChatRoomDetail : Fragment() {
 
         })
 
-        binding.sent
+        binding.chatRoomDetailSentMessage.setOnClickListener(){
+            viewModel.message.value?.let { it1 -> viewModel.sentMessage(it1) }
+            Handler.postDelayed
+
+        }
 
 
 

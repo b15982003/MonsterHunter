@@ -45,20 +45,21 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="60dp"
             android:background="@color/white"
+            android:text="@={viewModel.message.talk}"
             app:layout_constraintBottom_toBottomOf="@+id/chatRoom_detail_editText_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/chatRoom_detail_editText_background" />
 
         <ImageView
+            android:id="@+id/chatRoom_detail_sentMessage"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_flout"
             android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/chatRoom_detail_editText_background"
-            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_item_editText"
+            android:src="@drawable/ic_flout"
             app:layout_constraintBottom_toBottomOf="@+id/chatRoom_detail_item_editText"
-            />
+            app:layout_constraintEnd_toEndOf="@+id/chatRoom_detail_editText_background"
+            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_item_editText" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
