@@ -26,7 +26,8 @@
             app:layout_constraintBottom_toTopOf="@+id/chatRoom_detail_editText_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
+            android:overScrollMode="never"
+            app:stackFromEnd="true"
             tools:listitem="@layout/item_chatroom_message" />
 
         <TextView

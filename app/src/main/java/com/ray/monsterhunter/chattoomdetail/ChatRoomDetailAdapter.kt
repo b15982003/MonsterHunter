@@ -25,14 +25,34 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener ) :
 
         fun bind(message : Message, onClickListener: OnClickListener) {
 
-//            var AllStampTimeToDate = message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            var AllStampTimeToDate = message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
-//            binding.chatRoomListStartTime.text = AllStampTimeToDate
+            binding.chatRoomDetailItemCreateTime.text = AllStampTimeToDate
+            binding.chatRoomDetailItemCreateTimeRight.text = AllStampTimeToDate
+
             if (UserManager.userData.id == message.userId){
-                binding.me.visibility = View.VISIBLE
+
+
+                binding.chatRoomDetailItemMessageRight.visibility = View.VISIBLE
+                binding.chatRoomDetailItemCreateTimeRight.visibility = View.VISIBLE
+
+                binding.chatRoomDetailItemImage.visibility = View.GONE
+                binding.chatRoomDetailItemName.visibility = View.GONE
+                binding.chatRoomDetailItemLine.visibility = View.GONE
+                binding.chatRoomDetailItemMessage.visibility = View.GONE
+                binding.chatRoomDetailItemCreateTime.visibility = View.GONE
 
             }else{
-                binding.me.visibility = View.GONE
+
+
+                binding.chatRoomDetailItemMessageRight.visibility = View.GONE
+                binding.chatRoomDetailItemCreateTimeRight.visibility = View.GONE
+
+                binding.chatRoomDetailItemImage.visibility = View.VISIBLE
+                binding.chatRoomDetailItemName.visibility = View.VISIBLE
+                binding.chatRoomDetailItemLine.visibility = View.VISIBLE
+                binding.chatRoomDetailItemMessage.visibility = View.VISIBLE
+                binding.chatRoomDetailItemCreateTime.visibility = View.VISIBLE
             }
             binding.product = message
             binding.root.setOnClickListener { onClickListener.onClick(message) }

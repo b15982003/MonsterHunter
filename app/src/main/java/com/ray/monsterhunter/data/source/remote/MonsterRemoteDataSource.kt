@@ -111,7 +111,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_CHATROOM)
             .document("BYcrqNt3U9gYb203sdxD")
             .collection(PATH_MESSAGE)
-//            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
                 Logger.d("exception=${exception}")
                 Logger.d("snapshot=${snapshot}")
@@ -293,7 +293,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
 //            val document = messages.document()
 
-            message.createTime = Calendar.getInstance().timeInMillis.toString()
+            message.createTime = Calendar.getInstance().timeInMillis
 
             messages
                 .document("BYcrqNt3U9gYb203sdxD")

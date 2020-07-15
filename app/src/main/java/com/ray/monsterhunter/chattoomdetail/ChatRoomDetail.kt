@@ -33,7 +33,10 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailSentMessage.setOnClickListener(){
             viewModel.message.value?.let { it1 -> viewModel.sentMessage(it1) }
-            Handler.postDelayed
+            Handler().postDelayed({
+                binding.chatRoomDetailItemEditText.text.clear()
+            },500)
+
 
         }
 
