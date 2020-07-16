@@ -57,7 +57,9 @@
         tools:layout="@layout/chat_room_detail_fragment">
         <argument
             android:name="chatRoom"
-            app:argType="com.ray.monsterhunter.data.ChatRoom" />
+            app:argType="com.ray.monsterhunter.data.ChatRoom"
+            app:nullable="false"
+            />
     </fragment>
 
 

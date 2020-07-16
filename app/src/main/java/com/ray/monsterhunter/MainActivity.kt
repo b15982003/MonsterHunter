@@ -17,6 +17,7 @@ import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ray.monsterhunter.databinding.ActivityMainBinding
@@ -128,6 +129,10 @@ class MainActivity : BaseActivity() {
         val headerLayout = navigationView.inflateHeaderView(R.layout.item_drawer_heater)
         var ivHeaderPhoto: ImageView = headerLayout.findViewById(R.id.profile_image)
         var userName: TextView = headerLayout.findViewById(R.id.profile_userId)
+
+        UserManager.userData.id = FirebaseAuth.getInstance().currentUser?.displayName
+        UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
+        UserManager.userData.image = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
 
         userName.text = UserManager.userData.id

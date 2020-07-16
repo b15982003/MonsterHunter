@@ -49,11 +49,11 @@ class LogInActivity : AppCompatActivity() {
 
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//
-////        moveMainPage(auth?.currentUser)
-//    }
+    override fun onStart() {
+        super.onStart()
+
+       moveMainPage(auth?.currentUser)
+    }
 
     fun googleLogin() {
         var signInIntent = googleSignInClient?.signInIntent

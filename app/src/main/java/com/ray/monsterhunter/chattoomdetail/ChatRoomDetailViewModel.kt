@@ -17,7 +17,18 @@ import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.UserManager
 
-class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
+class ChatRoomDetailViewModel(
+    private val repository: MonsterRepository,
+    private val argument : ChatRoom
+) : ViewModel() {
+
+    private val _chatroom = MutableLiveData<ChatRoom>().apply {
+        value = argument
+    }
+    val chatRoom : LiveData<ChatRoom>
+    get() = _chatroom
+
+
 
     var liveMessage = MutableLiveData<List<Message>>()
 
@@ -61,12 +72,13 @@ class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
 
         }
         message.value?.userId = UserManager.userData.id.toString()
+        message.value?.image = UserManager.userData.image.toString()
     }
 
     fun getLiveMessageResoult(){
-        liveMessage = repository.getLiveMessage()
+        liveMessage = repository.getLiveMessage(chatRoom.value!!.documentId)
         Logger.d("liveMessage${liveMessage.value}")
-        Logger.d("liveMessage${repository.getLiveMessage()}")
+        Logger.d("liveMessage${repository.getLiveMessage(chatRoom.value!!.documentId)}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
@@ -79,7 +91,7 @@ class ChatRoomDetailViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = repository.sentMessage(message)) {
+            when (val result = repository.sentMessage(message,chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
                     _error.value = null

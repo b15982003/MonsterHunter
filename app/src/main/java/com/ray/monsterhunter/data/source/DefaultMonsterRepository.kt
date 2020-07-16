@@ -29,8 +29,8 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveChatRoom()
     }
 
-    override fun getLiveMessage(): MutableLiveData<List<Message>> {
-        return remoteDataSource.getLiveMessage()
+    override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
+        return remoteDataSource.getLiveMessage(document)
     }
 
 
@@ -38,8 +38,8 @@ class DefaultMonsterRepository(
         return remoteDataSource.publish(crawling)
     }
 
-    override suspend fun sentMessage(message: Message): Result<Boolean> {
-       return remoteDataSource.sentMessage(message)
+    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
+       return remoteDataSource.sentMessage(message,document)
     }
 
     override suspend fun pushUser(user: User): Result<Boolean> {

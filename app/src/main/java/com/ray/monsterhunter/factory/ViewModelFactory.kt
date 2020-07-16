@@ -36,8 +36,6 @@ class ViewModelFactory constructor(
             isAssignableFrom(DialogChatRoomViewModel::class.java) ->
                 DialogChatRoomViewModel(repository)
 
-            isAssignableFrom(ChatRoomDetailViewModel::class.java) ->
-                ChatRoomDetailViewModel(repository)
 
 
             else ->

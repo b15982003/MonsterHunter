@@ -39,6 +39,7 @@
             style="@style/chatRoom_Detail_toolbar_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.chatRoom.roomName}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_toolbar"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_toolbar"
             app:layout_constraintStart_toStartOf="@id/chatRoom_detail_toolbar"

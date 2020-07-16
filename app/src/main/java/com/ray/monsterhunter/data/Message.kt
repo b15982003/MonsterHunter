@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class Message(
     var userId: String = "",
     var talk: String = "",
-    var createTime: Long? = null
-):Parcelable
+    var createTime: Long? = null,
+    var image : String = ""
+) : Parcelable

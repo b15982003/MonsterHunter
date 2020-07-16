@@ -12,7 +12,7 @@ interface MonsterRepository {
 
     fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>>
 
-    fun getLiveMessage(): MutableLiveData<List<Message>>
+    fun getLiveMessage(document: String): MutableLiveData<List<Message>>
 
     suspend fun getUser(): Result<User>
 
@@ -20,7 +20,7 @@ interface MonsterRepository {
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
-    suspend fun sentMessage(message: Message): Result<Boolean>
+    suspend fun sentMessage(message: Message,document: String): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 

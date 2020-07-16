@@ -20,7 +20,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override fun getLiveMessage(): MutableLiveData<List<Message>> {
+    override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
         TODO("Not yet implemented")
     }
 
@@ -37,7 +37,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun sentMessage(message: Message): Result<Boolean> {
+    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

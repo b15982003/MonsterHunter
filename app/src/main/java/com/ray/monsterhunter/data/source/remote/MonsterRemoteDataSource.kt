@@ -103,13 +103,13 @@ object MonsterRemoteDataSource : MonsterDataSource {
     }
 
 
-    override fun getLiveMessage(): MutableLiveData<List<Message>> {
+    override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
 
         val liveData = MutableLiveData<List<Message>>()
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-            .document("BYcrqNt3U9gYb203sdxD")
+            .document(document)
             .collection(PATH_MESSAGE)
             .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
@@ -288,7 +288,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun sentMessage(message: Message): Result<Boolean> =
+    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
 //            val document = messages.document()
@@ -296,7 +296,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             message.createTime = Calendar.getInstance().timeInMillis
 
             messages
-                .document("BYcrqNt3U9gYb203sdxD")
+                .document(document)
                 .collection(PATH_MESSAGE)
                 .add(message)
                 .addOnCompleteListener { task ->

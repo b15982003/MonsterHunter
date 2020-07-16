@@ -7,7 +7,9 @@ import android.view.*
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
+import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 
@@ -15,7 +17,7 @@ import com.ray.monsterhunter.ext.getVmFactory
 class ChatRoomDetail : Fragment() {
 
 
-    private val viewModel by viewModels<ChatRoomDetailViewModel> { getVmFactory(chatRoomArgs.fromBundle(requireArguments()).forum) }
+    private val viewModel by viewModels<ChatRoomDetailViewModel> { getVmFactory(ChatRoomDetailArgs.fromBundle(requireArguments()).chatRoom) }
     lateinit var binding : ChatRoomDetailFragmentBinding
 
 
@@ -36,8 +38,10 @@ class ChatRoomDetail : Fragment() {
             Handler().postDelayed({
                 binding.chatRoomDetailItemEditText.text.clear()
             },500)
+        }
 
-
+        binding.chatRoomDetailToolbarBack.setOnClickListener(){
+            findNavController().navigateUp()
         }
 
 
