@@ -318,4 +318,62 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun update1(teamList:List<String>,document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val userUpdate1 = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+//            val document = messages.document()
+
+            userUpdate1
+                .document(document)
+                .update("teammate",teamList)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    override suspend fun leaveUpdate(user: User,document: String): Result<Boolean> =
+//        suspendCoroutine { continuation ->
+//            val leaveUpdate = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+////            val document = messages.document()
+//
+//            leaveUpdate
+//                .document(document)
+//                .re
+//                .addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        continuation.resume(Result.Success(true))
+//                    } else {
+//                        task.exception?.let {
+//                            continuation.resume(Result.Error(it))
+//                            return@addOnCompleteListener
+//                        }
+//                        continuation.resume(
+//                            Result.Fail(
+//                                MonsterApplication.instance.getString(
+//                                    R.string.notGood
+//                                )
+//                            )
+//                        )
+//                    }
+//                }
+//        }
+
+
 }

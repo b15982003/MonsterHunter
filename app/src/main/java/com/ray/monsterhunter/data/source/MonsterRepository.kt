@@ -22,6 +22,10 @@ interface MonsterRepository {
 
     suspend fun sentMessage(message: Message,document: String): Result<Boolean>
 
+    suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
+
+//    suspend fun leaveUpdate(user: User,document: String): Result<Boolean>
+
     suspend fun pushUser(user: User): Result<Boolean>
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>

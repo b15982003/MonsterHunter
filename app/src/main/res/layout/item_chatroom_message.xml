@@ -76,12 +76,12 @@
 
                     <TextView
                         android:id="@+id/chatRoom_detail_item_message"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{product.talk}"
                         style="@style/chatRoom_Detail_message"
+                        android:maxWidth="256dp"
                         app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_item_image"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/chatRoom_detail_item_name"
                         app:layout_constraintTop_toBottomOf="@id/chatRoom_detail_item_name"
                         tools:text="@string/chatRoom_detail_message"/>
@@ -102,9 +102,10 @@
 
                     <TextView
                         android:id="@+id/chatRoom_detail_item_message_right"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{product.talk}"
+                        android:maxWidth="256dp"
                         style="@style/chatRoom_Detail_message"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

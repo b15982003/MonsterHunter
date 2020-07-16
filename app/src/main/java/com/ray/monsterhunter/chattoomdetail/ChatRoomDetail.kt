@@ -4,14 +4,19 @@ package com.ray.monsterhunter.chattoomdetail
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.Toast
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
+import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 
 
 class ChatRoomDetail : Fragment() {
@@ -41,8 +46,36 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailToolbarBack.setOnClickListener(){
+            viewModel.outLeave()
             findNavController().navigateUp()
         }
+
+        viewModel.chatRoom.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                viewModel.teammateList = it.teammate
+            }
+        })
+
+        viewModel.emptySeat.observe(viewLifecycleOwner, Observer {
+            if(it == true) {
+                viewModel.teammateList.add(UserManager.userData.email.toString())
+            }
+        })
+
+        viewModel.leave.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                Toast.makeText(MonsterApplication.instance,"人員已經滿了",Toast.LENGTH_LONG).show()
+                findNavController().navigateUp()
+                viewModel.getOutFinish()
+            }
+        })
+
+        viewModel.isGoon.observe(viewLifecycleOwner, Observer {
+            if (it == true){
+                viewModel.teammateList.remove(UserManager.userData.email.toString())
+            }
+        })
+
 
 
 
