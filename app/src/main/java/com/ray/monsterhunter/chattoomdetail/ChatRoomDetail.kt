@@ -37,6 +37,9 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailStartButton.visibility = View.GONE
         binding.chatRoomDetailEndButton.visibility = View.GONE
         binding.chatRoomDetailStartBackground.visibility = View.GONE
+        binding.chatRoomDetailMinNumber.visibility = View.GONE
+        binding.chatRoomDetailSecNumber.visibility = View.GONE
+        binding.chatRoomDetailLine.visibility = View.GONE
         binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
         })
 
@@ -44,18 +47,36 @@ class ChatRoomDetail : Fragment() {
             if (viewModel.ready.value == false){
                 viewModel.getready()
                 binding.chatRoomDetailStartButton.visibility = View.VISIBLE
-                binding.chatRoomDetailEndButton.visibility = View.VISIBLE
                 binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
+                binding.chatRoomDetailMinNumber.visibility = View.VISIBLE
+                binding.chatRoomDetailSecNumber.visibility = View.VISIBLE
+                binding.chatRoomDetailLine.visibility = View.VISIBLE
+                if(viewModel.timming.value == true){
+                    binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+                }
             }else{
                 viewModel.endreadt()
                 binding.chatRoomDetailStartButton.visibility = View.GONE
-                binding.chatRoomDetailEndButton.visibility = View.GONE
                 binding.chatRoomDetailStartBackground.visibility = View.GONE
+                binding.chatRoomDetailEndButton.visibility = View.GONE
+                binding.chatRoomDetailMinNumber.visibility = View.GONE
+                binding.chatRoomDetailSecNumber.visibility = View.GONE
+                binding.chatRoomDetailLine.visibility = View.GONE
             }
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener(){
             viewModel.startTimming()
+            binding.chatRoomDetailStartButton.visibility = View.GONE
+            binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+
+        }
+
+        binding.chatRoomDetailEndButton.setOnClickListener(){
+            viewModel.endTimming()
+            binding.chatRoomDetailStartButton.visibility = View.VISIBLE
+            binding.chatRoomDetailEndButton.visibility = View.GONE
+
         }
 
 
@@ -97,6 +118,12 @@ class ChatRoomDetail : Fragment() {
                 viewModel.teammateList.remove(UserManager.userData.email.toString())
             }
         })
+
+        viewModel.timeSec.observe(viewLifecycleOwner, Observer {
+            binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck%60).toString()
+            binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
+        })
+
 
 
 

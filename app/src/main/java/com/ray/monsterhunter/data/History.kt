@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.data
 
 data class History(
+    var documentId : String? = "",
     var time : String? = "",
     var task : String? = "",
     var friendScore : FriendScore? = null

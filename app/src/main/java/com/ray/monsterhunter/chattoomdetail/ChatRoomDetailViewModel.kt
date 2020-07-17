@@ -1,7 +1,6 @@
 package com.ray.monsterhunter.chattoomdetail
 
 import android.os.Handler
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +23,10 @@ class ChatRoomDetailViewModel(
     private val repository: MonsterRepository,
     private val argument: ChatRoom
 ) : ViewModel() {
+
+    lateinit var runnable: Runnable
+    private var handler = Handler()
+    var timeCheck: Long = 0
 
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
@@ -58,17 +61,14 @@ class ChatRoomDetailViewModel(
     val user: LiveData<User>
         get() = _user
 
-    private val _timming = MutableLiveData<Boolean>(false)
+    private val _taming = MutableLiveData<Boolean>(false)
 
     val timming: LiveData<Boolean>
-        get() = _timming
-
-    private val _timeMin = MutableLiveData<Long>(0)
-    val timeMin: LiveData<Long>
-        get() = _timeMin
+        get() = _taming
 
 
-    private val _timeSec = MutableLiveData<Long>(0)
+
+    private var _timeSec = MutableLiveData<Long>(0)
     val timeSec: LiveData<Long>
         get() = _timeSec
 
@@ -208,23 +208,21 @@ class ChatRoomDetailViewModel(
 
 
     fun startTimming() {
-        _timming.value = true
+        _taming.value = true
 
-        for (min in 1..50) {
-            for (sec in 1..60) {
-                Handler().postDelayed({
-                    _timeSec
-                }, 1000)
-
-                _timeMin
-            }
+        runnable = Runnable {
+            _timeSec.value = _timeSec.value?.plus(1)
+            timeCheck = timeSec.value!!
+            handler.postDelayed(runnable, 1000)
         }
+        handler.postDelayed(runnable, 1000)
     }
 
+
     fun endTimming() {
-        _timming.value = false
-        _timeMin.value = 0
+        _taming.value = false
         _timeSec.value = 0
+        handler.removeCallbacks(runnable)
     }
 
     fun getready() {

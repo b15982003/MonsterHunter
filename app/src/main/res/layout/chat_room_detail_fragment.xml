@@ -66,58 +66,65 @@
 
         <TextView
             android:id="@+id/chatRoom_detail_line"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            android:text=":"
             style="@style/chatRoom_Detail_secNumber"
-            app:layout_constraintTop_toBottomOf="@+id/chatRoom_detail_start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:layout_marginTop="50dp"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_start_background"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chatRoom_detail_start_background" />
 
         <TextView
             android:id="@+id/chatRoom_detail_secNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-            app:layout_constraintTop_toBottomOf="@+id/chatRoom_detail_start_button"
-            app:layout_constraintBottom_toBottomOf="@+id/chatRoom_detail_start_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             style="@style/chatRoom_Detail_secNumber"
-            android:layout_marginStart="100dp"
-            tools:text="00"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/chatRoom_detail_line"
+            app:layout_constraintTop_toTopOf="@+id/chatRoom_detail_line"
+            tools:text="00" />
+
+        <TextView
+            android:id="@+id/chatRoom_detail_minNumber"
+            style="@style/chatRoom_Detail_secNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
+            app:layout_constraintEnd_toStartOf="@id/chatRoom_detail_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/chatRoom_detail_line"
+            tools:text="00" />
 
         <TextView
             android:id="@+id/chatRoom_detail_start_button"
+            style="@style/chatRoom_Detail_start_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_start_background"
-            app:layout_constraintStart_toStartOf="@+id/chatRoom_detail_start_background"
-            app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
-            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/chatroom_list_start_button"
-            android:text="@string/chatRoom_detail_start_button"
             android:gravity="center"
-            style="@style/chatRoom_Detail_start_button"
-            />
+            android:text="@string/chatRoom_detail_start_button"
+            app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
+            app:layout_constraintStart_toStartOf="@+id/chatRoom_detail_start_background"
+            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_start_background" />
 
         <TextView
             android:id="@+id/chatRoom_detail_end_button"
+            style="@style/chatRoom_Detail_start_button"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_start_background"
-            app:layout_constraintStart_toStartOf="@+id/chatRoom_detail_start_background"
-            app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
-            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/chatroom_list_end_button"
-            android:text="@string/chatRoom_detail_end_button"
             android:gravity="center"
-            style="@style/chatRoom_Detail_start_button"
-            />
+            android:text="@string/chatRoom_detail_end_button"
+            app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
+            app:layout_constraintStart_toStartOf="@+id/chatRoom_detail_start_background"
+            app:layout_constraintTop_toTopOf="@id/chatRoom_detail_start_background" />
 
 
         <androidx.recyclerview.widget.RecyclerView
