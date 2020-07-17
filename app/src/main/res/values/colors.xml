@@ -54,7 +54,9 @@
     <!-- Profile -->
     <color name="profile_background">#D9CD90</color>
 
-    <!-- Chatroom -->
+    <!-- Chatroom detail -->
     <color name="chatroom_detail_ed_background">@color/google_sign_in_button</color>
+    <color name="chatRoom_detail_start_button">#1B813E</color>
+    <color name="chatRoom_detail_end_button">#F19483</color>
 
 </resources>

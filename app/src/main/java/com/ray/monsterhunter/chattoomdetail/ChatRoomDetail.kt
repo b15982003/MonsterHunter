@@ -35,8 +35,27 @@ class ChatRoomDetail : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
-
         })
+
+        binding.chatRoomDetailReadyButton.setOnClickListener(){
+            if (viewModel.ready.value == false){
+                viewModel.getready()
+                binding.chatRoomDetailStartButton.visibility = View.VISIBLE
+                binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+                binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
+            }else{
+                viewModel.endreadt()
+                binding.chatRoomDetailStartButton.visibility = View.GONE
+                binding.chatRoomDetailEndButton.visibility = View.GONE
+                binding.chatRoomDetailStartBackground.visibility = View.GONE
+            }
+        }
+
+        binding.chatRoomDetailStartButton.setOnClickListener(){
+            viewModel.startTimming()
+        }
+
+
 
         binding.chatRoomDetailSentMessage.setOnClickListener(){
             viewModel.message.value?.let { it1 -> viewModel.sentMessage(it1) }

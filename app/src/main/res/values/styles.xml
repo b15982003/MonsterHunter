@@ -122,5 +122,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="chatRoom_Detail_start_button">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>

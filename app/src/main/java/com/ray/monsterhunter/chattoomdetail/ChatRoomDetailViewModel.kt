@@ -40,6 +40,11 @@ class ChatRoomDetailViewModel(
 
     var liveMessage = MutableLiveData<List<Message>>()
 
+
+    private val _ready = MutableLiveData<Boolean>(false)
+    val ready: LiveData<Boolean>
+        get() = _ready
+
     private val _message = MutableLiveData<Message>().apply {
         value = Message()
     }
@@ -53,6 +58,14 @@ class ChatRoomDetailViewModel(
     val user: LiveData<User>
         get() = _user
 
+    private val _timming = MutableLiveData<Boolean>(false)
+
+    val timming: LiveData<Boolean>
+        get() = _timming
+
+    private val _time = MutableLiveData<Long>(0)
+    val time: LiveData<Long>
+        get() = _time
 
     private val _leave = MutableLiveData<Boolean>()
 
@@ -142,8 +155,8 @@ class ChatRoomDetailViewModel(
         }
     }
 
-    fun outLeave(){
-       isGoon.value = true
+    fun outLeave() {
+        isGoon.value = true
         update1()
     }
 
@@ -151,7 +164,7 @@ class ChatRoomDetailViewModel(
         if (chatRoom.value?.teammate?.size!! < 3) {
             emptySeat.value = true
             update1()
-        }else{
+        } else {
             getOut()
         }
     }
@@ -220,11 +233,35 @@ class ChatRoomDetailViewModel(
 //
 //    }
 
-    fun getOut(){
+    fun startTimming() {
+        _timming.value = true
+        var min  = 0
+        var sec1 = 0
+
+        for (sec in 1..60){
+            Handler().postDelay
+            sec1
+        }
+
+    }
+
+    fun endTimming() {
+        _timming.value = false
+    }
+
+    fun getready() {
+        _ready.value = true
+    }
+
+    fun endreadt() {
+        _ready.value = false
+    }
+
+    fun getOut() {
         _leave.value = true
     }
 
-    fun getOutFinish(){
+    fun getOutFinish() {
         _leave.value = false
     }
 
