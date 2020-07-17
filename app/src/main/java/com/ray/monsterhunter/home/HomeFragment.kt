@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
         binding.homeDataRecy.adapter = HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener{
 
         })
+        HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener {  }).notifyDataSetChanged()
 
         binding.homeActivityRecy.adapter = HomeActivityAdapter(HomeActivityAdapter.OnClickListener{
 

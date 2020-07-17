@@ -34,6 +34,9 @@ class ChatRoomDetail : Fragment() {
         binding = ChatRoomDetailFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.chatRoomDetailStartButton.visibility = View.GONE
+        binding.chatRoomDetailEndButton.visibility = View.GONE
+        binding.chatRoomDetailStartBackground.visibility = View.GONE
         binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
         })
 
@@ -94,6 +97,7 @@ class ChatRoomDetail : Fragment() {
                 viewModel.teammateList.remove(UserManager.userData.email.toString())
             }
         })
+
 
 
 

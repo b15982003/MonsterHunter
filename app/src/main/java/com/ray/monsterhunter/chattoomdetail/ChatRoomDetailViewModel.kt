@@ -1,5 +1,6 @@
 package com.ray.monsterhunter.chattoomdetail
 
+import android.os.Handler
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +19,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.UserManager
-import java.util.logging.Handler
 
 class ChatRoomDetailViewModel(
     private val repository: MonsterRepository,
@@ -63,9 +63,14 @@ class ChatRoomDetailViewModel(
     val timming: LiveData<Boolean>
         get() = _timming
 
-    private val _time = MutableLiveData<Long>(0)
-    val time: LiveData<Long>
-        get() = _time
+    private val _timeMin = MutableLiveData<Long>(0)
+    val timeMin: LiveData<Long>
+        get() = _timeMin
+
+
+    private val _timeSec = MutableLiveData<Long>(0)
+    val timeSec: LiveData<Long>
+        get() = _timeSec
 
     private val _leave = MutableLiveData<Boolean>()
 
@@ -201,52 +206,25 @@ class ChatRoomDetailViewModel(
         }
     }
 
-//    fun leaveUpdate(user:User){
-//
-//        coroutineScope.launch {
-//
-//            _status.value = LoadApiStatus.LOADING
-//
-//            when (val result = repository.leaveUpdate(user, chatRoom.value!!.documentId)) {
-//                is Result.Success -> {
-//                    Logger.i("ok,${message}")
-//                    _error.value = null
-//                    _status.value = LoadApiStatus.DONE
-//                }
-//                is Result.Fail -> {
-//                    Logger.i("fail")
-//                    _error.value = result.error
-//                    _status.value = LoadApiStatus.ERROR
-//                }
-//                is Result.Error -> {
-//                    Logger.i("error")
-//                    _error.value = result.exception.toString()
-//                    _status.value = LoadApiStatus.ERROR
-//                }
-//                else -> {
-//                    Logger.i("no")
-//                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
-//                    _status.value = LoadApiStatus.ERROR
-//                }
-//            }
-//        }
-//
-//    }
 
     fun startTimming() {
         _timming.value = true
-        var min  = 0
-        var sec1 = 0
 
-        for (sec in 1..60){
-            Handler().postDelay
-            sec1
+        for (min in 1..50) {
+            for (sec in 1..60) {
+                Handler().postDelayed({
+                    _timeSec
+                }, 1000)
+
+                _timeMin
+            }
         }
-
     }
 
     fun endTimming() {
         _timming.value = false
+        _timeMin.value = 0
+        _timeSec.value = 0
     }
 
     fun getready() {
@@ -266,4 +244,5 @@ class ChatRoomDetailViewModel(
     }
 
 }
+
 

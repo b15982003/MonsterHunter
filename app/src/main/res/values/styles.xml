@@ -128,5 +128,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="chatRoom_Detail_secNumber">
+        <item name="android:textSize">60sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>
