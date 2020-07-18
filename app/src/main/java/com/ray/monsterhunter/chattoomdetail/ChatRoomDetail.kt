@@ -1,24 +1,22 @@
 package com.ray.monsterhunter.chattoomdetail
 
 
-import android.R
+import com.ray.monsterhunter.R
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.os.HandlerCompat.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.MonsterApplication
-import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.Logger
+
 import com.ray.monsterhunter.util.UserManager
 
 
@@ -45,6 +43,7 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailLine.visibility = View.GONE
         binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
         })
+        binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
 
         binding.chatRoomDetailReadyButton.setOnClickListener(){
             if (viewModel.ready.value == false){
@@ -127,6 +126,28 @@ class ChatRoomDetail : Fragment() {
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
         })
 
+        viewModel.userArms.observe(viewLifecycleOwner, Observer {
+            binding.chatRoomDetailArmsImage.setImageResource(
+                when(viewModel.userArms.value){
+                    1 -> R.drawable.ic_arms_knife
+                    2 -> R.drawable.ic_arms_bigknife
+                    3 -> R.drawable.ic_arms_bow
+                    4 -> R.drawable.ic_arms_gunax
+                    5 -> R.drawable.ic_arms_lightcrossbow
+                    6 -> R.drawable.ic_arms_double_knife
+                    7 -> R.drawable.ic_arms_stick
+                    8 -> R.drawable.ic_arms_hcrossbow
+                    9 -> R.drawable.ic_arms_bighammer
+                    10 -> R.drawable.ic_arms_gunspear
+                    11 -> R.drawable.ic_arms_singo_knife
+                    12 -> R.drawable.ic_arms_spear
+                    13 -> R.drawable.ic_arms_ax
+                    14 -> R.drawable.ic_arms_flout
+                    else -> R.drawable.spear
+                }
+            )
+        })
+
         val arms = arrayListOf<String>("皆可",
             "太刀", "大劍",
             "弓箭", "充能斧",
@@ -137,7 +158,7 @@ class ChatRoomDetail : Fragment() {
         )
         val adapterArmsType = ArrayAdapter(
             MonsterApplication.instance,
-            R.layout.simple_spinner_dropdown_item,
+            R.layout.support_simple_spinner_dropdown_item,
             arms
         )
 
@@ -156,29 +177,70 @@ class ChatRoomDetail : Fragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.message.value?.userArmsType = "皆可"
-                        1L -> viewModel.message.value?.userArmsType = "太刀"
-                        2L -> viewModel.message.value?.userArmsType = "大劍"
-                        3L -> viewModel.message.value?.userArmsType = "弓箭"
-                        4L -> viewModel.message.value?.userArmsType = "充能斧"
-                        5L -> viewModel.message.value?.userArmsType = "輕弩"
-                        6L -> viewModel.message.value?.userArmsType = "雙劍"
-                        7L -> viewModel.message.value?.userArmsType = "操蟲棍"
-                        8L -> viewModel.message.value?.userArmsType = "重弩"
-                        9L -> viewModel.message.value?.userArmsType = "大錘"
-                        10L -> viewModel.message.value?.userArmsType = "銃槍"
-                        11L -> viewModel.message.value?.userArmsType = "單手劍"
-                        12L -> viewModel.message.value?.userArmsType = "長槍"
-                        13L -> viewModel.message.value?.userArmsType = "斬擊斧"
-                        14L -> viewModel.message.value?.userArmsType = "狩獵笛"
+                        0L -> {
+                            viewModel.message.value?.userArmsType = "皆可"
+                            viewModel.userArms.value = 0
+                        }
+                        1L -> {
+                            viewModel.message.value?.userArmsType = "太刀"
+                            viewModel.userArms.value = 1
+                        }
+                        2L -> {
+                            viewModel.message.value?.userArmsType = "大劍"
+                            viewModel.userArms.value = 2
+                        }
+                        3L -> {
+                            viewModel.message.value?.userArmsType = "弓箭"
+                            viewModel.userArms.value = 3
+                        }
+                        4L -> {
+                            viewModel.message.value?.userArmsType = "充能斧"
+                            viewModel.userArms.value = 4
+                        }
+                        5L -> {
+                            viewModel.message.value?.userArmsType = "輕弩"
+                            viewModel.userArms.value = 5
+                        }
+                        6L -> {
+                            viewModel.message.value?.userArmsType = "雙劍"
+                            viewModel.userArms.value = 6
+                        }
+                        7L -> {
+                            viewModel.message.value?.userArmsType = "操蟲棍"
+                            viewModel.userArms.value = 7
+                        }
+                        8L -> {
+                            viewModel.message.value?.userArmsType = "重弩"
+                            viewModel.userArms.value = 8
+                        }
+                        9L -> {
+                            viewModel.message.value?.userArmsType = "大錘"
+                            viewModel.userArms.value = 9
+                        }
+                        10L -> {
+                            viewModel.message.value?.userArmsType = "銃槍"
+                            viewModel.userArms.value = 10
+                        }
+                        11L -> {
+                            viewModel.message.value?.userArmsType = "單手劍"
+                            viewModel.userArms.value = 11
+                        }
+                        12L -> {
+                            viewModel.message.value?.userArmsType = "長槍"
+                            viewModel.userArms.value = 12
+                        }
+                        13L -> {
+                            viewModel.message.value?.userArmsType = "斬擊斧"
+                            viewModel.userArms.value = 13
+                        }
+                        14L -> {
+                            viewModel.message.value?.userArmsType = "狩獵笛"
+                            viewModel.userArms.value = 14
+                        }
 
                     }
                 }
             }
-
-
-
-
 
         return binding.root
     }

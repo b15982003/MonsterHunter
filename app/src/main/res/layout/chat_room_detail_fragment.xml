@@ -57,19 +57,14 @@
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_ready_button"
             />
 
-
-
         <ImageView
-            android:id="@+id/chatRoom_detail_arms_button"
+            android:id="@+id/chatRoom_detail_arms_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="40dp"
-            android:src="@drawable/spear"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_ready_button"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_ready_button"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_ready_button" />
-
-
 
 
 
@@ -194,7 +189,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_flout"
+            android:src="@drawable/ic_arms_flout"
             app:layout_constraintBottom_toBottomOf="@+id/chatRoom_detail_item_editText"
             app:layout_constraintEnd_toEndOf="@+id/chatRoom_detail_editText_background"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_item_editText" />

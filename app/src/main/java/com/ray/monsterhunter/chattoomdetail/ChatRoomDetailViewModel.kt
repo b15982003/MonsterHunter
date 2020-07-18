@@ -43,6 +43,8 @@ class ChatRoomDetailViewModel(
 
     var liveMessage = MutableLiveData<List<Message>>()
 
+    var userArms = MutableLiveData<Int>()
+
 
     private val _ready = MutableLiveData<Boolean>(false)
     val ready: LiveData<Boolean>

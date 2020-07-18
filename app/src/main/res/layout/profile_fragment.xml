@@ -67,7 +67,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_ax"
+                android:src="@drawable/ic_arms_knife"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsB"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_line" />
@@ -86,7 +86,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/icon_bigknife"
+                android:src="@drawable/ic_arms_bigknife"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsC"
                 app:layout_constraintStart_toStartOf="@id/profile_armsA"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsA" />
@@ -105,7 +105,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_bighammer"
+                android:src="@drawable/ic_arms_bow"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsD"
                 app:layout_constraintStart_toStartOf="@id/profile_armsB"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsB" />
@@ -124,7 +124,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_bow"
+                android:src="@drawable/ic_arms_gunax"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsE"
                 app:layout_constraintStart_toStartOf="@id/profile_armsC"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsC" />
@@ -144,7 +144,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_double_knife"
+                android:src="@drawable/ic_arms_lightcrossbow"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsF"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
@@ -163,7 +163,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_flout"
+                android:src="@drawable/ic_arms_double_knife"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsG"
                 app:layout_constraintStart_toStartOf="@id/profile_armsE"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
@@ -182,7 +182,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_gunax"
+                android:src="@drawable/ic_arms_stick"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/profile_armsF"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
@@ -203,7 +203,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
-                android:src="@drawable/ic_gunspear"
+                android:src="@drawable/ic_arms_hcrossbow"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsI"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_line" />
@@ -223,7 +223,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_spear"
+                android:src="@drawable/ic_arms_bighammer"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsJ"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsH"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
@@ -242,7 +242,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_knife"
+                android:src="@drawable/ic_arms_gunspear"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsK"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsI"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
@@ -262,7 +262,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_singo_knife"
+                android:src="@drawable/ic_arms_singo_knife"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsL"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsJ"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
@@ -281,7 +281,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_hcrossbow"
+                android:src="@drawable/ic_arms_spear"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsM"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsK"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
@@ -300,7 +300,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_lightcrossbow"
+                android:src="@drawable/ic_arms_ax"
                 app:layout_constraintBottom_toTopOf="@+id/profile_armsN"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsL"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
@@ -320,7 +320,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_stick"
+                android:src="@drawable/ic_arms_flout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/profile_armsM"
                 app:layout_constraintTop_toBottomOf="@+id/profile_armsM" />

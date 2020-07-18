@@ -10,5 +10,5 @@ data class Message(
     var createTime: Long? = null,
     var image: String = "",
     var email: String = "",
-    var userArmsType: String = ""
+    var userArmsType : String = ""
 ) : Parcelable
