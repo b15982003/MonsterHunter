@@ -26,6 +26,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private val PATH_MESSAGE = "message"
+    private val PATH_USERARMSTYPE = "userArmsType"
     private const val KEY_START_TIME = "dateTime"
     private const val KEY_CREAT_TIME = "createTime"
 
@@ -297,6 +298,37 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
            documentMessage
                 .set(message)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun getUserArms( userArmsType :UserArms,document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val userArmsTypes = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentMessage = userArmsTypes.document(document)
+                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
+
+            userArmsType.createTime = Calendar.getInstance().timeInMillis
+
+            documentMessage
+                .set(userArmsType)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))

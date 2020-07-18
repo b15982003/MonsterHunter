@@ -60,4 +60,9 @@
     <color name="chatRoom_detail_start_button">#1B813E</color>
     <color name="chatRoom_detail_end_button">#F19483</color>
 
+    <!-- Chatroom Score -->
+    <color name="chatRoom_score_name">#30000000</color>
+    <color name="chatRoom_score_plus">#87000000</color>
+
+
 </resources>

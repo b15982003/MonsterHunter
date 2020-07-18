@@ -62,6 +62,12 @@
     <string name="chatRoom_detail_start_button">任務開始</string>
     <string name="chatRoom_detail_end_button">任務結束</string>
 
+    <!--ChatRoom Score -->
+    <string name="chatRoom_score_userName">紙火箭</string>
+    <string name="chatRoom_score_mission_successful">成功</string>
+    <string name="chatRoom_score_mission_fail">失敗</string>
+    <string name="chatRoom_score_title">評 分</string>
+    <string name="chatRoom_score_sent_button">Sent</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

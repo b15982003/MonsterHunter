@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.chattoomdetail
 
 
+import android.annotation.SuppressLint
 import com.ray.monsterhunter.R
 import android.os.Bundle
 import android.os.Handler
@@ -27,6 +28,7 @@ class ChatRoomDetail : Fragment() {
     lateinit var binding : ChatRoomDetailFragmentBinding
 
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,7 @@ class ChatRoomDetail : Fragment() {
         binding = ChatRoomDetailFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
         binding.chatRoomDetailStartButton.visibility = View.GONE
         binding.chatRoomDetailEndButton.visibility = View.GONE
         binding.chatRoomDetailStartBackground.visibility = View.GONE
@@ -75,9 +78,14 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailEndButton.setOnClickListener(){
+            Handler().postDelayed({
+                viewModel.chatRoom.value?.finishTime = viewModel.timeCheck
+            },1000)
+
             viewModel.endTimming()
             binding.chatRoomDetailStartButton.visibility = View.VISIBLE
             binding.chatRoomDetailEndButton.visibility = View.GONE
+            findNavController().navigate(R.id.action_global_chatRoomDetailScore)
 
         }
 
@@ -127,6 +135,7 @@ class ChatRoomDetail : Fragment() {
         })
 
         viewModel.userArms.observe(viewLifecycleOwner, Observer {
+            viewModel.userArmsType.value?.let { it1 -> viewModel.getUserArms(it1) }
             binding.chatRoomDetailArmsImage.setImageResource(
                 when(viewModel.userArms.value){
                     1 -> R.drawable.ic_arms_knife
@@ -178,63 +187,63 @@ class ChatRoomDetail : Fragment() {
                 ) {
                     when (id) {
                         0L -> {
-                            viewModel.message.value?.userArmsType = "皆可"
+                            viewModel.userArmsType.value?.armsType = "皆可"
                             viewModel.userArms.value = 0
                         }
                         1L -> {
-                            viewModel.message.value?.userArmsType = "太刀"
+                            viewModel.userArmsType.value?.armsType  = "太刀"
                             viewModel.userArms.value = 1
                         }
                         2L -> {
-                            viewModel.message.value?.userArmsType = "大劍"
+                            viewModel.userArmsType.value?.armsType = "大劍"
                             viewModel.userArms.value = 2
                         }
                         3L -> {
-                            viewModel.message.value?.userArmsType = "弓箭"
+                            viewModel.userArmsType.value?.armsType  = "弓箭"
                             viewModel.userArms.value = 3
                         }
                         4L -> {
-                            viewModel.message.value?.userArmsType = "充能斧"
+                            viewModel.userArmsType.value?.armsType  = "充能斧"
                             viewModel.userArms.value = 4
                         }
                         5L -> {
-                            viewModel.message.value?.userArmsType = "輕弩"
+                            viewModel.userArmsType.value?.armsType  = "輕弩"
                             viewModel.userArms.value = 5
                         }
                         6L -> {
-                            viewModel.message.value?.userArmsType = "雙劍"
+                            viewModel.userArmsType.value?.armsType  = "雙劍"
                             viewModel.userArms.value = 6
                         }
                         7L -> {
-                            viewModel.message.value?.userArmsType = "操蟲棍"
+                            viewModel.userArmsType.value?.armsType  = "操蟲棍"
                             viewModel.userArms.value = 7
                         }
                         8L -> {
-                            viewModel.message.value?.userArmsType = "重弩"
+                            viewModel.userArmsType.value?.armsType  = "重弩"
                             viewModel.userArms.value = 8
                         }
                         9L -> {
-                            viewModel.message.value?.userArmsType = "大錘"
+                            viewModel.userArmsType.value?.armsType  = "大錘"
                             viewModel.userArms.value = 9
                         }
                         10L -> {
-                            viewModel.message.value?.userArmsType = "銃槍"
+                            viewModel.userArmsType.value?.armsType  = "銃槍"
                             viewModel.userArms.value = 10
                         }
                         11L -> {
-                            viewModel.message.value?.userArmsType = "單手劍"
+                            viewModel.userArmsType.value?.armsType  = "單手劍"
                             viewModel.userArms.value = 11
                         }
                         12L -> {
-                            viewModel.message.value?.userArmsType = "長槍"
+                            viewModel.userArmsType.value?.armsType  = "長槍"
                             viewModel.userArms.value = 12
                         }
                         13L -> {
-                            viewModel.message.value?.userArmsType = "斬擊斧"
+                            viewModel.userArmsType.value?.armsType  = "斬擊斧"
                             viewModel.userArms.value = 13
                         }
                         14L -> {
-                            viewModel.message.value?.userArmsType = "狩獵笛"
+                            viewModel.userArmsType.value?.armsType  = "狩獵笛"
                             viewModel.userArms.value = 14
                         }
 

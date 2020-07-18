@@ -4,10 +4,11 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Message(
+data class UserArms(
     var userId: String = "",
-    var talk: String = "",
     var createTime: Long? = null,
     var image: String = "",
-    var email: String = ""
+    var email: String = "",
+    var armsType: String = ""
+
 ) : Parcelable

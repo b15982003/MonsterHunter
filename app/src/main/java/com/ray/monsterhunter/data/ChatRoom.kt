@@ -15,5 +15,6 @@ data class ChatRoom(
     var typeName: String = "",
     var userId: String = "",
     var createTime: Long? = null,
-    var teammate: MutableList<String> = mutableListOf()
+    var teammate: MutableList<String> = mutableListOf(),
+    var finishTime : Long? = null
     ) : Parcelable

@@ -62,6 +62,13 @@
             />
     </fragment>
 
+    <fragment
+        android:id="@+id/chatRoomDetailScore"
+        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScore"
+        android:label="chat_room_detail_score_fragment"
+        tools:layout="@layout/chat_room_detail_score_fragment" >
+    </fragment>
+
 
 
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
@@ -72,5 +79,6 @@
     <action android:id="@+id/action_global_dailogPost" app:destination="@id/dialogPostFragment" />
     <action android:id="@+id/action_global_dialogChatRoom" app:destination="@id/dialogChatRoomFragment" />
     <action android:id="@+id/action_global_chatRoomDetail" app:destination="@id/chatRoomDetail"/>
+    <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
 
 </navigation>

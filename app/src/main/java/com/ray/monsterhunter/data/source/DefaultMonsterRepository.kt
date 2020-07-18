@@ -42,13 +42,14 @@ class DefaultMonsterRepository(
        return remoteDataSource.sentMessage(message,document)
     }
 
+    override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> {
+        return remoteDataSource.getUserArms(userArmsType, document)
+    }
+
     override suspend fun update1(teamList:List<String>,document: String): Result<Boolean> {
         return remoteDataSource.update1(teamList,document)
     }
 
-//    override suspend fun leaveUpdate(user: User, document: String): Result<Boolean> {
-//        return remoteDataSource.leaveUpdate(user, document)
-//    }
 
     override suspend fun pushUser(user: User): Result<Boolean> {
         return remoteDataSource.pushUser(user)
