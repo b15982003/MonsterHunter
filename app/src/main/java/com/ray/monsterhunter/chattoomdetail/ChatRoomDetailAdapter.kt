@@ -30,7 +30,7 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener ) :
             binding.chatRoomDetailItemCreateTime.text = AllStampTimeToDate
             binding.chatRoomDetailItemCreateTimeRight.text = AllStampTimeToDate
 
-            if (UserManager.userData.id == message.userId){
+            if (UserManager.userData.email == message.email){
 
 
                 binding.chatRoomDetailItemMessageRight.visibility = View.VISIBLE

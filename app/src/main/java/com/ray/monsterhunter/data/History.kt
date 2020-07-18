@@ -14,3 +14,5 @@ data class FriendScore(
     var playnumber : String = ""
 )
 
+
+

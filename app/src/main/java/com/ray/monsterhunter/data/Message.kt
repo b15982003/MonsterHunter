@@ -8,5 +8,7 @@ data class Message(
     var userId: String = "",
     var talk: String = "",
     var createTime: Long? = null,
-    var image : String = ""
+    var image: String = "",
+    var email: String = "",
+    var userArmsType: String = ""
 ) : Parcelable

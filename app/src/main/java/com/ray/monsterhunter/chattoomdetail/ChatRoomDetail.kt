@@ -1,9 +1,12 @@
 package com.ray.monsterhunter.chattoomdetail
 
 
+import android.R
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.os.HandlerCompat.postDelayed
 import androidx.fragment.app.Fragment
@@ -124,6 +127,54 @@ class ChatRoomDetail : Fragment() {
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
         })
 
+        val arms = arrayListOf<String>("皆可",
+            "太刀", "大劍",
+            "弓箭", "充能斧",
+            "輕弩", "雙劍",
+            "操蟲棍", "重弩",
+            "大錘", "銃槍", "單手劍",
+            "長槍", "斬擊斧", "狩獵笛"
+        )
+        val adapterArmsType = ArrayAdapter(
+            MonsterApplication.instance,
+            R.layout.simple_spinner_dropdown_item,
+            arms
+        )
+
+        binding.chatRoomDetailArmsSpinner.adapter = adapterArmsType
+
+        binding.chatRoomDetailArmsSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (id) {
+                        0L -> viewModel.message.value?.userArmsType = "皆可"
+                        1L -> viewModel.message.value?.userArmsType = "太刀"
+                        2L -> viewModel.message.value?.userArmsType = "大劍"
+                        3L -> viewModel.message.value?.userArmsType = "弓箭"
+                        4L -> viewModel.message.value?.userArmsType = "充能斧"
+                        5L -> viewModel.message.value?.userArmsType = "輕弩"
+                        6L -> viewModel.message.value?.userArmsType = "雙劍"
+                        7L -> viewModel.message.value?.userArmsType = "操蟲棍"
+                        8L -> viewModel.message.value?.userArmsType = "重弩"
+                        9L -> viewModel.message.value?.userArmsType = "大錘"
+                        10L -> viewModel.message.value?.userArmsType = "銃槍"
+                        11L -> viewModel.message.value?.userArmsType = "單手劍"
+                        12L -> viewModel.message.value?.userArmsType = "長槍"
+                        13L -> viewModel.message.value?.userArmsType = "斬擊斧"
+                        14L -> viewModel.message.value?.userArmsType = "狩獵笛"
+
+                    }
+                }
+            }
 
 
 
@@ -143,8 +194,4 @@ class ChatRoomDetail : Fragment() {
         (activity as MainActivity).getBottomnav()
         (activity as MainActivity).getToolbar()
     }
-
-
-
-
 }

@@ -291,14 +291,12 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun sentMessage(message: Message,document: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
-//            val document = messages.document()
+            val documentMessage = messages.document(document).collection(PATH_MESSAGE).document()
 
             message.createTime = Calendar.getInstance().timeInMillis
 
-            messages
-                .document(document)
-                .collection(PATH_MESSAGE)
-                .add(message)
+           documentMessage
+                .set(message)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -345,35 +343,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     }
                 }
         }
-
-
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    override suspend fun leaveUpdate(user: User,document: String): Result<Boolean> =
-//        suspendCoroutine { continuation ->
-//            val leaveUpdate = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
-////            val document = messages.document()
-//
-//            leaveUpdate
-//                .document(document)
-//                .re
-//                .addOnCompleteListener { task ->
-//                    if (task.isSuccessful) {
-//                        continuation.resume(Result.Success(true))
-//                    } else {
-//                        task.exception?.let {
-//                            continuation.resume(Result.Error(it))
-//                            return@addOnCompleteListener
-//                        }
-//                        continuation.resume(
-//                            Result.Fail(
-//                                MonsterApplication.instance.getString(
-//                                    R.string.notGood
-//                                )
-//                            )
-//                        )
-//                    }
-//                }
-//        }
 
 
 }

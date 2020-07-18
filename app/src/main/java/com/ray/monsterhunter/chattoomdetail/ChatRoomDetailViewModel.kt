@@ -104,7 +104,6 @@ class ChatRoomDetailViewModel(
     init {
         if (MonsterApplication.instance.isLiveMessage()) {
             getLiveMessageResoult()
-            Logger.d("1234567890")
 
         } else {
             getMessage()
@@ -115,6 +114,7 @@ class ChatRoomDetailViewModel(
 
         message.value?.userId = UserManager.userData.id.toString()
         message.value?.image = UserManager.userData.image.toString()
+        message.value?.email = UserManager.userData.email.toString()
         enterUpdate()
 
     }
@@ -166,7 +166,7 @@ class ChatRoomDetailViewModel(
     }
 
     fun enterUpdate() {
-        if (chatRoom.value?.teammate?.size!! < 3) {
+        if (chatRoom.value?.teammate?.size!! < 4) {
             emptySeat.value = true
             update1()
         } else {
@@ -175,8 +175,6 @@ class ChatRoomDetailViewModel(
     }
 
     fun update1() {
-
-
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
