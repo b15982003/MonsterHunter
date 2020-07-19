@@ -14,6 +14,8 @@ interface MonsterDataSource {
 
     suspend fun getAllUser(): Result<List<User>>
 
+    suspend fun getMyUser(document: String): Result<List<User>>
+
     suspend fun getImageMonster(): Result<MonsterUri>
 
     fun getLiveChatRoom() : MutableLiveData<List<ChatRoom>>

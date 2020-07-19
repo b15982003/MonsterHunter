@@ -26,6 +26,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private val PATH_MESSAGE = "message"
+    private val PATH_FRIENDLIST = "friendList"
     private val PATH_USERARMSTYPE = "userArmsType"
     private const val KEY_START_TIME = "dateTime"
     private const val KEY_CREAT_TIME = "createTime"
@@ -92,6 +93,34 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         val user = document.toObject(User::class.java)
                         list.add(user)
                         Logger.d("allUserrepository${user}")
+
+                    }
+                    continuation.resume(Result.Success(list))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getMyUser(document: String): Result<List<User>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document("BnvEtE3ZyJaPnhtXrzRa")
+            .collection(PATH_FRIENDLIST)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<User>()
+                    for (document in task.result!!) {
+
+                        val user = document.toObject(User::class.java)
+                        list.add(user)
+                        Logger.d("MyUserrepository${user}")
 
                     }
                     continuation.resume(Result.Success(list))

@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.UserManager
 
 class FriendItemViewModel(
     val repository: MonsterRepository,
@@ -65,11 +66,9 @@ class FriendItemViewModel(
     }
 
     fun getUserList() {
-
-
         when (friendTypeFilter) {
             FriendTypeFilter.USERLIST -> getAllUser()
-            else -> "44"
+            else -> getMyUser()
 
         }
 
@@ -81,6 +80,43 @@ class FriendItemViewModel(
             _status.value = LoadApiStatus.LOADING
 
             val result = repository.getAllUser()
+
+            _userList.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+
+                }
+                is Result.Fail -> {
+
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+//            _refreshStatus.value = false
+        }
+    }
+
+    fun getMyUser() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getMyUser(UserManager.userData.email!!)
 
             _userList.value = when (result) {
                 is Result.Success -> {
