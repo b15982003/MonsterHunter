@@ -149,7 +149,7 @@
 
     <style name="chatRoom_score_sent_button">
         <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/entertext</item>
     </style>
 
     <!-- friend List -->

@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.MonsterApplication
+import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 
@@ -78,15 +79,14 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailEndButton.setOnClickListener(){
-            Handler().postDelayed({
-                viewModel.chatRoom.value?.finishTime = viewModel.timeCheck
-            },1000)
-
+            viewModel.chatRoom.value?.finishTime = viewModel.timeCheck
+//            viewModel.chatRoom.value?.finishTime = viewModel.chatRoom.value?.finishTime
             viewModel.endTimming()
             binding.chatRoomDetailStartButton.visibility = View.VISIBLE
             binding.chatRoomDetailEndButton.visibility = View.GONE
-            findNavController().navigate(R.id.action_global_chatRoomDetailScore)
-
+            Handler().postDelayed({
+                findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
+            },1000)
         }
 
 

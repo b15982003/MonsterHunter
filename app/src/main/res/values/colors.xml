@@ -64,5 +64,9 @@
     <color name="chatRoom_score_name">#30000000</color>
     <color name="chatRoom_score_plus">#87000000</color>
 
+    <!-- friend ViewPager -->
+    <color name="friendViewpager_line">#cccccc</color>
+    <color name="friendViewpager_no_choose_text">#cccccc</color>
+    <color name="friendViewpager_choose_text">#42602D</color>
 
 </resources>

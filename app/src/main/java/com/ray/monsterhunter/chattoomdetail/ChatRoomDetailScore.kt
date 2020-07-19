@@ -19,7 +19,7 @@ import com.ray.monsterhunter.util.Logger
 class ChatRoomDetailScore : Fragment() {
 
 
-    private val viewModel by viewModels<ChatRoomDetailScoreViewModel> { getVmFactory() }
+    private val viewModel by viewModels<ChatRoomDetailScoreViewModel> { getVmFactory(ChatRoomDetailScoreArgs.fromBundle(requireArguments()).chatRoomDetail) }
 
     //    private val chatRoomViewModel by  viewModels<ChatRoomDetailViewModel> { getVmFactory() }
 //    lateinit var chatRoomDetailViewModel : ChatRoomDetailViewModel
@@ -40,6 +40,10 @@ class ChatRoomDetailScore : Fragment() {
         binding.chatRoomScoreSentButton.setOnClickListener() {
             findNavController().navigateUp()
         }
+
+        viewModel.chatRoom.observe(viewLifecycleOwner, Observer {
+            Logger.d("chatRoomValue${viewModel.chatRoom.value}")
+        })
 //        val chatRoomViewModel = ChatRoomDetailViewModel()
 //
 //

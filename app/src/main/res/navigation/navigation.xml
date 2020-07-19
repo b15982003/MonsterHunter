@@ -67,6 +67,10 @@
         android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScore"
         android:label="chat_room_detail_score_fragment"
         tools:layout="@layout/chat_room_detail_score_fragment" >
+        <argument
+            android:name="chatRoomDetail"
+            app:argType="com.ray.monsterhunter.data.ChatRoom"
+            app:nullable="false" />
     </fragment>
 
 

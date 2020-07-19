@@ -1,7 +1,6 @@
 package com.ray.monsterhunter.ext
 
 import androidx.fragment.app.Fragment
-import androidx.room.Room
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.factory.FriendItemViewModelFactory
@@ -18,7 +17,6 @@ fun Fragment.getVmFactory(): ViewModelFactory {
 
 fun Fragment.getVmFactory(chatRoom: ChatRoom): RoomNameViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-
     return RoomNameViewModelFactory(repository,chatRoom)
 }
 
@@ -27,4 +25,5 @@ fun Fragment.getVmFactory(friendTypeFilter: FriendTypeFilter): FriendItemViewMod
 
     return FriendItemViewModelFactory(repository,friendTypeFilter)
 }
+
 
