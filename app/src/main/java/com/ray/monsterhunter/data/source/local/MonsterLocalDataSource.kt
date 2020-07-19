@@ -20,7 +20,19 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUser(): Result<User> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllUser(): Result<List<User>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMyUser(document: String): Result<List<User>> {
         TODO("Not yet implemented")
     }
 
@@ -30,6 +42,22 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
 
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun cencelUser(userArmsType: UserArms, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun update1( teamList:List<String>,document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.chatroom.ChatRoomAdapter
-import com.ray.monsterhunter.data.Activity
-import com.ray.monsterhunter.data.ChatRoom
-import com.ray.monsterhunter.data.Crawling
+import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailAdapter
+import com.ray.monsterhunter.data.*
+import com.ray.monsterhunter.friend.item.FriendItemAdapter
 import com.ray.monsterhunter.home.HomeActivityAdapter
 import com.ray.monsterhunter.home.HomeCrawlingAdapter
 import com.ray.monsterhunter.network.LoadApiStatus
@@ -44,12 +44,34 @@ fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?
     }
 }
 
+@BindingAdapter("chatRoomMessage")
+fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,message: List<Message>?){
+    message?.let {
+        recyclerView.adapter?.apply {
+            when (this){
+                is ChatRoomDetailAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
 @BindingAdapter("activity")
 fun bindActivityRecyclerView(recyclerView: RecyclerView, activity : List<Activity>?) {
     activity?.let {
         recyclerView.adapter?.apply {
             when (this) {
                 is HomeActivityAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
+@BindingAdapter("getAllUser")
+fun bindGetAllUserRecyclerView(recyclerView: RecyclerView, user : List<User>?) {
+    user?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is FriendItemAdapter -> submitList(it)
             }
         }
     }

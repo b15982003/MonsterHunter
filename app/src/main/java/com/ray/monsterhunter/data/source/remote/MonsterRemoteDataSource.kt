@@ -25,6 +25,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_MONSTER = "imagemonster"
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
+    private val PATH_MESSAGE = "message"
+    private val PATH_FRIENDLIST = "friendList"
+    private val PATH_USERARMSTYPE = "userArmsType"
     private const val KEY_START_TIME = "dateTime"
     private const val KEY_CREAT_TIME = "createTime"
 
@@ -44,6 +47,84 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         list.add(crawling)
                     }
                     continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_ACTIVITY)
+//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<Activity>()
+                    for (document in task.result!!) {
+
+                        Logger.d(document.id + " => " + document.data)
+                        val activity = document.toObject(Activity::class.java)
+                        list.add(activity)
+                    }
+                    continuation.resume(Result.Success(list))
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+    override suspend fun getAllUser(): Result<List<User>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<User>()
+                    for (document in task.result!!) {
+
+                        val user = document.toObject(User::class.java)
+                        list.add(user)
+                        Logger.d("allUserrepository${user}")
+
+                    }
+                    continuation.resume(Result.Success(list))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getMyUser(document: String): Result<List<User>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document("BnvEtE3ZyJaPnhtXrzRa")
+            .collection(PATH_FRIENDLIST)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<User>()
+                    for (document in task.result!!) {
+
+                        val user = document.toObject(User::class.java)
+                        list.add(user)
+                        Logger.d("MyUserrepository${user}")
+
+                    }
+                    continuation.resume(Result.Success(list))
+
                 } else {
                     task.exception?.let {
                         continuation.resume(Result.Error(it))
@@ -76,30 +157,32 @@ object MonsterRemoteDataSource : MonsterDataSource {
         return liveData
     }
 
-    override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_ACTIVITY)
-//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val list = mutableListOf<Activity>()
-                    for (document in task.result!!) {
 
-                        Logger.d(document.id + " => " + document.data)
-                        val activity = document.toObject(Activity::class.java)
-                        list.add(activity)
-                    }
-                    continuation.resume(Result.Success(list))
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+    override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
+
+        val liveData = MutableLiveData<List<Message>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .document(document)
+            .collection(PATH_MESSAGE)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                val list = mutableListOf<Message>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+                    val message = document.toObject(Message::class.java)
+                    list.add(message)
                 }
+
+                liveData.value = list
+                Logger.d("liveDatagg${liveData.value}")
             }
+        return liveData
     }
+
 
     override suspend fun getUser(): Result<User> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -127,6 +210,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
             }
     }
+
+
 
     override suspend fun getImageMonster(): Result<MonsterUri> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
@@ -258,4 +343,120 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun sentMessage(message: Message, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentMessage = messages.document(document).collection(PATH_MESSAGE).document()
+
+            message.createTime = Calendar.getInstance().timeInMillis
+
+            documentMessage
+                .set(message)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val userArmsTypes = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentMessage = userArmsTypes.document(document)
+                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
+
+            userArmsType.createTime = Calendar.getInstance().timeInMillis
+
+            documentMessage
+                .set(userArmsType)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun update1(teamList: List<String>, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val userUpdate1 = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+//            val document = messages.document()
+
+            userUpdate1
+                .document(document)
+                .update("teammate", teamList)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    override suspend fun cencelUser(userArmsType: UserArms, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val canceluser1 = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentCancelUser = canceluser1.document(document)
+                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
+
+            documentCancelUser
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
 }

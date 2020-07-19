@@ -17,6 +17,7 @@ import androidx.navigation.ui.NavigationUI
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ray.monsterhunter.databinding.ActivityMainBinding
@@ -24,6 +25,7 @@ import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : BaseActivity() {
@@ -41,28 +43,33 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_chatroom -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_chatRoomFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_friend -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_friendFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_home -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_homeFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_history -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_historyFragment)
+                    getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_profile -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_profileFragment)
+                    hiddingToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -122,6 +129,10 @@ class MainActivity : BaseActivity() {
         val headerLayout = navigationView.inflateHeaderView(R.layout.item_drawer_heater)
         var ivHeaderPhoto: ImageView = headerLayout.findViewById(R.id.profile_image)
         var userName: TextView = headerLayout.findViewById(R.id.profile_userId)
+
+        UserManager.userData.id = FirebaseAuth.getInstance().currentUser?.displayName
+        UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
+        UserManager.userData.image = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
 
         userName.text = UserManager.userData.id
@@ -188,6 +199,23 @@ class MainActivity : BaseActivity() {
             super.onBackPressed()
         }
     }
+
+    fun hiddingToolbar(){
+        toolbar.visibility = View.GONE
+    }
+
+    fun hiddingBottomnav(){
+        bottomNav.visibility = View.GONE
+    }
+
+    fun getToolbar(){
+        toolbar.visibility = View.VISIBLE
+    }
+
+    fun getBottomnav(){
+        bottomNav.visibility = View.VISIBLE
+    }
+
 
 }
 

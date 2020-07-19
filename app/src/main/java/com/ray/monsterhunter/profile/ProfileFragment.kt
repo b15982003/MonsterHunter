@@ -16,6 +16,7 @@ import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ProfileFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import kotlinx.android.synthetic.main.activity_main.*
 
 class ProfileFragment : Fragment() {
 

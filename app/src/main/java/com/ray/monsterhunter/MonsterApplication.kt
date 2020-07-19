@@ -20,7 +20,8 @@ class MonsterApplication : Application() {
         instance = this
     }
 
-
+    fun isLiveMessage() = true
     fun isLiveChatRoom() = true
 }
+
 

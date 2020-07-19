@@ -54,6 +54,24 @@
     <string name="chatRoom_post＿monsterName_text">魔物名稱 ：</string>
     <string name="chatRoom_post＿button">送 出</string>
 
+    <!-- ChatRoom detail -->
+    <string name="chatRoom_detail_userId">紙火箭</string>
+    <string name="chatRoom_detail_message">安安你好！住哪！幾歲....</string>
+    <string name="chatRoom_detail_createTime">2020-07-15-12:00</string>
+    <string name="chatRoom_detail_toolbar">聊天室名稱</string>
+    <string name="chatRoom_detail_start_button">任務開始</string>
+    <string name="chatRoom_detail_end_button">任務結束</string>
+
+    <!--ChatRoom Score -->
+    <string name="chatRoom_score_userName">紙火箭</string>
+    <string name="chatRoom_score_mission_successful">成功</string>
+    <string name="chatRoom_score_mission_fail">失敗</string>
+    <string name="chatRoom_score_title">評 分</string>
+    <string name="chatRoom_score_sent_button">Sent</string>
+
+    <!--Friend List -->
+    <string name="friend_list_username">紙火箭</string>
+    <string name="friend_list_email">Ray3456789@gmail.com</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

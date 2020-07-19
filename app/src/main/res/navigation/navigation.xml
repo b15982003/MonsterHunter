@@ -15,7 +15,9 @@
         android:id="@+id/chatRoomFragment"
         android:name="com.ray.monsterhunter.chatroom.ChatRoomFragment"
         android:label="chat_room_fragment"
-        tools:layout="@layout/chat_room_fragment" />
+        tools:layout="@layout/chat_room_fragment" >
+
+    </fragment>
     <fragment
         android:id="@+id/friendFragment"
         android:name="com.ray.monsterhunter.friend.FriendFragment"
@@ -48,6 +50,30 @@
 
     </dialog>
 
+    <fragment
+        android:id="@+id/chatRoomDetail"
+        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetail"
+        android:label="ChatRoomDetail"
+        tools:layout="@layout/chat_room_detail_fragment">
+        <argument
+            android:name="chatRoom"
+            app:argType="com.ray.monsterhunter.data.ChatRoom"
+            app:nullable="false"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatRoomDetailScore"
+        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScore"
+        android:label="chat_room_detail_score_fragment"
+        tools:layout="@layout/chat_room_detail_score_fragment" >
+        <argument
+            android:name="chatRoomDetail"
+            app:argType="com.ray.monsterhunter.data.ChatRoom"
+            app:nullable="false" />
+    </fragment>
+
+
 
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
     <action android:id="@+id/action_global_chatRoomFragment" app:destination="@id/chatRoomFragment"/>
@@ -56,5 +82,7 @@
     <action android:id="@+id/action_global_historyFragment" app:destination="@id/historyFragment"/>
     <action android:id="@+id/action_global_dailogPost" app:destination="@id/dialogPostFragment" />
     <action android:id="@+id/action_global_dialogChatRoom" app:destination="@id/dialogChatRoomFragment" />
+    <action android:id="@+id/action_global_chatRoomDetail" app:destination="@id/chatRoomDetail"/>
+    <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
 
 </navigation>

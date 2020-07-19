@@ -12,11 +12,25 @@ interface MonsterRepository {
 
     fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>>
 
+    fun getLiveMessage(document: String): MutableLiveData<List<Message>>
+
     suspend fun getUser(): Result<User>
+
+    suspend fun getAllUser(): Result<List<User>>
+
+    suspend fun getMyUser(document: String): Result<List<User>>
 
     suspend fun getImageMonster(): Result<MonsterUri>
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
+
+    suspend fun sentMessage(message: Message,document: String): Result<Boolean>
+
+    suspend fun getUserArms(userArmsType: UserArms,document: String): Result<Boolean>
+
+    suspend fun cancelUser(userArmsType: UserArms,document: String): Result<Boolean>
+
+    suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 
