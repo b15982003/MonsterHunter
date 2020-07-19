@@ -28,6 +28,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getAllUser(): Result<List<User>> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getImageMonster(): Result<MonsterUri> {
         TODO("Not yet implemented")
     }

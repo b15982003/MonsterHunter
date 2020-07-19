@@ -1,28 +1,43 @@
 package com.ray.monsterhunter.friend.item
 
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ray.monsterhunter.MonsterApplication
+import com.ray.monsterhunter.R
+import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.friend.FriendTypeFilter
+import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import com.ray.monsterhunter.data.source.Result
 
 class FriendItemViewModel(
-    private val repository: MonsterRepository,
+    val repository: MonsterRepository,
     val friendTypeFilter: FriendTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
-//    // Handle load api status
-//    val status: LiveData<LoadApiStatus> = Transformations.switchMap(sourceFactory.sourceLiveData) {
-//        it.statusInitialLoad
-//    }
-//
-//    // Handle load api error
-//    val error: LiveData<String> = Transformations.switchMap(sourceFactory.sourceLiveData) {
-//        it.errorInitialLoad
-//    }
+    private val _status = MutableLiveData<LoadApiStatus>()
+
+    val status: LiveData<LoadApiStatus>
+        get() = _status
+
+    // error: The internal MutableLiveData that stores the error of the most recent request
+    private val _error = MutableLiveData<String>()
+
+    val error: LiveData<String>
+        get() = _error
+
+    private val _userList = MutableLiveData<List<User>>().apply {
+        value = listOf(User())
+    }
+    val userList: MutableLiveData<List<User>>
+        get() = _userList
 
     // Handle navigation to detail
 //    private val _navigateToDetail = MutableLiveData<Product>()
@@ -37,10 +52,6 @@ class FriendItemViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    /**
-     * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
-     * Retrofit service to stop.
-     */
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -50,21 +61,55 @@ class FriendItemViewModel(
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
+        getUserList()
     }
 
-    fun getUserList(){
+    fun getUserList() {
 
 
-        when(friendTypeFilter){
-            FriendTypeFilter.USERLIST ->"55"
-                else -> "44"
+        when (friendTypeFilter) {
+            FriendTypeFilter.USERLIST -> getAllUser()
+            else -> "44"
 
         }
 
     }
 
-    fun getAllUser(){
-        
+    fun getAllUser() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            val result = repository.getAllUser()
+
+            _userList.value = when (result) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    result.data
+
+                }
+                is Result.Fail -> {
+
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                is Result.Error -> {
+
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+                else -> {
+
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                    null
+                }
+            }
+//            _refreshStatus.value = false
+        }
     }
 //    fun refresh() {
 //        if (status.value != LoadApiStatus.LOADING) {

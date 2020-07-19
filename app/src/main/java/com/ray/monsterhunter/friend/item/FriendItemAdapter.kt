@@ -8,11 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.databinding.ItemFriendBinding
 
-/**
- * This class implements a [RecyclerView] [ListAdapter] which uses Data Binding to present [List]
- * [Product], including computing diffs between lists.
- * @param onClickListener a lambda that takes the
- */
 class FriendItemAdapter(val onClickListener: OnClickListener ) :
         ListAdapter<User, FriendItemAdapter.FriendItemViewHolder>(DiffCallback) {
 
@@ -26,10 +21,6 @@ class FriendItemAdapter(val onClickListener: OnClickListener ) :
         }
     }
 
-    /**
-     * Allows the RecyclerView to determine which items have changed when the [List] of [Product]
-     * has been updated.
-     */
     companion object DiffCallback : DiffUtil.ItemCallback<User>() {
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
             return oldItem === newItem
@@ -40,17 +31,11 @@ class FriendItemAdapter(val onClickListener: OnClickListener ) :
         }
     }
 
-    /**
-     * Create new [RecyclerView] item views (invoked by the layout manager)
-     */
     override fun onCreateViewHolder(parent: ViewGroup,
                                     viewType: Int): FriendItemViewHolder {
         return FriendItemViewHolder(ItemFriendBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
-    /**
-     * Replaces the contents of a view (invoked by the layout manager)
-     */
     override fun onBindViewHolder(holder: FriendItemViewHolder, position: Int) {
         val product = getItem(position)
         holder.itemView.setOnClickListener {
@@ -59,11 +44,6 @@ class FriendItemAdapter(val onClickListener: OnClickListener ) :
         holder.bind(product)
     }
 
-    /**
-     * Custom listener that handles clicks on [RecyclerView] items.  Passes the [Product]
-     * associated with the current item to the [onClick] function.
-     * @param clickListener lambda that will be called with the current [Product]
-     */
     class OnClickListener(val clickListener: (user:User) -> Unit) {
         fun onClick(user:User) = clickListener(user)
     }

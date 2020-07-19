@@ -21,6 +21,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUser()
     }
 
+    override suspend fun getAllUser(): Result<List<User>> {
+        return remoteDataSource.getAllUser()
+    }
+
     override suspend fun getImageMonster(): Result<MonsterUri> {
        return remoteDataSource.getImageMonster()
     }

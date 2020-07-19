@@ -152,6 +152,11 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <!-- friend List -->
+    <style name="friend_list_userName">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/post_dialog_personName</item>
+    </style>
 
 
 </resources>

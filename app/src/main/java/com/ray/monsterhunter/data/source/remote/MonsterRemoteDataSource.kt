@@ -80,6 +80,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
             }
     }
+    override suspend fun getAllUser(): Result<List<User>> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val list = mutableListOf<User>()
+                    for (document in task.result!!) {
+
+                        val user = document.toObject(User::class.java)
+                        list.add(user)
+                        Logger.d("allUserrepository${user}")
+
+                    }
+                    continuation.resume(Result.Success(list))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
 
     override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
 
@@ -156,6 +181,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
             }
     }
+
+
 
     override suspend fun getImageMonster(): Result<MonsterUri> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()

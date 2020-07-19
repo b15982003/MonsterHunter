@@ -16,6 +16,8 @@ interface MonsterRepository {
 
     suspend fun getUser(): Result<User>
 
+    suspend fun getAllUser(): Result<List<User>>
+
     suspend fun getImageMonster(): Result<MonsterUri>
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
