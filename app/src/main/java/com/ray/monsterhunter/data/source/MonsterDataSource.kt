@@ -24,6 +24,8 @@ interface MonsterDataSource {
 
     suspend fun getUserArms(userArmsType : UserArms,document: String): Result<Boolean>
 
+    suspend fun cencelUser(userArmsType : UserArms,document: String): Result<Boolean>
+
     suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>

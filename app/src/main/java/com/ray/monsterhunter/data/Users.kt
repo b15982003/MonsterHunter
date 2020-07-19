@@ -15,7 +15,8 @@ data class User(
     var documentId: String? = "",
     var id: String? = "",
     var friendlist: FriendList? = null,
-    var email: String? = ""
+    var email: String? = "",
+    var armsType: ArmsType = ArmsType()
 ) : Parcelable
 
 @Parcelize

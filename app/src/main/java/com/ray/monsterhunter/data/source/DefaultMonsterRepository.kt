@@ -46,6 +46,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUserArms(userArmsType, document)
     }
 
+    override suspend fun cancelUser(userArmsType: UserArms, document: String): Result<Boolean> {
+       return remoteDataSource.cencelUser(userArmsType,document)
+    }
+
     override suspend fun update1(teamList:List<String>,document: String): Result<Boolean> {
         return remoteDataSource.update1(teamList,document)
     }

@@ -289,14 +289,14 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> =
+    override suspend fun sentMessage(message: Message, document: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             val messages = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
             val documentMessage = messages.document(document).collection(PATH_MESSAGE).document()
 
             message.createTime = Calendar.getInstance().timeInMillis
 
-           documentMessage
+            documentMessage
                 .set(message)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -319,7 +319,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun getUserArms( userArmsType :UserArms,document: String): Result<Boolean> =
+    override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             val userArmsTypes = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
             val documentMessage = userArmsTypes.document(document)
@@ -348,15 +348,16 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun update1(teamList:List<String>,document: String): Result<Boolean> =
+    override suspend fun update1(teamList: List<String>, document: String): Result<Boolean> =
         suspendCoroutine { continuation ->
             val userUpdate1 = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
 //            val document = messages.document()
 
             userUpdate1
                 .document(document)
-                .update("teammate",teamList)
+                .update("teammate", teamList)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -376,5 +377,30 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+    override suspend fun cencelUser(userArmsType: UserArms, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val canceluser1 = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentCancelUser = canceluser1.document(document)
+                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
 
+            documentCancelUser
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
 }

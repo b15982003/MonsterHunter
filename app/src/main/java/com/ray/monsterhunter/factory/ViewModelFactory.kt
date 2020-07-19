@@ -7,6 +7,7 @@ import com.ray.monsterhunter.chatroom.ChatRoomViewModel
 import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScoreViewModel
 import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel
 import com.ray.monsterhunter.data.source.MonsterRepository
+import com.ray.monsterhunter.friend.FriendViewModel
 import com.ray.monsterhunter.home.HomeViewModel
 import com.ray.monsterhunter.post.DialogChatRoomViewModel
 import com.ray.monsterhunter.post.DialogPostViewModel
@@ -39,6 +40,9 @@ class ViewModelFactory constructor(
 
             isAssignableFrom(ChatRoomDetailScoreViewModel::class.java) ->
                 ChatRoomDetailScoreViewModel(repository)
+
+            isAssignableFrom(FriendViewModel::class.java) ->
+                FriendViewModel(repository)
 
 
 

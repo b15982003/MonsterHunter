@@ -45,6 +45,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun cencelUser(userArmsType: UserArms, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun update1( teamList:List<String>,document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }

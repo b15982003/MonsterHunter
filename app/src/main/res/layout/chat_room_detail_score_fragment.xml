@@ -9,6 +9,10 @@
             name="viewModel"
             type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScoreViewModel" />
 
+        <variable
+            name="chatRoomViewModel"
+            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

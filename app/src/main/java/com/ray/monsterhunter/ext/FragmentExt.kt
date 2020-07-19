@@ -21,3 +21,4 @@ fun Fragment.getVmFactory(chatRoom: ChatRoom): RoomNameViewModelFactory {
 
     return RoomNameViewModelFactory(repository,chatRoom)
 }
+

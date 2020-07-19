@@ -100,6 +100,7 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailToolbarBack.setOnClickListener(){
             viewModel.outLeave()
+            viewModel.userArmsType.value?.let { it1 -> viewModel.cancelUser(it1) }
             findNavController().navigateUp()
         }
 

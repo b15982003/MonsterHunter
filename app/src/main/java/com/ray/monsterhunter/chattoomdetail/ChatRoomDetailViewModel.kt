@@ -230,6 +230,36 @@ class ChatRoomDetailViewModel(
         }
     }
 
+    fun cancelUser(userArmsType: UserArms) {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.cancelUser(userArmsType, chatRoom.value!!.documentId)) {
+                is Result.Success -> {
+                    Logger.i("ok,${message}")
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
     fun outLeave() {
         isGoon.value = true
         update1()
