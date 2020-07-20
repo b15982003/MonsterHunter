@@ -2,6 +2,7 @@ package com.ray.monsterhunter.chattoomdetail
 
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,33 @@ class ChatRoomDetailScore : Fragment() {
         binding.chatRoomScoreSentButton.setOnClickListener() {
             findNavController().navigateUp()
         }
+
+
+        viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
+            if (it.missionResult == "true"){
+                binding.chatRoomScoreSuccess.visibility = View.VISIBLE
+                binding.chatRoomScoreFail.visibility = View.INVISIBLE
+            }else{
+                binding.chatRoomScoreSuccess.visibility = View.INVISIBLE
+                binding.chatRoomScoreFail.visibility = View.VISIBLE
+            }
+
+        })
+
+        viewModel.history.observe(viewLifecycleOwner, Observer {
+                viewModel.pushHistory()
+        })
+
+        viewModel.user4.observe(viewLifecycleOwner, Observer {
+//            viewModel.history.value?.user1 = viewModel.user1.value?.userId
+//            viewModel.history.value?.user2 = viewModel.user2.value?.userId
+//            viewModel.history.value?.user3 = viewModel.user3.value?.userId
+//            viewModel.history.value?.user4 = viewModel.user4.value?.userId
+//            viewModel.history.value?.user1Type = viewModel.user1.value?.armsType.toString()
+//            viewModel.history.value?.user2Type = viewModel.user2.value?.armsType.toString()
+//            viewModel.history.value?.user3Type = viewModel.user3.value?.armsType.toString()
+//            viewModel.history.value?.user4Type = viewModel.user4.value?.armsType.toString()
+        })
 
 
 

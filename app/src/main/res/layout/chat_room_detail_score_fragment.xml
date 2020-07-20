@@ -42,7 +42,6 @@
             android:background="@drawable/scort_mission_button"
             android:gravity="center"
             android:text="@string/chatRoom_score_mission_fail"
-            android:visibility='@{viewModel.liveChatRoom.missionResult == "Success" ? View.VISIBLE : View.GONE}'
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chatRoom_score_title" />
@@ -55,7 +54,6 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/scort_mission_button"
             android:gravity="center"
-            android:visibility='@{viewModel.liveChatRoom.missionResult == "Success" ? View.GONE : View.VISIBLE}'
             android:text="@string/chatRoom_score_mission_successful"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

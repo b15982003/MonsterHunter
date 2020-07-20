@@ -65,5 +65,7 @@ interface MonsterDataSource {
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
 
+    suspend fun pushHistory(history: History):Result<Boolean>
+
 
 }

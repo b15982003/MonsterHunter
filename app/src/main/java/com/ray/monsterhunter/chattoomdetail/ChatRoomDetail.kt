@@ -53,25 +53,30 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
 
         binding.chatRoomDetailReadyButton.setOnClickListener(){
-            if (viewModel.ready.value == false){
-                viewModel.getready()
-                binding.chatRoomDetailStartButton.visibility = View.VISIBLE
-                binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
-                binding.chatRoomDetailMinNumber.visibility = View.VISIBLE
-                binding.chatRoomDetailSecNumber.visibility = View.VISIBLE
-                binding.chatRoomDetailLine.visibility = View.VISIBLE
-                if(viewModel.timming.value == true){
-                    binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+            if(viewModel.chatRoom.value?.userId == UserManager.userData.id){
+                if (viewModel.ready.value == false){
+                    viewModel.getready()
+                    binding.chatRoomDetailStartButton.visibility = View.VISIBLE
+                    binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
+                    binding.chatRoomDetailMinNumber.visibility = View.VISIBLE
+                    binding.chatRoomDetailSecNumber.visibility = View.VISIBLE
+                    binding.chatRoomDetailLine.visibility = View.VISIBLE
+                    if(viewModel.timming.value == true){
+                        binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+                    }
+                }else{
+                    viewModel.endreadt()
+                    binding.chatRoomDetailStartButton.visibility = View.GONE
+                    binding.chatRoomDetailStartBackground.visibility = View.GONE
+                    binding.chatRoomDetailEndButton.visibility = View.GONE
+                    binding.chatRoomDetailMinNumber.visibility = View.GONE
+                    binding.chatRoomDetailSecNumber.visibility = View.GONE
+                    binding.chatRoomDetailLine.visibility = View.GONE
                 }
             }else{
-                viewModel.endreadt()
-                binding.chatRoomDetailStartButton.visibility = View.GONE
-                binding.chatRoomDetailStartBackground.visibility = View.GONE
-                binding.chatRoomDetailEndButton.visibility = View.GONE
-                binding.chatRoomDetailMinNumber.visibility = View.GONE
-                binding.chatRoomDetailSecNumber.visibility = View.GONE
-                binding.chatRoomDetailLine.visibility = View.GONE
+                Toast.makeText(MonsterApplication.instance,"請找房主趕快開始",Toast.LENGTH_SHORT).show()
             }
+
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener(){
@@ -93,7 +98,8 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailMissionTypeSuccess.setOnClickListener(){
 
-            viewModel.chatRoom.value?.missionResult = "Success"
+            viewModel.chatRoom.value?.missionResult = "true"
+            viewModel.chatRoom.value?.endToScore = "true"
             viewModel.updateChatRoomInfo()
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
@@ -101,7 +107,8 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailMissionTypeFail.setOnClickListener(){
-            viewModel.chatRoom.value?.missionResult = "fail"
+            viewModel.chatRoom.value?.missionResult = "false"
+            viewModel.chatRoom.value?.endToScore = "true"
             viewModel.updateChatRoomInfo()
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
@@ -156,6 +163,14 @@ class ChatRoomDetail : Fragment() {
         viewModel.timeSec.observe(viewLifecycleOwner, Observer {
             binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck%60).toString()
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
+        })
+
+        viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
+            if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "true"){
+                Handler().postDelayed({
+                    findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
+                },500)
+            }
         })
 
         viewModel.userArms.observe(viewLifecycleOwner, Observer {

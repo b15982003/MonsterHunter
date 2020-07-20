@@ -1,11 +1,14 @@
 package com.ray.monsterhunter.chattoomdetail
 
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.ChatRoom
+import com.ray.monsterhunter.data.History
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.UserArms
 import com.ray.monsterhunter.data.source.MonsterRepository
@@ -37,6 +40,12 @@ class ChatRoomDetailScoreViewModel(
     }
     val chatRoom: LiveData<ChatRoom>
         get() = _chatroom
+
+    private val _history = MutableLiveData<History>().apply {
+        value = History()
+    }
+    val history: LiveData<History>
+        get() = _history
 
     private val _user1 = MutableLiveData<UserArms>().apply {
         value = UserArms()
@@ -86,6 +95,11 @@ class ChatRoomDetailScoreViewModel(
 
 
     init {
+        getLiveChatRoom()
+        Handler().postDelayed({
+            chatRoom.value?.endToScore = "false"
+            updateChatRoomInfo()
+        }, 3000)
 
         chatRoom.value?.teammate?.get(0)?.let { getUserOneArms() }
         chatRoom.value?.teammate?.get(1)?.let { getUserTwoArms() }
@@ -96,9 +110,61 @@ class ChatRoomDetailScoreViewModel(
         getLiveUserTwoScore()
         getLiveUserThreeScore()
         getLiveUserFourScore()
-        getLiveChatRoom()
+
+        history.value?.documentId = chatRoom.value?.documentId
+        history.value?.image = chatRoom.value?.image.toString()
+        history.value?.monsterName = chatRoom.value?.monsterName.toString()
+        history.value?.finishtime = chatRoom.value?.finishTime
+        history.value?.missionResult = chatRoom.value?.missionResult.toString()
+       history.value?.user1 = user1.value?.userId
+       history.value?.user2 = user2.value?.userId
+       history.value?.user3 = user3.value?.userId
+       history.value?.user4 = user4.value?.userId
+       history.value?.user1Type = user1.value?.armsType.toString()
+       history.value?.user2Type = user2.value?.armsType.toString()
+       history.value?.user3Type = user3.value?.armsType.toString()
+       history.value?.user4Type = user4.value?.armsType.toString()
+Logger.d("history1111111111111 ${history.value?.user1}")
+Logger.d("history1111111111111 ${user1.value?.userId}")
+
+
+
+
 
     }
+
+    fun pushHistory() {
+
+        Logger.i("ok,${history.value}")
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = history.value?.let { repository.pushHistory(it) }) {
+                is Result.Success -> {
+
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
 
     fun getUserOneArms() {
         coroutineScope.launch {
@@ -269,13 +335,13 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun getLiveUserOneScore() {
-            liveUserOne = repository.getLiveUserOneScore(chatRoom.value!!.teammate[0])
-            Logger.d("liveOne ${liveUserOne.value}")
-            Logger.d("liveOne ${repository.getLiveChatRoom()}")
-            _status.value = LoadApiStatus.DONE
-            _refreshStatus.value = false
+        liveUserOne = repository.getLiveUserOneScore(chatRoom.value!!.teammate[0])
+        Logger.d("liveOne ${liveUserOne.value}")
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
-        }
+    }
 
     fun getLiveUserTwoScore() {
         liveUserTwo = repository.getLiveUserOneScore(chatRoom.value!!.teammate[1])
@@ -287,7 +353,7 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun getLiveUserThreeScore() {
-        liveUserThree= repository.getLiveUserOneScore(chatRoom.value!!.teammate[2])
+        liveUserThree = repository.getLiveUserOneScore(chatRoom.value!!.teammate[2])
         Logger.d("liveOne ${liveUserOne.value}")
         Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
@@ -304,7 +370,7 @@ class ChatRoomDetailScoreViewModel(
 
     }
 
-    fun updateUserOne(){
+    fun updateUserOne() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
@@ -340,7 +406,7 @@ class ChatRoomDetailScoreViewModel(
         }
     }
 
-    fun updateUserTwo(){
+    fun updateUserTwo() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
@@ -374,7 +440,9 @@ class ChatRoomDetailScoreViewModel(
                 }
             }
         }
-    }fun updateUserThree(){
+    }
+
+    fun updateUserThree() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
@@ -410,7 +478,7 @@ class ChatRoomDetailScoreViewModel(
         }
     }
 
-    fun updateUserFour(){
+    fun updateUserFour() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
@@ -439,6 +507,33 @@ class ChatRoomDetailScoreViewModel(
                 }
                 else -> {
                     Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun updateChatRoomInfo() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result =
+                repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                 }

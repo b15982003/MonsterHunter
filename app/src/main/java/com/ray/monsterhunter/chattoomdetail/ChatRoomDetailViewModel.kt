@@ -32,6 +32,9 @@ class ChatRoomDetailViewModel(
     val chatRoom: LiveData<ChatRoom>
         get() = _chatroom
 
+
+    var liveChatRoom = MutableLiveData<ChatRoom>()
+
     var teammateList = mutableListOf<String>()
 
     var emptySeat = MutableLiveData<Boolean>(false)
@@ -126,6 +129,17 @@ class ChatRoomDetailViewModel(
         userArmsType.value?.email = UserManager.userData.email.toString()
 
         enterUpdate()
+        getLiveChatRoom()
+
+    }
+
+
+    fun getLiveChatRoom() {
+        liveChatRoom = repository.getLiveChatRoomScore(chatRoom.value!!.documentId)
+
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
     }
 
