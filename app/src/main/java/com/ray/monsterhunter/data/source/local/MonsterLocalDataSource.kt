@@ -41,6 +41,10 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUser(): Result<User> {
         TODO("Not yet implemented")
     }

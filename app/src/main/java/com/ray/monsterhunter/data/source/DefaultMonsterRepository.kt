@@ -70,6 +70,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveChatRoom()
     }
 
+    override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
+        return remoteDataSource.getLiveChatRoomScore(document)
+    }
+
     override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
         return remoteDataSource.getLiveMessage(document)
     }

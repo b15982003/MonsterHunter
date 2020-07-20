@@ -30,6 +30,8 @@ class ChatRoomDetailScoreViewModel(
 
     var liveUserFour = MutableLiveData<User>()
 
+    var liveChatRoom = MutableLiveData<ChatRoom>()
+
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
     }
@@ -94,6 +96,7 @@ class ChatRoomDetailScoreViewModel(
         getLiveUserTwoScore()
         getLiveUserThreeScore()
         getLiveUserFourScore()
+        getLiveChatRoom()
 
     }
 
@@ -253,6 +256,15 @@ class ChatRoomDetailScoreViewModel(
 //            _refreshStatus.value = false
         }
 
+
+    }
+
+    fun getLiveChatRoom() {
+        liveChatRoom = repository.getLiveChatRoomScore(chatRoom.value!!.documentId)
+        Logger.d("liveOne ${liveUserOne.value}")
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
     }
 

@@ -3,6 +3,7 @@ package com.ray.monsterhunter.data.source.remote
 import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -83,6 +84,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
             }
     }
+
     override suspend fun getAllUser(): Result<List<User>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_USER)
@@ -109,33 +111,34 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getMyUser(document: String): Result<List<User>> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_USER)
-            .document("BnvEtE3ZyJaPnhtXrzRa")
-            .collection(PATH_FRIENDLIST)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val list = mutableListOf<User>()
-                    for (document in task.result!!) {
+    override suspend fun getMyUser(document: String): Result<List<User>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_USER)
+                .document("BnvEtE3ZyJaPnhtXrzRa")
+                .collection(PATH_FRIENDLIST)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<User>()
+                        for (document in task.result!!) {
 
-                        val user = document.toObject(User::class.java)
-                        list.add(user)
-                        Logger.d("MyUserrepository${user}")
+                            val user = document.toObject(User::class.java)
+                            list.add(user)
+                            Logger.d("MyUserrepository${user}")
 
+                        }
+                        continuation.resume(Result.Success(list))
+
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                    continuation.resume(Result.Success(list))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
     override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
 
@@ -183,6 +186,27 @@ object MonsterRemoteDataSource : MonsterDataSource {
         return liveData
     }
 
+    override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
+        val liveDataChatRoom = MutableLiveData<ChatRoom>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document(document)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                Logger.d("liveChatRoom${document}")
+
+
+                Logger.d(snapshot?.id + " => " + snapshot?.data)
+                val chatRooms = snapshot?.toObject(ChatRoom::class.java)
+                liveDataChatRoom.value = chatRooms
+                Logger.d("liveDataChatRoom${liveDataChatRoom.value}")
+            }
+        return liveDataChatRoom
+
+    }
+
     override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
         val liveDataOne = MutableLiveData<User>()
 
@@ -197,7 +221,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
-                    liveDataOne.value = users
+                liveDataOne.value = users
                 Logger.d("liveData11111111${liveDataOne.value}")
             }
         return liveDataOne
@@ -294,7 +318,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
+    override suspend fun getUserOneArms(document: String, teammate: String): Result<UserArms> =
+        suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_CHATROOM)
                 .document(document)
@@ -321,91 +346,92 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
-    override suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_CHATROOM)
-            .document(document)
-            .collection(PATH_USERARMSTYPE)
-            .whereEqualTo("email", teammate)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var user1 = UserArms()
-                    for (document in task.result!!) {
+    override suspend fun getUserTwoArms(document: String, teammate: String): Result<UserArms> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_CHATROOM)
+                .document(document)
+                .collection(PATH_USERARMSTYPE)
+                .whereEqualTo("email", teammate)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var user1 = UserArms()
+                        for (document in task.result!!) {
 
-                        var user = document.toObject(UserArms::class.java)
-                        user1 = user
+                            var user = document.toObject(UserArms::class.java)
+                            user1 = user
 
+                        }
+                        continuation.resume(Result.Success(user1))
+
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                    continuation.resume(Result.Success(user1))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
-    override suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_CHATROOM)
-            .document(document)
-            .collection(PATH_USERARMSTYPE)
-            .whereEqualTo("email", teammate)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var user1 = UserArms()
-                    for (document in task.result!!) {
+    override suspend fun getUserThreeArms(document: String, teammate: String): Result<UserArms> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_CHATROOM)
+                .document(document)
+                .collection(PATH_USERARMSTYPE)
+                .whereEqualTo("email", teammate)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var user1 = UserArms()
+                        for (document in task.result!!) {
 
-                        var user = document.toObject(UserArms::class.java)
-                        user1 = user
+                            var user = document.toObject(UserArms::class.java)
+                            user1 = user
 
+                        }
+                        continuation.resume(Result.Success(user1))
+
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                    continuation.resume(Result.Success(user1))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
-    override suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_CHATROOM)
-            .document(document)
-            .collection(PATH_USERARMSTYPE)
-            .whereEqualTo("email", teammate)
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    var user1 = UserArms()
-                    for (document in task.result!!) {
+    override suspend fun getUserFourArms(document: String, teammate: String): Result<UserArms> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_CHATROOM)
+                .document(document)
+                .collection(PATH_USERARMSTYPE)
+                .whereEqualTo("email", teammate)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        var user1 = UserArms()
+                        for (document in task.result!!) {
 
-                        var user = document.toObject(UserArms::class.java)
-                        user1 = user
+                            var user = document.toObject(UserArms::class.java)
+                            user1 = user
 
+                        }
+                        continuation.resume(Result.Success(user1))
+
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                    continuation.resume(Result.Success(user1))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
-
-
+        }
 
 
     override suspend fun getImageMonster(): Result<MonsterUri> = suspendCoroutine { continuation ->
@@ -505,9 +531,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     }
                 } else {
 
-                    }
                 }
             }
+    }
 
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -631,19 +657,22 @@ object MonsterRemoteDataSource : MonsterDataSource {
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun updateChatRoomInfo(chatRoom : LiveData<ChatRoom>, document: String): Result<Boolean> =
+    override suspend fun updateChatRoomInfo(
+        chatRoom: LiveData<ChatRoom>,
+        document: String
+    ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateChatRoom = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
 //            val document = messages.document()
 
             updateChatRoom
                 .document(document)
-                .update("finishTime",chatRoom.value?.finishTime)
+                .update("finishTime", chatRoom.value?.finishTime)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         updateChatRoom
                             .document(document)
-                            .update("missionResult",chatRoom.value?.missionResult)
+                            .update("missionResult", chatRoom.value?.missionResult)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     continuation.resume(Result.Success(true))
@@ -661,25 +690,12 @@ object MonsterRemoteDataSource : MonsterDataSource {
                                     )
                                 }
                             }
-                        continuation.resume(Result.Success(true))
-                    } else {
-                        task.exception?.let {
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
-                        }
-                        continuation.resume(
-                            Result.Fail(
-                                MonsterApplication.instance.getString(
-                                    R.string.notGood
-                                )
-                            )
-                        )
                     }
                 }
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun updateUserOne( userId:String, userOneScore : ArmsType): Result<Boolean> =
+    override suspend fun updateUserOne(userId: String, userOneScore: ArmsType): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne = FirebaseFirestore.getInstance().collection(PATH_USER)
 //            val document = messages.document()
@@ -707,7 +723,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun updateUserTwo( userId:String, userTwoScore : ArmsType): Result<Boolean> =
+    override suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne = FirebaseFirestore.getInstance().collection(PATH_USER)
 //            val document = messages.document()
@@ -735,7 +751,10 @@ object MonsterRemoteDataSource : MonsterDataSource {
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun updateUserThree( userId:String, userThreeScore : ArmsType): Result<Boolean> =
+    override suspend fun updateUserThree(
+        userId: String,
+        userThreeScore: ArmsType
+    ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne = FirebaseFirestore.getInstance().collection(PATH_USER)
 //            val document = messages.document()
@@ -763,7 +782,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun updateUserFour( userId:String, userFourScore : ArmsType): Result<Boolean> =
+    override suspend fun updateUserFour(userId: String, userFourScore: ArmsType): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne = FirebaseFirestore.getInstance().collection(PATH_USER)
 //            val document = messages.document()
