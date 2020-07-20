@@ -30,6 +30,14 @@ interface MonsterDataSource {
 
     fun getLiveMessage(document: String) : MutableLiveData<List<Message>>
 
+    fun getLiveUserOneScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserTwoScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserThreeScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserFourScore(teammate: String): MutableLiveData<User>
+
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
     suspend fun sentMessage(message: Message,document: String): Result<Boolean>

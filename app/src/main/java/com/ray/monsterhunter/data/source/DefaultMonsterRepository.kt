@@ -37,6 +37,22 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUserOneArms(teammate,document)
     }
 
+    override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserOneScore(teammate)
+    }
+
+    override fun getLiveUserTwoScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserTwoScore(teammate)
+    }
+
+    override fun getLiveUserThreeScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserThreeScore(teammate)
+    }
+
+    override fun getLiveUserFourScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserFourScore(teammate)
+    }
+
     override suspend fun getAllUser(): Result<List<User>> {
         return remoteDataSource.getAllUser()
     }

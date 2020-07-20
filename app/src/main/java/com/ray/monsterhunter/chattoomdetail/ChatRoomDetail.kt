@@ -99,9 +99,13 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailToolbarBack.setOnClickListener(){
+
             viewModel.outLeave()
             viewModel.userArmsType.value?.let { it1 -> viewModel.cancelUser(it1) }
-            findNavController().navigateUp()
+            Handler().postDelayed({
+                findNavController().navigateUp()
+            },500)
+
         }
 
         viewModel.chatRoom.observe(viewLifecycleOwner, Observer {

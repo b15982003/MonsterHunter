@@ -14,6 +14,14 @@ interface MonsterRepository {
 
     fun getLiveMessage(document: String): MutableLiveData<List<Message>>
 
+    fun getLiveUserOneScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserTwoScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserThreeScore(teammate: String): MutableLiveData<User>
+
+    fun getLiveUserFourScore(teammate: String): MutableLiveData<User>
+
     suspend fun getUser(): Result<User>
 
    suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms>

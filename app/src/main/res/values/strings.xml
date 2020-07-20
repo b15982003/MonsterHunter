@@ -67,7 +67,7 @@
     <string name="chatRoom_score_mission_successful">成功</string>
     <string name="chatRoom_score_mission_fail">失敗</string>
     <string name="chatRoom_score_title">評 分</string>
-    <string name="chatRoom_score_sent_button">Sent</string>
+    <string name="chatRoom_score_sent_button">送出</string>
 
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>

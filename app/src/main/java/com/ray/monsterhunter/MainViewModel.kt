@@ -12,6 +12,7 @@ import com.ray.monsterhunter.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.UserManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -65,7 +66,9 @@ class MainViewModel(val repository: MonsterRepository): ViewModel() {
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
+init {
+    pushUser(UserManager.userData)
+}
 
     fun pushUser(user:User) {
 

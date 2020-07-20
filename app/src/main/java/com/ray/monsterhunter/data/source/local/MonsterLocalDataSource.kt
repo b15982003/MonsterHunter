@@ -24,6 +24,22 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserTwoScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserThreeScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserFourScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUser(): Result<User> {
         TODO("Not yet implemented")
     }

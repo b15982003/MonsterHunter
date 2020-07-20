@@ -22,6 +22,14 @@ class ChatRoomDetailScoreViewModel(
     private val argument: ChatRoom
 ) : ViewModel() {
 
+    var liveUserOne = MutableLiveData<User>()
+
+    var liveUserTwo = MutableLiveData<User>()
+
+    var liveUserThree = MutableLiveData<User>()
+
+    var liveUserFour = MutableLiveData<User>()
+
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
     }
@@ -64,10 +72,16 @@ class ChatRoomDetailScoreViewModel(
     val error: LiveData<String>
         get() = _error
 
+    private val _refreshStatus = MutableLiveData<Boolean>()
+
+    val refreshStatus: LiveData<Boolean>
+        get() = _refreshStatus
+
     private var viewModelJob = Job()
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
 
     init {
 
@@ -75,6 +89,11 @@ class ChatRoomDetailScoreViewModel(
         chatRoom.value?.teammate?.get(1)?.let { getUserTwoArms() }
         chatRoom.value?.teammate?.get(2)?.let { getUserThreeArms() }
         chatRoom.value?.teammate?.get(3)?.let { getUserFourArms() }
+
+        getLiveUserOneScore()
+        getLiveUserTwoScore()
+        getLiveUserThreeScore()
+        getLiveUserFourScore()
 
     }
 
@@ -237,19 +256,39 @@ class ChatRoomDetailScoreViewModel(
 
     }
 
-    fun getUserOneScore() {
+    fun getLiveUserOneScore() {
+            liveUserOne = repository.getLiveUserOneScore(chatRoom.value!!.teammate[0])
+            Logger.d("liveOne ${liveUserOne.value}")
+            Logger.d("liveOne ${repository.getLiveChatRoom()}")
+            _status.value = LoadApiStatus.DONE
+            _refreshStatus.value = false
+
+        }
+
+    fun getLiveUserTwoScore() {
+        liveUserTwo = repository.getLiveUserOneScore(chatRoom.value!!.teammate[1])
+        Logger.d("liveOne ${liveUserOne.value}")
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
     }
 
-    fun getUserTwoScore() {
+    fun getLiveUserThreeScore() {
+        liveUserThree= repository.getLiveUserOneScore(chatRoom.value!!.teammate[2])
+        Logger.d("liveOne ${liveUserOne.value}")
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
     }
 
-    fun getUserThreeScore() {
-
-    }
-
-    fun getUserFourScore() {
+    fun getLiveUserFourScore() {
+        liveUserFour = repository.getLiveUserOneScore(chatRoom.value!!.teammate[3])
+        Logger.d("liveOne ${liveUserOne.value}")
+        Logger.d("liveOne ${repository.getLiveChatRoom()}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
 
     }
 }

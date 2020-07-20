@@ -4,7 +4,9 @@ import android.icu.util.Calendar
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.Query
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
@@ -168,8 +170,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_MESSAGE)
             .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
                 val list = mutableListOf<Message>()
                 for (document in snapshot!!) {
                     Logger.d(document.id + " => " + document.data)
@@ -181,6 +181,90 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 Logger.d("liveDatagg${liveData.value}")
             }
         return liveData
+    }
+
+    override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
+        val liveDataOne = MutableLiveData<User>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document(teammate)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                Logger.d("liveDataggteammate${teammate}")
+
+
+                Logger.d(snapshot?.id + " => " + snapshot?.data)
+                val users = snapshot?.toObject(User::class.java)
+                    liveDataOne.value = users
+                Logger.d("liveData11111111${liveDataOne.value}")
+            }
+        return liveDataOne
+
+    }
+
+    override fun getLiveUserTwoScore(teammate: String): MutableLiveData<User> {
+        val liveDataOne = MutableLiveData<User>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document(teammate)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                Logger.d("liveDataggteammate${teammate}")
+
+
+                Logger.d(snapshot?.id + " => " + snapshot?.data)
+                val users = snapshot?.toObject(User::class.java)
+                liveDataOne.value = users
+                Logger.d("liveData22222222${liveDataOne.value}")
+            }
+        return liveDataOne
+
+    }
+
+    override fun getLiveUserThreeScore(teammate: String): MutableLiveData<User> {
+        val liveDataOne = MutableLiveData<User>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document(teammate)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                Logger.d("liveDataggteammate${teammate}")
+
+
+                Logger.d(snapshot?.id + " => " + snapshot?.data)
+                val users = snapshot?.toObject(User::class.java)
+                liveDataOne.value = users
+                Logger.d("liveData333333${liveDataOne.value}")
+            }
+        return liveDataOne
+
+    }
+
+    override fun getLiveUserFourScore(teammate: String): MutableLiveData<User> {
+        val liveDataOne = MutableLiveData<User>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_USER)
+            .document(teammate)
+            .addSnapshotListener { snapshot, exception ->
+                Logger.d("exception=${exception}")
+                Logger.d("snapshot=${snapshot}")
+                Logger.d("liveDataggteammate${teammate}")
+
+
+                Logger.d(snapshot?.id + " => " + snapshot?.data)
+                val users = snapshot?.toObject(User::class.java)
+                liveDataOne.value = users
+                Logger.d("liveData4444444${liveDataOne.value}")
+            }
+        return liveDataOne
+
     }
 
 
@@ -196,7 +280,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
                         var user = document.toObject(User::class.java)
                         user1 = user
-                        Logger.d("geeeeeeeeetttt ${user}")
 
                     }
                     continuation.resume(Result.Success(user1))
@@ -219,16 +302,12 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 .whereEqualTo("email", teammate)
                 .get()
                 .addOnCompleteListener { task ->
-                    Logger.d("seeuser${teammate}")
-                    Logger.d("seedocument${document}")
                     if (task.isSuccessful) {
                         var user1 = UserArms()
                         for (document in task.result!!) {
 
                             var user = document.toObject(UserArms::class.java)
                             user1 = user
-
-                            Logger.d("seedocument${user1}")
                         }
                         continuation.resume(Result.Success(user1))
 
@@ -250,8 +329,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .whereEqualTo("email", teammate)
             .get()
             .addOnCompleteListener { task ->
-                Logger.d("seeuser${teammate}")
-                Logger.d("seedocument${document}")
                 if (task.isSuccessful) {
                     var user1 = UserArms()
                     for (document in task.result!!) {
@@ -259,7 +336,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         var user = document.toObject(UserArms::class.java)
                         user1 = user
 
-                        Logger.d("seedocument${user1}")
                     }
                     continuation.resume(Result.Success(user1))
 
@@ -281,8 +357,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .whereEqualTo("email", teammate)
             .get()
             .addOnCompleteListener { task ->
-                Logger.d("seeuser${teammate}")
-                Logger.d("seedocument${document}")
                 if (task.isSuccessful) {
                     var user1 = UserArms()
                     for (document in task.result!!) {
@@ -290,7 +364,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         var user = document.toObject(UserArms::class.java)
                         user1 = user
 
-                        Logger.d("seedocument${user1}")
                     }
                     continuation.resume(Result.Success(user1))
 
@@ -312,8 +385,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .whereEqualTo("email", teammate)
             .get()
             .addOnCompleteListener { task ->
-                Logger.d("seeuser${teammate}")
-                Logger.d("seedocument${document}")
                 if (task.isSuccessful) {
                     var user1 = UserArms()
                     for (document in task.result!!) {
@@ -321,7 +392,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         var user = document.toObject(UserArms::class.java)
                         user1 = user
 
-                        Logger.d("seedocument${user1}")
                     }
                     continuation.resume(Result.Success(user1))
 
@@ -403,40 +473,42 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     override suspend fun pushUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->
         val users = FirebaseFirestore.getInstance().collection(PATH_USER)
-        val document = users.document()
+        val document = UserManager.userData.email?.let { users.document(it) }
 
-        user.documentId = document.id
+        user.documentId = document?.id
         users
             .whereEqualTo("email", UserManager.userData.email)
             .get()
             .addOnSuccessListener { task ->
                 if (task.isEmpty) {
                     Logger.d("wwwwwwwwww${task}")
-                    document
-                        .set(user)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                continuation.resume(Result.Success(true))
-                            } else {
-                                task.exception?.let {
-                                    continuation.resume(Result.Error(it))
-                                    return@addOnCompleteListener
-                                }
-                                continuation.resume(
-                                    Result.Fail(
-                                        MonsterApplication.instance.getString(
-                                            R.string.notGood
+                    if (document != null) {
+                        document
+                            .set(user)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    continuation.resume(Result.Success(true))
+                                } else {
+                                    task.exception?.let {
+                                        continuation.resume(Result.Error(it))
+                                        return@addOnCompleteListener
+                                    }
+                                    continuation.resume(
+                                        Result.Fail(
+                                            MonsterApplication.instance.getString(
+                                                R.string.notGood
+                                            )
                                         )
                                     )
-                                )
+                                }
                             }
-                        }
+                    }
                 } else {
-                    document
-                        .update("emiil", UserManager.userData.email)
+
+                    }
                 }
             }
-    }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> =
