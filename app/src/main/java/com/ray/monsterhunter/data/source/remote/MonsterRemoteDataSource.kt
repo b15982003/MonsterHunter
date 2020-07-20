@@ -631,6 +631,54 @@ object MonsterRemoteDataSource : MonsterDataSource {
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun updateChatRoomInfo(chatRoom : LiveData<ChatRoom>, document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val updateChatRoom = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+//            val document = messages.document()
+
+            updateChatRoom
+                .document(document)
+                .update("finishTime",chatRoom.value?.finishTime)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        updateChatRoom
+                            .document(document)
+                            .update("missionResult",chatRoom.value?.missionResult)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    continuation.resume(Result.Success(true))
+                                } else {
+                                    task.exception?.let {
+                                        continuation.resume(Result.Error(it))
+                                        return@addOnCompleteListener
+                                    }
+                                    continuation.resume(
+                                        Result.Fail(
+                                            MonsterApplication.instance.getString(
+                                                R.string.notGood
+                                            )
+                                        )
+                                    )
+                                }
+                            }
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun updateUserOne( userId:String, userOneScore : ArmsType): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne = FirebaseFirestore.getInstance().collection(PATH_USER)

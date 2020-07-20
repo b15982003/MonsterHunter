@@ -61,6 +61,9 @@
     <string name="chatRoom_detail_toolbar">聊天室名稱</string>
     <string name="chatRoom_detail_start_button">任務開始</string>
     <string name="chatRoom_detail_end_button">任務結束</string>
+    <string name="chatRoom_detail_mission_success">成功</string>
+    <string name="chatRoom_detail_mission_fail">失敗</string>
+    <string name="chatRoom_detail_navigate_text">前往評分頁面</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>

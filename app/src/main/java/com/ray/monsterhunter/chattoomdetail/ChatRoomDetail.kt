@@ -45,6 +45,9 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailMinNumber.visibility = View.GONE
         binding.chatRoomDetailSecNumber.visibility = View.GONE
         binding.chatRoomDetailLine.visibility = View.GONE
+        binding.chatRoomDetailMissionTypeBackground.visibility = View.GONE
+        binding.chatRoomDetailMissionTypeSuccess.visibility = View.GONE
+        binding.chatRoomDetailMissionTypeFail.visibility = View.GONE
         binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
         })
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
@@ -80,10 +83,26 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailEndButton.setOnClickListener(){
             viewModel.chatRoom.value?.finishTime = viewModel.timeCheck
-//            viewModel.chatRoom.value?.finishTime = viewModel.chatRoom.value?.finishTime
             viewModel.endTimming()
-            binding.chatRoomDetailStartButton.visibility = View.VISIBLE
             binding.chatRoomDetailEndButton.visibility = View.GONE
+            binding.chatRoomDetailMissionTypeSuccess.visibility = View.VISIBLE
+            binding.chatRoomDetailMissionTypeFail.visibility = View.VISIBLE
+            binding.chatRoomDetailMissionTypeBackground.visibility = View.VISIBLE
+
+        }
+
+        binding.chatRoomDetailMissionTypeSuccess.setOnClickListener(){
+
+            viewModel.chatRoom.value?.missionResult = "Success"
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
+            },500)
+        }
+
+        binding.chatRoomDetailMissionTypeFail.setOnClickListener(){
+            viewModel.chatRoom.value?.missionResult = "fail"
+            viewModel.updateChatRoomInfo()
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
             },500)

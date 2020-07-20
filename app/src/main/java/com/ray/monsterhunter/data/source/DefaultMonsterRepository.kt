@@ -1,5 +1,6 @@
 package com.ray.monsterhunter.data.source
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.*
 
@@ -92,6 +93,13 @@ class DefaultMonsterRepository(
 
     override suspend fun update1(teamList:List<String>,document: String): Result<Boolean> {
         return remoteDataSource.update1(teamList,document)
+    }
+
+    override suspend fun updateChatRoomInfo(
+        chatRoom: LiveData<ChatRoom>,
+        document: String
+    ): Result<Boolean> {
+        return remoteDataSource.updateChatRoomInfo(chatRoom,document)
     }
 
     override suspend fun updateUserOne(userId: String,userOneScore : ArmsType): Result<Boolean> {

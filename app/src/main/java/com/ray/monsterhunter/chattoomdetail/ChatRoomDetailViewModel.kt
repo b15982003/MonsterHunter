@@ -200,6 +200,32 @@ class ChatRoomDetailViewModel(
         }
     }
 
+    fun updateChatRoomInfo() {
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
     fun update1() {
         coroutineScope.launch {
 

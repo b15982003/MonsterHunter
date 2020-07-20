@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.data.source
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.*
 
@@ -47,6 +48,8 @@ interface MonsterDataSource {
     suspend fun cencelUser(userArmsType : UserArms,document: String): Result<Boolean>
 
     suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
+
+    suspend fun updateChatRoomInfo(chatRoom: LiveData<ChatRoom>, document: String): Result<Boolean>
 
     suspend fun updateUserOne(userId : String,userOneScore : ArmsType): Result<Boolean>
 

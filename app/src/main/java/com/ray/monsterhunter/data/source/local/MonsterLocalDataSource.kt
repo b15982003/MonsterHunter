@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.data.source.local
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.data.source.MonsterDataSource
@@ -90,6 +91,13 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
     }
 
     override suspend fun update1(teamList: List<String>, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateChatRoomInfo(
+        chatRoom: LiveData<ChatRoom>,
+        document: String
+    ): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
