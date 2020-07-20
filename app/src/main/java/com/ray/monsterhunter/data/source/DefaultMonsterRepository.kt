@@ -21,6 +21,22 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUser()
     }
 
+    override suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
     override suspend fun getAllUser(): Result<List<User>> {
         return remoteDataSource.getAllUser()
     }

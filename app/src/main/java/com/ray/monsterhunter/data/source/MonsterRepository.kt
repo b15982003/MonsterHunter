@@ -16,6 +16,14 @@ interface MonsterRepository {
 
     suspend fun getUser(): Result<User>
 
+   suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms>
+
+    suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms>
+
+    suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms>
+
+    suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms>
+
     suspend fun getAllUser(): Result<List<User>>
 
     suspend fun getMyUser(document: String): Result<List<User>>

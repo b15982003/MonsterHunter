@@ -28,6 +28,22 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getUserOneArms(teammate:String,document: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserTwoArms(document: String, teammate: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserThreeArms(document: String, teammate: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserFourArms(document: String, teammate: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getAllUser(): Result<List<User>> {
         TODO("Not yet implemented")
     }

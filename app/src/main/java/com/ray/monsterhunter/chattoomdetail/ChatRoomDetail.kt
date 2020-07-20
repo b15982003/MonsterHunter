@@ -86,7 +86,7 @@ class ChatRoomDetail : Fragment() {
             binding.chatRoomDetailEndButton.visibility = View.GONE
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
-            },1000)
+            },500)
         }
 
 

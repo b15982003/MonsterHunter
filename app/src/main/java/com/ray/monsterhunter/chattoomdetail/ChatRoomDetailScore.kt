@@ -19,11 +19,11 @@ import com.ray.monsterhunter.util.Logger
 class ChatRoomDetailScore : Fragment() {
 
 
-    private val viewModel by viewModels<ChatRoomDetailScoreViewModel> { getVmFactory(ChatRoomDetailScoreArgs.fromBundle(requireArguments()).chatRoomDetail) }
-
-    //    private val chatRoomViewModel by  viewModels<ChatRoomDetailViewModel> { getVmFactory() }
-//    lateinit var chatRoomDetailViewModel : ChatRoomDetailViewModel
-//    private val chatRoomViewModel = ViewModelProvider(this).get(ChatRoomDetailViewModel::class.java)
+    private val viewModel by viewModels<ChatRoomDetailScoreViewModel> {
+        getVmFactory(
+            ChatRoomDetailScoreArgs.fromBundle(requireArguments()).chatRoomDetail
+        )
+    }
     lateinit var binding: ChatRoomDetailScoreFragmentBinding
 
 
@@ -36,7 +36,6 @@ class ChatRoomDetailScore : Fragment() {
         binding = ChatRoomDetailScoreFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-//        binding.chatRoomViewModel = chatRoomViewModel
         binding.chatRoomScoreSentButton.setOnClickListener() {
             findNavController().navigateUp()
         }
@@ -44,14 +43,23 @@ class ChatRoomDetailScore : Fragment() {
         viewModel.chatRoom.observe(viewLifecycleOwner, Observer {
             Logger.d("chatRoomValue${viewModel.chatRoom.value}")
         })
-//        val chatRoomViewModel = ChatRoomDetailViewModel()
-//
-//
-//
+
+        viewModel.user1.observe(viewLifecycleOwner, Observer {
+            Logger.d("user111111111111${viewModel.user1.value}")
+        })
+        viewModel.user2.observe(viewLifecycleOwner, Observer {
+            Logger.d("user2222222222${viewModel.user2.value}")
+        })
+        viewModel.user3.observe(viewLifecycleOwner, Observer {
+            Logger.d("user3333333333${viewModel.user3.value}")
+        })
+        viewModel.user4.observe(viewLifecycleOwner, Observer {
+            Logger.d("user4444444444${viewModel.user4.value}")
+        })
+
 //        chatRoomViewModel.chatRoom.observe(viewLifecycleOwner, Observer {
 //            Logger.d("finish ${chatRoomViewModel.chatRoom.value?.finishTime}")
 //        })
-
 
 
         return binding.root

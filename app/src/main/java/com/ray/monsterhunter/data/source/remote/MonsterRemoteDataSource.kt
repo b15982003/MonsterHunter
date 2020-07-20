@@ -211,6 +211,131 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
+    override suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_CHATROOM)
+                .document(document)
+                .collection(PATH_USERARMSTYPE)
+                .whereEqualTo("email", teammate)
+                .get()
+                .addOnCompleteListener { task ->
+                    Logger.d("seeuser${teammate}")
+                    Logger.d("seedocument${document}")
+                    if (task.isSuccessful) {
+                        var user1 = UserArms()
+                        for (document in task.result!!) {
+
+                            var user = document.toObject(UserArms::class.java)
+                            user1 = user
+
+                            Logger.d("seedocument${user1}")
+                        }
+                        continuation.resume(Result.Success(user1))
+
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                    }
+                }
+        }
+
+    override suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .document(document)
+            .collection(PATH_USERARMSTYPE)
+            .whereEqualTo("email", teammate)
+            .get()
+            .addOnCompleteListener { task ->
+                Logger.d("seeuser${teammate}")
+                Logger.d("seedocument${document}")
+                if (task.isSuccessful) {
+                    var user1 = UserArms()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(UserArms::class.java)
+                        user1 = user
+
+                        Logger.d("seedocument${user1}")
+                    }
+                    continuation.resume(Result.Success(user1))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .document(document)
+            .collection(PATH_USERARMSTYPE)
+            .whereEqualTo("email", teammate)
+            .get()
+            .addOnCompleteListener { task ->
+                Logger.d("seeuser${teammate}")
+                Logger.d("seedocument${document}")
+                if (task.isSuccessful) {
+                    var user1 = UserArms()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(UserArms::class.java)
+                        user1 = user
+
+                        Logger.d("seedocument${user1}")
+                    }
+                    continuation.resume(Result.Success(user1))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+    override suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms> = suspendCoroutine { continuation ->
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CHATROOM)
+            .document(document)
+            .collection(PATH_USERARMSTYPE)
+            .whereEqualTo("email", teammate)
+            .get()
+            .addOnCompleteListener { task ->
+                Logger.d("seeuser${teammate}")
+                Logger.d("seedocument${document}")
+                if (task.isSuccessful) {
+                    var user1 = UserArms()
+                    for (document in task.result!!) {
+
+                        var user = document.toObject(UserArms::class.java)
+                        user1 = user
+
+                        Logger.d("seedocument${user1}")
+                    }
+                    continuation.resume(Result.Success(user1))
+
+                } else {
+                    task.exception?.let {
+                        continuation.resume(Result.Error(it))
+                        return@addOnCompleteListener
+                    }
+                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                }
+            }
+    }
+
+
 
 
     override suspend fun getImageMonster(): Result<MonsterUri> = suspendCoroutine { continuation ->
