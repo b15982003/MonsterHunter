@@ -62,7 +62,7 @@
             style="@style/chatRoom_score_name"
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="50dp"
             android:background="@color/chatRoom_score_name"
             android:gravity="center"
@@ -80,17 +80,20 @@
             android:text="@{viewModel.user1.armsType}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_score_user1"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user1"
-            app:layout_constraintTop_toTopOf="@id/chatRoom_score_user1" />
+            app:layout_constraintTop_toTopOf="@id/chatRoom_score_user1"
+            tools:text="@string/chatRoom_score_fake_arms"
+            />
 
         <TextView
             android:id="@+id/chatRoom_score_user1_number"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:background="@color/entertext"
-            android:text="@{viewModel.liveUserOne.armsType.a.toString()}"
+            android:background="@drawable/score_number_background"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user1_arms"
-            app:layout_constraintTop_toTopOf="@id/chatRoom_score_user1_arms" />
+            app:layout_constraintTop_toTopOf="@id/chatRoom_score_user1_arms"
+            tools:text="@string/chatRoom_score_fake_score"
+            />
 
 
         <TextView
@@ -116,6 +119,7 @@
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_score_user2"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user2"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_user2"
+            tools:text="@string/chatRoom_score_fake_arms"
             />
 
         <TextView
@@ -123,10 +127,10 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:text="@{viewModel.liveUserTwo.armsType.a.toString()}"
-            android:background="@color/entertext"
+            android:background="@drawable/score_number_background"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_user2_arms"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user2_arms"
+            tools:text="@string/chatRoom_score_fake_score"
              />
 
 
@@ -153,6 +157,7 @@
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_score_user3"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user3"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_user3"
+            tools:text="@string/chatRoom_score_fake_arms"
             />
 
         <TextView
@@ -160,10 +165,10 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:background="@color/entertext"
-            android:text="@{viewModel.liveUserThree.armsType.a.toString()}"
+            android:background="@drawable/score_number_background"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_user3_arms"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user3_arms"
+            tools:text="@string/chatRoom_score_fake_score"
              />
 
 
@@ -190,6 +195,7 @@
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_score_user4"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user4"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_user4"
+            tools:text="@string/chatRoom_score_fake_arms"
             />
 
         <TextView
@@ -197,10 +203,10 @@
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:gravity="center"
-            android:background="@color/entertext"
-            android:text="@{viewModel.liveUserFour.armsType.a.toString()}"
+            android:background="@drawable/score_number_background"
             app:layout_constraintTop_toTopOf="@+id/chatRoom_score_user4_arms"
             app:layout_constraintStart_toEndOf="@id/chatRoom_score_user4_arms"
+            tools:text="@string/chatRoom_score_fake_score"
             />
 
         <ImageView
@@ -314,7 +320,7 @@
             style="@style/chatRoom_score_sent_button"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/scort_mission_button"
             android:gravity="center"
             android:text="@string/chatRoom_score_sent_button"

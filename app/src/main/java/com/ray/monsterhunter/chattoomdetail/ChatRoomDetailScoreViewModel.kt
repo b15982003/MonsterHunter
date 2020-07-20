@@ -291,5 +291,147 @@ class ChatRoomDetailScoreViewModel(
         _refreshStatus.value = false
 
     }
+
+    fun updateUserOne(){
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = liveUserOne.value?.armsType?.let {
+                liveUserOne.value?.email?.let { it1 ->
+                    repository.updateUserOne(
+                        it1,
+                        it
+                    )
+                }
+            }) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun updateUserTwo(){
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = liveUserTwo.value?.armsType?.let {
+                liveUserTwo.value?.email?.let { it1 ->
+                    repository.updateUserTwo(
+                        it1,
+                        it
+                    )
+                }
+            }) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }fun updateUserThree(){
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = liveUserThree.value?.armsType?.let {
+                liveUserThree.value?.email?.let { it1 ->
+                    repository.updateUserThree(
+                        it1,
+                        it
+                    )
+                }
+            }) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    fun updateUserFour(){
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = liveUserFour.value?.armsType?.let {
+                liveUserFour.value?.email?.let { it1 ->
+                    repository.updateUserFour(
+                        it1,
+                        it
+                    )
+                }
+            }) {
+                is Result.Success -> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
 }
 

@@ -6,7 +6,7 @@ import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
 
-class MonsterLocalDataSource(context: Context) :MonsterDataSource {
+class MonsterLocalDataSource(context: Context) : MonsterDataSource {
 
     override suspend fun getCrawlings(): Result<List<Crawling>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -44,7 +44,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUserOneArms(teammate:String,document: String): Result<UserArms> {
+    override suspend fun getUserOneArms(teammate: String, document: String): Result<UserArms> {
         TODO("Not yet implemented")
     }
 
@@ -77,7 +77,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
+    override suspend fun sentMessage(message: Message, document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -89,7 +89,26 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun update1( teamList:List<String>,document: String): Result<Boolean> {
+    override suspend fun update1(teamList: List<String>, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserOne(userId: String, userOneScore: ArmsType): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserThree(
+        userId: String,
+        userThreeScore: ArmsType
+    ): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserFour(userId: String, userFourScore: ArmsType): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

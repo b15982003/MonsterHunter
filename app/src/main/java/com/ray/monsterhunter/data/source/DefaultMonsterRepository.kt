@@ -94,6 +94,22 @@ class DefaultMonsterRepository(
         return remoteDataSource.update1(teamList,document)
     }
 
+    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserOne(userId,userOneScore)
+    }
+
+    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserTwo(userId,userTwoScore)
+    }
+
+    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserThree(userId,userThreeScore)
+    }
+
+    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserFour(userId,userFourScore)
+    }
+
 
     override suspend fun pushUser(user: User): Result<Boolean> {
         return remoteDataSource.pushUser(user)

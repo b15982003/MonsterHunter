@@ -48,6 +48,14 @@ interface MonsterRepository {
 
     suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
 
+    suspend fun updateUserOne(userId : String,userOneScore : ArmsType): Result<Boolean>
+
+    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType): Result<Boolean>
+
+    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType): Result<Boolean>
+
+    suspend fun updateUserFour(userId : String,userFourScore : ArmsType): Result<Boolean>
+
     suspend fun pushUser(user: User): Result<Boolean>
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
