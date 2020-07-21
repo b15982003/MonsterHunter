@@ -58,14 +58,15 @@ class ChatRoomDetailScore : Fragment() {
         })
 
         viewModel.user4.observe(viewLifecycleOwner, Observer {
-//            viewModel.history.value?.user1 = viewModel.user1.value?.userId
-//            viewModel.history.value?.user2 = viewModel.user2.value?.userId
-//            viewModel.history.value?.user3 = viewModel.user3.value?.userId
-//            viewModel.history.value?.user4 = viewModel.user4.value?.userId
-//            viewModel.history.value?.user1Type = viewModel.user1.value?.armsType.toString()
-//            viewModel.history.value?.user2Type = viewModel.user2.value?.armsType.toString()
-//            viewModel.history.value?.user3Type = viewModel.user3.value?.armsType.toString()
-//            viewModel.history.value?.user4Type = viewModel.user4.value?.armsType.toString()
+            Logger.d("user4444444${viewModel.user4.value}")
+            viewModel.history.value?.user1 = viewModel.user1.value?.userId
+            viewModel.history.value?.user2 = viewModel.user2.value?.userId
+            viewModel.history.value?.user3 = viewModel.user3.value?.userId
+            viewModel.history.value?.user4 = viewModel.user4.value?.userId
+            viewModel.history.value?.user1Type = viewModel.user1.value?.armsType.toString()
+            viewModel.history.value?.user2Type = viewModel.user2.value?.armsType.toString()
+            viewModel.history.value?.user3Type = viewModel.user3.value?.armsType.toString()
+            viewModel.history.value?.user4Type = viewModel.user4.value?.armsType.toString()
         })
 
 

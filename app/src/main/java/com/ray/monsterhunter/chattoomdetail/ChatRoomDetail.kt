@@ -43,7 +43,9 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailEndButton.visibility = View.GONE
         binding.chatRoomDetailStartBackground.visibility = View.GONE
         binding.chatRoomDetailMinNumber.visibility = View.GONE
+        binding.chatRoomDetailTenMinNumber.visibility = View.GONE
         binding.chatRoomDetailSecNumber.visibility = View.GONE
+        binding.chatRoomDetailTenSecNumber.visibility = View.GONE
         binding.chatRoomDetailLine.visibility = View.GONE
         binding.chatRoomDetailMissionTypeBackground.visibility = View.GONE
         binding.chatRoomDetailMissionTypeSuccess.visibility = View.GONE
@@ -60,6 +62,8 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
                     binding.chatRoomDetailMinNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailSecNumber.visibility = View.VISIBLE
+                    binding.chatRoomDetailTenMinNumber.visibility = View.VISIBLE
+                    binding.chatRoomDetailTenSecNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailLine.visibility = View.VISIBLE
                     if(viewModel.timming.value == true){
                         binding.chatRoomDetailEndButton.visibility = View.VISIBLE
@@ -161,8 +165,10 @@ class ChatRoomDetail : Fragment() {
         })
 
         viewModel.timeSec.observe(viewLifecycleOwner, Observer {
-            binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck%60).toString()
+            binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck%10).toString()
+            binding.chatRoomDetailTenSecNumber.text = (viewModel.timeCheck/10).toString()
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
+            binding.chatRoomDetailTenMinNumber.text = (viewModel.timeCheck/600).toString()
         })
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {

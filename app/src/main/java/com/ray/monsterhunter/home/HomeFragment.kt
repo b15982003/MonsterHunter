@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ray.monsterhunter.databinding.HomeFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
@@ -31,6 +32,16 @@ class HomeFragment : Fragment() {
         binding = HomeFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        viewModel.status.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            if (viewModel.status.value == LoadApiStatus.LOADING){
+                binding.homeLoadingImage.visibility = View.VISIBLE
+            }else{
+                binding.homeLoadingImage.visibility = View.INVISIBLE
+            }
+        })
+
+
 
         binding.homeDataRecy.adapter = HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener{
 

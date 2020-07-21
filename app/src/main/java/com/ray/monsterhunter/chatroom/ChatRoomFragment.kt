@@ -26,9 +26,11 @@ class ChatRoomFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.chatRoomRecy.adapter = ChatRoomAdapter(ChatRoomAdapter.OnClickListener {
+        var adapter = ChatRoomAdapter(ChatRoomAdapter.OnClickListener {
             findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetail(it))
-       })
+        })
+        adapter.setHasStableIds(true)
+        binding.chatRoomRecy.adapter = adapter
         return binding.root
     }
 

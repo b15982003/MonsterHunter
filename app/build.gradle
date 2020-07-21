@@ -113,6 +113,8 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
+    //jason動畫
+    implementation 'com.airbnb.android:lottie:3.4.1'
 
 
 
