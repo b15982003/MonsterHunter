@@ -1,5 +1,6 @@
 package com.ray.monsterhunter.data.source
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.*
 
@@ -21,6 +22,38 @@ class DefaultMonsterRepository(
         return remoteDataSource.getUser()
     }
 
+    override suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms> {
+        return remoteDataSource.getUserOneArms(teammate,document)
+    }
+
+    override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserOneScore(teammate)
+    }
+
+    override fun getLiveUserTwoScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserTwoScore(teammate)
+    }
+
+    override fun getLiveUserThreeScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserThreeScore(teammate)
+    }
+
+    override fun getLiveUserFourScore(teammate: String): MutableLiveData<User> {
+        return remoteDataSource.getLiveUserFourScore(teammate)
+    }
+
     override suspend fun getAllUser(): Result<List<User>> {
         return remoteDataSource.getAllUser()
     }
@@ -35,6 +68,10 @@ class DefaultMonsterRepository(
 
     override fun getLiveChatRoom(): MutableLiveData<List<ChatRoom>> {
         return remoteDataSource.getLiveChatRoom()
+    }
+
+    override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
+        return remoteDataSource.getLiveChatRoomScore(document)
     }
 
     override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
@@ -62,6 +99,29 @@ class DefaultMonsterRepository(
         return remoteDataSource.update1(teamList,document)
     }
 
+    override suspend fun updateChatRoomInfo(
+        chatRoom: LiveData<ChatRoom>,
+        document: String
+    ): Result<Boolean> {
+        return remoteDataSource.updateChatRoomInfo(chatRoom,document)
+    }
+
+    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserOne(userId,userOneScore)
+    }
+
+    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserTwo(userId,userTwoScore)
+    }
+
+    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserThree(userId,userThreeScore)
+    }
+
+    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType): Result<Boolean> {
+        return remoteDataSource.updateUserFour(userId,userFourScore)
+    }
+
 
     override suspend fun pushUser(user: User): Result<Boolean> {
         return remoteDataSource.pushUser(user)
@@ -71,6 +131,9 @@ class DefaultMonsterRepository(
         return remoteDataSource.pushChatRoom(chatRoom)
     }
 
+    override suspend fun pushHistory(history: History): Result<Boolean> {
+        return remoteDataSource.pushHistory(history)
+    }
 
 
 }

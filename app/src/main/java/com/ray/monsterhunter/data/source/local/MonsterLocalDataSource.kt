@@ -1,12 +1,13 @@
 package com.ray.monsterhunter.data.source.local
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.data.source.MonsterDataSource
 import com.ray.monsterhunter.data.source.Result
 
-class MonsterLocalDataSource(context: Context) :MonsterDataSource {
+class MonsterLocalDataSource(context: Context) : MonsterDataSource {
 
     override suspend fun getCrawlings(): Result<List<Crawling>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -24,7 +25,43 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserTwoScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserThreeScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveUserFourScore(teammate: String): MutableLiveData<User> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUser(): Result<User> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserOneArms(teammate: String, document: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserTwoArms(document: String, teammate: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserThreeArms(document: String, teammate: String): Result<UserArms> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserFourArms(document: String, teammate: String): Result<UserArms> {
         TODO("Not yet implemented")
     }
 
@@ -45,7 +82,7 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
+    override suspend fun sentMessage(message: Message, document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -57,7 +94,33 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun update1( teamList:List<String>,document: String): Result<Boolean> {
+    override suspend fun update1(teamList: List<String>, document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateChatRoomInfo(
+        chatRoom: LiveData<ChatRoom>,
+        document: String
+    ): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserOne(userId: String, userOneScore: ArmsType): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserThree(
+        userId: String,
+        userThreeScore: ArmsType
+    ): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateUserFour(userId: String, userFourScore: ArmsType): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
@@ -66,6 +129,10 @@ class MonsterLocalDataSource(context: Context) :MonsterDataSource {
     }
 
     override suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun pushHistory(history: History): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

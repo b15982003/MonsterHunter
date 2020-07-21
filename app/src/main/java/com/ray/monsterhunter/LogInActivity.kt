@@ -77,7 +77,7 @@ class LogInActivity : AppCompatActivity() {
                     )
                     UserManager.userData= user
 
-                    viewModel.pushUser(user)
+
                     //Second step
                     Handler().postDelayed({
                         firebaseAuthWithGoogle(account)
@@ -94,6 +94,8 @@ class LogInActivity : AppCompatActivity() {
         auth?.signInWithCredential(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
+
+
                     //Login
                         moveMainPage(task.result?.user)
 
