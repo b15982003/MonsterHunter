@@ -35,17 +35,18 @@ class ChatRoomDetailScoreViewModel(
 
     var liveChatRoom = MutableLiveData<ChatRoom>()
 
+    var isDone = MutableLiveData<Boolean>(false)
+
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
     }
     val chatRoom: LiveData<ChatRoom>
         get() = _chatroom
 
-    private val _history = MutableLiveData<History>().apply {
+     val history = MutableLiveData<History>().apply {
         value = History()
     }
-    val history: LiveData<History>
-        get() = _history
+
 
     private val _user1 = MutableLiveData<UserArms>().apply {
         value = UserArms()
