@@ -6,28 +6,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.databinding.HistoryFragmentBinding
+import com.ray.monsterhunter.ext.getVmFactory
 
 class HistoryFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HistoryFragment()
-    }
 
-    private lateinit var viewModel: HistoryViewModel
+    private val viewModel by viewModels<HistoryViewModel> { getVmFactory() }
+    lateinit var binding : HistoryFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.history_fragment, container, false)
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding = HistoryFragmentBinding.inflate(inflater,container,false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        return binding.root
     }
 
 }

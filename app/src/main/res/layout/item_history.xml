@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+
+            <ImageView
+                android:id="@+id/history_list_monster_image"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_monster"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/history_list_monster_shape"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/chatroom_list_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/history_list_monsterName"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@{even.monsterName}"
+                app:layout_constraintEnd_toEndOf="@id/history_list_monster_image"
+                app:layout_constraintStart_toStartOf="@id/history_list_monster_image"
+                app:layout_constraintTop_toBottomOf="@id/history_list_monster_shape"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_roomName"
+                style="@style/chatRoom_data_title"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{even.roomName}"
+                app:layout_constraintStart_toEndOf="@+id/history_list_monster_image"
+                app:layout_constraintTop_toTopOf="@+id/history_list_monster_image"
+                tools:text="@string/chatRoom_test_text" />
+
+            <TextView
+                android:id="@+id/history_list_finish_time"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@+id/history_list_roomName"
+                app:layout_constraintTop_toBottomOf="@id/history_list_roomName"
+                tools:text="@string/chatRoom_test_text" />
+
+            <TextView
+                android:id="@+id/history_list_user1_name"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user1_line"
+                app:layout_constraintEnd_toEndOf="@id/history_list_user1_line"
+                app:layout_constraintStart_toEndOf="@id/history_list_monster_image"
+                app:layout_constraintTop_toTopOf="@id/history_list_user1_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user1_line"
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_cccccc"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/history_list_monster_image"
+                app:layout_constraintTop_toBottomOf="@id/history_list_finish_time"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user1_arms"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user1_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/history_list_user1_line"
+                app:layout_constraintTop_toTopOf="@id/history_list_user1_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user2_name"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user2_line"
+                app:layout_constraintEnd_toEndOf="@id/history_list_user2_line"
+                app:layout_constraintStart_toEndOf="@id/history_list_monster_image"
+                app:layout_constraintTop_toTopOf="@id/history_list_user2_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user2_line"
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_cccccc"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/history_list_monster_image"
+                app:layout_constraintTop_toBottomOf="@id/history_list_user1_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user2_arms"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user2_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/history_list_user2_line"
+                app:layout_constraintTop_toTopOf="@id/history_list_user2_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user3_name"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user3_line"
+                app:layout_constraintEnd_toEndOf="@id/history_list_user3_line"
+                app:layout_constraintStart_toEndOf="@id/history_list_monster_image"
+                app:layout_constraintTop_toTopOf="@id/history_list_user3_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user3_line"
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_cccccc"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/history_list_monster_image"
+                app:layout_constraintTop_toBottomOf="@id/history_list_user2_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user3_arms"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user3_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/history_list_user3_line"
+                app:layout_constraintTop_toTopOf="@id/history_list_user3_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+
+            <TextView
+                android:id="@+id/history_list_user4_name"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user4_line"
+                app:layout_constraintEnd_toEndOf="@id/history_list_user4_line"
+                app:layout_constraintStart_toEndOf="@id/history_list_monster_image"
+                app:layout_constraintTop_toTopOf="@id/history_list_user4_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user4_line"
+                android:layout_width="1dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/gray_cccccc"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/history_list_monster_image"
+                app:layout_constraintTop_toBottomOf="@id/history_list_user3_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+            <TextView
+                android:id="@+id/history_list_user4_arms"
+                style="@style/chatRoom_data_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/gray_888888"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_user4_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/history_list_user4_line"
+                app:layout_constraintTop_toTopOf="@id/history_list_user4_line"
+                tools:text="@string/chatRoom_test_text_short" />
+
+
+            <Button
+                android:id="@+id/history_list_mission_result"
+                style="@style/home_data_button"
+                android:layout_width="70dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/home_atten_background"
+                android:gravity="center"
+                android:text="@string/home_attendee"
+                app:layout_constraintBottom_toBottomOf="@id/history_list_finish_time"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/history_list_finish_time" />
+
+            <TextView
+                android:id="@+id/history_list_create_time"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/history_list_user4_line"
+                android:layout_marginTop="8dp"
+                tools:text="12345678909876543" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

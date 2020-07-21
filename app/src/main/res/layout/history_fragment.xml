@@ -1,13 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".history.HistoryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ray.monsterhunter.history.HistoryViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="history" />
+        tools:context=".history.HistoryFragment">
 
-</FrameLayout>
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/history_loading_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/active_archer"
+            app:lottie_speed="1.2" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/history_data_recy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="4dp"
+            app:crawlings="@{viewModel.crawlings}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:listitem="@layout/item_history" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
