@@ -97,7 +97,12 @@
     <style name="profile_heater_text">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/gray_888888</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
+    <style name="profile_all_crawling_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_646464</item>
     </style>
 
     <!-- chatRoomDetail -->

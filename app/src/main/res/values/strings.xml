@@ -82,6 +82,12 @@
     <string name="history_mission_type">限時任務</string>
     <string name="history_list_no_value_text">快去來場既分高下也決生死的戰鬥吧！</string>
 
+    <!--profile -->
+    <string name="profile_all_crawling">事件總數 : </string>
+    <string name="profile_all_game">參戰次數 ： </string>
+        <string name="profile_all_number">1234567</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
