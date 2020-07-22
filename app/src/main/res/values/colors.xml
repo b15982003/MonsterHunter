@@ -53,6 +53,7 @@
 
     <!-- Profile -->
     <color name="profile_background">#D9CD90</color>
+    <color name="profile_rating">#FCDC73</color>
 
     <!-- Chatroom detail -->
     <color name="chatroom_detail_ed_background">@color/google_sign_in_button</color>

@@ -105,6 +105,11 @@
         <item name="android:textColor">@color/gray_646464</item>
     </style>
 
+    <style name="profile_ratingBar_god">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
     <!-- chatRoomDetail -->
     <style name="chatRoom_Detail_userId">
         <item name="android:textSize">10sp</item>
@@ -161,6 +166,10 @@
     <style name="friend_list_userName">
         <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/post_dialog_personName</item>
+    </style>
+
+    <style name="RatingBar">
+        <item name="colorControlActivated">@color/profile_rating</item>
     </style>
 
     <!-- history List -->

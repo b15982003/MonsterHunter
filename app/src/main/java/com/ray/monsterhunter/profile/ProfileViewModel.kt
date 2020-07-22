@@ -27,6 +27,34 @@ class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
         auth.signOut()
     }
 
+    var userA = MutableLiveData<Float>()
+
+    var userB = MutableLiveData<Float>()
+
+    var userC = MutableLiveData<Float>()
+
+    var userD = MutableLiveData<Float>()
+
+    var userE = MutableLiveData<Float>()
+
+    var userF = MutableLiveData<Float>()
+
+    var userG = MutableLiveData<Float>()
+
+    var userH = MutableLiveData<Float>()
+
+    var userI = MutableLiveData<Float>()
+
+    var userJ = MutableLiveData<Float>()
+
+    var userK = MutableLiveData<Float>()
+
+    var userL = MutableLiveData<Float>()
+
+    var userM = MutableLiveData<Float>()
+
+    var userN = MutableLiveData<Float>()
+
 
     private val _user = MutableLiveData<User>()
 
@@ -100,47 +128,6 @@ class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
         }
     }
 
-
-
-
-//    fun getUser() {
-//
-//        coroutineScope.launch {
-//
-//            _status.value = LoadApiStatus.LOADING
-//            Logger.d("userInget111111${user.value}")
-//            val result = UserManager.userData.email?.let { repository?.getUser(it) }
-//
-//            _user.value = when (result) {
-//                is Result.Success -> {
-//                    Logger.d("userIngetsuccccc${user.value}")
-//                    _error.value = null
-//                    _status.value = LoadApiStatus.DONE
-//                    result.data
-//
-//                }
-//                is Result.Fail -> {
-//                    Logger.d("userIngetfaillllll${user.value}")
-//                    _error.value = result.error
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//                is Result.Error -> {
-//                    Logger.d("userIngeterrorrrr${user.value}")
-//                    _error.value = result.exception.toString()
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//                else -> {
-//                    Logger.d("userIngetooooooooooooo${user.value}")
-//                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
-//                    _status.value = LoadApiStatus.ERROR
-//                    null
-//                }
-//            }
-////            _refreshStatus.value = false
-//        }
-//    }
 
 
 }

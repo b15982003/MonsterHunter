@@ -31,7 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="85dp"
                 android:background="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/profile_userId_head"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -75,41 +76,31 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/profil_info"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_heater">
-
             <TextView
-                android:id="@+id/profile_all_crawling_text"
+                android:id="@+id/profile_all_game_text"
                 style="@style/profile_all_crawling_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/profile_all_crawling"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_line"
+                android:text="@string/profile_all_game"
+                app:layout_constraintBottom_toBottomOf="@id/profile_line"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/profile_heater_bk_color"
+
+                />
 
             <TextView
-                android:id="@+id/profile_all_crawling_number"
+                android:id="@+id/profile_all_game_number"
                 style="@style/profile_all_crawling_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_line"
-                app:layout_constraintStart_toEndOf="@+id/profile_all_crawling_text"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/profile_all_number"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/profile_all_game_text"
+                app:layout_constraintStart_toEndOf="@id/profile_all_game_text"
+                app:layout_constraintTop_toTopOf="@id/profile_all_game_text"
+
+                tools:text="@string/profile_all_number" />
 
 
             <TextView
@@ -121,343 +112,733 @@
                 android:background="@color/gray_888888"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_heater_bk_color"
 
                 />
-
-
-            <ImageView
-                android:id="@+id/profile_armsA"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_arms_knife"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsB"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/profile_line" />
-
-            <TextView
-                android:id="@+id/profile_armsA_line"
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsA"
-                app:layout_constraintStart_toEndOf="@id/profile_armsA"
-                app:layout_constraintTop_toTopOf="@id/profile_armsA" />
-
-            <RatingBar
-                android:id="@+id/profile_armsA_ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="69dp"
-                style="@android:style/Widget.Material.RatingBar.Small"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsA_line"
-                app:layout_constraintStart_toEndOf="@id/profile_armsA_line"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsA_line"
-                />
-
-            <TextView
-                android:id="@+id/profile_armsA_score"
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:text="@{viewmodel.user.armsType.a.toString()}"
-                android:gravity="center"
-                android:background="@drawable/chatroom_post_text_background"
-                app:layout_constraintStart_toEndOf="@id/profile_armsA_ratingBar"
-                app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
-                android:layout_marginStart="8dp"
-                />
-
-            <ImageView
-                android:id="@+id/profile_armsB"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_bigknife"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsC"
-                app:layout_constraintStart_toStartOf="@id/profile_armsA"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsA" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsB"
-                app:layout_constraintStart_toEndOf="@id/profile_armsB"
-                app:layout_constraintTop_toTopOf="@id/profile_armsB" />
-
-            <ImageView
-                android:id="@+id/profile_armsC"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_bow"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsD"
-                app:layout_constraintStart_toStartOf="@id/profile_armsB"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsB" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsC"
-                app:layout_constraintStart_toEndOf="@id/profile_armsC"
-                app:layout_constraintTop_toTopOf="@id/profile_armsC" />
-
-            <ImageView
-                android:id="@+id/profile_armsD"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_gunax"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsE"
-                app:layout_constraintStart_toStartOf="@id/profile_armsC"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsC" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsD"
-                app:layout_constraintStart_toEndOf="@id/profile_armsD"
-                app:layout_constraintTop_toTopOf="@id/profile_armsD" />
-
-            <ImageView
-                android:id="@+id/profile_armsE"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_lightcrossbow"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsF"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsE"
-                app:layout_constraintStart_toEndOf="@id/profile_armsE"
-                app:layout_constraintTop_toTopOf="@id/profile_armsE" />
-
-            <ImageView
-                android:id="@+id/profile_armsF"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_double_knife"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsG"
-                app:layout_constraintStart_toStartOf="@id/profile_armsE"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsF"
-                app:layout_constraintStart_toEndOf="@id/profile_armsF"
-                app:layout_constraintTop_toTopOf="@id/profile_armsF" />
-
-            <ImageView
-                android:id="@+id/profile_armsG"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_stick"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/profile_armsF"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsG"
-                app:layout_constraintStart_toEndOf="@id/profile_armsG"
-                app:layout_constraintTop_toTopOf="@id/profile_armsG" />
-
-
-            <ImageView
-                android:id="@+id/profile_armsH"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="140dp"
-                android:src="@drawable/ic_arms_hcrossbow"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsI"
-                app:layout_constraintTop_toTopOf="@id/profile_line" />
-
-            <TextView
-                android:id="@id/profile_armsH_line"
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsH"
-                app:layout_constraintStart_toEndOf="@id/profile_armsH"
-                app:layout_constraintTop_toTopOf="@id/profile_armsH" />
-
-
-            <RatingBar
-                android:id="@+id/profile_armsH_ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="69dp"
-                style="@android:style/Widget.Material.RatingBar.Small"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsH_line"
-                app:layout_constraintStart_toEndOf="@id/profile_armsH_line"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsH_line"
-                />
-
-            <TextView
-                android:id="@+id/profile_armsH_score"
-                android:layout_width="30dp"
-                android:layout_height="20dp"
-                android:text="@{viewmodel.user.armsType.h.toString()}"
-                android:gravity="center"
-                android:background="@drawable/chatroom_post_text_background"
-                app:layout_constraintStart_toEndOf="@id/profile_armsH_ratingBar"
-                app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsH_ratingBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="8dp"
-                />
-
-
-            <ImageView
-                android:id="@+id/profile_armsI"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_bighammer"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsJ"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsH"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsI"
-                app:layout_constraintStart_toEndOf="@id/profile_armsI"
-                app:layout_constraintTop_toTopOf="@id/profile_armsI" />
-
-            <ImageView
-                android:id="@+id/profile_armsJ"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_gunspear"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsK"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsI"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsJ"
-                app:layout_constraintStart_toEndOf="@id/profile_armsJ"
-                app:layout_constraintTop_toTopOf="@id/profile_armsJ" />
-
-
-            <ImageView
-                android:id="@+id/profile_armsK"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_singo_knife"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsL"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsJ"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsK"
-                app:layout_constraintStart_toEndOf="@id/profile_armsK"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsK" />
-
-            <ImageView
-                android:id="@+id/profile_armsL"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_spear"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsM"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsK"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsL"
-                app:layout_constraintStart_toEndOf="@id/profile_armsL"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsL" />
-
-            <ImageView
-                android:id="@+id/profile_armsM"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_ax"
-                app:layout_constraintBottom_toTopOf="@+id/profile_armsN"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsL"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsM"
-                app:layout_constraintStart_toEndOf="@id/profile_armsM"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsM" />
-
-
-            <ImageView
-                android:id="@+id/profile_armsN"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_arms_flout"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/profile_armsM"
-                app:layout_constraintTop_toBottomOf="@+id/profile_armsM" />
-
-            <TextView
-                android:layout_width="1dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintBottom_toBottomOf="@id/profile_armsN"
-                app:layout_constraintStart_toEndOf="@id/profile_armsN"
-                app:layout_constraintTop_toTopOf="@+id/profile_armsN" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_heater">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profil_info"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <ImageView
+                    android:id="@+id/profile_armsA"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_knife"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/profile_armsA_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsA"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsA" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsA_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsA_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsA_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsA_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    android:text="@string/profile_ratingBar_god"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintEnd_toStartOf="@id/profile_armsA_score"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
+
+                <TextView
+                    android:id="@+id/profile_armsA_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.a.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
+
+                <ImageView
+                    android:id="@+id/profile_armsB"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_bigknife"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsA"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsA" />
+
+                <TextView
+                    android:id="@+id/profile_armsB_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsB"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsB" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsB_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsB_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsB_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsB_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:background="@drawable/profile_rating_text"
+                    android:text="@string/profile_ratingBar_god"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintEnd_toStartOf="@id/profile_armsB_score"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
+
+                <TextView
+                    android:id="@+id/profile_armsB_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.b.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsC"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_bow"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsB"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsB" />
+
+                <TextView
+                    android:id="@+id/profile_armsC_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsC"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsC"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsC" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsC_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsC_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsC_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsC_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsC_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.c.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsC_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsC_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsD"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_gunax"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsC"
+                    app:layout_constraintTop_toBottomOf="@id/profile_armsC" />
+
+                <TextView
+                    android:id="@id/profile_armsD_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsD"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsD"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsD" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsD_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsD_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsD_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsD_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsD_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.d.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsD_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsD_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsE"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_lightcrossbow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
+
+                <TextView
+                    android:id="@+id/profile_armsE_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsE"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsE"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsE" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsE_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsE_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsE_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsE_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsE_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.e.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsE_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsE_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsF"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_double_knife"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsE"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
+
+                <TextView
+                    android:id="@id/profile_armsF_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsF"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsF"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsF" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsF_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsF_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsF_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsF_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsF_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.f.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsF_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsF_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsG"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_stick"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsF"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
+
+                <TextView
+                    android:id="@+id/profile_armsG_lineG"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsG"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsG"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsG" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsG_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsG_lineG"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsG_lineG"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsG_lineG"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsG_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.g.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsG_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsG_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsH"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_hcrossbow"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsG"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsG" />
+
+                <TextView
+                    android:id="@id/profile_armsH_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsH"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsH"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsH" />
+
+
+                <RatingBar
+                    android:id="@+id/profile_armsH_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsH_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsH_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsH_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsH_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.h.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsH_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsI"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_bighammer"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsJ"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsH"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
+
+                <TextView
+                    android:id="@id/profile_armsI_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsI"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsI"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsI" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsI_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsI_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsI_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsI_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsI_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.i.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsI_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsI_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsJ"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_gunspear"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsK"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsI"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
+
+                <TextView
+                    android:id="@id/profile_armsJ_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsJ"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsJ"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsJ" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsJ_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsJ_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsJ_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsJ_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.j.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsJ_ratingBar" />
+
+                <ImageView
+                    android:id="@+id/profile_armsK"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_singo_knife"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsL"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsJ"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
+
+                <TextView
+                    android:id="@+id/profile_armsK_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsK"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsK"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsK" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsK_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsK_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsK_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsK_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsK_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.k.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsK_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsK_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsL"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_spear"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsM"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsK"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
+
+                <TextView
+                    android:id="@+id/profile_armsL_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsL"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsL"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsL" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsL_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsL_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsL_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsL_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsL_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.l.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsL_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsL_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsM"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_ax"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsN"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsL"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
+
+                <TextView
+                    android:id="@+id/profile_armsM_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsM"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsM"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsM" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsM_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsM_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsM_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsM_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsM_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.m.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsM_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsM_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsN"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_arms_flout"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsM"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsM" />
+
+                <TextView
+                    android:id="@id/profile_armsN_line"
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsN"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsN" />
+
+                <RatingBar
+                    android:id="@+id/profile_armsN_ratingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:theme="@style/RatingBar"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN_line"
+                    app:layout_constraintStart_toEndOf="@id/profile_armsN_line"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsN_line"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="69dp" />
+
+                <TextView
+                    android:id="@+id/profile_armsN_score"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    android:gravity="center"
+                    android:text="@{viewmodel.user.armsType.n.toString()}"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsN_ratingBar" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

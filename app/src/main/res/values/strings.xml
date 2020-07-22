@@ -85,7 +85,8 @@
     <!--profile -->
     <string name="profile_all_crawling">事件總數 : </string>
     <string name="profile_all_game">參戰次數 ： </string>
-        <string name="profile_all_number">1234567</string>
+    <string name="profile_all_number">1234567</string>
+    <string name="profile_ratingBar_god">神</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
