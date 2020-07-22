@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -134,6 +135,10 @@ class MainActivity : BaseActivity() {
         UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
         UserManager.userData.image = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
+//        viewModel.user.observe(this, Observer {
+//                Logger.d("MainactiveMan${viewModel.user.value}")
+//        })
+
 
         userName.text = UserManager.userData.id
         Glide.with(navigationView).load(UserManager.userData.image).into(ivHeaderPhoto)
@@ -145,11 +150,12 @@ class MainActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getUser()
+//        viewModel.getUser()
         viewModel.getImageMonster()
         Logger.d(viewModel.image.value.toString())
 
     }
+
 
     private fun setupNavController() {
         findNavController(R.id.myNavHostFragment).addOnDestinationChangedListener { navController: NavController, _: NavDestination, _: Bundle? ->
@@ -200,19 +206,19 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun hiddingToolbar(){
+    fun hiddingToolbar() {
         toolbar.visibility = View.GONE
     }
 
-    fun hiddingBottomnav(){
+    fun hiddingBottomnav() {
         bottomNav.visibility = View.GONE
     }
 
-    fun getToolbar(){
+    fun getToolbar() {
         toolbar.visibility = View.VISIBLE
     }
 
-    fun getBottomnav(){
+    fun getBottomnav() {
         bottomNav.visibility = View.VISIBLE
     }
 

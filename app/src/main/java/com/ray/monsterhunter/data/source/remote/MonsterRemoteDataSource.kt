@@ -17,6 +17,7 @@ import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
+import java.sql.DataTruncation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -116,7 +117,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_USER)
-                .document("BnvEtE3ZyJaPnhtXrzRa")
+                .document(document)
                 .collection(PATH_FRIENDLIST)
                 .get()
                 .addOnCompleteListener { task ->
@@ -299,10 +300,10 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 if (task.isSuccessful) {
                     var user1 = User()
                     for (document in task.result!!) {
-
                         var user = document.toObject(User::class.java)
                         user1 = user
-
+                        Logger.d("userIn12121212121212${user1}")
+                        Logger.d("userIn1233333333333333${user}")
                     }
                     continuation.resume(Result.Success(user1))
 

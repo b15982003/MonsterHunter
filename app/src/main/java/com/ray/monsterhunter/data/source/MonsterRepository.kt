@@ -25,17 +25,17 @@ interface MonsterRepository {
 
     fun getLiveUserFourScore(teammate: String): MutableLiveData<User>
 
-    fun getLiveChatRoomScore(document: String) : MutableLiveData<ChatRoom>
+    fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom>
 
     suspend fun getUser(): Result<User>
 
-   suspend fun getUserOneArms(document: String,teammate:String): Result<UserArms>
+    suspend fun getUserOneArms(document: String, teammate: String): Result<UserArms>
 
-    suspend fun getUserTwoArms(document: String,teammate:String): Result<UserArms>
+    suspend fun getUserTwoArms(document: String, teammate: String): Result<UserArms>
 
-    suspend fun getUserThreeArms(document: String,teammate:String): Result<UserArms>
+    suspend fun getUserThreeArms(document: String, teammate: String): Result<UserArms>
 
-    suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms>
+    suspend fun getUserFourArms(document: String, teammate: String): Result<UserArms>
 
     suspend fun getAllUser(): Result<List<User>>
 
@@ -45,30 +45,29 @@ interface MonsterRepository {
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
-    suspend fun sentMessage(message: Message,document: String): Result<Boolean>
+    suspend fun sentMessage(message: Message, document: String): Result<Boolean>
 
-    suspend fun getUserArms(userArmsType: UserArms,document: String): Result<Boolean>
+    suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean>
 
-    suspend fun cancelUser(userArmsType: UserArms,document: String): Result<Boolean>
+    suspend fun cancelUser(userArmsType: UserArms, document: String): Result<Boolean>
 
-    suspend fun update1(teamList:List<String>,document: String): Result<Boolean>
+    suspend fun update1(teamList: List<String>, document: String): Result<Boolean>
 
     suspend fun updateChatRoomInfo(chatRoom: LiveData<ChatRoom>, document: String): Result<Boolean>
 
-    suspend fun updateUserOne(userId : String,userOneScore : ArmsType): Result<Boolean>
+    suspend fun updateUserOne(userId: String, userOneScore: ArmsType): Result<Boolean>
 
-    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType): Result<Boolean>
+    suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType): Result<Boolean>
 
-    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType): Result<Boolean>
+    suspend fun updateUserThree(userId: String, userThreeScore: ArmsType): Result<Boolean>
 
-    suspend fun updateUserFour(userId : String,userFourScore : ArmsType): Result<Boolean>
+    suspend fun updateUserFour(userId: String, userFourScore: ArmsType): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
 
-    suspend fun pushHistory(history: History):Result<Boolean>
-
+    suspend fun pushHistory(history: History): Result<Boolean>
 
 
 }
