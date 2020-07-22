@@ -34,6 +34,19 @@ class HistoryFragment : Fragment() {
         })
         binding.historyDataRecy.adapter = adapter
 
+        viewModel.liveHistory.observe(viewLifecycleOwner, Observer {
+            if (viewModel.liveHistory.value == listOf<String>()){
+
+                binding.historyListNoValue.visibility = View.VISIBLE
+                binding.historyListNoValueText.visibility = View.VISIBLE
+            }else{
+
+                binding.historyListNoValue.visibility = View.GONE
+                binding.historyListNoValueText.visibility = View.GONE
+
+            }
+        })
+
         viewModel.status.observe(viewLifecycleOwner, Observer {
             if(viewModel.status.value == LoadApiStatus.LOADING){
                 binding.historyLoadingImage.visibility = View.VISIBLE
