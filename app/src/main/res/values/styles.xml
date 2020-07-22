@@ -158,5 +158,10 @@
         <item name="android:textColor">@color/post_dialog_personName</item>
     </style>
 
+    <!-- history List -->
+    <style name="history_list_createTime">
+        <item name="android:textSize">8sp</item>
+        <item name="android:textColor">@color/gray_cccccc</item>
+    </style>
 
 </resources>

@@ -29,6 +29,8 @@ interface MonsterDataSource {
 
     fun getLiveChatRoom() : MutableLiveData<List<ChatRoom>>
 
+    fun getLiveHistory(): MutableLiveData<List<History>>
+
     fun getLiveMessage(document: String) : MutableLiveData<List<Message>>
 
     fun getLiveUserOneScore(teammate: String): MutableLiveData<User>

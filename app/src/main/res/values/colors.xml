@@ -69,4 +69,8 @@
     <color name="friendViewpager_no_choose_text">#cccccc</color>
     <color name="friendViewpager_choose_text">#42602D</color>
 
+    <!-- history -->
+    <color name="history_success_background">#ABDAFC</color>
+    <color name="history_fail_background">#F4C0C6</color>
+
 </resources>

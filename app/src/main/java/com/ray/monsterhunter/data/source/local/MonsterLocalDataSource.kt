@@ -21,6 +21,10 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveHistory(): MutableLiveData<List<History>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getLiveMessage(document: String): MutableLiveData<List<Message>> {
         TODO("Not yet implemented")
     }

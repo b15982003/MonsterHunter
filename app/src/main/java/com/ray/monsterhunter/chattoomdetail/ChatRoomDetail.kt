@@ -74,7 +74,9 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailStartBackground.visibility = View.GONE
                     binding.chatRoomDetailEndButton.visibility = View.GONE
                     binding.chatRoomDetailMinNumber.visibility = View.GONE
+                    binding.chatRoomDetailTenMinNumber.visibility = View.GONE
                     binding.chatRoomDetailSecNumber.visibility = View.GONE
+                    binding.chatRoomDetailTenSecNumber.visibility = View.GONE
                     binding.chatRoomDetailLine.visibility = View.GONE
                 }
             }else{

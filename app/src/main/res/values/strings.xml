@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MonsterHunter</string>
+    <string name="app_name">RaiMeet</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -77,6 +77,9 @@
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>
     <string name="friend_list_email">Ray3456789@gmail.com</string>
+
+    <!--History List -->
+    <string name="history_mission_type">限時任務</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
