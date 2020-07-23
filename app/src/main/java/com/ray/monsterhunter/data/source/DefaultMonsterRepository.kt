@@ -91,6 +91,14 @@ class DefaultMonsterRepository(
        return remoteDataSource.sentMessage(message,document)
     }
 
+    override suspend fun postFriend(user: User): Result<Boolean> {
+        return remoteDataSource.postFriend(user)
+    }
+
+    override suspend fun cancelFriend(user: User): Result<Boolean> {
+        return remoteDataSource.cancelFriend(user)
+    }
+
     override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> {
         return remoteDataSource.getUserArms(userArmsType, document)
     }

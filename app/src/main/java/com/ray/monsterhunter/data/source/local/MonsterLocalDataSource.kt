@@ -90,6 +90,14 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun postFriend(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun cancelFriend(user: User): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> {
         TODO("Not yet implemented")
     }

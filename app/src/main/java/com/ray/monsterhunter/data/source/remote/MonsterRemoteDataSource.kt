@@ -618,6 +618,77 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun postFriend(user: User): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val users = FirebaseFirestore.getInstance().collection(PATH_USER)
+            val documentFriendList =
+                UserManager.userData.email?.let {
+                    user.email?.let { it1 ->
+                        users.document(it).collection(PATH_FRIENDLIST).document(
+                            it1
+                        )
+                    }
+                }
+            if (documentFriendList != null) {
+                documentFriendList
+                    .set(user)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+            }
+        }
+
+
+    override suspend fun cancelFriend(
+        user: User
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val cancelFriend1 =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
+            val documentCancelUser = UserManager.userData.email?.let {
+                user.email?.let { it1 ->
+                    cancelFriend1.document(it)
+                        .collection(PATH_FRIENDLIST).document(it1)
+                }
+            }
+            if (documentCancelUser != null) {
+                documentCancelUser
+                    .delete()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+            }
+        }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> =

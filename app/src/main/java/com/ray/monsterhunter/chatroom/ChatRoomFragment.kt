@@ -29,6 +29,8 @@ class ChatRoomFragment : Fragment() {
         var adapter = ChatRoomAdapter(ChatRoomAdapter.OnClickListener {
             findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetail(it))
         })
+
+
         adapter.setHasStableIds(true)
         binding.chatRoomRecy.adapter = adapter
         return binding.root

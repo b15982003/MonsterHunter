@@ -42,8 +42,10 @@ class DialogFriendDetail : AppCompatDialogFragment() {
         binding.friendDetailDialogFollow.setOnClickListener() {
             if (viewModel.follow.value == false) {
                 viewModel.getFollow()
+                viewModel.postFriend()
             } else {
                 viewModel.cencelFollow()
+                viewModel.cancelFriend()
             }
 
         }

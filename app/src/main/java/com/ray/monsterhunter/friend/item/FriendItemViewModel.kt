@@ -53,10 +53,7 @@ class FriendItemViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
+
 
     init {
         Logger.i("------------------------------------")
@@ -146,6 +143,11 @@ class FriendItemViewModel(
             }
 //            _refreshStatus.value = false
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 //    fun refresh() {
 //        if (status.value != LoadApiStatus.LOADING) {

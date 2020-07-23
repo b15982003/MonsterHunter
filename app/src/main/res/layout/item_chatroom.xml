@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="even"
             type="com.ray.monsterhunter.data.ChatRoom" />
@@ -99,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/chatRoom_list_monsterName"
-                    app:layout_constraintStart_toStartOf="@id/chatRoom_list_userId"
+                    app:layout_constraintEnd_toEndOf="@id/chatRoom_list_typeName"
                     tools:text="@string/chatRoom_test_text" />
 
                 <TextView
@@ -115,17 +114,6 @@
                     app:layout_constraintTop_toTopOf="@+id/chatRoom_list_roomName"
                     tools:text="@string/testType" />
 
-                <Button
-                    android:id="@+id/chatRoom_list_attendee"
-                    style="@style/home_data_button"
-                    android:layout_width="70dp"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="60dp"
-                    android:background="@drawable/home_atten_background"
-                    android:gravity="center"
-                    android:text="@string/home_attendee"
-                    app:layout_constraintBottom_toBottomOf="@+id/chatRoom_list_startTime"
-                    app:layout_constraintEnd_toEndOf="@+id/chatRoom_list_typeName" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
