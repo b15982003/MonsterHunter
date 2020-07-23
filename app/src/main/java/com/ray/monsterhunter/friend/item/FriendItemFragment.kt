@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MonsterApplication
+import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.databinding.FriendFragmentBinding
 import com.ray.monsterhunter.databinding.FriendItemFragmentBinding
@@ -34,6 +35,7 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
         binding.friendListRecy.adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
 //            viewModel.navigateToDetail(it)
             Toast.makeText(MonsterApplication.instance,"備案摟",Toast.LENGTH_LONG).show()
+            findNavController().navigate(NavigationDirections.actionGlobalDialogFriendDetail(it))
         })
 
 //        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {

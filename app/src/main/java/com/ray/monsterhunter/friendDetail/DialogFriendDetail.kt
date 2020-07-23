@@ -7,19 +7,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.viewModels
 
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.databinding.DialogFriendDetailFragmentBinding
+import com.ray.monsterhunter.ext.getVmFactory
 
 class DialogFriendDetail : AppCompatDialogFragment()  {
 
-
-    private lateinit var viewModel: DialogFriendDetailViewModel
+    private val viewModel by viewModels<DialogFriendDetailViewModel> { getVmFactory(DialogFriendDetailArgs.fromBundle(requireArguments()).frienddetail) }
+    lateinit var binding : DialogFriendDetailFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_friend_detail_fragment, container, false)
+
+        binding = DialogFriendDetailFragmentBinding.inflate(inflater,container,false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        return binding.root
     }
 
 
