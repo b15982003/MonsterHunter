@@ -18,8 +18,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:onClick="@{() -> viewModel.nothing()}"
             android:background="@drawable/chatroom_post_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,6 +35,7 @@
                 android:layout_marginTop="16dp"
                 android:src="@drawable/fire_heater"
                 app:civ_border_color="@color/white"
+                imageUrl="@{viewModel.user.image}"
                 app:civ_border_width="2dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,6 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:text="@{viewModel.user.id}"
                 app:layout_constraintBottom_toBottomOf="@+id/friend_detail_dialog_image"
                 app:layout_constraintStart_toEndOf="@+id/friend_detail_dialog_image"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_image"
@@ -57,17 +60,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:text="@{viewModel.user.email}"
                 app:layout_constraintBottom_toBottomOf="@id/friend_detail_dialog_image"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_image"
                 tools:text="@string/friend_list_email" />
 
             <TextView
+                android:id="@+id/friend_detail_dialog_follow"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
                 android:text="@string/friend_detail_follow"
+                android:background="@color/friend_detail_follow"
                 android:gravity="center"
                 android:textColor="@color/white"
-                android:background="@drawable/friend_detail_dialog_follow"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
@@ -91,7 +96,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_knife"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsB"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsB"/>
 
@@ -113,7 +118,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_bigknife"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsC"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsC" />
 
@@ -134,7 +139,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_bow"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsD"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsD" />
 
@@ -178,7 +183,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_lightcrossbow"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_armsD"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsD" />
 
@@ -199,7 +204,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_double_knife"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_armsE"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsE" />
 
@@ -220,7 +225,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_stick"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_armsF"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsF" />
 
@@ -241,7 +246,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_hcrossbow"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsI"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsI"/>
 
@@ -263,7 +268,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_bighammer"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsJ"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsJ" />
 
@@ -284,7 +289,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_gunspear"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="14dp"
                 app:layout_constraintEnd_toStartOf="@id/friend_detail_dialog_armsK"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsK" />
 
@@ -309,6 +314,8 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/friend_detail_dialog_armsD"
                 app:layout_constraintStart_toStartOf="@+id/friend_detail_dialog_armsD"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
 
             <TextView
@@ -328,7 +335,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_spear"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_armsK"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsK" />
 
@@ -349,7 +356,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_ax"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintStart_toEndOf="@id/friend_detail_dialog_armsL"
                 app:layout_constraintTop_toTopOf="@id/friend_detail_dialog_armsL" />
 
@@ -370,7 +377,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/ic_arms_flout"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="14dp"
                 app:layout_constraintTop_toTopOf="@+id/friend_detail_dialog_armsM"
                 app:layout_constraintStart_toEndOf="@+id/friend_detail_dialog_armsM"
                 />

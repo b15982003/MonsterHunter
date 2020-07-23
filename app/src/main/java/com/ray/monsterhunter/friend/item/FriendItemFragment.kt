@@ -34,7 +34,6 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
 
         binding.friendListRecy.adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
 //            viewModel.navigateToDetail(it)
-            Toast.makeText(MonsterApplication.instance,"備案摟",Toast.LENGTH_LONG).show()
             findNavController().navigate(NavigationDirections.actionGlobalDialogFriendDetail(it))
         })
 

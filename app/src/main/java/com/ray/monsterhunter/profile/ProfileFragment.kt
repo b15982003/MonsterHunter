@@ -158,10 +158,6 @@ class ProfileFragment : Fragment() {
             }else{
                 binding.profileArmsNRatingBarGod.visibility = View.VISIBLE
             }
-
-
-
-
         })
 
 

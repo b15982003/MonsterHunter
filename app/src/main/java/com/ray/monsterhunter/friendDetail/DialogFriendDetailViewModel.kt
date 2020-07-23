@@ -23,8 +23,23 @@ class DialogFriendDetailViewModel(
     val leave: LiveData<Boolean>
         get() = _leave
 
+    val _follow = MutableLiveData<Boolean>(false)
+    val follow : LiveData<Boolean>
+    get() = _follow
+
     init{
 
+    }
+
+    fun nothing(){
+
+    }
+    fun getFollow(){
+        _follow.value = true
+    }
+
+    fun cencelFollow(){
+        _follow.value = false
     }
 
     fun leave(needRefresh: Boolean = false) {
