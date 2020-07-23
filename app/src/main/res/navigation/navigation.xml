@@ -73,6 +73,12 @@
             app:nullable="false" />
     </fragment>
 
+    <dialog
+        android:id="@+id/dialogFriendDetail"
+        android:name="com.ray.monsterhunter.friendDetail.DialogFriendDetail"
+        android:label="dialog_friend_detail_fragment"
+        tools:layout="@layout/dialog_friend_detail_fragment" />
+
 
 
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
@@ -84,5 +90,6 @@
     <action android:id="@+id/action_global_dialogChatRoom" app:destination="@id/dialogChatRoomFragment" />
     <action android:id="@+id/action_global_chatRoomDetail" app:destination="@id/chatRoomDetail"/>
     <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
+    <action android:id="@+id/action_global_dialogFriendDetail" app:destination="@id/dialogFriendDetail" />
 
 </navigation>

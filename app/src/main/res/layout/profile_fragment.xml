@@ -137,8 +137,9 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:src="@drawable/ic_arms_knife"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/profile_armsA_ratingBar"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -153,43 +154,40 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsA_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsA_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsA_line"
-                    app:layout_constraintTop_toTopOf="@+id/profile_armsA_line"
-                    tools:layout_editor_absoluteX="3dp"
-                    tools:layout_editor_absoluteY="69dp" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/profile_armsA_line" />
 
                 <TextView
                     android:id="@+id/profile_armsA_ratingBar_god"
                     style="@style/profile_ratingBar_god"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
-                    android:text="@string/profile_ratingBar_god"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
-                    app:layout_constraintEnd_toStartOf="@id/profile_armsA_score"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsA"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsA"
                     app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
 
                 <TextView
                     android:id="@+id/profile_armsA_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="4dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.a.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/profile_armsA_ratingBar"
                     app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
 
                 <ImageView
@@ -213,16 +211,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsB_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsB_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsB_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsA_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsB_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -230,27 +228,37 @@
                 <TextView
                     android:id="@+id/profile_armsB_ratingBar_god"
                     style="@style/profile_ratingBar_god"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
-                    android:text="@string/profile_ratingBar_god"
+                    android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
-                    app:layout_constraintEnd_toStartOf="@id/profile_armsB_score"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsB"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsB"
                     app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
 
                 <TextView
                     android:id="@+id/profile_armsB_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.b.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsA_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
+
+                <TextView
+                    android:id="@+id/profile_armsC_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsC_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsC"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsC"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsC_ratingBar" />
 
 
                 <ImageView
@@ -274,16 +282,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsC_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsC_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsC_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsB_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsC_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -292,12 +300,11 @@
                     android:id="@+id/profile_armsC_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.c.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsC_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsB_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsC_ratingBar" />
 
 
@@ -311,6 +318,18 @@
                     app:layout_constraintTop_toBottomOf="@id/profile_armsC" />
 
                 <TextView
+                    android:id="@+id/profile_armsD_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsD_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsD"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsD"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsD_ratingBar" />
+
+                <TextView
                     android:id="@id/profile_armsD_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -322,16 +341,17 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsD_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsD_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsD_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsC_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsC_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsD_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -340,12 +360,11 @@
                     android:id="@+id/profile_armsD_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.d.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsD_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsC_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsD_ratingBar" />
 
 
@@ -353,11 +372,22 @@
                     android:id="@+id/profile_armsE"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_arms_lightcrossbow"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsD"
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
+
+                <TextView
+                    android:id="@+id/profile_armsE_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsE_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsE"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsE"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsE_ratingBar" />
 
                 <TextView
                     android:id="@+id/profile_armsE_line"
@@ -371,16 +401,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsE_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsE_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsE_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsD_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsD_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsE_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -389,12 +419,11 @@
                     android:id="@+id/profile_armsE_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.e.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsE_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsD_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsE_ratingBar" />
 
 
@@ -408,6 +437,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
 
                 <TextView
+                    android:id="@+id/profile_armsF_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsF_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsF"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsF"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsF_ratingBar" />
+
+                <TextView
                     android:id="@id/profile_armsF_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -419,16 +460,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsF_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsF_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsF_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsE_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsE_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsF_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -437,12 +478,11 @@
                     android:id="@+id/profile_armsF_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.f.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsF_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsE_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsF_ratingBar" />
 
 
@@ -454,6 +494,19 @@
                     android:src="@drawable/ic_arms_stick"
                     app:layout_constraintStart_toStartOf="@id/profile_armsF"
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
+
+
+                <TextView
+                    android:id="@+id/profile_armsG_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsG_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsG"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsG"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsG_ratingBar" />
 
                 <TextView
                     android:id="@+id/profile_armsG_lineG"
@@ -467,16 +520,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsG_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsG_lineG"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsG_lineG"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsF_ratingBar"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsF_ratingBar"
                     app:layout_constraintTop_toTopOf="@id/profile_armsG_lineG"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -485,12 +538,11 @@
                     android:id="@+id/profile_armsG_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.g.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsG_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsF_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsG_ratingBar" />
 
 
@@ -502,6 +554,18 @@
                     android:src="@drawable/ic_arms_hcrossbow"
                     app:layout_constraintStart_toStartOf="@id/profile_armsG"
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsG" />
+
+                <TextView
+                    android:id="@+id/profile_armsH_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsH_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsH"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsH"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar" />
 
                 <TextView
                     android:id="@id/profile_armsH_line"
@@ -516,16 +580,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsH_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsH_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsH_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsG_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsG_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsH_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -534,12 +598,11 @@
                     android:id="@+id/profile_armsH_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.h.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsH_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsG_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar" />
 
 
@@ -554,6 +617,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
 
                 <TextView
+                    android:id="@+id/profile_armsI_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsI_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsI"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsI"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsI_ratingBar" />
+
+                <TextView
                     android:id="@id/profile_armsI_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -565,16 +640,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsI_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsI_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsI_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsH_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsH_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsI_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -583,12 +658,11 @@
                     android:id="@+id/profile_armsI_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.i.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsI_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsH_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsI_ratingBar" />
 
 
@@ -603,6 +677,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
 
                 <TextView
+                    android:id="@+id/profile_armsJ_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsJ"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsJ"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsJ_ratingBar" />
+
+                <TextView
                     android:id="@id/profile_armsJ_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -614,17 +700,18 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsJ_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsJ_line"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsI_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsI_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsJ_line"
+
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
 
@@ -632,12 +719,11 @@
                     android:id="@+id/profile_armsJ_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.j.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsI_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsJ_ratingBar" />
 
                 <ImageView
@@ -651,6 +737,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
 
                 <TextView
+                    android:id="@+id/profile_armsK_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsK_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsK"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsK"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsK_ratingBar" />
+
+                <TextView
                     android:id="@+id/profile_armsK_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -662,16 +760,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsK_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsK_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsK_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsJ_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsJ_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsK_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -680,12 +778,11 @@
                     android:id="@+id/profile_armsK_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.k.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsK_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsJ_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsK_ratingBar" />
 
 
@@ -700,6 +797,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
 
                 <TextView
+                    android:id="@+id/profile_armsL_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsL_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsL"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsL"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsL_ratingBar" />
+
+                <TextView
                     android:id="@+id/profile_armsL_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -711,16 +820,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsL_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsL_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsL_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsK_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsK_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsL_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -729,12 +838,11 @@
                     android:id="@+id/profile_armsL_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.l.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsL_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsK_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsL_ratingBar" />
 
 
@@ -749,6 +857,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
 
                 <TextView
+                    android:id="@+id/profile_armsM_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsM_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsM"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsM"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsM_ratingBar" />
+
+                <TextView
                     android:id="@+id/profile_armsM_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -760,16 +880,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsM_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsM_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsM_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsL_ratingBar"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsL_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsM_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -778,12 +898,11 @@
                     android:id="@+id/profile_armsM_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.m.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsM_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsL_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsM_ratingBar" />
 
 
@@ -799,6 +918,18 @@
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsM" />
 
                 <TextView
+                    android:id="@+id/profile_armsN_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsN"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsN"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsN_ratingBar" />
+
+                <TextView
                     android:id="@id/profile_armsN_line"
                     android:layout_width="1dp"
                     android:layout_height="20dp"
@@ -810,16 +941,16 @@
 
                 <RatingBar
                     android:id="@+id/profile_armsN_ratingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    style="@android:style/Widget.Material.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:isIndicator="true"
-                    android:numStars="5"
+                    android:numStars="15"
                     android:stepSize="0.5"
                     android:theme="@style/RatingBar"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsN_line"
-                    app:layout_constraintStart_toEndOf="@id/profile_armsN_line"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsM_ratingBar"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsM_ratingBar"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsN_line"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
@@ -828,12 +959,11 @@
                     android:id="@+id/profile_armsN_score"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/chatroom_post_text_background"
                     android:gravity="center"
                     android:text="@{viewmodel.user.armsType.n.toString()}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsM_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsN_ratingBar" />
 
 

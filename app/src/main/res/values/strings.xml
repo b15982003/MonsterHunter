@@ -88,6 +88,9 @@
     <string name="profile_all_number">1234567</string>
     <string name="profile_ratingBar_god">神</string>
 
+    <!-- friend detail -->
+    <string name="friend_detail_follow">追蹤</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -74,4 +74,7 @@
     <color name="history_success_background">#ABDAFC</color>
     <color name="history_fail_background">#F4C0C6</color>
 
+    <!-- friend detail -->
+    <color name="friend_detail_follow">#3b5998</color>
+
 </resources>

@@ -45,20 +45,20 @@ class ProfileFragment : Fragment() {
 
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            viewModel.userA.value = (viewModel.user.value?.armsType?.A?.div(200))?.toFloat()
-            viewModel.userB.value = (viewModel.user.value?.armsType?.B?.div(200))?.toFloat()
-            viewModel.userC.value = (viewModel.user.value?.armsType?.C?.div(200))?.toFloat()
-            viewModel.userD.value = (viewModel.user.value?.armsType?.D?.div(200))?.toFloat()
-            viewModel.userE.value = (viewModel.user.value?.armsType?.E?.div(200))?.toFloat()
-            viewModel.userF.value = (viewModel.user.value?.armsType?.F?.div(200))?.toFloat()
-            viewModel.userG.value = (viewModel.user.value?.armsType?.G?.div(200))?.toFloat()
-            viewModel.userH.value = (viewModel.user.value?.armsType?.H?.div(200))?.toFloat()
-            viewModel.userI.value = (viewModel.user.value?.armsType?.I?.div(200))?.toFloat()
-            viewModel.userJ.value = (viewModel.user.value?.armsType?.J?.div(200))?.toFloat()
-            viewModel.userK.value = (viewModel.user.value?.armsType?.K?.div(200))?.toFloat()
-            viewModel.userL.value = (viewModel.user.value?.armsType?.L?.div(200))?.toFloat()
-            viewModel.userM.value = (viewModel.user.value?.armsType?.M?.div(200))?.toFloat()
-            viewModel.userN.value = (viewModel.user.value?.armsType?.N?.div(200))?.toFloat()
+            viewModel.userA.value = (viewModel.user.value?.armsType?.A?.div(60))?.toFloat()
+            viewModel.userB.value = (viewModel.user.value?.armsType?.B?.div(60))?.toFloat()
+            viewModel.userC.value = (viewModel.user.value?.armsType?.C?.div(60))?.toFloat()
+            viewModel.userD.value = (viewModel.user.value?.armsType?.D?.div(60))?.toFloat()
+            viewModel.userE.value = (viewModel.user.value?.armsType?.E?.div(60))?.toFloat()
+            viewModel.userF.value = (viewModel.user.value?.armsType?.F?.div(60))?.toFloat()
+            viewModel.userG.value = (viewModel.user.value?.armsType?.G?.div(60))?.toFloat()
+            viewModel.userH.value = (viewModel.user.value?.armsType?.H?.div(60))?.toFloat()
+            viewModel.userI.value = (viewModel.user.value?.armsType?.I?.div(60))?.toFloat()
+            viewModel.userJ.value = (viewModel.user.value?.armsType?.J?.div(60))?.toFloat()
+            viewModel.userK.value = (viewModel.user.value?.armsType?.K?.div(60))?.toFloat()
+            viewModel.userL.value = (viewModel.user.value?.armsType?.L?.div(60))?.toFloat()
+            viewModel.userM.value = (viewModel.user.value?.armsType?.M?.div(60))?.toFloat()
+            viewModel.userN.value = (viewModel.user.value?.armsType?.N?.div(60))?.toFloat()
 
             viewModel.userA.value?.let { it1 -> binding.profileArmsARatingBar.setRating(it1) }
             viewModel.userB.value?.let { it1 -> binding.profileArmsBRatingBar.setRating(it1) }
@@ -75,17 +75,91 @@ class ProfileFragment : Fragment() {
             viewModel.userM.value?.let { it1 -> binding.profileArmsMRatingBar.setRating(it1) }
             viewModel.userN.value?.let { it1 -> binding.profileArmsNRatingBar.setRating(it1) }
 
-            if (viewModel.user.value?.armsType?.A!! < 1000){
+            if (viewModel.user.value?.armsType?.A!! < 900){
                 binding.profileArmsARatingBarGod.visibility = View.INVISIBLE
             }else{
                 binding.profileArmsARatingBarGod.visibility = View.VISIBLE
             }
 
-            if (viewModel.user.value?.armsType?.B!! < 1000){
+            if (viewModel.user.value?.armsType?.B!! < 900){
                 binding.profileArmsBRatingBarGod.visibility = View.INVISIBLE
             }else{
                 binding.profileArmsBRatingBarGod.visibility = View.VISIBLE
             }
+
+            if (viewModel.user.value?.armsType?.C!! < 900){
+                binding.profileArmsCRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsCRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.D!! < 900){
+                binding.profileArmsDRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsDRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.E!! < 900){
+                binding.profileArmsERatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsERatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.F!! < 900){
+                binding.profileArmsFRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsFRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.G!! < 900){
+                binding.profileArmsGRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsGRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.H!! < 900){
+                binding.profileArmsHRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsHRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.I!! < 900){
+                binding.profileArmsIRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsIRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.J!! < 900){
+                binding.profileArmsJRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsJRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.K!! < 900){
+                binding.profileArmsKRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsKRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.L!! < 900){
+                binding.profileArmsLRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsLRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.M!! < 900){
+                binding.profileArmsMRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsMRatingBarGod.visibility = View.VISIBLE
+            }
+
+            if (viewModel.user.value?.armsType?.N!! < 900){
+                binding.profileArmsNRatingBarGod.visibility = View.INVISIBLE
+            }else{
+                binding.profileArmsNRatingBarGod.visibility = View.VISIBLE
+            }
+
+
 
 
         })
