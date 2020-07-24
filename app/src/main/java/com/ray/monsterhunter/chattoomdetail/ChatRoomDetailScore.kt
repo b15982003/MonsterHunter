@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.databinding.ChatRoomDetailScoreFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.Logger
@@ -39,22 +37,25 @@ class ChatRoomDetailScore : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.chatRoomScoreSentButton.setOnClickListener() {
-            findNavController().navigateUp()
+
+            binding.chatRoomScoreBg.visibility = View.VISIBLE
+            binding.chatRoomScoreBgImage.visibility = View.VISIBLE
+            Handler().postDelayed({
+                findNavController().navigateUp()
+            },3000)
+
         }
 
         binding.chatRoomScoreUser1PlusNo.visibility = View.GONE
         binding.chatRoomScoreUser1LessNo.visibility = View.GONE
-
+        binding.chatRoomScoreBg.visibility = View.GONE
+        binding.chatRoomScoreBgImage.visibility = View.GONE
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
             if (it.missionResult == "true") {
-                binding.chatRoomScoreSuccess.visibility = View.VISIBLE
-                binding.chatRoomScoreFail.visibility = View.INVISIBLE
                 binding.chatRoomScoreSuccessImage.visibility = View.VISIBLE
                 binding.chatRoomScoreFailedImage.visibility = View.INVISIBLE
             } else {
-                binding.chatRoomScoreSuccess.visibility = View.INVISIBLE
-                binding.chatRoomScoreFail.visibility = View.VISIBLE
                 binding.chatRoomScoreSuccessImage.visibility = View.INVISIBLE
                 binding.chatRoomScoreFailedImage.visibility = View.VISIBLE
             }
