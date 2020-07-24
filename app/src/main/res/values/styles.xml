@@ -162,6 +162,12 @@
         <item name="android:textColor">@color/entertext</item>
     </style>
 
+    <style name="chatRoom_score_finishText">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/noto_sans</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
     <!-- friend List -->
     <style name="friend_list_userName">
         <item name="android:textSize">20sp</item>
@@ -179,7 +185,7 @@
     </style>
 
     <style name="history_list_no_value_text">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">#87000000</item>
     </style>
 

@@ -56,13 +56,13 @@
     <color name="profile_rating">#FCDC73</color>
 
     <!-- Chatroom detail -->
-    <color name="chatroom_detail_ed_background">@color/google_sign_in_button</color>
+    <color name="chatroom_detail_ed_background">@color/colorPrimaryDark</color>
     <color name="chatroom_detail_spinner_background">#00000000</color>
     <color name="chatRoom_detail_start_button">#1B813E</color>
     <color name="chatRoom_detail_end_button">#F19483</color>
 
     <!-- Chatroom Score -->
-    <color name="chatRoom_score_name">#30000000</color>
+    <color name="chatRoom_score_name">@color/colorPrimaryDark</color>
     <color name="chatRoom_score_plus">#87000000</color>
 
     <!-- friend ViewPager -->

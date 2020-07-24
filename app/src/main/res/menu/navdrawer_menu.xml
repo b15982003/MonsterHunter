@@ -4,12 +4,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/dialogPostFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
+            android:icon="@drawable/ic_bottom_history_light"
             android:title="@string/testPostCrawling" />
 
         <item
             android:id="@+id/dialogChatRoomFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
+            android:icon="@drawable/ic_bottom_home"
             android:title="@string/testChatRoom" />
 
     </group>

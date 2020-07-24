@@ -47,16 +47,6 @@ class HistoryFragment : Fragment() {
             }
         })
 
-        viewModel.status.observe(viewLifecycleOwner, Observer {
-            if(viewModel.status.value == LoadApiStatus.LOADING){
-                binding.historyLoadingImage.visibility = View.VISIBLE
-            }else{
-                binding.historyLoadingImage.visibility = View.INVISIBLE
-            }
-        })
-
-
-
 
         return binding.root
     }

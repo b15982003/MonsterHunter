@@ -15,6 +15,7 @@ import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.databinding.ChatRoomDetailScoreFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.UserManager
 
 
 class ChatRoomDetailScore : Fragment() {
@@ -41,14 +42,21 @@ class ChatRoomDetailScore : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.chatRoomScoreUser1PlusNo.visibility = View.GONE
+        binding.chatRoomScoreUser1LessNo.visibility = View.GONE
+
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
             if (it.missionResult == "true") {
                 binding.chatRoomScoreSuccess.visibility = View.VISIBLE
                 binding.chatRoomScoreFail.visibility = View.INVISIBLE
+                binding.chatRoomScoreSuccessImage.visibility = View.VISIBLE
+                binding.chatRoomScoreFailedImage.visibility = View.INVISIBLE
             } else {
                 binding.chatRoomScoreSuccess.visibility = View.INVISIBLE
                 binding.chatRoomScoreFail.visibility = View.VISIBLE
+                binding.chatRoomScoreSuccessImage.visibility = View.INVISIBLE
+                binding.chatRoomScoreFailedImage.visibility = View.VISIBLE
             }
 
         })
@@ -104,8 +112,6 @@ class ChatRoomDetailScore : Fragment() {
 
         })
 
-
-
         binding.chatRoomScoreUser1Plus.setOnClickListener() {
             when (viewModel.user1.value?.armsType) {
                 "太刀" -> viewModel.liveUserOne.value?.armsType?.A =
@@ -138,6 +144,15 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserOne.value?.armsType?.N?.plus(1)
                 else -> "皆可"
             }
+            binding.chatRoomScoreUser1Plus.visibility = View.GONE
+            binding.chatRoomScoreUser1Less.visibility = View.GONE
+            binding.chatRoomScoreUser1PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser1LessNo.visibility = View.VISIBLE
+
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserOne.value?.allFight?.plus(1)
+            }
+
             viewModel.updateUserOne()
         }
 
@@ -173,6 +188,14 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserOne.value?.armsType?.N?.minus(1)
                 else -> "皆可"
             }
+            binding.chatRoomScoreUser1Plus.visibility = View.GONE
+            binding.chatRoomScoreUser1Less.visibility = View.GONE
+            binding.chatRoomScoreUser1PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser1LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserOne.value?.allFight?.plus(1)
+            }
+
             viewModel.updateUserOne()
         }
         viewModel.liveUserOne.observe(viewLifecycleOwner, Observer {
@@ -193,9 +216,9 @@ class ChatRoomDetailScore : Fragment() {
                     "斬擊斧" -> viewModel.liveUserOne.value?.armsType?.M.toString()
                     "狩獵笛" -> viewModel.liveUserOne.value?.armsType?.N.toString()
                     else -> "請評分"
-
                 }
             )
+
         })
 
         binding.chatRoomScoreUser2Plus.setOnClickListener() {
@@ -231,6 +254,14 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserTwo()
+            binding.chatRoomScoreUser2Plus.visibility = View.GONE
+            binding.chatRoomScoreUser2Less.visibility = View.GONE
+            binding.chatRoomScoreUser2PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser2LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserTwo.value?.allFight?.plus(1)
+            }
+
         }
 
         binding.chatRoomScoreUser2Less.setOnClickListener() {
@@ -266,6 +297,13 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserTwo()
+            binding.chatRoomScoreUser2Plus.visibility = View.GONE
+            binding.chatRoomScoreUser2Less.visibility = View.GONE
+            binding.chatRoomScoreUser2PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser2LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserTwo.value?.allFight?.plus(1)
+            }
         }
         viewModel.liveUserTwo.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser2Number.setText(
@@ -323,6 +361,13 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserThree()
+            binding.chatRoomScoreUser3Plus.visibility = View.GONE
+            binding.chatRoomScoreUser3Less.visibility = View.GONE
+            binding.chatRoomScoreUser3PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser3LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserThree.value?.allFight?.plus(1)
+            }
         }
 
         binding.chatRoomScoreUser3Less.setOnClickListener() {
@@ -358,6 +403,13 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserThree()
+            binding.chatRoomScoreUser3Plus.visibility = View.GONE
+            binding.chatRoomScoreUser3Less.visibility = View.GONE
+            binding.chatRoomScoreUser3PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser3LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserThree.value?.allFight?.plus(1)
+            }
         }
         viewModel.liveUserThree.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser3Number.setText(
@@ -415,6 +467,13 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserFour()
+            binding.chatRoomScoreUser4Plus.visibility = View.GONE
+            binding.chatRoomScoreUser4Less.visibility = View.GONE
+            binding.chatRoomScoreUser4PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser4LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserFour.value?.allFight?.plus(1)
+            }
         }
 
         binding.chatRoomScoreUser4Less.setOnClickListener() {
@@ -450,6 +509,13 @@ class ChatRoomDetailScore : Fragment() {
                 else -> "皆可"
             }
             viewModel.updateUserFour()
+            binding.chatRoomScoreUser4Plus.visibility = View.GONE
+            binding.chatRoomScoreUser4Less.visibility = View.GONE
+            binding.chatRoomScoreUser4PlusNo.visibility = View.VISIBLE
+            binding.chatRoomScoreUser4LessNo.visibility = View.VISIBLE
+            if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
+                viewModel.liveUserFour.value?.allFight?.plus(1)
+            }
         }
         viewModel.liveUserFour.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser4Number.setText(
@@ -473,7 +539,6 @@ class ChatRoomDetailScore : Fragment() {
                 }
             )
         })
-
 
         return binding.root
     }

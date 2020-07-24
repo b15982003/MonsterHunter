@@ -73,6 +73,8 @@
     <string name="chatRoom_score_sent_button">完成</string>
     <string name="chatRoom_score_fake_score">777</string>
     <string name="chatRoom_score_fake_arms">操蟲棍</string>
+    <string name="chatRoom_score_finish_text">恭喜你完成了這次的任務，給予和你一起打拼的同伴評分吧！</string>
+    <string name="chatRoom_score_remind">貼心小提醒：一個同伴只能給予一次加減的機會唷</string>
 
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>

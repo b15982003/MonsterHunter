@@ -24,6 +24,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/black_3f3a3a"
+            />
+
         <ImageView
             android:id="@+id/chatRoom_detail_toolbar_back"
             android:layout_width="30dp"
@@ -73,7 +82,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_rocket"
+            android:src="@drawable/ic_chatroom_ready_button"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_toolbar"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_toolbar"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_toolbar" />

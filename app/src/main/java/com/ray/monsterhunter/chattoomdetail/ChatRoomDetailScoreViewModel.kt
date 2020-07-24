@@ -117,14 +117,7 @@ class ChatRoomDetailScoreViewModel(
         history.value?.monsterName = chatRoom.value?.monsterName.toString()
         history.value?.finishtime = chatRoom.value?.finishTime
         history.value?.missionResult = chatRoom.value?.missionResult.toString()
-//       history.value?.user1 = user1.value?.userId
-//       history.value?.user2 = user2.value?.userId
-//       history.value?.user3 = user3.value?.userId
-//       history.value?.user4 = user4.value?.userId
-//       history.value?.user1Type = user1.value?.armsType.toString()
-//       history.value?.user2Type = user2.value?.armsType.toString()
-//       history.value?.user3Type = user3.value?.armsType.toString()
-//       history.value?.user4Type = user4.value?.armsType.toString()
+
 Logger.d("history1111111111111 ${history.value?.user1}")
 Logger.d("history1111111111111 ${user1.value?.userId}")
 

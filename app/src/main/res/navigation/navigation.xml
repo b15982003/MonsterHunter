@@ -93,7 +93,10 @@
     <action android:id="@+id/action_global_historyFragment" app:destination="@id/historyFragment"/>
     <action android:id="@+id/action_global_dailogPost" app:destination="@id/dialogPostFragment" />
     <action android:id="@+id/action_global_dialogChatRoom" app:destination="@id/dialogChatRoomFragment" />
-    <action android:id="@+id/action_global_chatRoomDetail" app:destination="@id/chatRoomDetail"/>
+    <action
+        android:id="@+id/action_global_chatRoomDetail"
+        app:destination="@id/chatRoomDetail"
+        app:popUpToInclusive="false" />
     <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
     <action android:id="@+id/action_global_dialogFriendDetail" app:destination="@id/dialogFriendDetail" />
 
