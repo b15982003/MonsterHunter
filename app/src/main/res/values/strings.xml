@@ -10,8 +10,8 @@
     <string name="home">Monster Hunter</string>
     <string name="history">對戰紀錄</string>
     <string name="profile">個人資訊</string>
-    <string name="testPostCrawling">測試postCrawling</string>
-    <string name="testChatRoom">測試postChatRoom</string>
+    <string name="testPostCrawling">發表文章</string>
+    <string name="testChatRoom">開啟聊天室</string>
 
     <!-- Postdailog -->
     <string name="roomname">房間名稱</string>

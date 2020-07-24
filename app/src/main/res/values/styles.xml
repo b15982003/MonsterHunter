@@ -5,11 +5,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
 
     <style name="ProgressTheme" parent="Widget.AppCompat.ProgressBar">
-        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
 
     <style name="drawer_heater">
@@ -164,7 +164,7 @@
 
     <!-- friend List -->
     <style name="friend_list_userName">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/post_dialog_personName</item>
     </style>
 

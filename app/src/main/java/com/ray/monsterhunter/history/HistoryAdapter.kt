@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.History
 import com.ray.monsterhunter.databinding.ItemHistoryBinding
@@ -27,6 +28,14 @@ class HistoryAdapter(private val onClickListener: OnClickListener) :
             var AllStampTimeToDate = history.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
             binding.historyListCreateTime.text = AllStampTimeToDate
+
+            binding.historyListMonsterShape.setBackgroundResource(
+                if (history.missionResult == "true"){
+                R.drawable.item_history_image_success_bg
+                }else{
+                    R.drawable.item_history_image_fail_bg
+                }
+            )
 
             binding.historyListBackground.setBackgroundColor(
                 if (history.missionResult == "true") {

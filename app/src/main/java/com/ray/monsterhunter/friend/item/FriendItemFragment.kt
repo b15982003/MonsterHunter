@@ -32,9 +32,15 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
 
         binding.viewModel = viewModel
 
-        binding.friendListRecy.adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
+        var adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
 //            viewModel.navigateToDetail(it)
             findNavController().navigate(NavigationDirections.actionGlobalDialogFriendDetail(it))
+        })
+
+        binding.friendListRecy.adapter = adapter
+
+        viewModel.userList.observe(viewLifecycleOwner, Observer {
+            adapter.notifyDataSetChanged()
         })
 
 //        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {

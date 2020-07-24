@@ -31,6 +31,8 @@ class ChatRoomFragment : Fragment() {
         })
 
 
+
+
         adapter.setHasStableIds(true)
         binding.chatRoomRecy.adapter = adapter
         return binding.root

@@ -12,21 +12,23 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="8dp"
+        >
 
         <TextView
             android:id="@+id/friend_list_background"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/chatroom_post_background"
+            android:layout_height="60dp"
+            android:background="@drawable/item_friend_list_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/friend_list_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="30dp"
             imageUrl="@{user.image}"
             android:src="@drawable/fire_heater"
@@ -53,11 +55,21 @@
             android:id="@+id/friend_list_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:text="@{user.email}"
-            app:layout_constraintBottom_toBottomOf="@id/friend_list_image"
-            app:layout_constraintStart_toEndOf="@id/friend_list_image"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@id/friend_list_userId"
+            app:layout_constraintStart_toStartOf="@+id/friend_list_userId"
             tools:text="@string/friend_list_email" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/next"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
