@@ -26,6 +26,7 @@ class ChatRoomAdapter(
 
             var AllStampTimeToDate = chatRoom.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
+
             binding.chatRoomListStartTime.text = AllStampTimeToDate
             binding.even = chatRoom
             binding.root.setOnClickListener { onClickListener.onClick(chatRoom) }

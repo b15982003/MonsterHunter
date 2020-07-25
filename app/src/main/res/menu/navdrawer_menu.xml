@@ -3,34 +3,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/chatRoomFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/chatroom" />
-        <item
-            android:id="@+id/friendFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/friend" />
-        <item
-            android:id="@+id/homeFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/home" />
-        <item
-            android:id="@+id/historyFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/history" />
-        <item
-            android:id="@+id/profileFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
-            android:title="@string/profile" />
-
-        <item
             android:id="@+id/dialogPostFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
+            android:icon="@drawable/ic_bottom_history_light"
             android:title="@string/testPostCrawling" />
 
         <item
             android:id="@+id/dialogChatRoomFragment"
-            android:icon="@drawable/ic_comment_black_24dp"
+            android:icon="@drawable/ic_bottom_home"
             android:title="@string/testChatRoom" />
 
     </group>

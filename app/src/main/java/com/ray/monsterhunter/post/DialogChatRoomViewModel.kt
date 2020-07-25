@@ -87,4 +87,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     fun onLeft() {
         _leave.value = null
     }
+    fun nothing(){
+
+    }
 }

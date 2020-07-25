@@ -17,6 +17,7 @@ import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
+import java.sql.DataTruncation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -39,7 +40,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_CRAWLING)
-            .orderBy(KEY_START_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -116,7 +117,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             FirebaseFirestore.getInstance()
                 .collection(PATH_USER)
-                .document("BnvEtE3ZyJaPnhtXrzRa")
+                .document(document)
                 .collection(PATH_FRIENDLIST)
                 .get()
                 .addOnCompleteListener { task ->
@@ -156,6 +157,28 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
                     val chatroom = document.toObject(ChatRoom::class.java)
                     list.add(chatroom)
+                }
+
+                liveData.value = list
+            }
+        return liveData
+    }
+
+    override fun getLiveHistory(): MutableLiveData<List<History>> {
+
+        val liveData = MutableLiveData<List<History>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_HISTORY)
+//            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
+
+                val list = mutableListOf<History>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+
+                    val history = document.toObject(History::class.java)
+                    list.add(history)
                 }
 
                 liveData.value = list
@@ -215,15 +238,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_USER)
             .document(teammate)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
-                Logger.d("liveDataggteammate${teammate}")
-
-
-                Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
                 liveDataOne.value = users
-                Logger.d("liveData11111111${liveDataOne.value}")
             }
         return liveDataOne
 
@@ -236,15 +252,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_USER)
             .document(teammate)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
-                Logger.d("liveDataggteammate${teammate}")
-
-
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
                 liveDataOne.value = users
-                Logger.d("liveData22222222${liveDataOne.value}")
             }
         return liveDataOne
 
@@ -257,15 +267,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_USER)
             .document(teammate)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
-                Logger.d("liveDataggteammate${teammate}")
-
-
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
                 liveDataOne.value = users
-                Logger.d("liveData333333${liveDataOne.value}")
             }
         return liveDataOne
 
@@ -278,15 +282,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_USER)
             .document(teammate)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
-                Logger.d("liveDataggteammate${teammate}")
-
-
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
                 liveDataOne.value = users
-                Logger.d("liveData4444444${liveDataOne.value}")
             }
         return liveDataOne
 
@@ -302,10 +300,10 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 if (task.isSuccessful) {
                     var user1 = User()
                     for (document in task.result!!) {
-
                         var user = document.toObject(User::class.java)
                         user1 = user
-
+                        Logger.d("userIn12121212121212${user1}")
+                        Logger.d("userIn1233333333333333${user}")
                     }
                     continuation.resume(Result.Success(user1))
 
@@ -505,7 +503,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             val historys = FirebaseFirestore.getInstance().collection(PATH_HISTORY)
             val document = historys.document()
 
-            history.creatTime = Calendar.getInstance().timeInMillis.toString()
+            history.createTime = Calendar.getInstance().timeInMillis
             document
                 .set(history)
                 .addOnCompleteListener { task ->
@@ -620,6 +618,77 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun postFriend(user: User): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val users = FirebaseFirestore.getInstance().collection(PATH_USER)
+            val documentFriendList =
+                UserManager.userData.email?.let {
+                    user.email?.let { it1 ->
+                        users.document(it).collection(PATH_FRIENDLIST).document(
+                            it1
+                        )
+                    }
+                }
+            if (documentFriendList != null) {
+                documentFriendList
+                    .set(user)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+            }
+        }
+
+
+    override suspend fun cancelFriend(
+        user: User
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val cancelFriend1 =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
+            val documentCancelUser = UserManager.userData.email?.let {
+                user.email?.let { it1 ->
+                    cancelFriend1.document(it)
+                        .collection(PATH_FRIENDLIST).document(it1)
+                }
+            }
+            if (documentCancelUser != null) {
+                documentCancelUser
+                    .delete()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+            }
+        }
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> =
@@ -726,162 +795,166 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
         }
 
-                    @RequiresApi(Build.VERSION_CODES.N)
-                    override suspend fun updateUserOne(
-                        userId: String,
-                        userOneScore: ArmsType
-                    ): Result<Boolean> =
-                        suspendCoroutine { continuation ->
-                            val updateUserOne =
-                                FirebaseFirestore.getInstance().collection(PATH_USER)
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun updateUserOne(
+        userId: String,
+        userOneScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val updateUserOne =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
 //            val document = messages.document()
 
-                            updateUserOne
-                                .document(userId)
-                                .update("armsType", userOneScore)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        continuation.resume(Result.Success(true))
-                                    } else {
-                                        task.exception?.let {
-                                            continuation.resume(Result.Error(it))
-                                            return@addOnCompleteListener
-                                        }
-                                        continuation.resume(
-                                            Result.Fail(
-                                                MonsterApplication.instance.getString(
-                                                    R.string.notGood
-                                                )
-                                            )
-                                        )
-                                    }
-                                }
+            updateUserOne
+                .document(userId)
+                .update("armsType", userOneScore,"allFight",allFight)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
                         }
-
-                    @RequiresApi(Build.VERSION_CODES.N)
-                    override suspend fun updateUserTwo(
-                        userId: String,
-                        userTwoScore: ArmsType
-                    ): Result<Boolean> =
-                        suspendCoroutine { continuation ->
-                            val updateUserOne =
-                                FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
-
-                            updateUserOne
-                                .document(userId)
-                                .update("armsType", userTwoScore)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        continuation.resume(Result.Success(true))
-                                    } else {
-                                        task.exception?.let {
-                                            continuation.resume(Result.Error(it))
-                                            return@addOnCompleteListener
-                                        }
-                                        continuation.resume(
-                                            Result.Fail(
-                                                MonsterApplication.instance.getString(
-                                                    R.string.notGood
-                                                )
-                                            )
-                                        )
-                                    }
-                                }
-                        }
-
-                    @RequiresApi(Build.VERSION_CODES.N)
-                    override suspend fun updateUserThree(
-                        userId: String,
-                        userThreeScore: ArmsType
-                    ): Result<Boolean> =
-                        suspendCoroutine { continuation ->
-                            val updateUserOne =
-                                FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
-
-                            updateUserOne
-                                .document(userId)
-                                .update("armsType", userThreeScore)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        continuation.resume(Result.Success(true))
-                                    } else {
-                                        task.exception?.let {
-                                            continuation.resume(Result.Error(it))
-                                            return@addOnCompleteListener
-                                        }
-                                        continuation.resume(
-                                            Result.Fail(
-                                                MonsterApplication.instance.getString(
-                                                    R.string.notGood
-                                                )
-                                            )
-                                        )
-                                    }
-                                }
-                        }
-
-                    @RequiresApi(Build.VERSION_CODES.N)
-                    override suspend fun updateUserFour(
-                        userId: String,
-                        userFourScore: ArmsType
-                    ): Result<Boolean> =
-                        suspendCoroutine { continuation ->
-                            val updateUserOne =
-                                FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
-
-                            updateUserOne
-                                .document(userId)
-                                .update("armsType", userFourScore)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        continuation.resume(Result.Success(true))
-                                    } else {
-                                        task.exception?.let {
-                                            continuation.resume(Result.Error(it))
-                                            return@addOnCompleteListener
-                                        }
-                                        continuation.resume(
-                                            Result.Fail(
-                                                MonsterApplication.instance.getString(
-                                                    R.string.notGood
-                                                )
-                                            )
-                                        )
-                                    }
-                                }
-                        }
-
-                    override suspend fun cencelUser(
-                        userArmsType: UserArms,
-                        document: String
-                    ): Result<Boolean> =
-                        suspendCoroutine { continuation ->
-                            val canceluser1 =
-                                FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
-                            val documentCancelUser = canceluser1.document(document)
-                                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
-
-                            documentCancelUser
-                                .delete()
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        continuation.resume(Result.Success(true))
-                                    } else {
-                                        task.exception?.let {
-                                            continuation.resume(Result.Error(it))
-                                            return@addOnCompleteListener
-                                        }
-                                        continuation.resume(
-                                            Result.Fail(
-                                                MonsterApplication.instance.getString(
-                                                    R.string.notGood
-                                                )
-                                            )
-                                        )
-                                    }
-                                }
-                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
                 }
+        }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun updateUserTwo(
+        userId: String,
+        userTwoScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val updateUserOne =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
+//            val document = messages.document()
+
+            updateUserOne
+                .document(userId)
+                .update("armsType", userTwoScore,"allFight",allFight)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun updateUserThree(
+        userId: String,
+        userThreeScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val updateUserOne =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
+//            val document = messages.document()
+
+            updateUserOne
+                .document(userId)
+                .update("armsType", userThreeScore,"allFight",allFight)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun updateUserFour(
+        userId: String,
+        userFourScore: ArmsType,
+        allFight : Long
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val updateUserOne =
+                FirebaseFirestore.getInstance().collection(PATH_USER)
+//            val document = messages.document()
+
+            updateUserOne
+                .document(userId)
+                .update("armsType", userFourScore,"allFight",allFight)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    override suspend fun cencelUser(
+        userArmsType: UserArms,
+        document: String
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val canceluser1 =
+                FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val documentCancelUser = canceluser1.document(document)
+                .collection(PATH_USERARMSTYPE).document(userArmsType.email)
+
+            documentCancelUser
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+}

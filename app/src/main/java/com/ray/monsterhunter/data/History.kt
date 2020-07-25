@@ -1,5 +1,9 @@
 package com.ray.monsterhunter.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class History(
     var documentId : String? = "",
     var finishtime : Long? = null,
@@ -14,8 +18,8 @@ data class History(
     var image : String = "",
     var monsterName : String = "",
     var missionResult : String = "",
-    var creatTime : String = ""
-    )
+    var createTime : Long? = null
+    ): Parcelable
 
 data class FriendScore(
     var id : String = "",

@@ -5,11 +5,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
 
     <style name="ProgressTheme" parent="Widget.AppCompat.ProgressBar">
-        <item name="colorAccent">@color/black_3f3a3a</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
     </style>
 
     <style name="drawer_heater">
@@ -97,7 +97,17 @@
     <style name="profile_heater_text">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/gray_888888</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
+    <style name="profile_all_crawling_text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
+    <style name="profile_ratingBar_god">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_646464</item>
     </style>
 
     <!-- chatRoomDetail -->
@@ -152,11 +162,41 @@
         <item name="android:textColor">@color/entertext</item>
     </style>
 
+    <style name="chatRoom_score_finishText">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/noto_sans</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
     <!-- friend List -->
     <style name="friend_list_userName">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/post_dialog_personName</item>
     </style>
 
+    <style name="RatingBar">
+        <item name="colorControlActivated">@color/profile_rating</item>
+    </style>
+
+    <!-- history List -->
+    <style name="history_list_createTime">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/gray_646464</item>
+    </style>
+
+    <style name="history_list_no_value_text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#87000000</item>
+    </style>
+
+    <style name="history_user_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="history_user_arms">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
 </resources>

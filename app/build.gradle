@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.ray.monsterhunter"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -113,7 +113,8 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
-
+    //jason動畫
+    implementation 'com.airbnb.android:lottie:3.4.1'
 
 
     testImplementation 'junit:junit:4.12'

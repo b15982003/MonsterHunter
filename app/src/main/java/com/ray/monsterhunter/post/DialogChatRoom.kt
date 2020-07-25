@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
@@ -32,7 +30,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogPost)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogPost)
     }
 
     @SuppressLint("ResourceType")

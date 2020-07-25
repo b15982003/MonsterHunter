@@ -53,20 +53,29 @@
 
     <!-- Profile -->
     <color name="profile_background">#D9CD90</color>
+    <color name="profile_rating">#FCDC73</color>
 
     <!-- Chatroom detail -->
-    <color name="chatroom_detail_ed_background">@color/google_sign_in_button</color>
+    <color name="chatroom_detail_ed_background">@color/colorPrimaryDark</color>
     <color name="chatroom_detail_spinner_background">#00000000</color>
     <color name="chatRoom_detail_start_button">#1B813E</color>
     <color name="chatRoom_detail_end_button">#F19483</color>
 
     <!-- Chatroom Score -->
-    <color name="chatRoom_score_name">#30000000</color>
+    <color name="chatRoom_score_name">@color/colorPrimaryDark</color>
     <color name="chatRoom_score_plus">#87000000</color>
+    <color name="chatRoom_score_bg">#50000000</color>
 
     <!-- friend ViewPager -->
     <color name="friendViewpager_line">#cccccc</color>
     <color name="friendViewpager_no_choose_text">#cccccc</color>
     <color name="friendViewpager_choose_text">#42602D</color>
+
+    <!-- history -->
+    <color name="history_success_background">#ABDAFC</color>
+    <color name="history_fail_background">#F4C0C6</color>
+
+    <!-- friend detail -->
+    <color name="friend_detail_follow">#3b5998</color>
 
 </resources>

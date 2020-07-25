@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MonsterHunter</string>
+    <string name="app_name">RaiMeet</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -10,8 +10,8 @@
     <string name="home">Monster Hunter</string>
     <string name="history">對戰紀錄</string>
     <string name="profile">個人資訊</string>
-    <string name="testPostCrawling">測試postCrawling</string>
-    <string name="testChatRoom">測試postChatRoom</string>
+    <string name="testPostCrawling">發表文章</string>
+    <string name="testChatRoom">開啟聊天室</string>
 
     <!-- Postdailog -->
     <string name="roomname">房間名稱</string>
@@ -73,10 +73,26 @@
     <string name="chatRoom_score_sent_button">完成</string>
     <string name="chatRoom_score_fake_score">777</string>
     <string name="chatRoom_score_fake_arms">操蟲棍</string>
+    <string name="chatRoom_score_finish_text">恭喜你完成了這次的任務，給予和你一起打拼的同伴評分吧！</string>
+    <string name="chatRoom_score_remind">貼心小提醒：一個同伴只能給予一次加減的機會唷</string>
 
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>
     <string name="friend_list_email">Ray3456789@gmail.com</string>
+
+    <!--History List -->
+    <string name="history_mission_type">限時任務</string>
+    <string name="history_list_no_value_text">快去來場既分高下也決生死的戰鬥吧！</string>
+
+    <!--profile -->
+    <string name="profile_all_crawling">事件總數 : </string>
+    <string name="profile_all_game">參戰次數 ： </string>
+    <string name="profile_all_number">1234567</string>
+    <string name="profile_ratingBar_god">神</string>
+
+    <!-- friend detail -->
+    <string name="friend_detail_follow">追蹤</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

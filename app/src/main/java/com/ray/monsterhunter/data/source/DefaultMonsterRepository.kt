@@ -70,6 +70,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveChatRoom()
     }
 
+    override fun getLiveHistory(): MutableLiveData<List<History>> {
+        return remoteDataSource.getLiveHistory()
+    }
+
     override fun getLiveChatRoomScore(document: String): MutableLiveData<ChatRoom> {
         return remoteDataSource.getLiveChatRoomScore(document)
     }
@@ -85,6 +89,14 @@ class DefaultMonsterRepository(
 
     override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
        return remoteDataSource.sentMessage(message,document)
+    }
+
+    override suspend fun postFriend(user: User): Result<Boolean> {
+        return remoteDataSource.postFriend(user)
+    }
+
+    override suspend fun cancelFriend(user: User): Result<Boolean> {
+        return remoteDataSource.cancelFriend(user)
     }
 
     override suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean> {
@@ -106,20 +118,20 @@ class DefaultMonsterRepository(
         return remoteDataSource.updateChatRoomInfo(chatRoom,document)
     }
 
-    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserOne(userId,userOneScore)
+    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserOne(userId,userOneScore,allFight)
     }
 
-    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserTwo(userId,userTwoScore)
+    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserTwo(userId,userTwoScore,allFight)
     }
 
-    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserThree(userId,userThreeScore)
+    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserThree(userId,userThreeScore,allFight)
     }
 
-    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserFour(userId,userFourScore)
+    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserFour(userId,userFourScore,allFight)
     }
 
 

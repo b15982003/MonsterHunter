@@ -29,6 +29,8 @@ interface MonsterDataSource {
 
     fun getLiveChatRoom() : MutableLiveData<List<ChatRoom>>
 
+    fun getLiveHistory(): MutableLiveData<List<History>>
+
     fun getLiveMessage(document: String) : MutableLiveData<List<Message>>
 
     fun getLiveUserOneScore(teammate: String): MutableLiveData<User>
@@ -45,6 +47,10 @@ interface MonsterDataSource {
 
     suspend fun sentMessage(message: Message,document: String): Result<Boolean>
 
+    suspend fun postFriend(user : User): Result<Boolean>
+
+    suspend fun cancelFriend(user : User): Result<Boolean>
+
     suspend fun getUserArms(userArmsType : UserArms,document: String): Result<Boolean>
 
     suspend fun cencelUser(userArmsType : UserArms,document: String): Result<Boolean>
@@ -53,13 +59,13 @@ interface MonsterDataSource {
 
     suspend fun updateChatRoomInfo(chatRoom: LiveData<ChatRoom>, document: String): Result<Boolean>
 
-    suspend fun updateUserOne(userId : String,userOneScore : ArmsType): Result<Boolean>
+    suspend fun updateUserOne(userId : String,userOneScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType): Result<Boolean>
+    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType): Result<Boolean>
+    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserFour(userId : String,userFourScore : ArmsType): Result<Boolean>
+    suspend fun updateUserFour(userId : String,userFourScore : ArmsType,allFight : Long): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 

@@ -14,6 +14,7 @@ import com.ray.monsterhunter.chatroom.ChatRoomAdapter
 import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailAdapter
 import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.friend.item.FriendItemAdapter
+import com.ray.monsterhunter.history.HistoryAdapter
 import com.ray.monsterhunter.home.HomeActivityAdapter
 import com.ray.monsterhunter.home.HomeCrawlingAdapter
 import com.ray.monsterhunter.network.LoadApiStatus
@@ -43,6 +44,18 @@ fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?
         }
     }
 }
+
+@BindingAdapter("history")
+fun bindHistoryRecyclerView(recyclerView: RecyclerView, history: List<History>?) {
+    history?.let {
+        recyclerView.adapter?.apply {
+            when (this) {
+                is HistoryAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
 
 @BindingAdapter("chatRoomMessage")
 fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,message: List<Message>?){
