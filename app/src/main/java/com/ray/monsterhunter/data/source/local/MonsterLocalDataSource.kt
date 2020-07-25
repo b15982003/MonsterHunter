@@ -132,7 +132,7 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateUserFour(userId: String, userFourScore: ArmsType): Result<Boolean> {
+    override suspend fun updateUserFour(userId: String, userFourScore: ArmsType,allFight : Long): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

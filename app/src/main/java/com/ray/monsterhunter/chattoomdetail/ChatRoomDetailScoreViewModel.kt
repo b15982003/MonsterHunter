@@ -370,13 +370,13 @@ Logger.d("history1111111111111 ${user1.value?.userId}")
             _status.value = LoadApiStatus.LOADING
 
             when (val result = liveUserOne.value?.armsType?.let {
-                liveUserOne.value?.email?.let { it1 ->
-                    repository.updateUserOne(
-                        it1,
-                        it
-                    )
-                }
-            }) {
+                liveUserOne.value?.email?.let {
+                        it1 ->
+                    liveUserOne.value!!.allFight?.let { it2 ->
+
+                        repository.updateUserOne(it1, it ,it2)
+                    }
+                }}) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -406,13 +406,13 @@ Logger.d("history1111111111111 ${user1.value?.userId}")
             _status.value = LoadApiStatus.LOADING
 
             when (val result = liveUserTwo.value?.armsType?.let {
-                liveUserTwo.value?.email?.let { it1 ->
-                    repository.updateUserTwo(
-                        it1,
-                        it
-                    )
-                }
-            }) {
+                liveUserTwo.value?.email?.let {
+                        it1 ->
+                    liveUserTwo.value!!.allFight?.let { it2 ->
+
+                        repository.updateUserTwo(it1, it ,it2)
+                    }
+                }}) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -436,19 +436,22 @@ Logger.d("history1111111111111 ${user1.value?.userId}")
         }
     }
 
+
+
+
     fun updateUserThree() {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
             when (val result = liveUserThree.value?.armsType?.let {
-                liveUserThree.value?.email?.let { it1 ->
-                    repository.updateUserThree(
-                        it1,
-                        it
-                    )
-                }
-            }) {
+                liveUserThree.value?.email?.let {
+                        it1 ->
+                    liveUserThree.value!!.allFight?.let { it2 ->
+
+                        repository.updateUserThree(it1, it ,it2)
+                    }
+                }}) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -478,13 +481,13 @@ Logger.d("history1111111111111 ${user1.value?.userId}")
             _status.value = LoadApiStatus.LOADING
 
             when (val result = liveUserFour.value?.armsType?.let {
-                liveUserFour.value?.email?.let { it1 ->
-                    repository.updateUserFour(
-                        it1,
-                        it
-                    )
+                liveUserFour.value?.email?.let {
+                        it1 ->
+                    liveUserFour.value!!.allFight?.let { it2 ->
+
+                    repository.updateUserFour(it1, it ,it2)
                 }
-            }) {
+            }}) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE

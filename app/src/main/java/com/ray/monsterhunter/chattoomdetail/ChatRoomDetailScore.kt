@@ -42,7 +42,7 @@ class ChatRoomDetailScore : Fragment() {
             binding.chatRoomScoreBgImage.visibility = View.VISIBLE
             Handler().postDelayed({
                 findNavController().navigateUp()
-            },3000)
+            },2000)
 
         }
 
@@ -151,7 +151,7 @@ class ChatRoomDetailScore : Fragment() {
             binding.chatRoomScoreUser1LessNo.visibility = View.VISIBLE
 
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserOne.value?.allFight?.plus(1)
+                viewModel.liveUserOne.value?.allFight = viewModel.liveUserOne.value?.allFight?.plus(1)
             }
 
             viewModel.updateUserOne()
@@ -194,7 +194,7 @@ class ChatRoomDetailScore : Fragment() {
             binding.chatRoomScoreUser1PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser1LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserOne.value?.allFight?.plus(1)
+                viewModel.liveUserOne.value?.allFight = viewModel.liveUserOne.value?.allFight?.plus(1)
             }
 
             viewModel.updateUserOne()
@@ -254,14 +254,15 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserTwo.value?.armsType?.N?.plus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserTwo()
+
             binding.chatRoomScoreUser2Plus.visibility = View.GONE
             binding.chatRoomScoreUser2Less.visibility = View.GONE
             binding.chatRoomScoreUser2PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser2LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserTwo.value?.allFight?.plus(1)
+                viewModel.liveUserTwo.value?.allFight = viewModel.liveUserTwo.value?.allFight?.plus(1)
             }
+            viewModel.updateUserTwo()
 
         }
 
@@ -297,14 +298,15 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserTwo.value?.armsType?.N?.minus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserTwo()
+
             binding.chatRoomScoreUser2Plus.visibility = View.GONE
             binding.chatRoomScoreUser2Less.visibility = View.GONE
             binding.chatRoomScoreUser2PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser2LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserTwo.value?.allFight?.plus(1)
+                viewModel.liveUserTwo.value?.allFight =  viewModel.liveUserTwo.value?.allFight?.plus(1)
             }
+            viewModel.updateUserTwo()
         }
         viewModel.liveUserTwo.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser2Number.setText(
@@ -361,14 +363,15 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserThree.value?.armsType?.N?.plus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserThree()
+
             binding.chatRoomScoreUser3Plus.visibility = View.GONE
             binding.chatRoomScoreUser3Less.visibility = View.GONE
             binding.chatRoomScoreUser3PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser3LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserThree.value?.allFight?.plus(1)
+                viewModel.liveUserThree.value?.allFight = viewModel.liveUserThree.value?.allFight?.plus(1)
             }
+            viewModel.updateUserThree()
         }
 
         binding.chatRoomScoreUser3Less.setOnClickListener() {
@@ -403,14 +406,15 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserThree.value?.armsType?.N?.minus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserThree()
+
             binding.chatRoomScoreUser3Plus.visibility = View.GONE
             binding.chatRoomScoreUser3Less.visibility = View.GONE
             binding.chatRoomScoreUser3PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser3LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserThree.value?.allFight?.plus(1)
+                viewModel.liveUserThree.value?.allFight = viewModel.liveUserThree.value?.allFight?.plus(1)
             }
+            viewModel.updateUserThree()
         }
         viewModel.liveUserThree.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser3Number.setText(
@@ -467,14 +471,14 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserFour.value?.armsType?.N?.plus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserFour()
             binding.chatRoomScoreUser4Plus.visibility = View.GONE
             binding.chatRoomScoreUser4Less.visibility = View.GONE
             binding.chatRoomScoreUser4PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser4LessNo.visibility = View.VISIBLE
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserFour.value?.allFight?.plus(1)
+                viewModel.liveUserFour.value?.allFight = viewModel.liveUserFour.value?.allFight?.plus(1)
             }
+            viewModel.updateUserFour()
         }
 
         binding.chatRoomScoreUser4Less.setOnClickListener() {
@@ -509,14 +513,19 @@ class ChatRoomDetailScore : Fragment() {
                     viewModel.liveUserFour.value?.armsType?.N?.minus(1)
                 else -> "皆可"
             }
-            viewModel.updateUserFour()
+
             binding.chatRoomScoreUser4Plus.visibility = View.GONE
             binding.chatRoomScoreUser4Less.visibility = View.GONE
             binding.chatRoomScoreUser4PlusNo.visibility = View.VISIBLE
             binding.chatRoomScoreUser4LessNo.visibility = View.VISIBLE
+            Logger.d("userId${UserManager.userData.id}")
+            Logger.d("chatRoomId${viewModel.chatRoom.value?.userId}")
             if(UserManager.userData.id == viewModel.chatRoom.value?.userId){
-                viewModel.liveUserFour.value?.allFight?.plus(1)
+                viewModel.liveUserFour.value?.allFight = viewModel.liveUserFour.value?.allFight?.plus(1)
+                Logger.d("INNNNNNN${viewModel.liveUserFour.value?.allFight}")
+
             }
+            viewModel.updateUserFour()
         }
         viewModel.liveUserFour.observe(viewLifecycleOwner, Observer {
             binding.chatRoomScoreUser4Number.setText(

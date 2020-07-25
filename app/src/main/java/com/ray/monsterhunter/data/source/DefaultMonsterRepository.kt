@@ -118,20 +118,20 @@ class DefaultMonsterRepository(
         return remoteDataSource.updateChatRoomInfo(chatRoom,document)
     }
 
-    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserOne(userId,userOneScore)
+    override suspend fun updateUserOne(userId: String,userOneScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserOne(userId,userOneScore,allFight)
     }
 
-    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserTwo(userId,userTwoScore)
+    override suspend fun updateUserTwo(userId: String,userTwoScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserTwo(userId,userTwoScore,allFight)
     }
 
-    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserThree(userId,userThreeScore)
+    override suspend fun updateUserThree(userId: String,userThreeScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserThree(userId,userThreeScore,allFight)
     }
 
-    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType): Result<Boolean> {
-        return remoteDataSource.updateUserFour(userId,userFourScore)
+    override suspend fun updateUserFour(userId: String,userFourScore : ArmsType,allFight : Long): Result<Boolean> {
+        return remoteDataSource.updateUserFour(userId,userFourScore,allFight)
     }
 
 

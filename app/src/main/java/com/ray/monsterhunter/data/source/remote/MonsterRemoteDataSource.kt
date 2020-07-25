@@ -798,7 +798,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun updateUserOne(
         userId: String,
-        userOneScore: ArmsType
+        userOneScore: ArmsType,
+        allFight: Long
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne =
@@ -807,7 +808,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userOneScore)
+                .update("armsType", userOneScore,"allFight",allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -830,7 +831,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun updateUserTwo(
         userId: String,
-        userTwoScore: ArmsType
+        userTwoScore: ArmsType,
+        allFight: Long
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne =
@@ -839,7 +841,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userTwoScore)
+                .update("armsType", userTwoScore,"allFight",allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -862,7 +864,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun updateUserThree(
         userId: String,
-        userThreeScore: ArmsType
+        userThreeScore: ArmsType,
+        allFight: Long
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne =
@@ -871,7 +874,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userThreeScore)
+                .update("armsType", userThreeScore,"allFight",allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -894,7 +897,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun updateUserFour(
         userId: String,
-        userFourScore: ArmsType
+        userFourScore: ArmsType,
+        allFight : Long
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne =
@@ -903,7 +907,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userFourScore)
+                .update("armsType", userFourScore,"allFight",allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))

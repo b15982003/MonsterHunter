@@ -484,7 +484,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/active_finish"
+            app:lottie_rawRes="@raw/active_success_check"
             app:lottie_speed="1.5" />
 
 

@@ -59,13 +59,13 @@ interface MonsterDataSource {
 
     suspend fun updateChatRoomInfo(chatRoom: LiveData<ChatRoom>, document: String): Result<Boolean>
 
-    suspend fun updateUserOne(userId : String,userOneScore : ArmsType): Result<Boolean>
+    suspend fun updateUserOne(userId : String,userOneScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType): Result<Boolean>
+    suspend fun updateUserTwo(userId : String,userTwoScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType): Result<Boolean>
+    suspend fun updateUserThree(userId : String,userThreeScore : ArmsType,allFight : Long): Result<Boolean>
 
-    suspend fun updateUserFour(userId : String,userFourScore : ArmsType): Result<Boolean>
+    suspend fun updateUserFour(userId : String,userFourScore : ArmsType,allFight : Long): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 
