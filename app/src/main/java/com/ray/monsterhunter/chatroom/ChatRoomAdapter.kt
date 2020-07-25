@@ -25,10 +25,13 @@ class ChatRoomAdapter(
         fun bind(chatRoom: ChatRoom, onClickListener: OnClickListener) {
 
             var AllStampTimeToDate = chatRoom.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            val stampTpData = chatRoom.dateTime?.date?.let { TimeUtil.StampToDate(it, Locale.TAIWAN) }
+            val stampToTime = chatRoom.dateTime?.time?.let { TimeUtil.StampToTime(it, Locale.TAIWAN) }
 
-
+            binding.chatRoomListStartTimeDate.text = stampTpData
+            binding.chatRoomListStartTime2.text = stampToTime
             binding.chatRoomListStartTime.text = AllStampTimeToDate
-            binding.even = chatRoom
+            binding.event = chatRoom
             binding.root.setOnClickListener { onClickListener.onClick(chatRoom) }
             binding.executePendingBindings()
         }

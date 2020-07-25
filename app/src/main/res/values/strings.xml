@@ -21,6 +21,7 @@
     <string name="sent">送出</string>
     <string name="armschoose">需要武器 ：</string>
     <string name="missionType">任務類型 ：</string>
+    <string name="crawlingType">文章類型：</string>
     <string name="monstername">魔物名稱 ：</string>
     <string name="time_title_text">良辰吉時 ：</string>
     <string name="chooseDate">選擇日期</string>

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.ChatRoom
+import com.ray.monsterhunter.data.DateTime
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.data.source.Result
@@ -18,7 +19,11 @@ import kotlinx.coroutines.launch
 class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
     private val _event = MutableLiveData<ChatRoom>().apply {
-        value = ChatRoom()
+        value = ChatRoom(dateTime = DateTime())
+    }
+
+    val dateTime = MutableLiveData<DateTime>().apply {
+        value = DateTime()
     }
     val event : LiveData<ChatRoom>
         get() = _event
@@ -46,6 +51,15 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    init {
+        putdateTime()
+    }
+
+    fun putdateTime(){
+        _event.value?.dateTime?.date = dateTime.value?.date
+        _event.value?.dateTime?.time = dateTime.value?.time
+    }
 
 
     fun pushChatRoom(chatRoom: ChatRoom) {
