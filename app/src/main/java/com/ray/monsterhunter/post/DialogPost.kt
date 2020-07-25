@@ -20,6 +20,7 @@ import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogPostFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.TimeUtil
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
@@ -50,7 +51,7 @@ class DialogPost : AppCompatDialogFragment() {
 
 
 
-        val missionType = arrayListOf("選擇任務類型", "任務", "自由", "調查", "活動", "限時活動", "採集")
+        val missionType = arrayListOf("選擇文章類型", "最新活動", "心情分享", "魔物分析", "攻略分析", "神人搜尋", "趣事分享")
         val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
 
 
@@ -81,13 +82,13 @@ class DialogPost : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.crawling.value?.type = "出擊"
-                        1L -> viewModel.crawling.value?.type = "任務"
-                        2L -> viewModel.crawling.value?.type = "自由"
-                        3L -> viewModel.crawling.value?.type = "調查"
-                        4L -> viewModel.crawling.value?.type = "活動"
-                        5L -> viewModel.crawling.value?.type = "限時活動"
-                        5L -> viewModel.crawling.value?.type = "採集"
+                        0L -> viewModel.crawling.value?.type = "選擇文章類型"
+                        1L -> viewModel.crawling.value?.type = "最新活動"
+                        2L -> viewModel.crawling.value?.type = "心情分享"
+                        3L -> viewModel.crawling.value?.type = "魔物分析"
+                        4L -> viewModel.crawling.value?.type = "攻略分析"
+                        5L -> viewModel.crawling.value?.type = "神人搜尋"
+                        5L -> viewModel.crawling.value?.type = "趣事分享"
                     }
                 }
             }
@@ -106,19 +107,37 @@ class DialogPost : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.crawling.value?.monsterType = "隨機攻打生物"
-                        1L -> viewModel.crawling.value?.monsterType = "滅盡龍"
-                        2L -> viewModel.crawling.value?.monsterType = "煌黑龍"
-                        3L -> viewModel.crawling.value?.monsterType = "麒麟"
-                        4L -> viewModel.crawling.value?.monsterType = "火龍"
-                        5L -> viewModel.crawling.value?.monsterType = "冰牙龍"
-                        5L -> viewModel.crawling.value?.monsterType = "冰呪龍"
+                        0L -> {
+                            viewModel.crawling.value?.monsterType = "隨機攻打生物"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterRoomPost
+                        }
+                        1L -> {
+                            viewModel.crawling.value?.monsterType = "滅盡龍"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterRoomPost
+                        }
+                        2L -> {
+                            viewModel.crawling.value?.monsterType = "煌黑龍"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterYellowBlack
+                        }
+                        3L -> {
+                            viewModel.crawling.value?.monsterType = "麒麟"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterUnico
+                        }
+                        4L -> {
+                            viewModel.crawling.value?.monsterType = "火龍"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterFireDragon
+                        }
+                        5L -> {
+                            viewModel.crawling.value?.monsterType = "冰牙龍"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterIceteeth
+                        }
+                        5L -> {
+                            viewModel.crawling.value?.monsterType = "冰呪龍"
+                            viewModel.crawling.value?.image = ImageManger.imageData.monsterIcehit
+                        }
                     }
                 }
             }
-
-
-
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
             it?.let { needRefresh ->

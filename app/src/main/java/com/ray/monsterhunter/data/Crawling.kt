@@ -12,6 +12,7 @@ data class Crawling(
     var type : String? = "",
     var monsterType : String? = "",
     var createTime : Long? = null,
-    var text : String? = ""
+    var text : String? = "",
+    var image : String? = ""
 
 ) : Parcelable
