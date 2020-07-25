@@ -65,8 +65,8 @@
                     android:gravity="center"
                     android:text="@{event.monsterName}"
                     app:layout_constraintStart_toStartOf="@+id/chatRoom_list_monster_image"
-                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_monster_shape"
                     app:layout_constraintEnd_toEndOf="@id/chatRoom_list_monster_image"
+                    app:layout_constraintBottom_toBottomOf="@id/chatRoom_list_data_armsC"
                     tools:text="@string/chatRoom_test_text_short" />
 
                 <TextView

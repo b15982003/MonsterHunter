@@ -32,8 +32,8 @@ import java.util.*
 class DialogChatRoom : AppCompatDialogFragment() {
 
 
-    private  val viewModel by viewModels<DialogChatRoomViewModel> { getVmFactory() }
-    private lateinit var binding : DialogChatRoomFragmentBinding
+    private val viewModel by viewModels<DialogChatRoomViewModel> { getVmFactory() }
+    private lateinit var binding: DialogChatRoomFragmentBinding
     val calender = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DialogChatRoomFragmentBinding.inflate(inflater,container,false)
+        binding = DialogChatRoomFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.chatRoomPostDateText.setOnClickListener {
@@ -61,9 +61,10 @@ class DialogChatRoom : AppCompatDialogFragment() {
 
         viewModel.event.observe(viewLifecycleOwner, Observer {
             it.roomName?.let {
-                Log.d("eeeeeeee","${it}")
+                Log.d("eeeeeeee", "${it}")
             }
         })
+
 
 
         viewModel.postMonster.observe(viewLifecycleOwner, Observer {
@@ -71,7 +72,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
                 Logger.d(viewModel.postMonster.value.toString())
 
                 binding.chatRoomPostImage.setImageResource(
-                    when(viewModel.postMonster.value){
+                    when (viewModel.postMonster.value) {
                         1 -> R.drawable.ic_monster_roompost
                         2 -> R.drawable.ic_monster_yellowblack
                         3 -> R.drawable.ic_monster_unico
@@ -111,7 +112,8 @@ class DialogChatRoom : AppCompatDialogFragment() {
         val adapterMonsterName = ArrayAdapter(
             MonsterApplication.instance,
             android.R.layout.simple_spinner_dropdown_item,
-            monsterName)
+            monsterName
+        )
 
         binding.chatRoomPostArmsA.adapter = adapter
         binding.chatRoomPostArmsB.adapter = adapter
@@ -133,13 +135,13 @@ class DialogChatRoom : AppCompatDialogFragment() {
                     id: Long
                 ) {
                     when (id) {
-                        0L -> viewModel.event.value?.typeName  = "出擊"
-                        1L -> viewModel.event.value?.typeName  = "任務"
-                        2L -> viewModel.event.value?.typeName  = "自由"
-                        3L -> viewModel.event.value?.typeName  = "調查"
-                        4L -> viewModel.event.value?.typeName  = "活動"
-                        5L -> viewModel.event.value?.typeName  = "限時活動"
-                        5L -> viewModel.event.value?.typeName  = "採集"
+                        0L -> viewModel.event.value?.typeName = "出擊"
+                        1L -> viewModel.event.value?.typeName = "任務"
+                        2L -> viewModel.event.value?.typeName = "自由"
+                        3L -> viewModel.event.value?.typeName = "調查"
+                        4L -> viewModel.event.value?.typeName = "活動"
+                        5L -> viewModel.event.value?.typeName = "限時活動"
+                        5L -> viewModel.event.value?.typeName = "採集"
                     }
                 }
             }
@@ -295,7 +297,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
                             viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
                         }
                         1L -> {
-                            viewModel.event.value?.monsterName= "滅盡龍"
+                            viewModel.event.value?.monsterName = "滅盡龍"
                             viewModel.postMonster.value = 1
                             viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
                         }
@@ -310,12 +312,12 @@ class DialogChatRoom : AppCompatDialogFragment() {
                             viewModel.event.value?.image = ImageManger.imageData.monsterUnico
                         }
                         4L -> {
-                            viewModel.event.value?.monsterName= "火龍"
+                            viewModel.event.value?.monsterName = "火龍"
                             viewModel.postMonster.value = 4
                             viewModel.event.value?.image = ImageManger.imageData.monsterFireDragon
                         }
                         5L -> {
-                            viewModel.event.value?.monsterName= "冰牙龍"
+                            viewModel.event.value?.monsterName = "冰牙龍"
                             viewModel.postMonster.value = 5
                             viewModel.event.value?.image = ImageManger.imageData.monsterIceteeth
                         }
@@ -343,7 +345,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             calender.set(year, month, day)
             format("yyyy-MM-dd")
             val dateToStamp = TimeUtil.DateToStamp("$year-$month-$day", Locale.TAIWAN)
-            viewModel.dateTime.value?.date = dateToStamp
+            viewModel.event.value?.dateTime?.date = dateToStamp
 
             binding.chatRoomPostDateText.text = "$year-$month-$day"
         }
@@ -364,7 +366,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             calender.set(Calendar.MINUTE, min)
             format("HH:mm")
             val timeToStamp = TimeUtil.TimeToStamp("$hour:$min", Locale.TAIWAN)
-            viewModel.dateTime.value?.time = timeToStamp
+            viewModel.event.value?.dateTime?.time = timeToStamp
 
             binding.chatRoomPostTimeText.text = "$hour : $min "
 
@@ -382,7 +384,6 @@ class DialogChatRoom : AppCompatDialogFragment() {
         val time = SimpleDateFormat(format, Locale.TAIWAN)
         (view as EditText).setText(time.format(calender.time))
     }
-
 
 
 }

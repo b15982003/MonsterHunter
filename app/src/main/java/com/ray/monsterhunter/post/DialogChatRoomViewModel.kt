@@ -21,12 +21,12 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     private val _event = MutableLiveData<ChatRoom>().apply {
         value = ChatRoom(dateTime = DateTime())
     }
+    val event : LiveData<ChatRoom>
+        get() = _event
 
     val dateTime = MutableLiveData<DateTime>().apply {
         value = DateTime()
     }
-    val event : LiveData<ChatRoom>
-        get() = _event
 
     val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
