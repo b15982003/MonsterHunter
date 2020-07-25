@@ -17,16 +17,22 @@
         android:onClick="@{() -> viewModel.leave(false)}"
         tools:context=".post.DialogChatRoom">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="560dp"
             android:layout_margin="16dp"
             android:onClick="@{() -> viewModel.nothing()}"
             android:background="@drawable/chatroom_post_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
             <TextView
                 android:id="@+id/chatRoom_post_image_shape"
@@ -53,7 +59,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/chatRoom_post_roomName"
                 style="@style/TextInputLayoutStyle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
@@ -69,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top|start"
-                    android:hint="@string/roomname"
+                    android:hint="@string/roomName"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:lines="1"
@@ -90,12 +96,13 @@
 
             <TextView
                 android:id="@+id/chatRoom_post_typeName_shape"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/chatroom_post_text_background"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chatRoom_post_typeName_text" />
 
             <Spinner
@@ -107,7 +114,6 @@
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toBottomOf="@id/chatRoom_post_typeName_shape"
                 app:layout_constraintEnd_toEndOf="@id/chatRoom_post_typeName_shape"
-                app:layout_constraintStart_toStartOf="@id/chatRoom_post_typeName_shape"
                 app:layout_constraintTop_toTopOf="@id/chatRoom_post_typeName_shape" />
 
             <TextView
@@ -124,7 +130,7 @@
 
             <TextView
                 android:id="@+id/chatRoom_post_monsterName_shape"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
@@ -133,6 +139,7 @@
                 android:background="@drawable/chatroom_post_text_background"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chatRoom_post_monsterName_text"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:layout_editor_absoluteX="16dp" />
 
             <Spinner
@@ -144,8 +151,126 @@
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toBottomOf="@+id/chatRoom_post_monsterName_shape"
                 app:layout_constraintEnd_toEndOf="@+id/chatRoom_post_monsterName_shape"
-                app:layout_constraintStart_toStartOf="@id/chatRoom_post_monsterName_shape"
                 app:layout_constraintTop_toTopOf="@id/chatRoom_post_monsterName_shape" />
+
+
+            <TextView
+                android:id="@+id/chatRoom_post_date_title_text"
+                style="@style/post_dailog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_title_text"
+                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_monsterName_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <TextView
+                android:id="@+id/chatRoom_post_date_shape"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dailog_shape"
+                app:layout_constraintEnd_toStartOf="@+id/chatRoom_post_time_shape"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_date_title_text" />
+
+            <TextView
+                android:id="@+id/chatRoom_post_date_text"
+                style="@style/post_dailog_choose_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseDate"
+                app:layout_constraintBottom_toBottomOf="@id/chatRoom_post_date_shape"
+                app:layout_constraintEnd_toEndOf="@id/chatRoom_post_date_shape"
+                app:layout_constraintStart_toStartOf="@id/chatRoom_post_date_shape"
+                app:layout_constraintTop_toTopOf="@id/chatRoom_post_date_shape" />
+
+            <TextView
+                android:id="@+id/chatRoom_post_time_shape"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:background="@drawable/dailog_shape"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/chatRoom_post_date_shape"
+                app:layout_constraintTop_toTopOf="@id/chatRoom_post_date_shape" />
+
+            <TextView
+                android:id="@+id/chatRoom_post_time_text"
+                style="@style/post_dailog_choose_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chooseTime"
+                app:layout_constraintBottom_toBottomOf="@id/chatRoom_post_time_shape"
+                app:layout_constraintEnd_toEndOf="@id/chatRoom_post_time_shape"
+                app:layout_constraintStart_toStartOf="@id/chatRoom_post_time_shape"
+                app:layout_constraintTop_toTopOf="@id/chatRoom_post_time_shape" />
+
+            <TextView
+                android:id="@+id/post_dialog_changeArms_text"
+                style="@style/post_dailog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/armschoose"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/post_dialog_monster_shape" />
+
+            <TextView
+                android:id="@+id/post_dialog_changeArms_shape"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/dailog_shape"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/post_dialog_changeArms_text"
+
+                />
+
+            <Spinner
+                android:id="@+id/post_dialog_armsA"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintStart_toStartOf="@id/post_dialog_changeArms_shape"
+                app:layout_constraintTop_toTopOf="@+id/post_dialog_changeArms_shape" />
+
+            <Spinner
+                android:id="@+id/post_dialog_armsB"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="16dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintStart_toEndOf="@id/post_dialog_armsA"
+                app:layout_constraintTop_toTopOf="@+id/post_dialog_armsA" />
+
+            <Spinner
+                android:id="@+id/post_dialog_armsC"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintStart_toStartOf="@id/post_dialog_armsA"
+                app:layout_constraintTop_toBottomOf="@+id/post_dialog_armsA" />
+
+            <Spinner
+                android:id="@+id/post_dialog_armsD"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:spinnerMode="dialog"
+                app:layout_constraintStart_toStartOf="@+id/post_dialog_armsB"
+                app:layout_constraintTop_toTopOf="@id/post_dialog_armsC" />
+
 
             <Button
                 android:id="@+id/chatRoom_post_sentButton"
@@ -159,10 +284,11 @@
                 android:background="@color/chatRoom_post_button"
                 android:text="@string/chatRoom_post＿button"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chatRoom_post_monsterName_shape" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
