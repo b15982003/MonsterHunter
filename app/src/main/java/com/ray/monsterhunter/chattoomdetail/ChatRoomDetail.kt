@@ -107,6 +107,7 @@ class ChatRoomDetail : Fragment() {
             viewModel.chatRoom.value?.missionResult = "true"
             viewModel.chatRoom.value?.endToScore = "true"
             viewModel.updateChatRoomInfo()
+            viewModel.isGoon.value = false
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
             },500)
@@ -116,6 +117,7 @@ class ChatRoomDetail : Fragment() {
             viewModel.chatRoom.value?.missionResult = "false"
             viewModel.chatRoom.value?.endToScore = "true"
             viewModel.updateChatRoomInfo()
+            viewModel.isGoon.value = false
             Handler().postDelayed({
                 findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
             },500)
@@ -297,6 +299,7 @@ class ChatRoomDetail : Fragment() {
                     }
                 }
             }
+        viewModel.enterUpdate()
 
         return binding.root
     }
