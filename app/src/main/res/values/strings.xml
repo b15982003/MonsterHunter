@@ -14,7 +14,7 @@
     <string name="testChatRoom">開啟聊天室</string>
 
     <!-- Postdailog -->
-    <string name="roomname">房間名稱</string>
+    <string name="roomname">文章名稱</string>
     <string name="time">開場時間</string>
     <string name="textcontent">文字內容</string>
     <string name="sent">送出</string>
@@ -64,6 +64,8 @@
     <string name="chatRoom_detail_mission_success">成功</string>
     <string name="chatRoom_detail_mission_fail">失敗</string>
     <string name="chatRoom_detail_navigate_text">前往評分頁面</string>
+    <string name="chatRoom_detail_time_startText">遊戲開始</string>
+    <string name="chatRoom_detail_time_endText">遊戲結束</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>

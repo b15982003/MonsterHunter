@@ -60,6 +60,7 @@
     <color name="chatroom_detail_spinner_background">#00000000</color>
     <color name="chatRoom_detail_start_button">#1B813E</color>
     <color name="chatRoom_detail_end_button">#F19483</color>
+    <color name="chatRoom_detail_background">#50000000</color>
 
     <!-- Chatroom Score -->
     <color name="chatRoom_score_name">@color/colorPrimaryDark</color>

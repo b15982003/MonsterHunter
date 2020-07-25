@@ -25,6 +25,8 @@ class ChatRoomDetailViewModel(
     lateinit var runnable: Runnable
     private var handler = Handler()
     var timeCheck: Long = 0
+    var timeCheckTenSec : Long = 0
+    var timeTenSec: Long = 0
 
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
@@ -40,6 +42,8 @@ class ChatRoomDetailViewModel(
     var emptySeat = MutableLiveData<Boolean>(false)
 
     var isGoon = MutableLiveData<Boolean>(false)
+
+    var startJudgment = MutableLiveData<Boolean>(false)
 
 
     var liveMessage = MutableLiveData<List<Message>>()
@@ -219,7 +223,8 @@ class ChatRoomDetailViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
+            when (val result =
+                repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -324,6 +329,15 @@ class ChatRoomDetailViewModel(
             handler.postDelayed(runnable, 1000)
         }
         handler.postDelayed(runnable, 1000)
+    }
+
+    fun upDateTenSec() {
+        if (timeCheck / 10 > 0) {
+            timeTenSec = +1
+        } else {
+
+        }
+
     }
 
 

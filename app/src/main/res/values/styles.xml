@@ -144,6 +144,13 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="chatRoom_Detail_time_text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
     <!-- chatRoomScore -->
     <style name="chatRoom_score_name">
         <item name="android:textSize">14sp</item>

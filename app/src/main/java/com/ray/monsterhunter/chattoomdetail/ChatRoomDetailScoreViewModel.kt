@@ -134,7 +134,7 @@ class ChatRoomDetailScoreViewModel(
 
         Logger.d("history1111111111111 ${history.value?.user1}")
         Logger.d("history1111111111111 ${user1.value?.userId}")
-        
+
     }
 
     fun pushHistory() {
