@@ -480,7 +480,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             val document = crawlings.document()
 
             crawling.id = document.id
-            crawling.createTime = Calendar.getInstance().timeInMillis.toString()
+            crawling.createTime = Calendar.getInstance().timeInMillis
             document
                 .set(crawling)
                 .addOnCompleteListener { task ->

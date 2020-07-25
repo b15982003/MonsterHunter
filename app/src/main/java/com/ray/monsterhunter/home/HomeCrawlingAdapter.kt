@@ -22,7 +22,9 @@ class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(crawling: Crawling, onClickListener: OnClickListener) {
+            var AllStampTimeToDate = crawling.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
+            binding.homeDataCreatTime.text = AllStampTimeToDate
             binding.product = crawling
             binding.root.setOnClickListener { onClickListener.onClick(crawling) }
             binding.executePendingBindings()

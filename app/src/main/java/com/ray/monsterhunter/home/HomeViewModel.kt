@@ -16,8 +16,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.Logger
-import com.ray.monsterhunter.util.TimeUtil
-import java.util.*
 
 class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
 

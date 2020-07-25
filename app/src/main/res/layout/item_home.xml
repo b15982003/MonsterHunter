@@ -57,12 +57,12 @@
                 <TextView
                     android:id="@+id/home_data_roomName"
                     style="@style/home_data_title"
-                    android:layout_width="150dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@{product.roomname}"
                     app:layout_constraintStart_toEndOf="@+id/home_data_image"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/home_data_image"
                     tools:text="@string/testGo" />
 
                 <TextView
@@ -82,9 +82,8 @@
                     style="@style/home_data_text"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:text="@{product.monsterType}"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="@id/home_data_userId"
                     app:layout_constraintTop_toBottomOf="@id/home_data_userId"
                     tools:text="@string/testGo" />
@@ -93,23 +92,41 @@
                     android:id="@+id/home_data_type"
                     style="@style/home_data_button"
                     android:layout_width="70dp"
+                    android:layout_marginTop="32dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/home_type_background"
                     android:gravity="center"
                     android:text="@{product.type}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/home_data_monsterName"
+                    app:layout_constraintBottom_toTopOf="@id/home_data_creatTime"
                     tools:text="@string/testType" />
 
                 <TextView
+                    android:id="@+id/home_data_creatTime"
+                    style="@style/chatRoom_data_text"
+                    android:textColor="@color/gray_888888"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/home_data_type"
+                    android:layout_marginTop="80dp"
+                    tools:text="345678900987654"
+                    />
+
+                <TextView
+                    android:id="@+id/home_data_text"
                     android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/chatroom_post_text_background"
+                    android:text="@{product.text}"
+                    android:padding="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/home_data_image" />
+                    app:layout_constraintTop_toBottomOf="@id/home_data_creatTime"
+                    tools:text="@string/postDialog_text"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
