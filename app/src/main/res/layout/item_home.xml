@@ -58,7 +58,7 @@
                 <TextView
                     android:id="@+id/home_data_roomName"
                     style="@style/home_data_title"
-                    android:layout_width="270dp"
+                    android:layout_width="210dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@{product.roomname}"

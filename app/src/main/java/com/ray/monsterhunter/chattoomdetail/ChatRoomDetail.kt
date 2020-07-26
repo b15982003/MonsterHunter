@@ -59,6 +59,7 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
         binding.chatRoomDetailTimeEnd.visibility = View.GONE
+
         binding.chatRoomDetailTextMessageRecy.adapter =
             ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
             })
@@ -75,7 +76,7 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailTenMinNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailTenSecNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailLine.visibility = View.VISIBLE
-                    if (viewModel.timming.value == true) {
+                    if (viewModel.timing.value == "true") {
                         binding.chatRoomDetailEndButton.visibility = View.VISIBLE
                     }
                 } else {
@@ -96,10 +97,10 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener() {
-            viewModel.startTimming()
-            binding.chatRoomDetailStartButton.visibility = View.GONE
-            binding.chatRoomDetailEndButton.visibility = View.VISIBLE
-
+            
+                viewModel.startTimming()
+                binding.chatRoomDetailStartButton.visibility = View.GONE
+                binding.chatRoomDetailEndButton.visibility = View.VISIBLE
         }
 
         binding.chatRoomDetailEndButton.setOnClickListener() {
@@ -116,6 +117,7 @@ class ChatRoomDetail : Fragment() {
 
             viewModel.chatRoom.value?.missionResult = "true"
             viewModel.chatRoom.value?.endToScore = "true"
+            viewModel.chatRoom.value?.startTime = "null"
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
             Handler().postDelayed({
@@ -130,6 +132,7 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailMissionTypeFail.setOnClickListener() {
             viewModel.chatRoom.value?.missionResult = "false"
             viewModel.chatRoom.value?.endToScore = "true"
+            viewModel.chatRoom.value?.startTime = "null"
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
             Handler().postDelayed({
@@ -160,39 +163,9 @@ class ChatRoomDetail : Fragment() {
 
         }
 
-        viewModel.chatRoom.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                viewModel.teammateList = it.teammate
-                viewModel.startJudgment.value = viewModel.chatRoom.value?.startTime
-            }
-        })
-
-        viewModel.startJudgment.observe(viewLifecycleOwner, Observer {
-            if(viewModel.chatRoom.value?.userId != UserManager.userData.id){
-                if (viewModel.chatRoom.value?.startTime == true) {
-                    binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
-                    binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
-                    binding.chatRoomDetailTimeEnd.visibility = View.GONE
-                    Handler().postDelayed({
-                        binding.chatRoomDetailTimeBg.visibility = View.GONE
-                        binding.chatRoomDetailTimeStart.visibility = View.GONE
-                    },3000)
-                }else{
-                    binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
-                    binding.chatRoomDetailTimeStart.visibility = View.GONE
-                    binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
-
-                    Handler().postDelayed({
-                        binding.chatRoomDetailTimeBg.visibility = View.GONE
-                        binding.chatRoomDetailTimeEnd.visibility = View.GONE
-                    },3000)
-
-                }
-            }
-        })
-
         viewModel.emptySeat.observe(viewLifecycleOwner, Observer {
             if (it == true) {
+                viewModel.teammateList = viewModel.chatRoom.value?.teammate!!
                 viewModel.teammateList.add(UserManager.userData.email.toString())
             }
         })
@@ -211,9 +184,9 @@ class ChatRoomDetail : Fragment() {
             }
         })
 
-        viewModel.timming.observe(viewLifecycleOwner, Observer {
+        viewModel.timing.observe(viewLifecycleOwner, Observer {
             if (viewModel.chatRoom.value?.userId == UserManager.userData.id) {
-                viewModel.chatRoom.value?.startTime = viewModel.timming.value!!
+                viewModel.chatRoom.value?.startTime = viewModel.timing.value!!
                 viewModel.updateChatRoomInfo()
             }
 
@@ -239,6 +212,23 @@ class ChatRoomDetail : Fragment() {
                         )
                     )
                 }, 500)
+            }else if(viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true"){
+                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeEnd.visibility = View.GONE
+                Handler().postDelayed({
+                    binding.chatRoomDetailTimeBg.visibility = View.GONE
+                    binding.chatRoomDetailTimeStart.visibility = View.GONE
+                },3000)
+            }else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false"){
+                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeStart.visibility = View.GONE
+                binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
+
+                Handler().postDelayed({
+                    binding.chatRoomDetailTimeBg.visibility = View.GONE
+                    binding.chatRoomDetailTimeEnd.visibility = View.GONE
+                },3000)
             }
         })
 
@@ -359,7 +349,6 @@ class ChatRoomDetail : Fragment() {
                     }
                 }
             }
-        viewModel.enterUpdate()
 
         return binding.root
     }

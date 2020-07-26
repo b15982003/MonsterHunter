@@ -760,7 +760,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateChatRoom
                 .document(document)
-                .update("finishTime", chatRoom.value?.finishTime)
+                .update("finishTime", chatRoom.value?.finishTime,"startTime",chatRoom.value?.startTime)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         updateChatRoom
