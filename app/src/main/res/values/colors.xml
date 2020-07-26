@@ -65,7 +65,7 @@
     <!-- Chatroom Score -->
     <color name="chatRoom_score_name">@color/colorPrimaryDark</color>
     <color name="chatRoom_score_plus">#87000000</color>
-    <color name="chatRoom_score_bg">#50000000</color>
+    <color name="chatRoom_score_bg">#90000000</color>
 
     <!-- friend ViewPager -->
     <color name="friendViewpager_line">#cccccc</color>
