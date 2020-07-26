@@ -97,10 +97,14 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener() {
-            
+            if(viewModel.liveChatRoom.value?.teammate?.size!! < 4){
+                Toast.makeText(MonsterApplication.instance,"人數不足",Toast.LENGTH_SHORT).show()
+            }else{
                 viewModel.startTimming()
                 binding.chatRoomDetailStartButton.visibility = View.GONE
                 binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+            }
+
         }
 
         binding.chatRoomDetailEndButton.setOnClickListener() {
@@ -117,7 +121,7 @@ class ChatRoomDetail : Fragment() {
 
             viewModel.chatRoom.value?.missionResult = "true"
             viewModel.chatRoom.value?.endToScore = "true"
-            viewModel.chatRoom.value?.startTime = "null"
+            viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
             Handler().postDelayed({
@@ -132,7 +136,7 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailMissionTypeFail.setOnClickListener() {
             viewModel.chatRoom.value?.missionResult = "false"
             viewModel.chatRoom.value?.endToScore = "true"
-            viewModel.chatRoom.value?.startTime = "null"
+            viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
             Handler().postDelayed({

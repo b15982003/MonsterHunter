@@ -336,6 +336,10 @@ class ChatRoomDetailViewModel(
         handler.removeCallbacks(runnable)
     }
 
+    fun returnStartTime(){
+        _timing.value = "null"
+    }
+
     fun getready() {
         _ready.value = true
     }

@@ -104,6 +104,7 @@ class ChatRoomDetailScoreViewModel(
         }, 3000)
 
         chatRoom.value?.teammate?.get(0)?.let { getUserOneArms() }
+        getLiveUserOneScore()
 
         if (chatRoom.value?.teammate?.get(1) != null) {
             getUserTwoArms()
