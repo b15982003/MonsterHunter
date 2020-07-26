@@ -165,24 +165,26 @@ object MonsterRemoteDataSource : MonsterDataSource {
     }
 
     override fun getLiveHistory(): MutableLiveData<List<History>> {
-
+var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+        var document = UserManager.userData.email?.let { historys.document(it).collection(PATH_HISTORY) }
         val liveData = MutableLiveData<List<History>>()
 
-        FirebaseFirestore.getInstance()
-            .collection(PATH_HISTORY)
-//            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
-            .addSnapshotListener { snapshot, exception ->
+        if (document != null) {
+            document
+                .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+                .addSnapshotListener { snapshot, exception ->
 
-                val list = mutableListOf<History>()
-                for (document in snapshot!!) {
-                    Logger.d(document.id + " => " + document.data)
+                    val list = mutableListOf<History>()
+                    for (document in snapshot!!) {
+                        Logger.d(document.id + " => " + document.data)
 
-                    val history = document.toObject(History::class.java)
-                    list.add(history)
+                        val history = document.toObject(History::class.java)
+                        list.add(history)
+                    }
+
+                    liveData.value = list
                 }
-
-                liveData.value = list
-            }
+        }
         return liveData
     }
 
@@ -544,6 +546,52 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun pushHistory3(history: History, email: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+            val document = historys.document(email).collection(PATH_HISTORY).document()
+
+            history.createTime = Calendar.getInstance().timeInMillis
+            document
+                .set(history)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                    }
+                }
+
+        }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun pushHistory4(history: History, email: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+            val document = historys.document(email).collection(PATH_HISTORY).document()
+
+            history.createTime = Calendar.getInstance().timeInMillis
+            document
+                .set(history)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
+                    }
+                }
+
+        }
+
 
     override suspend fun pushUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->
         val users = FirebaseFirestore.getInstance().collection(PATH_USER)
@@ -786,7 +834,12 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateChatRoom
                 .document(document)
-                .update("finishTime", chatRoom.value?.finishTime,"startTime",chatRoom.value?.startTime)
+                .update(
+                    "finishTime",
+                    chatRoom.value?.finishTime,
+                    "startTime",
+                    chatRoom.value?.startTime
+                )
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         updateChatRoom
@@ -834,7 +887,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userOneScore,"allFight",allFight)
+                .update("armsType", userOneScore, "allFight", allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -867,7 +920,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userTwoScore,"allFight",allFight)
+                .update("armsType", userTwoScore, "allFight", allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -900,7 +953,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userThreeScore,"allFight",allFight)
+                .update("armsType", userThreeScore, "allFight", allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))
@@ -924,7 +977,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun updateUserFour(
         userId: String,
         userFourScore: ArmsType,
-        allFight : Long
+        allFight: Long
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateUserOne =
@@ -933,7 +986,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
             updateUserOne
                 .document(userId)
-                .update("armsType", userFourScore,"allFight",allFight)
+                .update("armsType", userFourScore, "allFight", allFight)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         continuation.resume(Result.Success(true))

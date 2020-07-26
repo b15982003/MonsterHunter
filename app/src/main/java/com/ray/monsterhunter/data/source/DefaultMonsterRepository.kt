@@ -151,5 +151,13 @@ class DefaultMonsterRepository(
         return remoteDataSource.pushHistory2(history,email)
     }
 
+    override suspend fun pushHistory3(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory3(history,email)
+    }
+
+    override suspend fun pushHistory4(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory4(history,email)
+    }
+
 
 }
