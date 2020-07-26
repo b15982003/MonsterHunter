@@ -148,5 +148,9 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun pushHistory2(history: History, email: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
 
 }

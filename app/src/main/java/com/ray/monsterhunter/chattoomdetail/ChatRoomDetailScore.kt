@@ -64,9 +64,14 @@ class ChatRoomDetailScore : Fragment() {
         })
 
         viewModel.isDone.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
-                Logger.d("userDone${viewModel.history.value}")
-                viewModel.pushHistory1()
+            if (viewModel.chatRoom.value?.userId == UserManager.userData.id){
+                    if (it == true) {
+                        Logger.d("userDone${viewModel.history.value}")
+                        viewModel.pushHistory1()
+                        viewModel.pushHistory2()
+                        viewModel.isDone.value = false
+                    }
+                }else{
                 viewModel.isDone.value = false
             }
         })

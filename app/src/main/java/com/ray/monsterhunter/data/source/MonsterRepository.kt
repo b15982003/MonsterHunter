@@ -73,5 +73,7 @@ interface MonsterRepository {
 
     suspend fun pushHistory1(history: History,email:String): Result<Boolean>
 
+    suspend fun pushHistory2(history: History,email:String): Result<Boolean>
+
 
 }

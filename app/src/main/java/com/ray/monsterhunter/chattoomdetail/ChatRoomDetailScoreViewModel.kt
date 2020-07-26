@@ -174,6 +174,42 @@ class ChatRoomDetailScoreViewModel(
         }
     }
 
+    fun pushHistory2() {
+
+        Logger.i("ok,${history.value}")
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+
+            when (val result = history.value?.let { user2.value?.email?.let { it1 ->
+                repository.pushHistory2(it,
+                    it1
+                )
+            } }) {
+                is Result.Success -> {
+
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                }
+                is Result.Fail -> {
+                    Logger.i("fail")
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is Result.Error -> {
+                    Logger.i("error")
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    Logger.i("no")
+                    _error.value = MonsterApplication.instance.getString(R.string.notGood)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
 
     fun getUserOneArms() {
         coroutineScope.launch {
