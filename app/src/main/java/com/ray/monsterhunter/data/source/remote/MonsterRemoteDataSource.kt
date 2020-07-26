@@ -498,25 +498,26 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun pushHistory(history: History): Result<Boolean> =
+    override suspend fun pushHistory1(history: History,email:String): Result<Boolean> =
         suspendCoroutine { continuation ->
-            val historys = FirebaseFirestore.getInstance().collection(PATH_HISTORY)
-            val document = historys.document()
+            val historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+            val document = historys.document(email).collection(PATH_HISTORY).document()
 
             history.createTime = Calendar.getInstance().timeInMillis
-            document
-                .set(history)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        continuation.resume(Result.Success(true))
-                    } else {
-                        task.exception?.let {
-                            continuation.resume(Result.Error(it))
-                            return@addOnCompleteListener
+                document
+                    .set(history)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                         }
-                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                }
+
         }
 
     override suspend fun pushUser(user: User): Result<Boolean> = suspendCoroutine { continuation ->

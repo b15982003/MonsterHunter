@@ -138,14 +138,18 @@ class ChatRoomDetailScoreViewModel(
 
     }
 
-    fun pushHistory() {
+    fun pushHistory1() {
 
         Logger.i("ok,${history.value}")
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = history.value?.let { repository.pushHistory(it) }) {
+            when (val result = history.value?.let { user1.value?.email?.let { it1 ->
+                repository.pushHistory1(it,
+                    it1
+                )
+            } }) {
                 is Result.Success -> {
 
                     _error.value = null

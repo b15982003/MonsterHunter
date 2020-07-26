@@ -36,6 +36,7 @@ class ChatRoomDetailScore : Fragment() {
         binding = ChatRoomDetailScoreFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
         binding.chatRoomScoreSentButton.setOnClickListener() {
 
             binding.chatRoomScoreBg.visibility = View.VISIBLE
@@ -65,7 +66,7 @@ class ChatRoomDetailScore : Fragment() {
         viewModel.isDone.observe(viewLifecycleOwner, Observer {
             if (it == true) {
                 Logger.d("userDone${viewModel.history.value}")
-                viewModel.pushHistory()
+                viewModel.pushHistory1()
                 viewModel.isDone.value = false
             }
         })
