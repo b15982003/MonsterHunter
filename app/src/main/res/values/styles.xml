@@ -227,5 +227,10 @@
         <item name="android:textColor">@color/gray_87_black</item>
     </style>
 
+    <style name="crawling_detail_date_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 
 </resources>
