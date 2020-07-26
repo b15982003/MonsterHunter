@@ -71,7 +71,14 @@ interface MonsterDataSource {
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
 
-    suspend fun pushHistory(history: History):Result<Boolean>
+    suspend fun pushHistory1(history: History,email:String):Result<Boolean>
+
+    suspend fun pushHistory2(history: History,email:String):Result<Boolean>
+
+    suspend fun pushHistory3(history: History,email:String): Result<Boolean>
+
+    suspend fun pushHistory4(history: History,email:String): Result<Boolean>
+
 
 
 }

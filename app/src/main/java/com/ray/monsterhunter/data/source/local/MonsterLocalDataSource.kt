@@ -117,17 +117,17 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateUserOne(userId: String, userOneScore: ArmsType): Result<Boolean> {
+    override suspend fun updateUserOne(userId: String, userOneScore: ArmsType,allFight : Long): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType): Result<Boolean> {
+    override suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType,allFight : Long): Result<Boolean> {
         TODO("Not yet implemented")
     }
 
     override suspend fun updateUserThree(
         userId: String,
-        userThreeScore: ArmsType
+        userThreeScore: ArmsType,allFight : Long
     ): Result<Boolean> {
         TODO("Not yet implemented")
     }
@@ -144,7 +144,19 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun pushHistory(history: History): Result<Boolean> {
+    override suspend fun pushHistory1(history: History,email:String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun pushHistory2(history: History, email: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun pushHistory3(history: History, email: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun pushHistory4(history: History, email: String): Result<Boolean> {
         TODO("Not yet implemented")
     }
 

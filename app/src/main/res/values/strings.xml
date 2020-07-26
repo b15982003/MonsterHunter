@@ -14,16 +14,19 @@
     <string name="testChatRoom">開啟聊天室</string>
 
     <!-- Postdailog -->
-    <string name="roomname">房間名稱</string>
+    <string name="crawlingName">文章名稱</string>
+    <string name="roomName">房間名稱</string>
     <string name="time">開場時間</string>
     <string name="textcontent">文字內容</string>
     <string name="sent">送出</string>
     <string name="armschoose">需要武器 ：</string>
     <string name="missionType">任務類型 ：</string>
+    <string name="crawlingType">文章類型：</string>
     <string name="monstername">魔物名稱 ：</string>
     <string name="time_title_text">良辰吉時 ：</string>
     <string name="chooseDate">選擇日期</string>
     <string name="chooseTime">選擇時間</string>
+    <string name="postDialog_text">《魔物獵人 世界（Monster Hunter World）》在今日正式開啟了遊戲新的季節活動：夏季暮光節（Summer Twilight Fest）。在此次節日期間遊戲不僅將有相應的裝扮，同時遊戲中也將更新大量每日限時任務以及合作任務等，可以讓玩家解鎖全新的裝備。</string>
 
     <!-- Error -->
     <string name="notGood">我也是笑笑的拉</string>
@@ -64,6 +67,8 @@
     <string name="chatRoom_detail_mission_success">成功</string>
     <string name="chatRoom_detail_mission_fail">失敗</string>
     <string name="chatRoom_detail_navigate_text">前往評分頁面</string>
+    <string name="chatRoom_detail_time_startText">遊戲開始</string>
+    <string name="chatRoom_detail_time_endText">遊戲結束</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>
@@ -75,6 +80,7 @@
     <string name="chatRoom_score_fake_arms">操蟲棍</string>
     <string name="chatRoom_score_finish_text">恭喜你完成了這次的任務，給予和你一起打拼的同伴評分吧！</string>
     <string name="chatRoom_score_remind">貼心小提醒：一個同伴只能給予一次加減的機會唷</string>
+    <string name="chatRoom_score_arms_text">目前總分 : </string>
 
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>
@@ -93,6 +99,8 @@
     <!-- friend detail -->
     <string name="friend_detail_follow">追蹤</string>
 
+    <!-- crawling detail -->
+    <string name="crawling_detail_leave_message">留言板 : </string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

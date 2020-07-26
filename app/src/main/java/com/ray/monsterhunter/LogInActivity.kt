@@ -51,11 +51,12 @@ class LogInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-       moveMainPage(auth?.currentUser)
+        Logger.d("checkIn11")
+        moveMainPage(auth?.currentUser)
     }
 
     fun googleLogin() {
+        Logger.d("checkIn22")
         var signInIntent = googleSignInClient?.signInIntent
         startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
     }
@@ -75,14 +76,14 @@ class LogInActivity : AppCompatActivity() {
                         id = account?.displayName,
                         email = account?.email
                     )
-                    UserManager.userData= user
+                    UserManager.userData = user
 
 
                     //Second step
                     Handler().postDelayed({
                         firebaseAuthWithGoogle(account)
-                    },500)
-
+                    }, 500)
+                    Logger.d("checkIn1")
                 }
             }
         }
@@ -94,12 +95,9 @@ class LogInActivity : AppCompatActivity() {
         auth?.signInWithCredential(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-
+                    Logger.d("checkIn2")
                     //Login
-                        moveMainPage(task.result?.user)
-
-
+                    moveMainPage(task.result?.user)
                 } else {
                     //Show the error message
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
@@ -109,7 +107,7 @@ class LogInActivity : AppCompatActivity() {
 
     fun moveMainPage(user: FirebaseUser?) {
         if (user != null) {
-
+            Logger.d("checkIn3")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }

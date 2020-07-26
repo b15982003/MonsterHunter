@@ -30,11 +30,10 @@ class ChatRoomFragment : Fragment() {
             findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetail(it))
         })
 
-
-
-
         adapter.setHasStableIds(true)
         binding.chatRoomRecy.adapter = adapter
+
+
         return binding.root
     }
 

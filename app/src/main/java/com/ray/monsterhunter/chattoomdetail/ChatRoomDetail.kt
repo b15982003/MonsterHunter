@@ -25,8 +25,14 @@ import com.ray.monsterhunter.util.UserManager
 class ChatRoomDetail : Fragment() {
 
 
-    private val viewModel by viewModels<ChatRoomDetailViewModel> { getVmFactory(ChatRoomDetailArgs.fromBundle(requireArguments()).chatRoom) }
-    lateinit var binding : ChatRoomDetailFragmentBinding
+    private val viewModel by viewModels<ChatRoomDetailViewModel> {
+        getVmFactory(
+            ChatRoomDetailArgs.fromBundle(
+                requireArguments()
+            ).chatRoom
+        )
+    }
+    lateinit var binding: ChatRoomDetailFragmentBinding
 
 
     @SuppressLint("ResourceType")
@@ -35,7 +41,7 @@ class ChatRoomDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = ChatRoomDetailFragmentBinding.inflate(inflater,container,false)
+        binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -50,13 +56,18 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailMissionTypeBackground.visibility = View.GONE
         binding.chatRoomDetailMissionTypeSuccess.visibility = View.GONE
         binding.chatRoomDetailMissionTypeFail.visibility = View.GONE
-        binding.chatRoomDetailTextMessageRecy.adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener{
-        })
+        binding.chatRoomDetailTimeBg.visibility = View.GONE
+        binding.chatRoomDetailTimeStart.visibility = View.GONE
+        binding.chatRoomDetailTimeEnd.visibility = View.GONE
+
+        binding.chatRoomDetailTextMessageRecy.adapter =
+            ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
+            })
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
 
-        binding.chatRoomDetailReadyButton.setOnClickListener(){
-            if(viewModel.chatRoom.value?.userId == UserManager.userData.id){
-                if (viewModel.ready.value == false){
+        binding.chatRoomDetailReadyButton.setOnClickListener() {
+            if (viewModel.chatRoom.value?.userId == UserManager.userData.id) {
+                if (viewModel.ready.value == false) {
                     viewModel.getready()
                     binding.chatRoomDetailStartButton.visibility = View.VISIBLE
                     binding.chatRoomDetailStartBackground.visibility = View.VISIBLE
@@ -65,10 +76,10 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailTenMinNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailTenSecNumber.visibility = View.VISIBLE
                     binding.chatRoomDetailLine.visibility = View.VISIBLE
-                    if(viewModel.timming.value == true){
+                    if (viewModel.timing.value == "true") {
                         binding.chatRoomDetailEndButton.visibility = View.VISIBLE
                     }
-                }else{
+                } else {
                     viewModel.endreadt()
                     binding.chatRoomDetailStartButton.visibility = View.GONE
                     binding.chatRoomDetailStartBackground.visibility = View.GONE
@@ -79,20 +90,24 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailTenSecNumber.visibility = View.GONE
                     binding.chatRoomDetailLine.visibility = View.GONE
                 }
-            }else{
-                Toast.makeText(MonsterApplication.instance,"請找房主趕快開始",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(MonsterApplication.instance, "請找房主趕快開始", Toast.LENGTH_SHORT).show()
             }
 
         }
 
-        binding.chatRoomDetailStartButton.setOnClickListener(){
-            viewModel.startTimming()
-            binding.chatRoomDetailStartButton.visibility = View.GONE
-            binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+        binding.chatRoomDetailStartButton.setOnClickListener() {
+            if(viewModel.liveChatRoom.value?.teammate?.size!! < 4){
+                Toast.makeText(MonsterApplication.instance,"人數不足",Toast.LENGTH_SHORT).show()
+            }else{
+                viewModel.startTimming()
+                binding.chatRoomDetailStartButton.visibility = View.GONE
+                binding.chatRoomDetailEndButton.visibility = View.VISIBLE
+            }
 
         }
 
-        binding.chatRoomDetailEndButton.setOnClickListener(){
+        binding.chatRoomDetailEndButton.setOnClickListener() {
             viewModel.chatRoom.value?.finishTime = viewModel.timeCheck
             viewModel.endTimming()
             binding.chatRoomDetailEndButton.visibility = View.GONE
@@ -102,89 +117,129 @@ class ChatRoomDetail : Fragment() {
 
         }
 
-        binding.chatRoomDetailMissionTypeSuccess.setOnClickListener(){
+        binding.chatRoomDetailMissionTypeSuccess.setOnClickListener() {
 
             viewModel.chatRoom.value?.missionResult = "true"
             viewModel.chatRoom.value?.endToScore = "true"
+            viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
+            viewModel.isGoon.value = false
             Handler().postDelayed({
-                findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
-            },500)
+                findNavController().navigate(
+                    NavigationDirections.actionGlobalChatRoomDetailScore(
+                        viewModel.chatRoom.value!!
+                    )
+                )
+            }, 500)
         }
 
-        binding.chatRoomDetailMissionTypeFail.setOnClickListener(){
+        binding.chatRoomDetailMissionTypeFail.setOnClickListener() {
             viewModel.chatRoom.value?.missionResult = "false"
             viewModel.chatRoom.value?.endToScore = "true"
+            viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
+            viewModel.isGoon.value = false
             Handler().postDelayed({
-                findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
-            },500)
+                findNavController().navigate(
+                    NavigationDirections.actionGlobalChatRoomDetailScore(
+                        viewModel.chatRoom.value!!
+                    )
+                )
+            }, 500)
         }
 
 
 
-        binding.chatRoomDetailSentMessage.setOnClickListener(){
+        binding.chatRoomDetailSentMessage.setOnClickListener() {
             viewModel.message.value?.let { it1 -> viewModel.sentMessage(it1) }
             Handler().postDelayed({
                 binding.chatRoomDetailItemEditText.text.clear()
-            },500)
+            }, 500)
         }
 
-        binding.chatRoomDetailToolbarBack.setOnClickListener(){
+        binding.chatRoomDetailToolbarBack.setOnClickListener() {
 
             viewModel.outLeave()
             viewModel.userArmsType.value?.let { it1 -> viewModel.cancelUser(it1) }
             Handler().postDelayed({
                 findNavController().navigateUp()
-            },500)
+            }, 500)
 
         }
 
-        viewModel.chatRoom.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                viewModel.teammateList = it.teammate
-            }
-        })
-
         viewModel.emptySeat.observe(viewLifecycleOwner, Observer {
-            if(it == true) {
+            if (it == true) {
+                viewModel.teammateList = viewModel.chatRoom.value?.teammate!!
                 viewModel.teammateList.add(UserManager.userData.email.toString())
             }
         })
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
-            if(it == true){
-                Toast.makeText(MonsterApplication.instance,"人員已經滿了",Toast.LENGTH_LONG).show()
+            if (it == true) {
+                Toast.makeText(MonsterApplication.instance, "人員已經滿了", Toast.LENGTH_LONG).show()
                 findNavController().navigateUp()
                 viewModel.getOutFinish()
             }
         })
 
         viewModel.isGoon.observe(viewLifecycleOwner, Observer {
-            if (it == true){
+            if (it == true) {
                 viewModel.teammateList.remove(UserManager.userData.email.toString())
             }
         })
 
+        viewModel.timing.observe(viewLifecycleOwner, Observer {
+            if (viewModel.chatRoom.value?.userId == UserManager.userData.id) {
+                viewModel.chatRoom.value?.startTime = viewModel.timing.value!!
+                viewModel.updateChatRoomInfo()
+            }
+
+        })
+
         viewModel.timeSec.observe(viewLifecycleOwner, Observer {
-            binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck%10).toString()
-            binding.chatRoomDetailTenSecNumber.text = (viewModel.timeCheck/10).toString()
-            binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck/60).toString()
-            binding.chatRoomDetailTenMinNumber.text = (viewModel.timeCheck/600).toString()
+            binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck % 10).toString()
+            binding.chatRoomDetailTenSecNumber.text = (if(viewModel.timeCheck / 10 > 5){
+                0
+            }else{
+                viewModel.timeCheck / 10
+            }).toString()
+            binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck / 60).toString()
+            binding.chatRoomDetailTenMinNumber.text = (viewModel.timeCheck / 600).toString()
         })
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
-            if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "true"){
+            if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "true") {
                 Handler().postDelayed({
-                    findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetailScore(viewModel.chatRoom.value!!))
-                },500)
+                    findNavController().navigate(
+                        NavigationDirections.actionGlobalChatRoomDetailScore(
+                            viewModel.chatRoom.value!!
+                        )
+                    )
+                }, 500)
+            }else if(viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true"){
+                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeEnd.visibility = View.GONE
+                Handler().postDelayed({
+                    binding.chatRoomDetailTimeBg.visibility = View.GONE
+                    binding.chatRoomDetailTimeStart.visibility = View.GONE
+                },3000)
+            }else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false"){
+                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                binding.chatRoomDetailTimeStart.visibility = View.GONE
+                binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
+
+                Handler().postDelayed({
+                    binding.chatRoomDetailTimeBg.visibility = View.GONE
+                    binding.chatRoomDetailTimeEnd.visibility = View.GONE
+                },3000)
             }
         })
 
         viewModel.userArms.observe(viewLifecycleOwner, Observer {
             viewModel.userArmsType.value?.let { it1 -> viewModel.getUserArms(it1) }
             binding.chatRoomDetailArmsImage.setImageResource(
-                when(viewModel.userArms.value){
+                when (viewModel.userArms.value) {
                     1 -> R.drawable.ic_arms_knife
                     2 -> R.drawable.ic_arms_bigknife
                     3 -> R.drawable.ic_arms_bow
@@ -204,7 +259,8 @@ class ChatRoomDetail : Fragment() {
             )
         })
 
-        val arms = arrayListOf<String>("皆可",
+        val arms = arrayListOf<String>(
+            "皆可",
             "太刀", "大劍",
             "弓箭", "充能斧",
             "輕弩", "雙劍",
@@ -238,7 +294,7 @@ class ChatRoomDetail : Fragment() {
                             viewModel.userArms.value = 0
                         }
                         1L -> {
-                            viewModel.userArmsType.value?.armsType  = "太刀"
+                            viewModel.userArmsType.value?.armsType = "太刀"
                             viewModel.userArms.value = 1
                         }
                         2L -> {
@@ -246,51 +302,51 @@ class ChatRoomDetail : Fragment() {
                             viewModel.userArms.value = 2
                         }
                         3L -> {
-                            viewModel.userArmsType.value?.armsType  = "弓箭"
+                            viewModel.userArmsType.value?.armsType = "弓箭"
                             viewModel.userArms.value = 3
                         }
                         4L -> {
-                            viewModel.userArmsType.value?.armsType  = "充能斧"
+                            viewModel.userArmsType.value?.armsType = "充能斧"
                             viewModel.userArms.value = 4
                         }
                         5L -> {
-                            viewModel.userArmsType.value?.armsType  = "輕弩"
+                            viewModel.userArmsType.value?.armsType = "輕弩"
                             viewModel.userArms.value = 5
                         }
                         6L -> {
-                            viewModel.userArmsType.value?.armsType  = "雙劍"
+                            viewModel.userArmsType.value?.armsType = "雙劍"
                             viewModel.userArms.value = 6
                         }
                         7L -> {
-                            viewModel.userArmsType.value?.armsType  = "操蟲棍"
+                            viewModel.userArmsType.value?.armsType = "操蟲棍"
                             viewModel.userArms.value = 7
                         }
                         8L -> {
-                            viewModel.userArmsType.value?.armsType  = "重弩"
+                            viewModel.userArmsType.value?.armsType = "重弩"
                             viewModel.userArms.value = 8
                         }
                         9L -> {
-                            viewModel.userArmsType.value?.armsType  = "大錘"
+                            viewModel.userArmsType.value?.armsType = "大錘"
                             viewModel.userArms.value = 9
                         }
                         10L -> {
-                            viewModel.userArmsType.value?.armsType  = "銃槍"
+                            viewModel.userArmsType.value?.armsType = "銃槍"
                             viewModel.userArms.value = 10
                         }
                         11L -> {
-                            viewModel.userArmsType.value?.armsType  = "單手劍"
+                            viewModel.userArmsType.value?.armsType = "單手劍"
                             viewModel.userArms.value = 11
                         }
                         12L -> {
-                            viewModel.userArmsType.value?.armsType  = "長槍"
+                            viewModel.userArmsType.value?.armsType = "長槍"
                             viewModel.userArms.value = 12
                         }
                         13L -> {
-                            viewModel.userArmsType.value?.armsType  = "斬擊斧"
+                            viewModel.userArmsType.value?.armsType = "斬擊斧"
                             viewModel.userArms.value = 13
                         }
                         14L -> {
-                            viewModel.userArmsType.value?.armsType  = "狩獵笛"
+                            viewModel.userArmsType.value?.armsType = "狩獵笛"
                             viewModel.userArms.value = 14
                         }
 

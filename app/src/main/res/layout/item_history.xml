@@ -77,6 +77,15 @@
                     app:layout_constraintStart_toStartOf="@+id/history_list_monster_name"
                     app:layout_constraintTop_toBottomOf="@id/history_list_monster_name"
                     tools:text="@string/chatRoom_test_text" />
+                <TextView
+                    android:id="@+id/history_list_finish_time_sec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="秒"
+                    app:layout_constraintStart_toEndOf="@id/history_list_finish_time"
+                    app:layout_constraintTop_toTopOf="@id/history_list_finish_time"
+                    android:layout_marginStart="4dp"
+                    />
 
                 <TextView
                     android:id="@+id/history_list_user1_name"

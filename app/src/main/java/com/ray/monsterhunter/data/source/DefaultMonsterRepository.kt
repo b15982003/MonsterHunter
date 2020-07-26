@@ -143,8 +143,20 @@ class DefaultMonsterRepository(
         return remoteDataSource.pushChatRoom(chatRoom)
     }
 
-    override suspend fun pushHistory(history: History): Result<Boolean> {
-        return remoteDataSource.pushHistory(history)
+    override suspend fun pushHistory1(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory1(history,email)
+    }
+
+    override suspend fun pushHistory2(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory2(history,email)
+    }
+
+    override suspend fun pushHistory3(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory3(history,email)
+    }
+
+    override suspend fun pushHistory4(history: History,email:String): Result<Boolean> {
+        return remoteDataSource.pushHistory4(history,email)
     }
 
 

@@ -25,6 +25,8 @@ class ChatRoomDetailViewModel(
     lateinit var runnable: Runnable
     private var handler = Handler()
     var timeCheck: Long = 0
+    var timeCheckTenSec: Long = 0
+    var timeTenSec: Long = 0
 
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
@@ -40,7 +42,6 @@ class ChatRoomDetailViewModel(
     var emptySeat = MutableLiveData<Boolean>(false)
 
     var isGoon = MutableLiveData<Boolean>(false)
-
 
     var liveMessage = MutableLiveData<List<Message>>()
 
@@ -70,10 +71,10 @@ class ChatRoomDetailViewModel(
     val user: LiveData<User>
         get() = _user
 
-    private val _taming = MutableLiveData<Boolean>(false)
+    private val _timing = MutableLiveData<String>("null")
 
-    val timming: LiveData<Boolean>
-        get() = _taming
+    val timing: LiveData<String>
+        get() = _timing
 
 
     private var _timeSec = MutableLiveData<Long>(0)
@@ -219,7 +220,8 @@ class ChatRoomDetailViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
+            when (val result =
+                repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
@@ -316,8 +318,8 @@ class ChatRoomDetailViewModel(
 
 
     fun startTimming() {
-        _taming.value = true
-
+        _timing.value = "true"
+        _chatroom.value?.startTime = "true"
         runnable = Runnable {
             _timeSec.value = _timeSec.value?.plus(1)
             timeCheck = timeSec.value!!
@@ -328,9 +330,14 @@ class ChatRoomDetailViewModel(
 
 
     fun endTimming() {
-        _taming.value = false
+        _timing.value = "false"
+        _chatroom.value?.startTime = "false"
         _timeSec.value = 0
         handler.removeCallbacks(runnable)
+    }
+
+    fun returnStartTime(){
+        _timing.value = "null"
     }
 
     fun getready() {

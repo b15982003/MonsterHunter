@@ -7,7 +7,7 @@
 
     <data>
         <variable
-            name="even"
+            name="event"
             type="com.ray.monsterhunter.data.ChatRoom" />
 
     </data>
@@ -36,20 +36,21 @@
 
                 <ImageView
                     android:id="@+id/chatRoom_list_monster_image"
-                    imageUrl="@{even.image}"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="5dp"
+                    imageUrl="@{event.image}"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:src="@drawable/ic_monster"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@id/chatRoom_list_monster_shape"
+                    app:layout_constraintStart_toStartOf="@id/chatRoom_list_monster_shape"
+                    app:layout_constraintBottom_toBottomOf="@id/chatRoom_list_monster_shape"
+                    app:layout_constraintEnd_toEndOf="@id/chatRoom_list_monster_shape"
+                   />
 
                 <TextView
                     android:id="@+id/chatRoom_list_monster_shape"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="11dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="4dp"
                     android:background="@drawable/chatroom_list_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -60,12 +61,12 @@
                     style="@style/chatRoom_data_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@{even.monsterName}"
+                    android:text="@{event.monsterName}"
                     app:layout_constraintStart_toStartOf="@+id/chatRoom_list_monster_image"
-                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_monster_shape"
                     app:layout_constraintEnd_toEndOf="@id/chatRoom_list_monster_image"
+                    app:layout_constraintBottom_toBottomOf="@id/chatRoom_list_data_armsC"
                     tools:text="@string/chatRoom_test_text_short" />
 
                 <TextView
@@ -74,9 +75,9 @@
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@{even.roomName}"
+                    android:text="@{event.roomName}"
                     app:layout_constraintStart_toEndOf="@+id/chatRoom_list_monster_image"
-                    app:layout_constraintTop_toTopOf="@+id/chatRoom_list_monster_image"
+                    app:layout_constraintTop_toTopOf="@+id/chatRoom_list_monster_shape"
                     tools:text="@string/chatRoom_test_text" />
 
                 <TextView
@@ -86,10 +87,87 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@{even.userId}"
+                    android:text="@{event.userId}"
                     app:layout_constraintStart_toStartOf="@+id/chatRoom_list_roomName"
                     app:layout_constraintTop_toBottomOf="@id/chatRoom_list_roomName"
                     tools:text="@string/chatRoom_test_text" />
+
+
+                <TextView
+                    android:id="@+id/chatRoom_list_startTime_date"
+                    style="@style/home_data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/chatRoom_list_userId"
+                    app:layout_constraintTop_toBottomOf="@+id/chatRoom_list_userId"
+                    tools:text="@string/testGo" />
+
+                <TextView
+                    android:id="@+id/chatRoom_list_startTime2"
+                    style="@style/home_data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/chatRoom_list_startTime_date"
+                    app:layout_constraintTop_toTopOf="@+id/chatRoom_list_startTime_date"
+                    tools:text="@string/chatRoom_test_text_short" />
+
+                <TextView
+                    android:id="@+id/chatRoom_list_data_armsA"
+                    style="@style/home_data_button"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:text="@{event.armsType1}"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@id/chatRoom_list_userId"
+                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_startTime_date"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/chatRoom_list_data_armsB"
+                    style="@style/home_data_button"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{event.armsType2}"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toTopOf="@id/chatRoom_list_data_armsA"
+                    app:layout_constraintStart_toEndOf="@id/chatRoom_list_data_armsA"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/chatRoom_list_data_armsC"
+                    style="@style/home_data_button"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{event.armsType3}"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_data_armsA"
+                    app:layout_constraintStart_toStartOf="@id/chatRoom_list_data_armsA"
+                    tools:text="@string/testArms" />
+
+                <TextView
+                    android:id="@+id/chatRoom_list_data_armsD"
+                    style="@style/home_data_button"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/home_arms_background"
+                    android:gravity="center"
+                    android:text="@{event.armsType4}"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toTopOf="@id/chatRoom_list_data_armsC"
+                    app:layout_constraintStart_toEndOf="@id/chatRoom_list_data_armsC"
+                    tools:text="@string/testArms" />
 
                 <TextView
                     android:id="@+id/chatRoom_list_startTime"
@@ -97,8 +175,9 @@
                     android:textColor="@color/gray_888888"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/chatRoom_list_monsterName"
                     app:layout_constraintEnd_toEndOf="@id/chatRoom_list_typeName"
+                    app:layout_constraintTop_toBottomOf="@id/chatRoom_list_data_armsD"
+                    android:layout_marginTop="8dp"
                     tools:text="@string/chatRoom_test_text" />
 
                 <TextView
@@ -106,12 +185,12 @@
                     style="@style/home_data_button"
                     android:layout_width="70dp"
                     android:layout_height="30dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="4dp"
                     android:background="@drawable/home_type_background"
                     android:gravity="center"
-                    android:text="@{even.typeName}"
+                    android:text="@{event.typeName}"
+                    app:layout_constraintTop_toTopOf="@id/chatRoom_list_data_armsA"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/chatRoom_list_userId"
                     tools:text="@string/testType" />
 
 

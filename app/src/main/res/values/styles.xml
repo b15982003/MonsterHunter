@@ -40,7 +40,7 @@
 
     <!-- Home -->
     <style name="home_data_title">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
@@ -144,17 +144,29 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="chatRoom_Detail_time_text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
     <!-- chatRoomScore -->
     <style name="chatRoom_score_name">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="chatRoom_score_title">
-        <item name="android:textSize">50sp</item>
+        <item name="android:textSize">40sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/orange_8b572a</item>
+    </style>
+
+    <style name="chatRoom_score_arms">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_3f3a3a</item>
     </style>
 
     <style name="chatRoom_score_sent_button">
@@ -198,5 +210,22 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <!-- crawling detail -->
+    <style name="crawling_detail_title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
+
+    <style name="crawling_Detail_createTime">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/gray_cccccc</item>
+    </style>
+
+    <style name="crawling_Detail_leave_message">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
+
 
 </resources>
