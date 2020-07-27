@@ -84,6 +84,18 @@
             app:nullable="false" />
     </dialog>
 
+    <fragment
+        android:id="@+id/crawlingDetail"
+        android:name="com.ray.monsterhunter.crawlingdetail.CrawlingDetail"
+        android:label="CrawlingDetail"
+        tools:layout="@layout/crawling_detail_fragment"
+        >
+        <argument
+            android:name="crawlingDetail"
+            app:argType="com.ray.monsterhunter.data.Crawling"
+            app:nullable="false" />
+    </fragment>
+
 
 
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
@@ -99,5 +111,6 @@
         app:popUpToInclusive="false" />
     <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
     <action android:id="@+id/action_global_dialogFriendDetail" app:destination="@id/dialogFriendDetail" />
+    <action android:id="@+id/action_global_crawlingDetail" app:destination="@id/crawlingDetail" />
 
 </navigation>
