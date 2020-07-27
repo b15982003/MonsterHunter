@@ -72,6 +72,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/login_activity_signin_button"
                 android:gravity="center"
+                android:visibility="invisible"
                 android:text="@string/google_signOut"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -132,6 +133,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
 
+                <TextView
+                    android:id="@+id/profile_armsA_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@id/profile_armsA"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsA"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
+
                 <ImageView
                     android:id="@+id/profile_armsA"
                     android:layout_width="30dp"
@@ -167,17 +180,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/profile_armsA_line" />
 
-                <TextView
-                    android:id="@+id/profile_armsA_ratingBar_god"
-                    style="@style/profile_ratingBar_god"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/profile_rating_text"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
-                    app:layout_constraintEnd_toEndOf="@id/profile_armsA"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsA"
-                    app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
+
 
                 <TextView
                     android:id="@+id/profile_armsA_score"
@@ -190,6 +193,18 @@
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
                     app:layout_constraintStart_toEndOf="@+id/profile_armsA_ratingBar"
                     app:layout_constraintTop_toTopOf="@id/profile_armsA_ratingBar" />
+
+                <TextView
+                    android:id="@+id/profile_armsB_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsB"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsB"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
 
                 <ImageView
                     android:id="@+id/profile_armsB"
@@ -226,17 +241,7 @@
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="69dp" />
 
-                <TextView
-                    android:id="@+id/profile_armsB_ratingBar_god"
-                    style="@style/profile_ratingBar_god"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/profile_rating_text"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_armsB"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsB"
-                    app:layout_constraintTop_toTopOf="@id/profile_armsB_ratingBar" />
+
 
                 <TextView
                     android:id="@+id/profile_armsB_score"
@@ -309,15 +314,6 @@
                     app:layout_constraintTop_toTopOf="@id/profile_armsC_ratingBar" />
 
 
-                <ImageView
-                    android:id="@+id/profile_armsD"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_gunax"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsC"
-                    app:layout_constraintTop_toBottomOf="@id/profile_armsC" />
-
                 <TextView
                     android:id="@+id/profile_armsD_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -329,6 +325,17 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsD"
                     app:layout_constraintStart_toStartOf="@id/profile_armsD"
                     app:layout_constraintTop_toTopOf="@id/profile_armsD_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsD"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_gunax"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsC"
+                    app:layout_constraintTop_toBottomOf="@id/profile_armsC" />
+
 
                 <TextView
                     android:id="@id/profile_armsD_line"
@@ -368,16 +375,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsC_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsD_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsE"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_lightcrossbow"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsD"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
-
                 <TextView
                     android:id="@+id/profile_armsE_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -389,6 +386,18 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsE"
                     app:layout_constraintStart_toStartOf="@id/profile_armsE"
                     app:layout_constraintTop_toTopOf="@id/profile_armsE_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsE"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_lightcrossbow"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsD"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsD" />
+
+
 
                 <TextView
                     android:id="@+id/profile_armsE_line"
@@ -427,16 +436,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsD_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsE_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsF"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_double_knife"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsE"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
-
                 <TextView
                     android:id="@+id/profile_armsF_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -448,6 +447,18 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsF"
                     app:layout_constraintStart_toStartOf="@id/profile_armsF"
                     app:layout_constraintTop_toTopOf="@id/profile_armsF_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsF"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_double_knife"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsE"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsE" />
+
+
 
                 <TextView
                     android:id="@id/profile_armsF_line"
@@ -486,17 +497,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsE_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsF_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsG"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_stick"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsF"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
-
-
                 <TextView
                     android:id="@+id/profile_armsG_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -508,6 +508,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsG"
                     app:layout_constraintStart_toStartOf="@id/profile_armsG"
                     app:layout_constraintTop_toTopOf="@id/profile_armsG_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsG"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_stick"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsF"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsF" />
+
+
+
 
                 <TextView
                     android:id="@+id/profile_armsG_lineG"
@@ -546,16 +559,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsF_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsG_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsH"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_hcrossbow"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsG"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsG" />
-
                 <TextView
                     android:id="@+id/profile_armsH_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -567,6 +570,18 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsH"
                     app:layout_constraintStart_toStartOf="@id/profile_armsH"
                     app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar" />
+
+
+
+                <ImageView
+                    android:id="@+id/profile_armsH"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_hcrossbow"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsG"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsG" />
+
 
                 <TextView
                     android:id="@id/profile_armsH_line"
@@ -606,17 +621,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsG_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsH_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsI"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_bighammer"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_armsJ"
-                    app:layout_constraintStart_toStartOf="@+id/profile_armsH"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
-
                 <TextView
                     android:id="@+id/profile_armsI_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -628,6 +632,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsI"
                     app:layout_constraintStart_toStartOf="@id/profile_armsI"
                     app:layout_constraintTop_toTopOf="@id/profile_armsI_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsI"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_bighammer"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsJ"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsH"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsH" />
+
+
 
                 <TextView
                     android:id="@id/profile_armsI_line"
@@ -666,17 +683,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsH_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsI_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsJ"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_gunspear"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_armsK"
-                    app:layout_constraintStart_toStartOf="@+id/profile_armsI"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
-
                 <TextView
                     android:id="@+id/profile_armsJ_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -688,6 +694,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsJ"
                     app:layout_constraintStart_toStartOf="@id/profile_armsJ"
                     app:layout_constraintTop_toTopOf="@id/profile_armsJ_ratingBar" />
+
+
+                <ImageView
+                    android:id="@+id/profile_armsJ"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_gunspear"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsK"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsI"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsI" />
+
+
 
                 <TextView
                     android:id="@id/profile_armsJ_line"
@@ -727,15 +746,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsI_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsJ_ratingBar" />
 
-                <ImageView
-                    android:id="@+id/profile_armsK"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_singo_knife"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_armsL"
-                    app:layout_constraintStart_toStartOf="@+id/profile_armsJ"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
 
                 <TextView
                     android:id="@+id/profile_armsK_ratingBar_god"
@@ -748,6 +758,18 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsK"
                     app:layout_constraintStart_toStartOf="@id/profile_armsK"
                     app:layout_constraintTop_toTopOf="@id/profile_armsK_ratingBar" />
+
+                <ImageView
+                    android:id="@+id/profile_armsK"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_singo_knife"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsL"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsJ"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsJ" />
+
+
 
                 <TextView
                     android:id="@+id/profile_armsK_line"
@@ -787,16 +809,6 @@
                     app:layout_constraintTop_toTopOf="@id/profile_armsK_ratingBar" />
 
 
-                <ImageView
-                    android:id="@+id/profile_armsL"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_spear"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_armsM"
-                    app:layout_constraintStart_toStartOf="@+id/profile_armsK"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
-
                 <TextView
                     android:id="@+id/profile_armsL_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -808,6 +820,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsL"
                     app:layout_constraintStart_toStartOf="@id/profile_armsL"
                     app:layout_constraintTop_toTopOf="@id/profile_armsL_ratingBar" />
+
+
+
+                <ImageView
+                    android:id="@+id/profile_armsL"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_spear"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsM"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsK"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsK" />
+
 
                 <TextView
                     android:id="@+id/profile_armsL_line"
@@ -846,17 +871,6 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsK_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsL_ratingBar" />
 
-
-                <ImageView
-                    android:id="@+id/profile_armsM"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_arms_ax"
-                    app:layout_constraintBottom_toTopOf="@+id/profile_armsN"
-                    app:layout_constraintStart_toStartOf="@+id/profile_armsL"
-                    app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
-
                 <TextView
                     android:id="@+id/profile_armsM_ratingBar_god"
                     style="@style/profile_ratingBar_god"
@@ -868,6 +882,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsM"
                     app:layout_constraintStart_toStartOf="@id/profile_armsM"
                     app:layout_constraintTop_toTopOf="@id/profile_armsM_ratingBar" />
+
+
+
+                <ImageView
+                    android:id="@+id/profile_armsM"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_arms_ax"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_armsN"
+                    app:layout_constraintStart_toStartOf="@+id/profile_armsL"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_armsL" />
+
 
                 <TextView
                     android:id="@+id/profile_armsM_line"
@@ -906,6 +933,18 @@
                     app:layout_constraintEnd_toEndOf="@id/profile_armsL_score"
                     app:layout_constraintTop_toTopOf="@id/profile_armsM_ratingBar" />
 
+                <TextView
+                    android:id="@+id/profile_armsN_ratingBar_god"
+                    style="@style/profile_ratingBar_god"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/profile_rating_text"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
+                    app:layout_constraintEnd_toEndOf="@+id/profile_armsN"
+                    app:layout_constraintStart_toStartOf="@id/profile_armsN"
+                    app:layout_constraintTop_toTopOf="@id/profile_armsN_ratingBar" />
+
 
                 <ImageView
                     android:id="@+id/profile_armsN"
@@ -918,17 +957,7 @@
                     app:layout_constraintStart_toStartOf="@+id/profile_armsM"
                     app:layout_constraintTop_toBottomOf="@+id/profile_armsM" />
 
-                <TextView
-                    android:id="@+id/profile_armsN_ratingBar_god"
-                    style="@style/profile_ratingBar_god"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/profile_rating_text"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_armsN"
-                    app:layout_constraintStart_toStartOf="@id/profile_armsN"
-                    app:layout_constraintTop_toTopOf="@id/profile_armsN_ratingBar" />
+
 
                 <TextView
                     android:id="@id/profile_armsN_line"

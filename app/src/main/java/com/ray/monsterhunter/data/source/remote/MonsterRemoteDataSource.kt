@@ -31,6 +31,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private val PATH_MESSAGE = "message"
+    private val PATH_LEAVEMESSAGE = "leaveMessage"
     private val PATH_FRIENDLIST = "friendList"
     private val PATH_USERARMSTYPE = "userArmsType"
     private const val KEY_START_TIME = "dateTime"
@@ -40,7 +41,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_CRAWLING)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -112,6 +113,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 }
             }
     }
+    
 
     override suspend fun getMyUser(document: String): Result<List<User>> =
         suspendCoroutine { continuation ->
@@ -148,7 +150,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()
@@ -165,13 +167,14 @@ object MonsterRemoteDataSource : MonsterDataSource {
     }
 
     override fun getLiveHistory(): MutableLiveData<List<History>> {
-var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
-        var document = UserManager.userData.email?.let { historys.document(it).collection(PATH_HISTORY) }
+        var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+        var document =
+            UserManager.userData.email?.let { historys.document(it).collection(PATH_HISTORY) }
         val liveData = MutableLiveData<List<History>>()
 
         if (document != null) {
             document
-                .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+                .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
 
                     val list = mutableListOf<History>()
@@ -208,6 +211,28 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
 
                 liveData.value = list
                 Logger.d("liveDatagg${liveData.value}")
+            }
+        return liveData
+    }
+
+    override fun getLiveLeaveMessage(document: String): MutableLiveData<List<Message>> {
+
+        val liveData = MutableLiveData<List<Message>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CRAWLING)
+            .document(document)
+            .collection(PATH_LEAVEMESSAGE)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
+                val list = mutableListOf<Message>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+                    val message = document.toObject(Message::class.java)
+                    list.add(message)
+                }
+                liveData.value = list
+                Logger.d("livemessagr${liveData.value}")
             }
         return liveData
     }
@@ -692,6 +717,38 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
                 }
         }
 
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun leaveMessage(
+        message : Message,document :String
+    ): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val messages = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
+            val documentMessage =messages.document(document).collection(PATH_LEAVEMESSAGE).document()
+
+            message.createTime = Calendar.getInstance().timeInMillis
+
+                documentMessage
+                    .set(message)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+        }
+
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun postFriend(user: User): Result<Boolean> =
         suspendCoroutine { continuation ->
@@ -1017,6 +1074,33 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
                 .collection(PATH_USERARMSTYPE).document(userArmsType.email)
 
             documentCancelUser
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
+
+    override suspend fun deleteRoom(document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val deleteRooms =
+                FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val document = deleteRooms.document(document)
+
+            document
                 .delete()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {

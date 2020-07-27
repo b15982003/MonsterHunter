@@ -347,7 +347,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             val dateToStamp = TimeUtil.DateToStamp("$year-$month-$day", Locale.TAIWAN)
             viewModel.event.value?.dateTime?.date = dateToStamp
 
-            binding.chatRoomPostDateText.text = "$year-$month-$day"
+            binding.chatRoomPostDateText.text = "$year-${month.plus(1)}-$day"
         }
         context?.let {
             DatePickerDialog(

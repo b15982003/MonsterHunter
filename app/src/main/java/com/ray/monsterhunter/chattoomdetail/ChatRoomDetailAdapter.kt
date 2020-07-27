@@ -13,7 +13,8 @@ import com.ray.monsterhunter.util.TimeUtil
 import com.ray.monsterhunter.util.UserManager
 import java.util.*
 
-class ChatRoomDetailAdapter(private val onClickListener: OnClickListener ) :
+class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
+                            ) :
     ListAdapter<Message, RecyclerView.ViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (message: Message) -> Unit) {

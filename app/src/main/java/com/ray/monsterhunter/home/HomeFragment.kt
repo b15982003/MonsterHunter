@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.databinding.HomeFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.network.LoadApiStatus
@@ -44,6 +46,7 @@ class HomeFragment : Fragment() {
 
 
         binding.homeDataRecy.adapter = HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener{
+            findNavController().navigate(NavigationDirections.actionGlobalCrawlingDetail(it))
 
         })
         HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener {  }).notifyDataSetChanged()

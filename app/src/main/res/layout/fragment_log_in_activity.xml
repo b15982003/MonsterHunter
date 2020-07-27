@@ -13,14 +13,29 @@
 
         <ImageView
             android:id="@+id/google_sing_in_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="180dp"
             android:src="@drawable/ic_other_fire"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="50dp"
+            android:alpha="0.7"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_app_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="70dp"
+            />
+
 
         <TextView
             android:id="@+id/google_sign_in_button"

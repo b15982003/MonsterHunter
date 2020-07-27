@@ -69,6 +69,8 @@ class ChatRoomDetailScore : Fragment() {
                         Logger.d("userDone${viewModel.history.value}")
                         viewModel.pushHistory1()
                         viewModel.pushHistory2()
+                        viewModel.pushHistory3()
+                        viewModel.pushHistory4()
                         viewModel.isDone.value = false
                     }
                 }else{

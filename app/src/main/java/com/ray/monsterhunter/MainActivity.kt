@@ -139,12 +139,12 @@ class MainActivity : BaseActivity() {
 //                Logger.d("MainactiveMan${viewModel.user.value}")
 //        })
 
-
+        setupNavController()
+        setupDrawer()
         userName.text = UserManager.userData.id
         Glide.with(navigationView).load(UserManager.userData.image).into(ivHeaderPhoto)
         //addData()
-        setupNavController()
-        setupDrawer()
+
 
     }
 
@@ -160,7 +160,11 @@ class MainActivity : BaseActivity() {
     private fun setupNavController() {
         findNavController(R.id.myNavHostFragment).addOnDestinationChangedListener { navController: NavController, _: NavDestination, _: Bundle? ->
             viewModel.currentFragmentType.value = when (navController.currentDestination?.id) {
-                R.id.homeFragment -> CurrentFragmentType.HOME
+                R.id.homeFragment -> {
+                    val home = binding.bottomNav.menu.findItem(R.id.navigation_home)
+                    home.isChecked = true
+                    CurrentFragmentType.HOME
+                }
                 R.id.chatRoomFragment -> CurrentFragmentType.CHATROOM
                 R.id.friendFragment -> CurrentFragmentType.FRIEND
                 R.id.historyFragment -> CurrentFragmentType.HISTORY

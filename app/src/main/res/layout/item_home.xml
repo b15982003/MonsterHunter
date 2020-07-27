@@ -124,7 +124,7 @@
                     android:padding="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/home_data_image"
                     app:layout_constraintTop_toBottomOf="@id/home_data_creatTime"
                     tools:text="@string/postDialog_text"
                     />

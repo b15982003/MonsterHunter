@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.chatroom.ChatRoomAdapter
 import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailAdapter
+import com.ray.monsterhunter.crawlingdetail.CrawlingDetailAdapter
 import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.friend.item.FriendItemAdapter
 import com.ray.monsterhunter.history.HistoryAdapter
@@ -63,6 +64,17 @@ fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,message: List<Mess
         recyclerView.adapter?.apply {
             when (this){
                 is ChatRoomDetailAdapter -> submitList(it)
+            }
+        }
+    }
+}
+
+@BindingAdapter("crawlingleaveMessage")
+fun bindCrawlingMessageRecycleView(recyclerView: RecyclerView,message: List<Message>?){
+    message?.let {
+        recyclerView.adapter?.apply {
+            when (this){
+                is CrawlingDetailAdapter -> submitList(it)
             }
         }
     }
