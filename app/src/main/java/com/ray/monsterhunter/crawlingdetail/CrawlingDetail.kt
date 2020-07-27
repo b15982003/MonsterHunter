@@ -44,6 +44,9 @@ class CrawlingDetail : Fragment() {
         var adapter = CrawlingDetailAdapter(CrawlingDetailAdapter.OnClickListener {
         })
 
+        adapter.setHasStableIds(true)
+
+
         binding.crawlingDetailLeaveMessageRecy.adapter = adapter
 
         var AllStampTimeToDate = viewModel.crawling.value?.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }

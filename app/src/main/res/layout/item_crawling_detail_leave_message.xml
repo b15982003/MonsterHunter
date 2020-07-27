@@ -11,17 +11,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="10dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -31,9 +34,10 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/leave_message_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
                     android:src="@drawable/fire_heater"
                     imageUrl="@{product.image}"
                     app:civ_border_color="@color/white"
@@ -47,7 +51,8 @@
                     android:id="@+id/leave_message_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="8dp"
+                    style="@style/crawling_detail_date_text"
                     android:text="@{product.userId}"
                     app:layout_constraintStart_toEndOf="@id/leave_message_image"
                     app:layout_constraintTop_toTopOf="@id/leave_message_image"
@@ -56,6 +61,7 @@
                 <TextView
                     android:id="@+id/leave_message_content"
                     android:layout_width="0dp"
+                    style="@style/crawling_detail_date_text"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="8dp"

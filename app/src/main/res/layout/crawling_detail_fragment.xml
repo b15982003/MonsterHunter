@@ -16,134 +16,162 @@
         android:layout_height="match_parent"
         tools:context=".crawlingdetail.CrawlingDetail">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toTopOf="@+id/crawling_detail_editText_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/crawling_detail_title"
-                style="@style/crawling_detail_title"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:gravity="center"
-                android:text="@{viewModel.crawling.roomname}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/chatRoom_test_text" />
+                android:layout_height="match_parent"
+                android:padding="16dp">
 
-            <ImageView
-                android:id="@+id/crawling_detail_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/toolbar_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/crawling_detail_title"
+                    style="@style/crawling_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:text="@{viewModel.crawling.roomname}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/chatRoom_test_text" />
 
-            <TextView
-                android:id="@+id/crawling_detail_data_type"
-                style="@style/home_data_button"
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:background="@drawable/home_type_background"
-                android:gravity="center"
-                android:text="@{viewModel.crawling.type}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_title"
-                tools:text="@string/testType" />
+                <ImageView
+                    android:id="@+id/crawling_detail_back"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/toolbar_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/crawling_detail_image"
-                imageUrl="@{viewModel.crawling.image}"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:src="@drawable/ic_monster"
-                app:layout_constraintBottom_toBottomOf="@id/crawling_detail_image_shape"
-                app:layout_constraintEnd_toEndOf="@id/crawling_detail_image_shape"
-                app:layout_constraintStart_toStartOf="@id/crawling_detail_image_shape"
-                app:layout_constraintTop_toTopOf="@id/crawling_detail_image_shape" />
+                <TextView
+                    android:id="@+id/crawling_detail_data_type"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:background="@drawable/home_type_background"
+                    android:gravity="center"
+                    android:text="@{viewModel.crawling.type}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_title"
+                    tools:text="@string/testType" />
 
-            <TextView
-                android:id="@+id/crawling_detail_image_shape"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/chatroom_list_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_title" />
+                <ImageView
+                    android:id="@+id/crawling_detail_image"
+                    imageUrl="@{viewModel.crawling.image}"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_monster"
+                    app:layout_constraintBottom_toBottomOf="@id/crawling_detail_image_shape"
+                    app:layout_constraintEnd_toEndOf="@id/crawling_detail_image_shape"
+                    app:layout_constraintStart_toStartOf="@id/crawling_detail_image_shape"
+                    app:layout_constraintTop_toTopOf="@id/crawling_detail_image_shape" />
 
-            <TextView
-                android:id="@+id/crawling_detail_monster_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{viewModel.crawling.monsterType}"
-                app:layout_constraintEnd_toEndOf="@id/crawling_detail_image"
-                app:layout_constraintStart_toStartOf="@id/crawling_detail_image"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_image"
-                tools:text="@string/chatRoom_test_text_short" />
+                <TextView
+                    android:id="@+id/crawling_detail_image_shape"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/chatroom_list_background"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_title" />
 
-            <TextView
-                android:id="@+id/crawling_detail_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/chatroom_post_text_background"
-                android:padding="8dp"
-                android:text="@{viewModel.crawling.text}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_monster_name"
-                tools:text="@string/postDialog_text" />
+                <TextView
+                    android:id="@+id/crawling_detail_monster_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    style="@style/crawling_Detail_leave_message"
+                    android:text="@{viewModel.crawling.monsterType}"
+                    app:layout_constraintEnd_toEndOf="@id/crawling_detail_image"
+                    app:layout_constraintStart_toStartOf="@id/crawling_detail_image"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_image"
+                    tools:text="@string/chatRoom_test_text_short" />
 
-            <TextView
-                android:id="@+id/crawling_detail_create_time"
-                style="@style/crawling_Detail_createTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toEndOf="@id/crawling_detail_text"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_text"
-                tools:text="1234567890987654" />
+                <TextView
+                    android:id="@+id/crawling_detail_userId"
+                    style="@style/crawling_Detail_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="@{viewModel.crawling.user.id}"
+                   app:layout_constraintStart_toStartOf="@id/crawling_detail_text"
+                    app:layout_constraintBottom_toTopOf="@+id/crawling_detail_text"
+                    tools:text="@string/friend_list_username" />
 
-            <TextView
-                android:id="@+id/crawling_detail_detail_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/gray_cccccc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_create_time" />
+                <TextView
+                    android:id="@+id/crawling_detail_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/chatroom_post_text_background"
+                    style="@style/crawling_detail_date_text"
+                    android:padding="8dp"
+                    android:text="@{viewModel.crawling.text}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_monster_name"
+                    tools:text="@string/postDialog_text" />
 
-            <TextView
-                android:id="@+id/crawling_detail_leave_message_text"
-                style="@style/crawling_Detail_leave_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="@string/crawling_detail_leave_message"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/crawling_detail_detail_line" />
+                <TextView
+                    android:id="@+id/crawling_detail_create_time"
+                    style="@style/crawling_Detail_createTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="@id/crawling_detail_text"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_text"
+                    tools:text="1234567890987654" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/crawling_detail_leave_message_recy"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginBottom="35dp"
-                android:padding="2dp"
-                app:crawlingleaveMessage="@{viewModel.liveMessage}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/crawling_detail_leave_message_text"
-                tools:listitem="@layout/item_crawling_detail_leave_message" />
+                <TextView
+                    android:id="@+id/crawling_detail_detail_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/gray_cccccc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_create_time" />
+
+                <TextView
+                    android:id="@+id/crawling_detail_leave_message_text"
+                    style="@style/crawling_Detail_leave_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/crawling_detail_leave_message"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/crawling_detail_detail_line" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/crawling_detail_leave_message_recy"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginBottom="35dp"
+                    android:overScrollMode="never"
+                    android:layout_marginTop="4dp"
+                    app:crawlingleaveMessage="@{viewModel.liveMessage}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/crawling_detail_leave_message_text"
+                    tools:listitem="@layout/item_crawling_detail_leave_message" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
 
         <TextView
             android:id="@+id/crawling_detail_editText_background"
