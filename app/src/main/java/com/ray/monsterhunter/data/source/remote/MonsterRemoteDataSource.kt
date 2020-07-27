@@ -41,7 +41,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun getCrawlings(): Result<List<Crawling>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_CRAWLING)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -149,7 +149,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()
@@ -173,7 +173,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         if (document != null) {
             document
-                .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+                .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
                 .addSnapshotListener { snapshot, exception ->
 
                     val list = mutableListOf<History>()
