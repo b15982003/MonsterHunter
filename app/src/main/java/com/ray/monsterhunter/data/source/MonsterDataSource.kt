@@ -47,6 +47,9 @@ interface MonsterDataSource {
 
     suspend fun sentMessage(message: Message,document: String): Result<Boolean>
 
+    suspend fun leaveMessage(message : MutableLiveData<Message>,crawling: MutableLiveData<Crawling>): Result<Boolean>
+
+
     suspend fun postFriend(user : User): Result<Boolean>
 
     suspend fun cancelFriend(user : User): Result<Boolean>

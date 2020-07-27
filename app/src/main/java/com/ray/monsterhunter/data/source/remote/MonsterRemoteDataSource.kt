@@ -31,6 +31,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
     private val PATH_ACTIVITY = "activity"
     private val PATH_CHATROOM = "chatRoom"
     private val PATH_MESSAGE = "message"
+    private val PATH_LEAVEMESSAGE = "leaveMessage"
     private val PATH_FRIENDLIST = "friendList"
     private val PATH_USERARMSTYPE = "userArmsType"
     private const val KEY_START_TIME = "dateTime"
@@ -690,6 +691,44 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
                         )
                     }
                 }
+        }
+
+
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    override suspend fun leaveMessage(message : MutableLiveData<Message>,crawling: MutableLiveData<Crawling>): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val messages = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
+            val documentMessage =
+                crawling.value?.id?.let { UserManager.userData.email?.let { it1 ->
+                    messages.document(it).collection(PATH_LEAVEMESSAGE).document(
+                        it1
+                    )
+                } }
+
+            message.value?.createTime = Calendar.getInstance().timeInMillis
+
+            if (documentMessage != null) {
+                documentMessage
+                    .set(message)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            continuation.resume(Result.Success(true))
+                        } else {
+                            task.exception?.let {
+                                continuation.resume(Result.Error(it))
+                                return@addOnCompleteListener
+                            }
+                            continuation.resume(
+                                Result.Fail(
+                                    MonsterApplication.instance.getString(
+                                        R.string.notGood
+                                    )
+                                )
+                            )
+                        }
+                    }
+            }
         }
 
     @RequiresApi(Build.VERSION_CODES.N)

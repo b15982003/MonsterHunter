@@ -90,6 +90,13 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun leaveMessage(
+        message: MutableLiveData<Message>,
+        crawling: MutableLiveData<Crawling>
+    ) : Result<Boolean>{
+        TODO("Not yet implemented")
+    }
+
     override suspend fun postFriend(user: User): Result<Boolean> {
         TODO("Not yet implemented")
     }

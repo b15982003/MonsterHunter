@@ -91,6 +91,13 @@ class DefaultMonsterRepository(
        return remoteDataSource.sentMessage(message,document)
     }
 
+    override suspend fun leaveMessage(
+        message: MutableLiveData<Message>,
+        crawling: MutableLiveData<Crawling>
+    ): Result<Boolean> {
+       return remoteDataSource.leaveMessage(message,crawling)
+    }
+
     override suspend fun postFriend(user: User): Result<Boolean> {
         return remoteDataSource.postFriend(user)
     }

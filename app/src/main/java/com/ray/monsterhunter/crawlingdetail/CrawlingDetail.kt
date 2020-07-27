@@ -2,6 +2,7 @@ package com.ray.monsterhunter.crawlingdetail
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +32,12 @@ class CrawlingDetail : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.crawlingDetailSentMessage.setOnClickListener(){
+            viewModel.leaveMessage()
+            Handler().postDelayed({
+                binding.crawlingDetailItemEditText.text.clear()
+            }, 500)
+        }
 
         return binding.root
     }
