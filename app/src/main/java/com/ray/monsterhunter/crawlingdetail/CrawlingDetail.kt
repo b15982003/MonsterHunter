@@ -14,6 +14,8 @@ import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.CrawlingDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.TimeUtil
+import java.util.*
 
 class CrawlingDetail : Fragment() {
 
@@ -33,11 +35,24 @@ class CrawlingDetail : Fragment() {
         }
 
         binding.crawlingDetailSentMessage.setOnClickListener(){
-            viewModel.leaveMessage()
+            viewModel.message.value?.let { it1 -> viewModel.leaveMessage(it1) }
             Handler().postDelayed({
                 binding.crawlingDetailItemEditText.text.clear()
             }, 500)
         }
+
+        var adapter = CrawlingDetailAdapter(CrawlingDetailAdapter.OnClickListener {
+        })
+
+        binding.crawlingDetailLeaveMessageRecy.adapter = adapter
+
+        var AllStampTimeToDate = viewModel.crawling.value?.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+
+        binding.crawlingDetailCreateTime.text = AllStampTimeToDate
+
+        viewModel.liveMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            viewModel.liveMessage.value
+        })
 
         return binding.root
     }

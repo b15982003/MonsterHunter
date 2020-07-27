@@ -22,6 +22,8 @@ class CrawlingDetailViewModel(
     val argument : Crawling
 )
     : ViewModel() {
+
+
     private val _crawling = MutableLiveData<Crawling>().apply {
         value = argument
     }
@@ -33,6 +35,8 @@ class CrawlingDetailViewModel(
     }
     val message: LiveData<Message>
         get() = _message
+
+    var liveMessage = MutableLiveData<List<Message>>()
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -60,16 +64,39 @@ class CrawlingDetailViewModel(
         _message.value?.userId = UserManager.userData.id.toString()
         _message.value?.image = UserManager.userData.image.toString()
         _message.value?.email = UserManager.userData.email.toString()
+        getLiveLeaveMessageResoult()
+
+        if (MonsterApplication.instance.isLiveMessage()) {
+            getLiveLeaveMessageResoult()
+
+        } else {
+            getMessage()
+
+        }
 
     }
 
-    fun leaveMessage() {
+    fun getMessage(){
+
+    }
+
+    fun getLiveLeaveMessageResoult() {
+        liveMessage = crawling.value!!.id?.let { repository.getLiveLeaveMessage(it) }!!
+        Logger.d("liveMessage${liveMessage.value}")
+        Logger.d("liveMessage${crawling.value!!.id?.let { repository.getLiveLeaveMessage(it) }}")
+        _status.value = LoadApiStatus.DONE
+        _refreshStatus.value = false
+
+    }
+
+
+    fun leaveMessage(message: Message) {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = repository.leaveMessage(_message,_crawling)) {
+            when (val result = crawling.value?.id?.let { repository.leaveMessage(message, it) }) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
                     _error.value = null

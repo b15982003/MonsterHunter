@@ -29,6 +29,10 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override fun getLiveLeaveMessage(document:String): MutableLiveData<List<Message>> {
+        TODO("Not yet implemented")
+    }
+
     override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
         TODO("Not yet implemented")
     }
@@ -91,8 +95,8 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
     }
 
     override suspend fun leaveMessage(
-        message: MutableLiveData<Message>,
-        crawling: MutableLiveData<Crawling>
+        message:Message,
+       document: String
     ) : Result<Boolean>{
         TODO("Not yet implemented")
     }

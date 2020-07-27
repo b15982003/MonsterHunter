@@ -166,8 +166,9 @@ object MonsterRemoteDataSource : MonsterDataSource {
     }
 
     override fun getLiveHistory(): MutableLiveData<List<History>> {
-var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
-        var document = UserManager.userData.email?.let { historys.document(it).collection(PATH_HISTORY) }
+        var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
+        var document =
+            UserManager.userData.email?.let { historys.document(it).collection(PATH_HISTORY) }
         val liveData = MutableLiveData<List<History>>()
 
         if (document != null) {
@@ -209,6 +210,28 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
 
                 liveData.value = list
                 Logger.d("liveDatagg${liveData.value}")
+            }
+        return liveData
+    }
+
+    override fun getLiveLeaveMessage(document: String): MutableLiveData<List<Message>> {
+
+        val liveData = MutableLiveData<List<Message>>()
+
+        FirebaseFirestore.getInstance()
+            .collection(PATH_CRAWLING)
+            .document(document)
+            .collection(PATH_LEAVEMESSAGE)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .addSnapshotListener { snapshot, exception ->
+                val list = mutableListOf<Message>()
+                for (document in snapshot!!) {
+                    Logger.d(document.id + " => " + document.data)
+                    val message = document.toObject(Message::class.java)
+                    list.add(message)
+                }
+                liveData.value = list
+                Logger.d("livemessagr${liveData.value}")
             }
         return liveData
     }
@@ -694,21 +717,16 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
         }
 
 
-
     @RequiresApi(Build.VERSION_CODES.N)
-    override suspend fun leaveMessage(message : MutableLiveData<Message>,crawling: MutableLiveData<Crawling>): Result<Boolean> =
+    override suspend fun leaveMessage(
+        message : Message,document :String
+    ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val messages = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
-            val documentMessage =
-                crawling.value?.id?.let { UserManager.userData.email?.let { it1 ->
-                    messages.document(it).collection(PATH_LEAVEMESSAGE).document(
-                        it1
-                    )
-                } }
+            val documentMessage =messages.document(document).collection(PATH_LEAVEMESSAGE).document()
 
-            message.value?.createTime = Calendar.getInstance().timeInMillis
+            message.createTime = Calendar.getInstance().timeInMillis
 
-            if (documentMessage != null) {
                 documentMessage
                     .set(message)
                     .addOnCompleteListener { task ->
@@ -728,7 +746,6 @@ var historys = FirebaseFirestore.getInstance().collection(PATH_USER)
                             )
                         }
                     }
-            }
         }
 
     @RequiresApi(Build.VERSION_CODES.N)

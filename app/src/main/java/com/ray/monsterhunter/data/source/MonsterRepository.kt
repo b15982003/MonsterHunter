@@ -17,6 +17,8 @@ interface MonsterRepository {
 
     fun getLiveMessage(document: String): MutableLiveData<List<Message>>
 
+    fun getLiveLeaveMessage(document:String): MutableLiveData<List<Message>>
+
     fun getLiveUserOneScore(teammate: String): MutableLiveData<User>
 
     fun getLiveUserTwoScore(teammate: String): MutableLiveData<User>
@@ -47,7 +49,7 @@ interface MonsterRepository {
 
     suspend fun sentMessage(message: Message, document: String): Result<Boolean>
 
-    suspend fun leaveMessage(message : MutableLiveData<Message>,crawling: MutableLiveData<Crawling>): Result<Boolean>
+    suspend fun leaveMessage(message : Message,document :String): Result<Boolean>
 
     suspend fun postFriend(user : User): Result<Boolean>
 

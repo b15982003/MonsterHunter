@@ -82,6 +82,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveMessage(document)
     }
 
+    override fun getLiveLeaveMessage(document:String): MutableLiveData<List<Message>> {
+        return remoteDataSource.getLiveLeaveMessage(document)
+    }
+
 
     override suspend fun publish(crawling: Crawling): Result<Boolean> {
         return remoteDataSource.publish(crawling)
@@ -92,10 +96,9 @@ class DefaultMonsterRepository(
     }
 
     override suspend fun leaveMessage(
-        message: MutableLiveData<Message>,
-        crawling: MutableLiveData<Crawling>
+        message : Message,document :String
     ): Result<Boolean> {
-       return remoteDataSource.leaveMessage(message,crawling)
+       return remoteDataSource.leaveMessage(message,document)
     }
 
     override suspend fun postFriend(user: User): Result<Boolean> {
