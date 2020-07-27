@@ -1092,4 +1092,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     }
                 }
         }
+
+    override suspend fun deleteRoom(document: String): Result<Boolean> =
+        suspendCoroutine { continuation ->
+            val deleteRooms =
+                FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
+            val document = deleteRooms.document(document)
+
+            document
+                .delete()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
+                                )
+                            )
+                        )
+                    }
+                }
+        }
 }

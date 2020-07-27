@@ -52,6 +52,7 @@ interface MonsterDataSource {
 
     suspend fun leaveMessage(message : Message,document :String): Result<Boolean>
 
+    suspend fun deleteRoom(document:String): Result<Boolean>
 
     suspend fun postFriend(user : User): Result<Boolean>
 

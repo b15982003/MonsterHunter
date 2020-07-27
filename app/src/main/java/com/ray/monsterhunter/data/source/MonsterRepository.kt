@@ -47,6 +47,8 @@ interface MonsterRepository {
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
+    suspend fun deleteRoom(document:String): Result<Boolean>
+
     suspend fun sentMessage(message: Message, document: String): Result<Boolean>
 
     suspend fun leaveMessage(message : Message,document :String): Result<Boolean>

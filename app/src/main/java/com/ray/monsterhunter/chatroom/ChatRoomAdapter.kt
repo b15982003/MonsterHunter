@@ -2,16 +2,20 @@ package com.ray.monsterhunter.chatroom
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ItemChatroomBinding
 import com.ray.monsterhunter.util.TimeUtil
+import com.ray.monsterhunter.util.UserManager
 import java.util.*
 
 class ChatRoomAdapter(
-    private val onClickListener: OnClickListener
+    private val onClickListener: OnClickListener,
+    val viewModel: ChatRoomViewModel
 ) :
     ListAdapter<ChatRoom, RecyclerView.ViewHolder>(DiffCallback) {
 
@@ -22,7 +26,7 @@ class ChatRoomAdapter(
     class ChatRoomViewHolder(private var binding: ItemChatroomBinding):
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(chatRoom: ChatRoom, onClickListener: OnClickListener) {
+        fun bind(chatRoom: ChatRoom, onClickListener: OnClickListener,viewModel: ChatRoomViewModel) {
 
             var AllStampTimeToDate = chatRoom.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
             val stampTpData = chatRoom.dateTime?.date?.let { TimeUtil.StampToDate(it, Locale.TAIWAN) }
@@ -32,6 +36,14 @@ class ChatRoomAdapter(
             binding.chatRoomListStartTime2.text = stampToTime
             binding.chatRoomListStartTime.text = AllStampTimeToDate
             binding.event = chatRoom
+            binding.chatRoomListClose.setOnClickListener(){
+                if (chatRoom.userId == UserManager.userData.id){
+                    viewModel.deleteRoom(chatRoom.documentId)
+                }else{
+                    Toast.makeText(MonsterApplication.instance,"這好像不是你的房間",Toast.LENGTH_SHORT).show()
+                }
+            }
+
             binding.root.setOnClickListener { onClickListener.onClick(chatRoom) }
             binding.executePendingBindings()
         }
@@ -60,7 +72,7 @@ class ChatRoomAdapter(
 
         when (holder) {
             is ChatRoomViewHolder -> {
-                holder.bind((getItem(position) as ChatRoom), onClickListener)
+                holder.bind((getItem(position) as ChatRoom), onClickListener,viewModel)
             }
         }
     }

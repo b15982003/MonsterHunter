@@ -91,6 +91,10 @@ class DefaultMonsterRepository(
         return remoteDataSource.publish(crawling)
     }
 
+    override suspend fun deleteRoom(document: String): Result<Boolean> {
+        return remoteDataSource.deleteRoom(document)
+    }
+
     override suspend fun sentMessage(message: Message,document: String): Result<Boolean> {
        return remoteDataSource.sentMessage(message,document)
     }

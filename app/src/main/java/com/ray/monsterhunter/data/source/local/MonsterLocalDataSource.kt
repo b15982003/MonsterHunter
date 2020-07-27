@@ -101,6 +101,10 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
+    override suspend fun deleteRoom(document: String): Result<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun postFriend(user: User): Result<Boolean> {
         TODO("Not yet implemented")
     }

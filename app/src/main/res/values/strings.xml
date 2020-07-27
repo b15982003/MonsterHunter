@@ -56,6 +56,7 @@
     <string name="chatRoom_post_typeName_text">任務類型 ：</string>
     <string name="chatRoom_post＿monsterName_text">魔物名稱 ：</string>
     <string name="chatRoom_post＿button">送 出</string>
+    <string name="chatRoom_not_your_room">這好像不是你開的房間</string>
 
     <!-- ChatRoom detail -->
     <string name="chatRoom_detail_userId">紙火箭</string>
