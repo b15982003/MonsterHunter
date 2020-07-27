@@ -27,7 +27,7 @@
                 style="@style/crawling_detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="@{viewModel.crawling.roomname}"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@{viewModel.crawling.createTime}"
+                android:text="@{viewModel.crawling.createTime.toString()}"
                 app:layout_constraintEnd_toEndOf="@id/crawling_detail_text"
                 app:layout_constraintTop_toBottomOf="@id/crawling_detail_text"
                 tools:text="1234567890987654" />

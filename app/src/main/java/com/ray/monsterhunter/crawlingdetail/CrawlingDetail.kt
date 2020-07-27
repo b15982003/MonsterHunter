@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.ray.monsterhunter.MainActivity
 
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.CrawlingDetailFragmentBinding
@@ -25,10 +27,22 @@ class CrawlingDetail : Fragment() {
         binding = CrawlingDetailFragmentBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
+        binding.crawlingDetailBack.setOnClickListener(){
+            findNavController().navigateUp()
+        }
 
 
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).hiddingToolbar()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (activity as MainActivity).getToolbar()
     }
 
 }
