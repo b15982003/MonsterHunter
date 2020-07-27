@@ -171,6 +171,7 @@ class ChatRoomDetail : Fragment() {
             if (it == true) {
                 viewModel.teammateList = viewModel.chatRoom.value?.teammate!!
                 viewModel.teammateList.add(UserManager.userData.email.toString())
+                viewModel.emptySeat.value = false
             }
         })
 
