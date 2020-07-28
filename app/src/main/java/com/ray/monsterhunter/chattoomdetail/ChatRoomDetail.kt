@@ -145,7 +145,7 @@ class ChatRoomDetail : Fragment() {
                         viewModel.chatRoom.value!!
                     )
                 )
-            }, 500)
+            }, 1000)
         }
 
 
