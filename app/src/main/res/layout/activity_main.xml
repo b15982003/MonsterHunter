@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -59,12 +60,14 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
                 app:navGraph="@navigation/navigation" />
 
+
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNav"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                app:labelVisibilityMode="unlabeled"
                 android:background="@color/white"
-                app:itemIconSize="30dp"
+                app:itemIconSize="32dp"
                 app:itemIconTint="@drawable/bottom_nav_item_selector"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +82,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:itemIconTint="#132EB6"
-            app:headerLayout="@layout/item_drawer_heater"
             app:menu="@menu/navdrawer_menu" />
 
     </androidx.drawerlayout.widget.DrawerLayout>

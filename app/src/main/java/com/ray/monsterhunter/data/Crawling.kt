@@ -11,12 +11,8 @@ data class Crawling(
     var roomname : String? = "",
     var type : String? = "",
     var monsterType : String? = "",
-    var startTime : String? = "",
-    var createTime : String? = "",
+    var createTime : Long? = null,
     var text : String? = "",
-    var armsType1 : String? = "",
-    var armsType2 : String? = "",
-    var armsType3 : String? = "",
-    var armsType4 : String? = ""
+    var image : String? = ""
 
 ) : Parcelable

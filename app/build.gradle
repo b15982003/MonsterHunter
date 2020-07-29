@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
@@ -15,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.ray.monsterhunter"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -61,9 +62,6 @@ dependencies {
     implementation "androidx.room:room-runtime:$version_room"
 //    kapt "androidx.room:room-compiler:$version_room"
 
-    //Firebase
-    implementation 'com.google.firebase:firebase-firestore:21.4.3'
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
     //recycleview
     implementation "androidx.recyclerview:recyclerview:1.1.0"
@@ -108,6 +106,21 @@ dependencies {
 
     //drawer heater
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Firebase Authentication (帳號驗證模組)
+    implementation 'com.google.firebase:firebase-auth:19.3.1'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    //Firebase
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+    implementation 'com.google.firebase:firebase-analytics:17.4.3'
+    //jason動畫
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
+        transitive = true;
+    }
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

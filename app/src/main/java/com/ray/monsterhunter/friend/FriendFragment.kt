@@ -6,28 +6,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayout
 
 import com.ray.monsterhunter.R
+import com.ray.monsterhunter.databinding.FriendFragmentBinding
+import com.ray.monsterhunter.ext.getVmFactory
+import kotlinx.android.synthetic.main.friend_fragment.*
 
 class FriendFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = FriendFragment()
-    }
-
-    private lateinit var viewModel: FriendViewModel
+    private val viewModel by viewModels<FriendViewModel> { getVmFactory() }
+    lateinit var  binding : FriendFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.friend_fragment, container, false)
+
+        binding = FriendFragmentBinding.inflate(inflater,container,false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        binding.pager.let {
+            binding.tabLayout.setupWithViewPager(it)
+            it.adapter = FriendAdapter(childFragmentManager)
+            it.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.tabLayout))
+        }
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(FriendViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+
     }
+
 
 }
+
+

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.ray.monsterhunter.home.HomeViewModel" />
@@ -15,11 +14,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/home_loading_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentEnd="true"
+            app:layout_constraintBottom_toBottomOf="@+id/home_data_recy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/active_archer"
+            app:lottie_speed="1.2" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_activity_recy"
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:orientation="horizontal"
+            android:overScrollMode="never"
             app:activity="@{viewModel.activityImage}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="4dp"
+            android:overScrollMode="never"
             app:crawlings="@{viewModel.crawlings}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.Crawling
 import com.ray.monsterhunter.databinding.ItemHomeBinding
+import com.ray.monsterhunter.util.TimeUtil
+import java.util.*
 
 
 class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
@@ -20,7 +22,9 @@ class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(crawling: Crawling, onClickListener: OnClickListener) {
+            var AllStampTimeToDate = crawling.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
+            binding.homeDataCreatTime.text = AllStampTimeToDate
             binding.product = crawling
             binding.root.setOnClickListener { onClickListener.onClick(crawling) }
             binding.executePendingBindings()

@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.ray.monsterhunter.util.UserManager"/>
+
         <variable
             name="viewModel"
             type="com.ray.monsterhunter.post.DialogPostViewModel" />
@@ -44,10 +46,24 @@
                     android:src="@drawable/fire_heater"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="2dp"
+                    app:imageUrl="@{viewModel.crawling.user.image}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="157dp"
                     tools:layout_editor_absoluteY="47dp" />
+
+                <TextView
+                    android:id="@+id/post_dialog_personName"
+                    style="@style/post_dailod_profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{UserManager.INSTANCE.userData.id}"
+                    app:layout_constraintBottom_toTopOf="@+id/post_dialog_roomName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/post_dialog_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/textcontent" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/post_dialog_roomName"
@@ -67,36 +83,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="top|start"
-                        android:hint="@string/roomname"
-                        android:text="@={viewModel.crawling.roomname}"
+                        android:hint="@string/crawlingName"
                         android:imeOptions="actionNext"
                         android:inputType="text"
-                        android:lines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/post_dialog_time"
-                    style="@style/TextInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:textColorHint="@color/post_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_dialog_roomName"
-                    tools:visibility="visible">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/post_dialog_time_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="top|start"
-                        android:hint="@string/time"
-                        android:imeOptions="actionNext"
-                        android:text="@={viewModel.crawling.startTime}"
-                        android:inputType="text"
-                        android:lines="1" />
+                        android:lines="1"
+                        android:text="@={viewModel.crawling.roomname}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -106,9 +97,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/missionType"
+                    android:text="@string/crawlingType"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_dialog_time" />
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_roomName" />
 
                 <TextView
                     android:id="@+id/post_dialog_activityType_shape"
@@ -165,67 +156,7 @@
                     app:layout_constraintStart_toStartOf="@id/post_dialog_monster_shape"
                     app:layout_constraintTop_toTopOf="@+id/post_dialog_monster_shape" />
 
-                <TextView
-                    android:id="@+id/post_dialog_changeArms_text"
-                    style="@style/post_dailog"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/armschoose"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_dialog_monster_shape" />
 
-                <TextView
-                    android:id="@+id/post_dialog_changeArms_shape"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/dailog_shape"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_dialog_changeArms_text"
-
-                    />
-
-                <Spinner
-                    android:id="@+id/post_dialog_armsA"
-                    android:layout_width="130dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:spinnerMode="dialog"
-                    app:layout_constraintStart_toStartOf="@id/post_dialog_changeArms_shape"
-                    app:layout_constraintTop_toTopOf="@+id/post_dialog_changeArms_shape" />
-
-                <Spinner
-                    android:id="@+id/post_dialog_armsB"
-                    android:layout_width="130dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="16dp"
-                    android:spinnerMode="dialog"
-                    app:layout_constraintStart_toEndOf="@id/post_dialog_armsA"
-                    app:layout_constraintTop_toTopOf="@+id/post_dialog_armsA" />
-
-                <Spinner
-                    android:id="@+id/post_dialog_armsC"
-                    android:layout_width="130dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:spinnerMode="dialog"
-                    app:layout_constraintStart_toStartOf="@id/post_dialog_armsA"
-                    app:layout_constraintTop_toBottomOf="@+id/post_dialog_armsA" />
-
-                <Spinner
-                    android:id="@+id/post_dialog_armsD"
-                    android:layout_width="130dp"
-                    android:layout_height="30dp"
-                    android:spinnerMode="dialog"
-                    app:layout_constraintStart_toStartOf="@+id/post_dialog_armsB"
-                    app:layout_constraintTop_toTopOf="@id/post_dialog_armsC" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/post_dialog_textcontent"
@@ -237,7 +168,7 @@
                     android:layout_marginEnd="16dp"
                     android:textColorHint="@color/post_text"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/post_dialog_changeArms_shape"
+                    app:layout_constraintTop_toBottomOf="@id/post_dialog_monster_shape"
                     tools:visibility="visible">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -246,9 +177,9 @@
                         android:layout_height="wrap_content"
                         android:gravity="top|start"
                         android:hint="@string/textcontent"
-                        android:text="@={viewModel.crawling.text}"
                         android:inputType="textMultiLine"
-                        android:lines="4" />
+                        android:lines="4"
+                        android:text="@={viewModel.crawling.text}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
@@ -259,8 +190,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="@string/sent"
                     android:onClick="@{() -> viewModel.publish(viewModel.crawling)}"
+                    android:text="@string/sent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/post_dialog_textcontent" />

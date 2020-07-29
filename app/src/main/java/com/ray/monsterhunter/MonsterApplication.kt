@@ -1,6 +1,7 @@
 package com.ray.monsterhunter
 
 import android.app.Application
+import android.content.Context
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.util.ServiceLocator
 import kotlin.properties.Delegates
@@ -19,5 +20,8 @@ class MonsterApplication : Application() {
         instance = this
     }
 
-    fun isLiveDataDesign() = true
+    fun isLiveMessage() = true
+    fun isLiveChatRoom() = true
 }
+
+
