@@ -24,6 +24,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
+    signingConfigs{
+        release{
+            storeFile file('/Users/zhangchengyan/.android/RaiMeet')
+            storePassword'ray820211'
+            keyAlias'key0'
+            keyPassword'ray820211'
+        }
+    }
 
     buildTypes {
         release {
@@ -31,6 +39,7 @@ android {
             buildConfigField("Boolean", "LOGGER_VISIABLE", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
         //Logger
         debug {
