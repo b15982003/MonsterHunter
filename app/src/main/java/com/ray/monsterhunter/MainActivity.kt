@@ -121,6 +121,7 @@ class MainActivity : BaseActivity() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.bottomNav.selectedItemId = R.id.navigation_home
+        binding.bottomNav.itemBackground = null
 
         binding.bottomNav.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         binding.drawerNavView.setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)

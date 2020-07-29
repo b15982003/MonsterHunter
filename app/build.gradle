@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 29
@@ -115,6 +116,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.4.3'
     //jason動畫
     implementation 'com.airbnb.android:lottie:3.4.1'
+
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
+        transitive = true;
+    }
 
 
     testImplementation 'junit:junit:4.12'

@@ -70,6 +70,7 @@
     <string name="chatRoom_detail_navigate_text">前往評分頁面</string>
     <string name="chatRoom_detail_time_startText">遊戲開始</string>
     <string name="chatRoom_detail_time_endText">遊戲結束</string>
+    <string name="chatRoom_detail_enter_message">訊息...</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>
