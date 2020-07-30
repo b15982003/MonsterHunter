@@ -40,13 +40,6 @@ class FriendItemViewModel(
     val userList: MutableLiveData<List<User>>
         get() = _userList
 
-    // Handle navigation to detail
-//    private val _navigateToDetail = MutableLiveData<Product>()
-//
-//    val navigateToDetail: LiveData<Product>
-//        get() = _navigateToDetail
-
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
     // the Coroutine runs using the Main (UI) dispatcher

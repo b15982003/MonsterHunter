@@ -24,22 +24,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-    signingConfigs{
-        release{
-            storeFile file('/Users/zhangchengyan/.android/RaiMeet')
-            storePassword'ray820211'
-            keyAlias'key0'
-            keyPassword'ray820211'
-        }
-    }
-
     buildTypes {
         release {
             //Logger
             buildConfigField("Boolean", "LOGGER_VISIABLE", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         //Logger
         debug {
@@ -129,6 +119,8 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
         transitive = true;
     }
+
+
 
 
     testImplementation 'junit:junit:4.12'

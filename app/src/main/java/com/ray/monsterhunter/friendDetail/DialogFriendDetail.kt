@@ -2,6 +2,7 @@ package com.ray.monsterhunter.friendDetail
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogFriendDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
 
 
 class DialogFriendDetail : AppCompatDialogFragment() {
@@ -52,8 +54,10 @@ class DialogFriendDetail : AppCompatDialogFragment() {
 
         viewModel.follow.observe(viewLifecycleOwner, Observer {
             if (viewModel.follow.value == true) {
+
                 binding.friendDetailDialogFollow.setBackgroundResource(R.drawable.friend_detail_dialog_getfollow)
             } else {
+
                 binding.friendDetailDialogFollow.setBackgroundResource(R.drawable.friend_detail_dialog_follow)
             }
         })
@@ -66,6 +70,10 @@ class DialogFriendDetail : AppCompatDialogFragment() {
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
+
+            if (viewModel.user.value?.track == "true"){
+                viewModel.getFollow()
+            }
 
             if (viewModel.user.value?.armsType?.A!! < 900) {
                 binding.friendDetailDialogArmsARatingBarGod.visibility = View.INVISIBLE

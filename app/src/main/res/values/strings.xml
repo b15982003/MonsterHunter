@@ -71,6 +71,10 @@
     <string name="chatRoom_detail_time_startText">遊戲開始</string>
     <string name="chatRoom_detail_time_endText">遊戲結束</string>
     <string name="chatRoom_detail_enter_message">訊息...</string>
+    <string name="chatRoom_detail_end_back">退</string>
+    <string name="chatRoom_detail_end_hit">打</string>
+    <string name="chatRoom_detail_end_wait">等</string>
+    <string name="chatRoom_detail_end_mackUp">補</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>

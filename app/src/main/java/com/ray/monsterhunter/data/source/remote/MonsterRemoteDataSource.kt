@@ -150,7 +150,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
+//            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()
@@ -761,6 +761,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
                         )
                     }
                 }
+            user.track = "true"
             if (documentFriendList != null) {
                 documentFriendList
                     .set(user)

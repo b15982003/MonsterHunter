@@ -33,7 +33,7 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
         binding.viewModel = viewModel
 
         var adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
-//            viewModel.navigateToDetail(it)
+
             findNavController().navigate(NavigationDirections.actionGlobalDialogFriendDetail(it))
         })
 
@@ -42,24 +42,6 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
         viewModel.userList.observe(viewLifecycleOwner, Observer {
             adapter.notifyDataSetChanged()
         })
-
-//        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
-//            it?.let {
-//                findNavController().navigate(NavigationDirections.navigateToDetailFragment(it))
-//                viewModel.onDetailNavigated()
-//            }
-//        })
-
-//        binding.layoutSwipeRefreshCatalogItem.setOnRefreshListener {
-//            viewModel.refresh()
-//        }
-
-//        viewModel.status.observe(viewLifecycleOwner, Observer {
-//            it?.let {
-//                if (it != LoadApiStatus.LOADING)
-//                    binding.layoutSwipeRefreshCatalogItem.isRefreshing = false
-//            }
-//        })
 
         return binding.root
     }

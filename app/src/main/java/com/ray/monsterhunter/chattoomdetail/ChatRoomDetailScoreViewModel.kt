@@ -20,10 +20,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 
+
 class ChatRoomDetailScoreViewModel(
     private val repository: MonsterRepository,
     private val argument: ChatRoom
 ) : ViewModel() {
+
+    var saySomthing = MutableLiveData<String>()
 
     var liveUserOne = MutableLiveData<User>()
 

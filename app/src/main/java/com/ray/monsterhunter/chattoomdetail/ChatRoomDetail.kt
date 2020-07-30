@@ -2,10 +2,13 @@ package com.ray.monsterhunter.chattoomdetail
 
 
 import android.annotation.SuppressLint
-import com.ray.monsterhunter.R
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
+import android.speech.tts.TextToSpeech
+import android.speech.tts.TextToSpeech.OnInitListener
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -16,11 +19,12 @@ import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.NavigationDirections
+import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-
+import java.util.*
 
 class ChatRoomDetail : Fragment() {
 
@@ -34,12 +38,28 @@ class ChatRoomDetail : Fragment() {
     }
     lateinit var binding: ChatRoomDetailFragmentBinding
 
+    private var tts: TextToSpeech? = null
+
+
+
+
+
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        //初始化
+        viewModel.createLanguageTTS()
+
+        Handler().postDelayed({
+            viewModel.say("我在測試")
+        },3000)
+
+
+
 
         binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -97,9 +117,9 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener() {
-            if(viewModel.liveChatRoom.value?.teammate?.size!! < 4){
-                Toast.makeText(MonsterApplication.instance,"人數不足",Toast.LENGTH_SHORT).show()
-            }else{
+            if (viewModel.liveChatRoom.value?.teammate?.size!! < 4) {
+                Toast.makeText(MonsterApplication.instance, "人數不足", Toast.LENGTH_SHORT).show()
+            } else {
                 viewModel.startTimming()
                 binding.chatRoomDetailStartButton.visibility = View.GONE
                 binding.chatRoomDetailEndButton.visibility = View.VISIBLE
@@ -199,9 +219,9 @@ class ChatRoomDetail : Fragment() {
 
         viewModel.timeSec.observe(viewLifecycleOwner, Observer {
             binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck % 10).toString()
-            binding.chatRoomDetailTenSecNumber.text = (if(viewModel.timeCheck / 10 > 5){
+            binding.chatRoomDetailTenSecNumber.text = (if (viewModel.timeCheck / 10 > 5) {
                 0
-            }else{
+            } else {
                 viewModel.timeCheck / 10
             }).toString()
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck / 60).toString()
@@ -217,15 +237,15 @@ class ChatRoomDetail : Fragment() {
                         )
                     )
                 }, 500)
-            }else if(viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true"){
+            } else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true") {
                 binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
                 binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
                 binding.chatRoomDetailTimeEnd.visibility = View.GONE
                 Handler().postDelayed({
                     binding.chatRoomDetailTimeBg.visibility = View.GONE
                     binding.chatRoomDetailTimeStart.visibility = View.GONE
-                },3000)
-            }else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false"){
+                }, 3000)
+            } else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false") {
                 binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
                 binding.chatRoomDetailTimeStart.visibility = View.GONE
                 binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
@@ -233,7 +253,7 @@ class ChatRoomDetail : Fragment() {
                 Handler().postDelayed({
                     binding.chatRoomDetailTimeBg.visibility = View.GONE
                     binding.chatRoomDetailTimeEnd.visibility = View.GONE
-                },3000)
+                }, 3000)
             }
         })
 
@@ -358,15 +378,19 @@ class ChatRoomDetail : Fragment() {
         return binding.root
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).hiddingBottomnav()
         (activity as MainActivity).hiddingToolbar()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).getBottomnav()
         (activity as MainActivity).getToolbar()
+        viewModel.canceltts()
+
     }
 }
