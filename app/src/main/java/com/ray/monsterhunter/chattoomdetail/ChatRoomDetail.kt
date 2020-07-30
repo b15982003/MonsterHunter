@@ -20,6 +20,7 @@ import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
 class ChatRoomDetail : Fragment() {
@@ -307,7 +308,9 @@ class ChatRoomDetail : Fragment() {
             }
 
             if (viewModel.liveChatRoom.value?.speaker != "null") {
+                Logger.d("speakerrrrrrrrrr")
                 when (viewModel.liveChatRoom.value?.speaker) {
+
                     "back" -> viewModel.say("退退退退退退退退")
                     "hit" -> viewModel.say("打他頭，打他的頭，朝頭打下去")
                     "mackUp" -> viewModel.say("補血補血補血補血")
