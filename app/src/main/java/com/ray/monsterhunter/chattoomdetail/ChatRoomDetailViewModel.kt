@@ -50,6 +50,10 @@ class ChatRoomDetailViewModel(
 
     var userArms = MutableLiveData<Int>()
 
+    private val _speakerReady = MutableLiveData<Boolean>(false)
+    val speakerReady: LiveData<Boolean>
+        get() = _speakerReady
+
     private val _userArmsType = MutableLiveData<UserArms>().apply {
         value = UserArms()
     }
@@ -339,7 +343,35 @@ class ChatRoomDetailViewModel(
         handler.removeCallbacks(runnable)
     }
 
-    fun returnStartTime(){
+    fun getSpeakerReady(){
+        _speakerReady.value = true
+    }
+
+    fun endSpeakerReady(){
+        _speakerReady.value = false
+    }
+
+    fun speakerBack() {
+        chatRoom.value?.speaker = "back"
+    }
+
+    fun speakerHit() {
+        chatRoom.value?.speaker = "hit"
+    }
+
+    fun speakerMackUp() {
+        chatRoom.value?.speaker = "mackUp"
+    }
+
+    fun speakerWait() {
+        chatRoom.value?.speaker = "wait"
+    }
+
+    fun speakerEnd() {
+        chatRoom.value?.speaker = "null"
+    }
+
+    fun returnStartTime() {
         _timing.value = "null"
     }
 
@@ -359,7 +391,7 @@ class ChatRoomDetailViewModel(
         _leave.value = false
     }
 
-    fun say(userSay:String) {
+    fun say(userSay: String) {
         //設定發音語言
         tts?.setLanguage(Locale.TAIWAN);
         //語調
@@ -373,6 +405,7 @@ class ChatRoomDetailViewModel(
         Logger.d("reallllllllllllll")
 
     }
+
     fun createLanguageTTS() {
         if (tts == null) {
             Logger.d("laught1")
@@ -390,7 +423,7 @@ class ChatRoomDetailViewModel(
         }
     }
 
-    fun canceltts(){
+    fun canceltts() {
         // 釋放 TTS
         tts?.shutdown()
     }

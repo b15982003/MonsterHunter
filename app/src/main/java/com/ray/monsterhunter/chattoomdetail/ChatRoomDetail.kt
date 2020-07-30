@@ -4,8 +4,6 @@ package com.ray.monsterhunter.chattoomdetail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
-import android.speech.tts.TextToSpeech
-import android.speech.tts.TextToSpeech.OnInitListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +20,7 @@ import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-import java.util.*
 
 class ChatRoomDetail : Fragment() {
 
@@ -38,12 +34,6 @@ class ChatRoomDetail : Fragment() {
     }
     lateinit var binding: ChatRoomDetailFragmentBinding
 
-    private var tts: TextToSpeech? = null
-
-
-
-
-
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -53,13 +43,6 @@ class ChatRoomDetail : Fragment() {
 
         //初始化
         viewModel.createLanguageTTS()
-
-        Handler().postDelayed({
-            viewModel.say("我在測試")
-        },3000)
-
-
-
 
         binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -79,6 +62,73 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
         binding.chatRoomDetailTimeEnd.visibility = View.GONE
+        binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+        binding.chatRoomDetailEndBackground.visibility = View.GONE
+        binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+        binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+        binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+
+        binding.chatRoomDetailSpeakerBack.setOnClickListener() {
+            viewModel.speakerBack()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeakerHit.setOnClickListener() {
+            viewModel.speakerHit()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeakerMackUp.setOnClickListener() {
+            viewModel.speakerMackUp()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+
+        binding.chatRoomDetailSpeakerWait.setOnClickListener() {
+            viewModel.speakerWait()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeaker.setOnClickListener() {
+                if (viewModel.speakerReady.value == false) {
+                    viewModel.getSpeakerReady()
+                    binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
+                    binding.chatRoomDetailEndBackground.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
+
+                } else {
+                    viewModel.endSpeakerReady()
+                    binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                    binding.chatRoomDetailEndBackground.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+                }
+            }
+
 
         binding.chatRoomDetailTextMessageRecy.adapter =
             ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
@@ -254,6 +304,15 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailTimeBg.visibility = View.GONE
                     binding.chatRoomDetailTimeEnd.visibility = View.GONE
                 }, 3000)
+            }
+
+            if (viewModel.liveChatRoom.value?.speaker != "null") {
+                when (viewModel.liveChatRoom.value?.speaker) {
+                    "back" -> viewModel.say("退退退退退退退退")
+                    "hit" -> viewModel.say("打他頭，打他的頭，朝頭打下去")
+                    "mackUp" -> viewModel.say("補血補血補血補血")
+                    "wait" -> viewModel.say("等等等等等等等等")
+                }
             }
         })
 

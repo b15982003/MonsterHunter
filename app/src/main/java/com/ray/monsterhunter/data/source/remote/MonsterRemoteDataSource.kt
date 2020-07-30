@@ -896,7 +896,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     "finishTime",
                     chatRoom.value?.finishTime,
                     "startTime",
-                    chatRoom.value?.startTime
+                    chatRoom.value?.startTime,"speaker",chatRoom.value?.speaker
+
                 )
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
