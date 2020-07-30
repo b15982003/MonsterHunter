@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.NavigationDirections
+import com.ray.monsterhunter.R
 
 import com.ray.monsterhunter.databinding.ChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
@@ -25,6 +26,10 @@ class ChatRoomFragment : Fragment() {
         binding = ChatRoomFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        binding.chatRoomNot.setOnClickListener(){
+            findNavController().navigate(R.id.dialogChatRoomFragment)
+        }
 
         var adapter = ChatRoomAdapter(ChatRoomAdapter.OnClickListener {
             findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetail(it))

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -19,7 +20,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ray.monsterhunter.databinding.ActivityMainBinding
 import com.ray.monsterhunter.ext.getVmFactory
@@ -136,9 +136,23 @@ class MainActivity : BaseActivity() {
         UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
         UserManager.userData.image = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
-//        viewModel.user.observe(this, Observer {
-//                Logger.d("MainactiveMan${viewModel.user.value}")
-//        })
+//        // workermanger
+//        val request = OneTimeWorkRequestBuilder<WorkerManager>().build()
+//
+//
+//        binding.activityNot.setOnClickListener {
+//
+//            WorkManager.getInstance(this).enqueue(request)
+//        }
+//
+//        WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
+//            .observe(this, Observer {
+//
+//                val status: String = it.state.name
+//                Toast.makeText(this,status, Toast.LENGTH_SHORT).show()
+//            })
+
+
 
         setupNavController()
         setupDrawer()
