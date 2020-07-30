@@ -68,6 +68,10 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailSpeakerWait.visibility = View.GONE
         binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
         binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+        binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
 
 
         binding.chatRoomDetailSpeakerBack.setOnClickListener() {
@@ -112,23 +116,28 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailSpeaker.setOnClickListener() {
-                if (viewModel.speakerReady.value == false) {
-                    viewModel.getSpeakerReady()
-                    binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
-                    binding.chatRoomDetailEndBackground.visibility = View.VISIBLE
-                    binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
-                    binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
-                    binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
+            if (viewModel.speakerReady.value == false) {
+                viewModel.getSpeakerReady()
+                binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
+                binding.chatRoomDetailEndBackground.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
 
-                } else {
-                    viewModel.endSpeakerReady()
-                    binding.chatRoomDetailSpeakerBack.visibility = View.GONE
-                    binding.chatRoomDetailEndBackground.visibility = View.GONE
-                    binding.chatRoomDetailSpeakerWait.visibility = View.GONE
-                    binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
-                    binding.chatRoomDetailSpeakerHit.visibility = View.GONE
-                }
+            } else {
+                viewModel.endSpeakerReady()
+                binding.chatRoomDetailEndBackground.visibility = View.GONE
+                binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+                binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+                binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
             }
+        }
 
 
         binding.chatRoomDetailTextMessageRecy.adapter =
@@ -306,17 +315,41 @@ class ChatRoomDetail : Fragment() {
                     binding.chatRoomDetailTimeEnd.visibility = View.GONE
                 }, 3000)
             }
+            if (viewModel.speakerReady.value == true) {
 
-            if (viewModel.liveChatRoom.value?.speaker != "null") {
-                Logger.d("speakerrrrrrrrrr")
-                when (viewModel.liveChatRoom.value?.speaker) {
+                if (viewModel.liveChatRoom.value?.speaker != "null") {
+                    binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
 
-                    "back" -> viewModel.say("退退退退退退退退")
-                    "hit" -> viewModel.say("打他頭，打他的頭，朝頭打下去")
-                    "mackUp" -> viewModel.say("補血補血補血補血")
-                    "wait" -> viewModel.say("等等等等等等等等")
+                    binding.chatRoomDetailSpeakerBackNo.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerHitNo.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerWaitNo.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerMackUpNo.visibility = View.VISIBLE
+
+                    when (viewModel.liveChatRoom.value?.speaker) {
+
+                        "back" -> viewModel.say("退退退退退退退退")
+                        "hit" -> viewModel.say("打他頭，打他的頭，朝頭打下去")
+                        "mackUp" -> viewModel.say("補血補血補血補血")
+                        "wait" -> viewModel.say("等等等等等等等等")
+                    }
+                } else {
+                    binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
+                    binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
+
+                    binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+
                 }
+
             }
+
         })
 
         viewModel.userArms.observe(viewLifecycleOwner, Observer {
