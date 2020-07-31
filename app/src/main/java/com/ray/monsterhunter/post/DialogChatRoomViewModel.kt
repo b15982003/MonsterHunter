@@ -18,10 +18,21 @@ import kotlinx.coroutines.launch
 
 class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
+    val finalTime = MutableLiveData<Long>()
+    val getTime = MutableLiveData<Long>()
+    val datadate = MutableLiveData<Long>()
+    val dataTime = MutableLiveData<Long>()
+
+    val year = MutableLiveData<Int>()
+    val month = MutableLiveData<Int>()
+    val day = MutableLiveData<Int>()
+    val hour = MutableLiveData<Int>()
+    val min = MutableLiveData<Int>()
+
     private val _event = MutableLiveData<ChatRoom>().apply {
         value = ChatRoom(dateTime = DateTime())
     }
-    val event : LiveData<ChatRoom>
+    val event: LiveData<ChatRoom>
         get() = _event
 
     val dateTime = MutableLiveData<DateTime>().apply {
@@ -56,7 +67,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         putdateTime()
     }
 
-    fun putdateTime(){
+    fun putdateTime() {
         _event.value?.dateTime?.date = dateTime.value?.date
         _event.value?.dateTime?.time = dateTime.value?.time
     }
@@ -101,7 +112,8 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     fun onLeft() {
         _leave.value = null
     }
-    fun nothing(){
+
+    fun nothing() {
 
     }
 }
