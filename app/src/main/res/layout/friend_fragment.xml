@@ -30,7 +30,8 @@
             android:layout_height="60dp"
             app:tabIndicatorColor="@color/friendViewpager_line"
             app:tabSelectedTextColor="@color/friendViewpager_choose_text"
-            app:tabTextColor="@color/friendViewpager_no_choose_text">
+            app:tabTextColor="@color/friendViewpager_no_choose_text"
+            >
 
         </com.google.android.material.tabs.TabLayout>
         </androidx.viewpager.widget.ViewPager>

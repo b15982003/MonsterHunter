@@ -88,11 +88,13 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getAllUser(): Result<List<User>> = suspendCoroutine { continuation ->
+    override suspend fun getAllUser(searchText:String): Result<List<User>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_USER)
+            .orderBy("email")
+            .startAt(searchText)
             .get()
-            .addOnCompleteListener { task ->
+            .addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
                     val list = mutableListOf<User>()
                     for (document in task.result!!) {
@@ -150,7 +152,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
         FirebaseFirestore.getInstance()
             .collection(PATH_CHATROOM)
-//            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, exception ->
 
                 val list = mutableListOf<ChatRoom>()
@@ -200,7 +202,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_CHATROOM)
             .document(document)
             .collection(PATH_MESSAGE)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, exception ->
                 val list = mutableListOf<Message>()
                 for (document in snapshot!!) {

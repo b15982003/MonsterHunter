@@ -1,6 +1,8 @@
 package com.ray.monsterhunter.friend.item
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +44,36 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
         viewModel.userList.observe(viewLifecycleOwner, Observer {
             adapter.notifyDataSetChanged()
         })
+
+        if(friendTypeFilter == FriendTypeFilter.USERLIST) {
+            binding.friendListEdText.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                    val searchText: String = binding.friendListEdText.text.toString()
+
+                    if (searchText != null || searchText != "") {
+                        viewModel.getAllUser(searchText)
+                    }
+                }
+            })
+        }
+
+        if(friendTypeFilter == FriendTypeFilter.FOLLOWINUSER){
+            binding.friendListSearch.visibility = View.GONE
+            binding.friendListEdText.visibility = View.GONE
+            binding.friendListImage.visibility = View.GONE
+        }
 
         return binding.root
     }

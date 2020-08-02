@@ -91,6 +91,7 @@
     <!--Friend List -->
     <string name="friend_list_username">紙火箭</string>
     <string name="friend_list_email">Ray3456789@gmail.com</string>
+    <string name="friend_list_search">ex : A1234567@gmail.com</string>
 
     <!--History List -->
     <string name="history_mission_type">限時任務</string>

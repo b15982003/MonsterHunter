@@ -140,10 +140,11 @@ class ChatRoomDetail : Fragment() {
             }
         }
 
+        val adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
+        })
 
-        binding.chatRoomDetailTextMessageRecy.adapter =
-            ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
-            })
+        binding.chatRoomDetailTextMessageRecy.adapter = adapter
+
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
 
         binding.chatRoomDetailReadyButton.setOnClickListener() {

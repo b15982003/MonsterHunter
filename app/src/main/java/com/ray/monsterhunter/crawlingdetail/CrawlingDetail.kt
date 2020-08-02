@@ -14,6 +14,7 @@ import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.CrawlingDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
@@ -54,8 +55,15 @@ class CrawlingDetail : Fragment() {
         binding.crawlingDetailCreateTime.text = AllStampTimeToDate
 
         viewModel.liveMessage.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            viewModel.liveMessage.value
+
+            Logger.d("liveMessage = ${it}")
+            it?.let {
+
+                Logger.d("size = ${viewModel.liveMessage.value?.size}")
+
+            }
         })
+
 
         return binding.root
     }

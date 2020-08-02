@@ -89,8 +89,12 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
         }
     }
 
-
     override fun getItemViewType(position: Int): Int {
         return ITEM_VIEW_TYPE_ARTICLE
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
 }

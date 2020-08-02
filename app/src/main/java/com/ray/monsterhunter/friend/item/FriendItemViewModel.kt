@@ -23,10 +23,14 @@ class FriendItemViewModel(
     val friendTypeFilter: FriendTypeFilter // Handle the type for each catalog item
 ) : ViewModel() {
 
+    val searchText: String? = UserManager.userData.email
+
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
         get() = _status
+
+    var friendEmail = MutableLiveData<String>()
 
     // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
@@ -52,24 +56,30 @@ class FriendItemViewModel(
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
         Logger.i("------------------------------------")
-        getUserList()
+        if (searchText != null) {
+            getUserList(searchText)
+        }
     }
 
-    fun getUserList() {
+    fun getUserList(searchText: String) {
         when (friendTypeFilter) {
-            FriendTypeFilter.USERLIST -> getAllUser()
+            FriendTypeFilter.USERLIST ->{
+                if (searchText != null){
+                    getAllUser(searchText)
+                }
+            }
             else -> getMyUser()
 
         }
 
     }
 
-    fun getAllUser() {
+    fun getAllUser(searchText : String) {
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            val result = repository.getAllUser()
+            val result = repository.getAllUser(searchText)
 
             _userList.value = when (result) {
                 is Result.Success -> {
@@ -142,17 +152,4 @@ class FriendItemViewModel(
         super.onCleared()
         viewModelJob.cancel()
     }
-//    fun refresh() {
-//        if (status.value != LoadApiStatus.LOADING) {
-//            sourceFactory.sourceLiveData.value?.invalidate()
-//        }
-//    }
-
-//    fun navigateToDetail(product: Product) {
-//        _navigateToDetail.value = product
-//    }
-//
-//    fun onDetailNavigated() {
-//        _navigateToDetail.value = null
-//    }
 }
