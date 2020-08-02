@@ -206,6 +206,17 @@ class ChatRoomDetail : Fragment() {
             viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
+            viewModel.endSpeakerReady()
+            binding.chatRoomDetailEndBackground.visibility = View.GONE
+            binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+            binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
             Handler().postDelayed({
                 findNavController().navigate(
                     NavigationDirections.actionGlobalChatRoomDetailScore(
@@ -221,6 +232,17 @@ class ChatRoomDetail : Fragment() {
             viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
+            viewModel.endSpeakerReady()
+            binding.chatRoomDetailEndBackground.visibility = View.GONE
+            binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+            binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
             Handler().postDelayed({
                 findNavController().navigate(
                     NavigationDirections.actionGlobalChatRoomDetailScore(
