@@ -37,6 +37,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
 
 @BindingAdapter("chatRoom")
 fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?){
+    Logger.d("bindChatRoomRecycleView, chatRoom=$chatRoom")
     chatRoom?.let {
         recyclerView.adapter?.apply {
             when (this){

@@ -21,7 +21,7 @@ interface MonsterDataSource {
 
     suspend fun getUserFourArms(document: String,teammate:String): Result<UserArms>
 
-    suspend fun getAllUser(): Result<List<User>>
+    suspend fun getAllUser(searchText:String): Result<List<User>>
 
     suspend fun getMyUser(document: String): Result<List<User>>
 

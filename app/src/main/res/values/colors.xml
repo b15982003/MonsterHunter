@@ -63,6 +63,10 @@
     <color name="chatRoom_detail_start_button">#1B813E</color>
     <color name="chatRoom_detail_end_button">#F19483</color>
     <color name="chatRoom_detail_background">#50000000</color>
+    <color name="chatRoom_detail_speaker_back">#EEA9A9</color>
+    <color name="chatRoom_detail_speaker_hit">@color/colorPrimaryDark</color>
+    <color name="chatRoom_detail_speaker_mackUp">#D9CD90</color>
+    <color name="chatRoom_detail_speaker_wait">#1E88A8</color>
 
     <!-- Chatroom Score -->
     <color name="chatRoom_score_name">@color/colorPrimaryDark</color>

@@ -45,12 +45,9 @@ class ChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     }
 
     init {
-        if(MonsterApplication.instance.isLiveChatRoom()){
-            getLiveChatRoomResoult()
-        }else{
-            getChatRoom()
 
-        }
+            getLiveChatRoomResoult()
+
     }
     fun getLiveChatRoomResoult(){
         livechatRoom = repository.getLiveChatRoom()

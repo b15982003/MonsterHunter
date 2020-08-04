@@ -2,10 +2,12 @@ package com.ray.monsterhunter.chattoomdetail
 
 
 import android.annotation.SuppressLint
-import com.ray.monsterhunter.R
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -16,11 +18,11 @@ import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.NavigationDirections
+import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-
 
 class ChatRoomDetail : Fragment() {
 
@@ -41,6 +43,9 @@ class ChatRoomDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        //初始化
+        viewModel.createLanguageTTS()
+
         binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -59,10 +64,87 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
         binding.chatRoomDetailTimeEnd.visibility = View.GONE
+        binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+        binding.chatRoomDetailEndBackground.visibility = View.GONE
+        binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+        binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+        binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+        binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+        binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
 
-        binding.chatRoomDetailTextMessageRecy.adapter =
-            ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
-            })
+
+        binding.chatRoomDetailSpeakerBack.setOnClickListener() {
+            viewModel.speakerBack()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeakerHit.setOnClickListener() {
+            viewModel.speakerHit()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeakerMackUp.setOnClickListener() {
+            viewModel.speakerMackUp()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+
+        binding.chatRoomDetailSpeakerWait.setOnClickListener() {
+            viewModel.speakerWait()
+            viewModel.updateChatRoomInfo()
+            Handler().postDelayed({
+                viewModel.speakerEnd()
+                viewModel.updateChatRoomInfo()
+            }, 7000)
+
+        }
+
+        binding.chatRoomDetailSpeaker.setOnClickListener() {
+            if (viewModel.speakerReady.value == false) {
+                viewModel.getSpeakerReady()
+                binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
+                binding.chatRoomDetailEndBackground.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
+                binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
+
+            } else {
+                viewModel.endSpeakerReady()
+                binding.chatRoomDetailEndBackground.visibility = View.GONE
+                binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+                binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+                binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+                binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+            }
+        }
+
+        val adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
+        })
+
+        binding.chatRoomDetailTextMessageRecy.adapter = adapter
+
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
 
         binding.chatRoomDetailReadyButton.setOnClickListener() {
@@ -97,9 +179,9 @@ class ChatRoomDetail : Fragment() {
         }
 
         binding.chatRoomDetailStartButton.setOnClickListener() {
-            if(viewModel.liveChatRoom.value?.teammate?.size!! < 4){
-                Toast.makeText(MonsterApplication.instance,"人數不足",Toast.LENGTH_SHORT).show()
-            }else{
+            if (viewModel.liveChatRoom.value?.teammate?.size!! < 4) {
+                Toast.makeText(MonsterApplication.instance, "人數不足", Toast.LENGTH_SHORT).show()
+            } else {
                 viewModel.startTimming()
                 binding.chatRoomDetailStartButton.visibility = View.GONE
                 binding.chatRoomDetailEndButton.visibility = View.VISIBLE
@@ -119,33 +201,70 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailMissionTypeSuccess.setOnClickListener() {
 
-            viewModel.chatRoom.value?.missionResult = "true"
             viewModel.chatRoom.value?.endToScore = "true"
+
+
+//            Handler().postDelayed({
+            viewModel.chatRoom.value?.missionResult = "true"
             viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
+//            viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
+            viewModel.endSpeakerReady()
+
+//            }, 1000)
+            binding.chatRoomDetailEndBackground.visibility = View.GONE
+            binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+            binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
             Handler().postDelayed({
                 findNavController().navigate(
                     NavigationDirections.actionGlobalChatRoomDetailScore(
                         viewModel.chatRoom.value!!
                     )
                 )
-            }, 500)
+            }, 2000)
         }
 
+
         binding.chatRoomDetailMissionTypeFail.setOnClickListener() {
-            viewModel.chatRoom.value?.missionResult = "false"
+
             viewModel.chatRoom.value?.endToScore = "true"
+
+
+//            Handler().postDelayed({
+            viewModel.chatRoom.value?.missionResult = "false"
             viewModel.returnStartTime()
             viewModel.updateChatRoomInfo()
+//            viewModel.updateChatRoomInfo()
             viewModel.isGoon.value = false
+            viewModel.endSpeakerReady()
+//            }, 1000)
+
+
+            binding.chatRoomDetailEndBackground.visibility = View.GONE
+            binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+            binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+            binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
             Handler().postDelayed({
                 findNavController().navigate(
                     NavigationDirections.actionGlobalChatRoomDetailScore(
                         viewModel.chatRoom.value!!
                     )
                 )
-            }, 1000)
+            }, 2000)
         }
 
 
@@ -199,9 +318,9 @@ class ChatRoomDetail : Fragment() {
 
         viewModel.timeSec.observe(viewLifecycleOwner, Observer {
             binding.chatRoomDetailSecNumber.text = (viewModel.timeCheck % 10).toString()
-            binding.chatRoomDetailTenSecNumber.text = (if(viewModel.timeCheck / 10 > 5){
+            binding.chatRoomDetailTenSecNumber.text = (if (viewModel.timeCheck / 10 > 5) {
                 0
-            }else{
+            } else {
                 viewModel.timeCheck / 10
             }).toString()
             binding.chatRoomDetailMinNumber.text = (viewModel.timeCheck / 60).toString()
@@ -209,31 +328,86 @@ class ChatRoomDetail : Fragment() {
         })
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
-            if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "true") {
-                Handler().postDelayed({
-                    findNavController().navigate(
-                        NavigationDirections.actionGlobalChatRoomDetailScore(
-                            viewModel.chatRoom.value!!
-                        )
-                    )
-                }, 500)
-            }else if(viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true"){
-                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
-                binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
-                binding.chatRoomDetailTimeEnd.visibility = View.GONE
-                Handler().postDelayed({
-                    binding.chatRoomDetailTimeBg.visibility = View.GONE
-                    binding.chatRoomDetailTimeStart.visibility = View.GONE
-                },3000)
-            }else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false"){
-                binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
-                binding.chatRoomDetailTimeStart.visibility = View.GONE
-                binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
 
-                Handler().postDelayed({
-                    binding.chatRoomDetailTimeBg.visibility = View.GONE
+            it?.let {
+
+
+                if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "true") {
+
+                    viewModel.isGoon.value = false
+                    viewModel.endSpeakerReady()
+                    binding.chatRoomDetailEndBackground.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+
+                    binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+                    binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+                    Handler().postDelayed({
+                        findNavController().navigate(
+                            NavigationDirections.actionGlobalChatRoomDetailScore(
+                                viewModel.chatRoom.value!!
+                            )
+                        )
+                    }, 2000)
+                }
+
+                if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true") {
+                    binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                    binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
                     binding.chatRoomDetailTimeEnd.visibility = View.GONE
-                },3000)
+                    Handler().postDelayed({
+                        binding.chatRoomDetailTimeBg.visibility = View.GONE
+                        binding.chatRoomDetailTimeStart.visibility = View.GONE
+                    }, 1000)
+                } else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false") {
+                    binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
+                    binding.chatRoomDetailTimeStart.visibility = View.GONE
+                    binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
+
+                    Handler().postDelayed({
+                        binding.chatRoomDetailTimeBg.visibility = View.GONE
+                        binding.chatRoomDetailTimeEnd.visibility = View.GONE
+                    }, 1000)
+                }
+
+                if (viewModel.speakerReady.value == true) {
+
+                    if (viewModel.liveChatRoom.value?.speaker != "null") {
+                        binding.chatRoomDetailSpeakerBack.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerHit.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerWait.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerMackUp.visibility = View.GONE
+
+                        binding.chatRoomDetailSpeakerBackNo.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerHitNo.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerWaitNo.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerMackUpNo.visibility = View.VISIBLE
+
+                        when (viewModel.liveChatRoom.value?.speaker) {
+
+                            "back" -> viewModel.say("退退退退退退退退")
+                            "hit" -> viewModel.say("打他頭，打他的頭，朝頭打下去")
+                            "mackUp" -> viewModel.say("補血補血補血補血")
+                            "wait" -> viewModel.say("等等等等等等等等")
+                        }
+                    } else {
+                        binding.chatRoomDetailSpeakerBack.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerHit.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerWait.visibility = View.VISIBLE
+                        binding.chatRoomDetailSpeakerMackUp.visibility = View.VISIBLE
+
+                        binding.chatRoomDetailSpeakerBackNo.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerHitNo.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerWaitNo.visibility = View.GONE
+                        binding.chatRoomDetailSpeakerMackUpNo.visibility = View.GONE
+
+                    }
+
+                }
             }
         })
 
@@ -358,15 +532,19 @@ class ChatRoomDetail : Fragment() {
         return binding.root
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).hiddingBottomnav()
         (activity as MainActivity).hiddingToolbar()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).getBottomnav()
         (activity as MainActivity).getToolbar()
+        viewModel.canceltts()
+
     }
 }

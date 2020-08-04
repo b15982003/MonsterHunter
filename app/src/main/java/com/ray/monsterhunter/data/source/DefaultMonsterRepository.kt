@@ -54,8 +54,8 @@ class DefaultMonsterRepository(
         return remoteDataSource.getLiveUserFourScore(teammate)
     }
 
-    override suspend fun getAllUser(): Result<List<User>> {
-        return remoteDataSource.getAllUser()
+    override suspend fun getAllUser(searchText:String): Result<List<User>> {
+        return remoteDataSource.getAllUser(searchText)
     }
 
     override suspend fun getMyUser(document: String): Result<List<User>> {

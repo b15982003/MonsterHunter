@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.databinding.ItemChatroomBinding
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import com.ray.monsterhunter.util.UserManager
 import java.util.*
@@ -17,7 +18,7 @@ class ChatRoomAdapter(
     private val onClickListener: OnClickListener,
     val viewModel: ChatRoomViewModel
 ) :
-    ListAdapter<ChatRoom, RecyclerView.ViewHolder>(DiffCallback) {
+    ListAdapter<ChatRoom, ChatRoomAdapter.ChatRoomViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (chatRoom : ChatRoom) -> Unit) {
         fun onClick(chatRoom: ChatRoom) = clickListener(chatRoom)
@@ -51,33 +52,30 @@ class ChatRoomAdapter(
 
     companion object DiffCallback : DiffUtil.ItemCallback<ChatRoom>() {
         override fun areItemsTheSame(oldItem: ChatRoom, newItem: ChatRoom): Boolean {
-            return oldItem === newItem
+            return oldItem.createTime === newItem.createTime
         }
         override fun areContentsTheSame(oldItem: ChatRoom, newItem: ChatRoom): Boolean {
-            return oldItem.image == newItem.image
+            return oldItem.createTime == newItem.createTime
         }
-
-        private const val ITEM_VIEW_TYPE_ARTICLE = 0x00
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            ITEM_VIEW_TYPE_ARTICLE -> ChatRoomViewHolder(ItemChatroomBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRoomViewHolder {
+            return ChatRoomViewHolder(ItemChatroomBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false))
-            else -> throw ClassCastException("Unknown viewType $viewType")
+
         }
-    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        when (holder) {
-            is ChatRoomViewHolder -> {
+    override fun onBindViewHolder(holder: ChatRoomViewHolder, position: Int) {
+
+                Logger.i("position=$position, name=${getItem(position) as ChatRoom}")
                 holder.bind((getItem(position) as ChatRoom), onClickListener,viewModel)
-            }
-        }
+
+     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return ITEM_VIEW_TYPE_ARTICLE
-    }
 }
+

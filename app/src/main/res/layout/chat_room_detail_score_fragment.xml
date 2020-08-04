@@ -11,10 +11,6 @@
             name="viewModel"
             type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScoreViewModel" />
 
-        <variable
-            name="chatRoomViewModel"
-            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -538,7 +534,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:lottie_autoPlay="true"
+            app:lottie_autoPlay="false"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/active_success_check"
             app:lottie_speed="1.0" />

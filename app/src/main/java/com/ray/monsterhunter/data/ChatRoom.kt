@@ -24,7 +24,7 @@ data class ChatRoom(
     var armsType1 : String? = "",
     var armsType2 : String? = "",
     var armsType3 : String? = "",
-    var armsType4 : String? = ""
-
+    var armsType4 : String? = "",
+    var speaker : String = "null"
 
 ) : Parcelable
