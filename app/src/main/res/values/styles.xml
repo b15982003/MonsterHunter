@@ -176,7 +176,6 @@
 
     <style name="chatRoom_score_finishText">
         <item name="android:textSize">12sp</item>
-        <item name="fontFamily">@font/noto_sans</item>
         <item name="android:textColor">@color/gray_646464</item>
     </style>
 

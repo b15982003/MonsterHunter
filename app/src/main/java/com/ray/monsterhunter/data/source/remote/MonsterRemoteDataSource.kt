@@ -202,7 +202,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_CHATROOM)
             .document(document)
             .collection(PATH_MESSAGE)
-            .orderBy(KEY_CREAT_TIME, Query.Direction.DESCENDING)
+            .orderBy(KEY_CREAT_TIME, Query.Direction.ASCENDING)
             .addSnapshotListener { snapshot, exception ->
                 val list = mutableListOf<Message>()
                 for (document in snapshot!!) {

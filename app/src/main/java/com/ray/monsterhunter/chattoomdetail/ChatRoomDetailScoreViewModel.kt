@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.UserManager
 
 
 class ChatRoomDetailScoreViewModel(
@@ -100,34 +101,32 @@ class ChatRoomDetailScoreViewModel(
 
     init {
         getLiveChatRoom()
-        Handler().postDelayed({
-            chatRoom.value?.endToScore = "false"
-            updateChatRoomInfo()
-        }, 3000)
 
-        chatRoom.value?.teammate?.get(0)?.let { getUserOneArms() }
+
+//        chatRoom.value?.teammate?.get(0)?.let {  }
+        getUserOneArms()
         getLiveUserOneScore()
 
-        if (chatRoom.value?.teammate?.get(1) != null) {
+////        if (chatRoom.value?.teammate?.get(1) != null) {
             getUserTwoArms()
             getLiveUserTwoScore()
-        } else {
-            Toast.makeText(MonsterApplication.instance, "只有你一個人喔", Toast.LENGTH_SHORT).show()
-        }
-
-        if (chatRoom.value?.teammate?.get(2) != null) {
+////        } else {
+////            Toast.makeText(MonsterApplication.instance, "只有你一個人喔", Toast.LENGTH_SHORT).show()
+////        }
+//
+////        if (chatRoom.value?.teammate?.get(2) != null) {
             getUserThreeArms()
             getLiveUserThreeScore()
-        } else {
-            Toast.makeText(MonsterApplication.instance, "只有兩個人喔", Toast.LENGTH_SHORT).show()
-        }
-
-        if (chatRoom.value?.teammate?.get(3) != null) {
+////        } else {
+////            Toast.makeText(MonsterApplication.instance, "只有兩個人喔", Toast.LENGTH_SHORT).show()
+////        }
+//
+////        if (chatRoom.value?.teammate?.get(3) != null) {
             getUserFourArms()
             getLiveUserFourScore()
-        } else {
-            Toast.makeText(MonsterApplication.instance, "只有三個人喔", Toast.LENGTH_SHORT).show()
-        }
+//        } else {
+//            Toast.makeText(MonsterApplication.instance, "只有三個人喔", Toast.LENGTH_SHORT).show()
+//        }
 
         history.value?.documentId = chatRoom.value?.documentId
         history.value?.image = chatRoom.value?.image.toString()
@@ -135,8 +134,8 @@ class ChatRoomDetailScoreViewModel(
         history.value?.finishtime = chatRoom.value?.finishTime
         history.value?.missionResult = chatRoom.value?.missionResult.toString()
 
-        Logger.d("history1111111111111 ${history.value?.user1}")
-        Logger.d("history1111111111111 ${user1.value?.userId}")
+//        Logger.d("history1111111111111 ${history.value?.user1}")
+//        Logger.d("history1111111111111 ${user1.value?.userId}")
 
     }
 
@@ -448,44 +447,40 @@ class ChatRoomDetailScoreViewModel(
 
     fun getLiveChatRoom() {
         liveChatRoom = repository.getLiveChatRoomScore(chatRoom.value!!.documentId)
-        Logger.d("liveOne ${liveUserOne.value}")
-        Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
     }
 
     fun getLiveUserOneScore() {
+        Logger.d("getLiveUserOneScore")
+
+
         liveUserOne = repository.getLiveUserOneScore(chatRoom.value!!.teammate[0])
-        Logger.d("liveOne ${liveUserOne.value}")
-        Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
     }
 
     fun getLiveUserTwoScore() {
+        Logger.d("getLiveUserTwoScore")
         liveUserTwo = repository.getLiveUserOneScore(chatRoom.value!!.teammate[1])
-        Logger.d("liveOne ${liveUserOne.value}")
-        Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
     }
 
     fun getLiveUserThreeScore() {
+        Logger.d("getLiveUserThreeScore")
         liveUserThree = repository.getLiveUserOneScore(chatRoom.value!!.teammate[2])
-        Logger.d("liveOne ${liveUserOne.value}")
-        Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
     }
 
     fun getLiveUserFourScore() {
+        Logger.d("getLiveUserFourScore")
         liveUserFour = repository.getLiveUserOneScore(chatRoom.value!!.teammate[3])
-        Logger.d("liveOne ${liveUserOne.value}")
-        Logger.d("liveOne ${repository.getLiveChatRoom()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
 
