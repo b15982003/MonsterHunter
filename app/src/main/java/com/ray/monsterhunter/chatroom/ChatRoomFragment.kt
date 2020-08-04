@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.NavigationDirections
+import com.ray.monsterhunter.R
 
 import com.ray.monsterhunter.databinding.ChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
+import com.ray.monsterhunter.util.Logger
 
 class ChatRoomFragment : Fragment() {
 
@@ -23,8 +26,12 @@ class ChatRoomFragment : Fragment() {
     ): View? {
 
         binding = ChatRoomFragmentBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+
+        binding.chatRoomNot.setOnClickListener(){
+            findNavController().navigate(R.id.dialogChatRoomFragment)
+        }
 
         var adapter = ChatRoomAdapter(ChatRoomAdapter.OnClickListener {
             findNavController().navigate(NavigationDirections.actionGlobalChatRoomDetail(it))
@@ -32,6 +39,14 @@ class ChatRoomFragment : Fragment() {
 
         adapter.setHasStableIds(true)
         binding.chatRoomRecy.adapter = adapter
+
+//        viewModel.livechatRoom.observe(viewLifecycleOwner, Observer {
+//            it?.let {
+//
+//                Logger.d("size = ${viewModel.livechatRoom.value?.size}")
+//
+//            }
+//        })
 
 
         return binding.root

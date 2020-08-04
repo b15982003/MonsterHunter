@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
@@ -15,11 +16,14 @@ import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ray.monsterhunter.databinding.ActivityMainBinding
 import com.ray.monsterhunter.ext.getVmFactory
@@ -27,6 +31,7 @@ import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : BaseActivity() {
@@ -35,6 +40,10 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    // workermanger
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED).build()
 
 
     private val onNavigationItemSelectedListener =
@@ -136,10 +145,6 @@ class MainActivity : BaseActivity() {
         UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
         UserManager.userData.image = FirebaseAuth.getInstance().currentUser?.photoUrl.toString()
 
-//        viewModel.user.observe(this, Observer {
-//                Logger.d("MainactiveMan${viewModel.user.value}")
-//        })
-
         setupNavController()
         setupDrawer()
         userName.text = UserManager.userData.id
@@ -227,6 +232,26 @@ class MainActivity : BaseActivity() {
         bottomNav.visibility = View.VISIBLE
     }
 
+    fun cancelWorkerManger(){
+        WorkManager.getInstance(this).cancelAllWork()
+
+    }
+
+    fun startWorkerManger(time: Long){
+        Logger.d("call fun Work")
+        val request = OneTimeWorkRequestBuilder<WorkerManager>()
+            .setInitialDelay(time, TimeUnit.MILLISECONDS)
+            .setConstraints(constraints).build()
+        WorkManager.getInstance(this).enqueue(request)
+
+//        WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
+//            .observe(this, Observer {
+//
+//                val status: String = it.state.name
+//                Toast.makeText(this,status, Toast.LENGTH_SHORT).show()
+//            })
+
+    }
 
 }
 

@@ -1,6 +1,7 @@
 package com.ray.monsterhunter.chattoomdetail
 
 import android.os.Handler
+import android.speech.tts.TextToSpeech
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.UserManager
+import java.util.*
 
 class ChatRoomDetailViewModel(
     private val repository: MonsterRepository,
@@ -27,6 +29,7 @@ class ChatRoomDetailViewModel(
     var timeCheck: Long = 0
     var timeCheckTenSec: Long = 0
     var timeTenSec: Long = 0
+    private var tts: TextToSpeech? = null
 
     private val _chatroom = MutableLiveData<ChatRoom>().apply {
         value = argument
@@ -46,6 +49,10 @@ class ChatRoomDetailViewModel(
     var liveMessage = MutableLiveData<List<Message>>()
 
     var userArms = MutableLiveData<Int>()
+
+    private val _speakerReady = MutableLiveData<Boolean>(false)
+    val speakerReady: LiveData<Boolean>
+        get() = _speakerReady
 
     private val _userArmsType = MutableLiveData<UserArms>().apply {
         value = UserArms()
@@ -336,7 +343,35 @@ class ChatRoomDetailViewModel(
         handler.removeCallbacks(runnable)
     }
 
-    fun returnStartTime(){
+    fun getSpeakerReady(){
+        _speakerReady.value = true
+    }
+
+    fun endSpeakerReady(){
+        _speakerReady.value = false
+    }
+
+    fun speakerBack() {
+        chatRoom.value?.speaker = "back"
+    }
+
+    fun speakerHit() {
+        chatRoom.value?.speaker = "hit"
+    }
+
+    fun speakerMackUp() {
+        chatRoom.value?.speaker = "mackUp"
+    }
+
+    fun speakerWait() {
+        chatRoom.value?.speaker = "wait"
+    }
+
+    fun speakerEnd() {
+        chatRoom.value?.speaker = "null"
+    }
+
+    fun returnStartTime() {
         _timing.value = "null"
     }
 
@@ -354,6 +389,43 @@ class ChatRoomDetailViewModel(
 
     fun getOutFinish() {
         _leave.value = false
+    }
+
+    fun say(userSay: String) {
+        //設定發音語言
+        tts?.setLanguage(Locale.TAIWAN);
+        //語調
+        tts?.setPitch(1F);//預設1
+        //速度
+        tts?.setSpeechRate(1F);//預設1
+        //然後 播放
+        //TextToSpeech.QUEUE_FLUSH:播放下一句時，前一句直接中斷
+        //TextToSpeech.QUEUE_ADD:播放下一句時，等待前一句播完
+        tts?.speak(userSay, TextToSpeech.QUEUE_FLUSH, null, null)
+        Logger.d("reallllllllllllll")
+
+    }
+
+    fun createLanguageTTS() {
+        if (tts == null) {
+            Logger.d("laught1")
+            tts = TextToSpeech(MonsterApplication.instance, TextToSpeech.OnInitListener { arg0 ->
+                // TTS 初始化成功
+                if (arg0 == TextToSpeech.SUCCESS) {
+                    Logger.d("laught2")
+                    // 目前指定的【語系+國家】TTS, 已下載離線語音檔, 可以離線發音
+                    if (tts!!.isLanguageAvailable(Locale.TRADITIONAL_CHINESE) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                        tts!!.language = Locale.TRADITIONAL_CHINESE
+                        Logger.d("laught3")
+                    }
+                }
+            })
+        }
+    }
+
+    fun canceltts() {
+        // 釋放 TTS
+        tts?.shutdown()
     }
 
 }

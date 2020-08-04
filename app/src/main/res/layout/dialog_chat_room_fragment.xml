@@ -271,7 +271,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/dialog_chatroom_post_sent_button"
-                    android:onClick="@{() -> viewModel.pushChatRoom(viewModel.event)}"
                     android:text="@string/chatRoom_post＿button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

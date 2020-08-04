@@ -4,6 +4,7 @@ package com.ray.monsterhunter.post
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,11 +13,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
@@ -27,6 +30,9 @@ import com.ray.monsterhunter.util.TimeUtil
 import com.ray.monsterhunter.util.UserManager
 import okhttp3.internal.format
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
 
 class DialogChatRoom : AppCompatDialogFragment() {
@@ -41,6 +47,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogPost)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -337,6 +344,34 @@ class DialogChatRoom : AppCompatDialogFragment() {
             }
         })
 
+        viewModel.dataTime.observe(viewLifecycleOwner, Observer {
+            viewModel.getTime.value = viewModel.datadate.value?.let { it1 ->
+                viewModel.dataTime.value?.plus(
+                    it1
+                )
+            }
+        })
+
+        viewModel.getTime.observe(viewLifecycleOwner, Observer {
+            var testTime = LocalDate.now()
+            var tstTime = LocalTime.now()
+            var addTime = "$testTime $tstTime"
+            viewModel.finalTime.value = viewModel.getTime.value?.minus(TimeUtil.DateToAllStamp(addTime, Locale.TAIWAN))
+
+        })
+
+        viewModel.finalTime.observe(viewLifecycleOwner, Observer {
+            it?.let {  }
+        })
+
+        binding.chatRoomPostSentButton.setOnClickListener(){
+            viewModel.finalTime.value?.let {
+                    it1 -> (activity as MainActivity).startWorkerManger(it1)
+            }
+            viewModel.event.value?.let { it1 -> viewModel.pushChatRoom(it1) }
+
+        }
+
         return binding.root
     }
 
@@ -344,8 +379,11 @@ class DialogChatRoom : AppCompatDialogFragment() {
         val dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             calender.set(year, month, day)
             format("yyyy-MM-dd")
-            val dateToStamp = TimeUtil.DateToStamp("$year-$month-$day", Locale.TAIWAN)
+            val dateToStamp = TimeUtil.DateToStamp("$year-${month.plus(1)}-$day", Locale.TAIWAN)
             viewModel.event.value?.dateTime?.date = dateToStamp
+            viewModel.year.value = year
+            viewModel.month.value = month +1
+            viewModel.day.value = day
 
             binding.chatRoomPostDateText.text = "$year-${month.plus(1)}-$day"
         }
@@ -367,7 +405,12 @@ class DialogChatRoom : AppCompatDialogFragment() {
             format("HH:mm")
             val timeToStamp = TimeUtil.TimeToStamp("$hour:$min", Locale.TAIWAN)
             viewModel.event.value?.dateTime?.time = timeToStamp
-
+            viewModel.hour.value = hour
+            viewModel.min.value = min
+            var nowTime =
+                "${viewModel.year.value}-${viewModel.month.value}-${viewModel.day.value} " +
+                        "${viewModel.hour.value}:${viewModel.min.value}"
+            viewModel.getTime.value = TimeUtil.DateToAllStamp(nowTime, Locale.TAIWAN)
             binding.chatRoomPostTimeText.text = "$hour : $min "
 
         }

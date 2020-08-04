@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Message
 import com.ray.monsterhunter.databinding.ItemCrawlingDetailLeaveMessageBinding
+import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
@@ -39,7 +40,7 @@ class CrawlingDetailAdapter(
             return oldItem === newItem
         }
         override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
-            return oldItem.image == newItem.image
+            return oldItem == newItem
         }
 
         private const val ITEM_VIEW_TYPE_ARTICLE = 0x00
@@ -57,6 +58,7 @@ class CrawlingDetailAdapter(
 
         when (holder) {
             is CrawlingDetailViewHolder -> {
+                Logger.i("position=$position, name=${getItem(position) as Message}")
                 holder.bind((getItem(position) as Message), onClickListener)
             }
         }
@@ -65,4 +67,9 @@ class CrawlingDetailAdapter(
     override fun getItemViewType(position: Int): Int {
         return ITEM_VIEW_TYPE_ARTICLE
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
 }

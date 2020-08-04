@@ -73,7 +73,7 @@ class MonsterLocalDataSource(context: Context) : MonsterDataSource {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllUser(): Result<List<User>> {
+    override suspend fun getAllUser(searchText:String): Result<List<User>> {
         TODO("Not yet implemented")
     }
 
