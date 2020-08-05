@@ -20,42 +20,6 @@ import com.ray.monsterhunter.util.UserManager
 
 class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
 
-    var auth = FirebaseAuth.getInstance()
-
-     fun signOut() {
-
-        auth.signOut()
-    }
-
-    var userA = MutableLiveData<Float>()
-
-    var userB = MutableLiveData<Float>()
-
-    var userC = MutableLiveData<Float>()
-
-    var userD = MutableLiveData<Float>()
-
-    var userE = MutableLiveData<Float>()
-
-    var userF = MutableLiveData<Float>()
-
-    var userG = MutableLiveData<Float>()
-
-    var userH = MutableLiveData<Float>()
-
-    var userI = MutableLiveData<Float>()
-
-    var userJ = MutableLiveData<Float>()
-
-    var userK = MutableLiveData<Float>()
-
-    var userL = MutableLiveData<Float>()
-
-    var userM = MutableLiveData<Float>()
-
-    var userN = MutableLiveData<Float>()
-
-
     private val _user = MutableLiveData<User>()
 
     val user: LiveData<User>
@@ -86,7 +50,7 @@ class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-    getUser()
+        getUser()
     }
 
     fun getUser() {
@@ -99,35 +63,27 @@ class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
 
             _user.value = when (result) {
                 is Result.Success -> {
-                    Logger.d("succsesssss3")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
 
                 }
                 is Result.Fail -> {
-                    Logger.d("faillllll2")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-                    Logger.d("erorrrrrr1")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
-                    Logger.d("nonononnononononono0")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
     }
-
-
-
 }
