@@ -29,10 +29,7 @@ import java.util.*
 
 class DialogPost : AppCompatDialogFragment() {
 
-
-    private val viewModel by viewModels<DialogPostViewModel> {
-        getVmFactory()
-    }
+    private val viewModel by viewModels<DialogPostViewModel> { getVmFactory() }
     private lateinit var binding: DialogPostFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,11 +46,8 @@ class DialogPost : AppCompatDialogFragment() {
         binding.viewModel = viewModel
 
 
-
-
         val missionType = arrayListOf("選擇文章類型", "最新活動", "心情分享", "魔物分析", "攻略分析", "神人搜尋", "趣事分享")
         val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
-
 
         val adapterActivityType = ArrayAdapter(
             MonsterApplication.instance,
@@ -68,11 +62,10 @@ class DialogPost : AppCompatDialogFragment() {
 
         binding.postDialogActivityType.adapter = adapterActivityType
         binding.postDialogMonstername.adapter = adapterMonsterName
-
+        // choose active type
         binding.postDialogActivityType.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onItemSelected(
@@ -81,71 +74,26 @@ class DialogPost : AppCompatDialogFragment() {
                     position: Int,
                     id: Long
                 ) {
-                    when (id) {
-                        0L -> viewModel.crawling.value?.type = "選擇文章類型"
-                        1L -> viewModel.crawling.value?.type = "最新活動"
-                        2L -> viewModel.crawling.value?.type = "心情分享"
-                        3L -> viewModel.crawling.value?.type = "魔物分析"
-                        4L -> viewModel.crawling.value?.type = "攻略分析"
-                        5L -> viewModel.crawling.value?.type = "神人搜尋"
-                        5L -> viewModel.crawling.value?.type = "趣事分享"
-                    }
+                    viewModel.chooseCrawlingType(id)
                 }
             }
-
-
+        // choose Monster type
         binding.postDialogMonstername.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
                 }
 
                 override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
+                    parent: AdapterView<*>?, view: View?,
                     position: Int,
                     id: Long
                 ) {
-                    when (id) {
-                        0L -> {
-                            viewModel.crawling.value?.monsterType = "隨機攻打生物"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterRoomPost
-                        }
-                        1L -> {
-                            viewModel.crawling.value?.monsterType = "滅盡龍"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterRoomPost
-                        }
-                        2L -> {
-                            viewModel.crawling.value?.monsterType = "煌黑龍"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterYellowBlack
-                        }
-                        3L -> {
-                            viewModel.crawling.value?.monsterType = "麒麟"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterUnico
-                        }
-                        4L -> {
-                            viewModel.crawling.value?.monsterType = "火龍"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterFireDragon
-                        }
-                        5L -> {
-                            viewModel.crawling.value?.monsterType = "冰牙龍"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterIceteeth
-                        }
-                        5L -> {
-                            viewModel.crawling.value?.monsterType = "冰呪龍"
-                            viewModel.crawling.value?.image = ImageManger.imageData.monsterIcehit
-                        }
-                    }
+                    viewModel.chooseMonsterType(id)
                 }
             }
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
             it?.let { needRefresh ->
-                if (needRefresh) {
-                    ViewModelProvider(requireActivity()).get(MainViewModel::class.java).apply {
-                        refresh()
-                    }
-                }
                 findNavController().navigateUp()
                 viewModel.onLeft()
             }
@@ -153,14 +101,9 @@ class DialogPost : AppCompatDialogFragment() {
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
             it?.let {
-
                 viewModel.crawling.value?.user = it
             }
         })
-
-
         return binding.root
     }
-
-
 }
