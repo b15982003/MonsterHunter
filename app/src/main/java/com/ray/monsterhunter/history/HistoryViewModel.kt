@@ -15,10 +15,6 @@ class HistoryViewModel(
     val repository: MonsterRepository
 ) : ViewModel() {
 
-//    private var _history = MutableLiveData<List<History>>()
-//    val history: LiveData<List<History>>
-//        get() = _history
-
     var liveHistory = MutableLiveData<List<History>>()
 
     private val _status = MutableLiveData<LoadApiStatus>()
@@ -40,19 +36,14 @@ class HistoryViewModel(
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     init {
 
         getLiveHistoryResoult()
     }
 
-
     fun getLiveHistoryResoult(){
         liveHistory = repository.getLiveHistory()
-        Logger.d("see data livehistory ${liveHistory.value}")
-        Logger.d("see data livehistory2 ${repository.getLiveHistory()}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
-
     }
 }

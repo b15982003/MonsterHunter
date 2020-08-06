@@ -1,6 +1,5 @@
 package com.ray.monsterhunter.history
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,15 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-
-import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.HistoryFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.network.LoadApiStatus
 
 class HistoryFragment : Fragment() {
-
 
     private val viewModel by viewModels<HistoryViewModel> { getVmFactory() }
     lateinit var binding: HistoryFragmentBinding
@@ -32,23 +26,18 @@ class HistoryFragment : Fragment() {
 
         val adapter = HistoryAdapter(HistoryAdapter.OnClickListener{
         })
+
         binding.historyDataRecy.adapter = adapter
 
         viewModel.liveHistory.observe(viewLifecycleOwner, Observer {
             if (viewModel.liveHistory.value == listOf<String>()){
-
                 binding.historyListNoValue.visibility = View.VISIBLE
                 binding.historyListNoValueText.visibility = View.VISIBLE
             }else{
-
                 binding.historyListNoValue.visibility = View.GONE
                 binding.historyListNoValueText.visibility = View.GONE
-
             }
         })
-
-
         return binding.root
     }
-
 }
