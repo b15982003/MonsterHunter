@@ -21,9 +21,6 @@ import com.ray.monsterhunter.home.HomeCrawlingAdapter
 import com.ray.monsterhunter.network.LoadApiStatus
 
 
-/**
- * Created by Wayne Chen on 2020-01-15.
- */
 @BindingAdapter("crawlings")
 fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
     crawlings?.let {
