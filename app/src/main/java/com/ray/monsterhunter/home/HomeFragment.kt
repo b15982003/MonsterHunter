@@ -23,11 +23,6 @@ class HomeFragment : Fragment() {
     private lateinit var binding : HomeFragmentBinding
     private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,23 +40,19 @@ class HomeFragment : Fragment() {
             }
         })
 
-
         binding.activityNot.setOnClickListener(){
             findNavController().navigate(R.id.dialogPostFragment)
         }
 
         binding.homeDataRecy.adapter = HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener{
             findNavController().navigate(NavigationDirections.actionGlobalCrawlingDetail(it))
-
         })
+
         HomeCrawlingAdapter(HomeCrawlingAdapter.OnClickListener {  }).notifyDataSetChanged()
 
         binding.homeActivityRecy.adapter = HomeActivityAdapter(HomeActivityAdapter.OnClickListener{
 
         })
-
-
-
         return binding.root
     }
 }

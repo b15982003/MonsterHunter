@@ -1,30 +1,20 @@
 package com.ray.monsterhunter.post
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogPostFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.ImageManger
-import com.ray.monsterhunter.util.TimeUtil
-import okhttp3.internal.format
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class DialogPost : AppCompatDialogFragment() {
@@ -62,35 +52,11 @@ class DialogPost : AppCompatDialogFragment() {
 
         binding.postDialogActivityType.adapter = adapterActivityType
         binding.postDialogMonstername.adapter = adapterMonsterName
-        // choose active type
-        binding.postDialogActivityType.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
 
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    viewModel.chooseCrawlingType(id)
-                }
-            }
         // choose Monster type
-        binding.postDialogMonstername.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?, view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    viewModel.chooseMonsterType(id)
-                }
-            }
+        binding.postDialogMonstername.onItemSelectedListener = getSpinnerListner(1)
+        // choose active type
+        binding.postDialogActivityType.onItemSelectedListener = getSpinnerListner(2)
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
             it?.let { needRefresh ->
@@ -105,5 +71,23 @@ class DialogPost : AppCompatDialogFragment() {
             }
         })
         return binding.root
+    }
+
+    fun getSpinnerListner(type: Long): AdapterView.OnItemSelectedListener {
+        return object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?, view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (type) {
+                    1L -> viewModel.chooseMonsterType(id)
+                    else -> viewModel.chooseCrawlingType(id)
+                }
+            }
+        }
     }
 }

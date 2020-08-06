@@ -6,14 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Crawling
-import com.ray.monsterhunter.data.DateTime
-import com.ray.monsterhunter.data.FriendList
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.util.ImageManger
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
