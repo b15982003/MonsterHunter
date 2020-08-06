@@ -17,24 +17,23 @@ import com.ray.monsterhunter.data.source.Result
 
 
 class DialogFriendDetailViewModel(
-     val repository: MonsterRepository,
+    val repository: MonsterRepository,
     private val argument: User
 ) : ViewModel() {
 
     private val _user = MutableLiveData<User>().apply {
         value = argument
     }
-    val user : LiveData<User>
+    val user: LiveData<User>
         get() = _user
-
 
     val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
         get() = _leave
 
     val _follow = MutableLiveData<Boolean>(false)
-    val follow : LiveData<Boolean>
-    get() = _follow
+    val follow: LiveData<Boolean>
+        get() = _follow
 
     private val _status = MutableLiveData<LoadApiStatus>()
 
@@ -54,7 +53,7 @@ class DialogFriendDetailViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    init{
+    init {
 
     }
 
@@ -64,24 +63,20 @@ class DialogFriendDetailViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = user.value?.let { repository.postFriend(it) }){
+            when (val result = user.value?.let { repository.postFriend(it) }) {
                 is Result.Success -> {
-                    Logger.i("ok,${user}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
-                    Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
                 is Result.Error -> {
-                    Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                 }
@@ -96,24 +91,20 @@ class DialogFriendDetailViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = user.value?.let { repository.cancelFriend(it) }){
+            when (val result = user.value?.let { repository.cancelFriend(it) }) {
                 is Result.Success -> {
-                    Logger.i("ok,${user}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
-                    Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
                 is Result.Error -> {
-                    Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                 }
@@ -126,14 +117,15 @@ class DialogFriendDetailViewModel(
         viewModelJob.cancel()
     }
 
-    fun nothing(){
+    fun nothing() {
 
     }
-    fun getFollow(){
+
+    fun getFollow() {
         _follow.value = true
     }
 
-    fun cencelFollow(){
+    fun cencelFollow() {
         _follow.value = false
     }
 
