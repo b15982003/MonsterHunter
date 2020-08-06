@@ -3,6 +3,10 @@ package com.ray.monsterhunter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.ray.monsterhunter.data.MonsterUri
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterRepository
@@ -15,12 +19,15 @@ import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.UserManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 
-class MainViewModel(val repository: MonsterRepository): ViewModel() {
+class MainViewModel(val repository: MonsterRepository) : ViewModel() {
 
-
-     val userInfo = MutableLiveData<User>()
+    // workermanger
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED).build()
+    val userInfo = MutableLiveData<User>()
 
     val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
@@ -66,11 +73,12 @@ class MainViewModel(val repository: MonsterRepository): ViewModel() {
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-init {
-    pushUser(UserManager.userData)
-}
 
-    fun pushUser(user:User) {
+    init {
+        pushUser(UserManager.userData)
+    }
+
+    fun pushUser(user: User) {
 
         coroutineScope.launch {
 
@@ -81,7 +89,7 @@ init {
                     Logger.i("okkkkkk,${user}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    leave(true)
+//                    leave(true)
                 }
                 is Result.Fail -> {
                     Logger.i("ffffffail")
@@ -179,12 +187,24 @@ init {
         }
     }
 
-    fun leave(needRefresh: Boolean = false) {
-        _leave.value = needRefresh
+    fun cancelWorkerManger() {
+        WorkManager.getInstance(MonsterApplication.instance).cancelAllWork()
     }
 
-    fun onLeft() {
-        _leave.value = null
+    // start workerManger
+    fun startWorkerManger(time: Long) {
+        val request = OneTimeWorkRequestBuilder<WorkerManager>()
+            .setInitialDelay(time, TimeUnit.MILLISECONDS)
+            .setConstraints(constraints).build()
+        WorkManager.getInstance(MonsterApplication.instance).enqueue(request)
+
+        fun leave(needRefresh: Boolean = false) {
+            _leave.value = needRefresh
+        }
+
+        fun onLeft() {
+            _leave.value = null
+        }
+
     }
-    
 }

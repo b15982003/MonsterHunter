@@ -41,11 +41,6 @@ class MainActivity : BaseActivity() {
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    // workermanger
-    val constraints = Constraints.Builder()
-        .setRequiredNetworkType(NetworkType.CONNECTED).build()
-
-
     private val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -232,17 +227,7 @@ class MainActivity : BaseActivity() {
         bottomNav.visibility = View.VISIBLE
     }
 
-    fun cancelWorkerManger(){
-        WorkManager.getInstance(this).cancelAllWork()
 
-    }
-
-    fun startWorkerManger(time: Long){
-        Logger.d("call fun Work")
-        val request = OneTimeWorkRequestBuilder<WorkerManager>()
-            .setInitialDelay(time, TimeUnit.MILLISECONDS)
-            .setConstraints(constraints).build()
-        WorkManager.getInstance(this).enqueue(request)
 
 //        WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
 //            .observe(this, Observer {
@@ -251,7 +236,7 @@ class MainActivity : BaseActivity() {
 //                Toast.makeText(this,status, Toast.LENGTH_SHORT).show()
 //            })
 
-    }
+
 
 }
 

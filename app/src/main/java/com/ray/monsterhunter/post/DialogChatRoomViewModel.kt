@@ -3,6 +3,7 @@ package com.ray.monsterhunter.post
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.ChatRoom
@@ -10,24 +11,25 @@ import com.ray.monsterhunter.data.DateTime
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
 import com.ray.monsterhunter.data.source.Result
+import com.ray.monsterhunter.util.ImageManger
 import com.ray.monsterhunter.util.Logger
+import com.ray.monsterhunter.util.TimeUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
     val finalTime = MutableLiveData<Long>()
     val getTime = MutableLiveData<Long>()
-    val datadate = MutableLiveData<Long>()
-    val dataTime = MutableLiveData<Long>()
 
-    val year = MutableLiveData<Int>()
-    val month = MutableLiveData<Int>()
-    val day = MutableLiveData<Int>()
-    val hour = MutableLiveData<Int>()
-    val min = MutableLiveData<Int>()
+    val years = MutableLiveData<Int>()
+    val months = MutableLiveData<Int>()
+    val days = MutableLiveData<Int>()
+    val hours = MutableLiveData<Int>()
+    val mins = MutableLiveData<Int>()
 
     private val _event = MutableLiveData<ChatRoom>().apply {
         value = ChatRoom(dateTime = DateTime())
@@ -72,7 +74,6 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         _event.value?.dateTime?.time = dateTime.value?.time
     }
 
-
     fun pushChatRoom(chatRoom: ChatRoom) {
 
         coroutineScope.launch {
@@ -105,6 +106,38 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         }
     }
 
+    fun getDate(year: Int, month: Int, day: Int){
+        val dateToStamp = TimeUtil.DateToStamp("$year-${month.plus(1)}-$day", Locale.TAIWAN)
+        event.value?.dateTime?.date = dateToStamp
+        years.value = year
+        months.value = month +1
+        days.value = day
+    }
+
+    fun getTime(hour: Int, min: Int){
+        val timeToStamp = TimeUtil.TimeToStamp("$hour:$min", Locale.TAIWAN)
+        event.value?.dateTime?.time = timeToStamp
+        hours.value = hour
+        mins.value = min
+        var nowTime =
+            "${years.value}-${months.value}-${days.value} " +
+                    "${hours.value}:${mins.value}"
+        getTime.value = TimeUtil.DateToAllStamp(nowTime, Locale.TAIWAN)
+    }
+    // get UserManger have time
+    fun getWorkerMangerTime(addTime: String){
+        finalTime.value = getTime.value?.minus(TimeUtil.DateToAllStamp(addTime, Locale.TAIWAN))
+    }
+
+    fun isWorkerManger(){
+       finalTime.value?.let {it ->
+            (viewModelJob as MainViewModel).startWorkerManger(it)
+        }
+       event.value?.let { it ->
+            pushChatRoom(it)
+        }
+    }
+
     fun leave(needRefresh: Boolean = false) {
         _leave.value = needRefresh
     }
@@ -115,5 +148,75 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
     fun nothing() {
 
+    }
+
+    fun setArmsNameByMember(member: Int, armsName: String) {
+
+        when (member) {
+            1 -> {
+                _event.value?.armsType1 = armsName
+            }
+            2 -> {
+                _event.value?.armsType2 = armsName
+            }
+            3 -> {
+                _event.value?.armsType3 = armsName
+            }
+            4 -> {
+                _event.value?.armsType4 = armsName
+            }
+        }
+    }
+
+     fun setPostTypeName(id: Long){
+        when (id) {
+            0L -> _event.value?.typeName = "出擊"
+            1L -> _event.value?.typeName = "任務"
+            2L -> _event.value?.typeName = "自由"
+            3L -> _event.value?.typeName = "調查"
+            4L -> _event.value?.typeName = "活動"
+            5L -> _event.value?.typeName = "限時活動"
+            6L -> _event.value?.typeName = "採集"
+        }
+    }
+
+    fun setMonsterType(id: Long){
+        when (id) {
+            0L -> {
+                _event.value?.monsterName = "隨機打"
+                postMonster.value = 0
+                _event.value?.image = ImageManger.imageData.monsterRoomPost
+            }
+            1L -> {
+                _event.value?.monsterName = "滅盡龍"
+                postMonster.value = 1
+                _event.value?.image = ImageManger.imageData.monsterRoomPost
+            }
+            2L -> {
+                _event.value?.monsterName = "煌黑龍"
+                postMonster.value = 2
+                _event.value?.image = ImageManger.imageData.monsterYellowBlack
+            }
+            3L -> {
+                _event.value?.monsterName = "麒麟"
+                postMonster.value = 3
+                _event.value?.image = ImageManger.imageData.monsterUnico
+            }
+            4L -> {
+                _event.value?.monsterName = "火龍"
+                postMonster.value = 4
+                _event.value?.image = ImageManger.imageData.monsterFireDragon
+            }
+            5L -> {
+                _event.value?.monsterName = "冰牙龍"
+                postMonster.value = 5
+                _event.value?.image = ImageManger.imageData.monsterIceteeth
+            }
+            6L -> {
+                _event.value?.monsterName = "冰呪龍"
+                postMonster.value = 6
+                _event.value?.image = ImageManger.imageData.monsterIcehit
+            }
+        }
     }
 }
