@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/chatRoomDetailScore"
-        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScore"
+        android:name="com.ray.monsterhunter.chatroomScore.ChatRoomDetailScore"
         android:label="chat_room_detail_score_fragment"
         tools:layout="@layout/chat_room_detail_score_fragment" >
         <argument

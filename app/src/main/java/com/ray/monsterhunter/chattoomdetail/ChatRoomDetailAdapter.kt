@@ -7,54 +7,41 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Message
 import com.ray.monsterhunter.databinding.ItemChatroomMessageBinding
 import com.ray.monsterhunter.util.TimeUtil
 import com.ray.monsterhunter.util.UserManager
 import java.util.*
 
-class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
-                            ) :
+class ChatRoomDetailAdapter(
+    private val onClickListener: OnClickListener,
+    val viewModel: ChatRoomDetailViewModel
+) :
     ListAdapter<Message, RecyclerView.ViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (message: Message) -> Unit) {
         fun onClick(message: Message) = clickListener(message)
     }
 
-    class ChatRoomDetailViewHolder(private var binding: ItemChatroomMessageBinding):
+    class ChatRoomDetailViewHolder(
+        private var binding: ItemChatroomMessageBinding
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(message : Message, onClickListener: OnClickListener) {
+        fun bind(
+            message: Message,
+            onClickListener: OnClickListener,
+            viewModel: ChatRoomDetailViewModel
+        ) {
 
-            var AllStampTimeToDate = message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            var AllStampTimeToDate =
+                message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
             binding.chatRoomDetailItemCreateTime.text = AllStampTimeToDate
             binding.chatRoomDetailItemCreateTimeRight.text = AllStampTimeToDate
 
-            if (UserManager.userData.email == message.email){
-
-
-                binding.chatRoomDetailItemMessageRight.visibility = View.VISIBLE
-                binding.chatRoomDetailItemCreateTimeRight.visibility = View.VISIBLE
-
-                binding.chatRoomDetailItemImage.visibility = View.GONE
-                binding.chatRoomDetailItemName.visibility = View.GONE
-                binding.chatRoomDetailItemLine.visibility = View.GONE
-                binding.chatRoomDetailItemMessage.visibility = View.GONE
-                binding.chatRoomDetailItemCreateTime.visibility = View.GONE
-
-            }else{
-
-
-                binding.chatRoomDetailItemMessageRight.visibility = View.GONE
-                binding.chatRoomDetailItemCreateTimeRight.visibility = View.GONE
-
-                binding.chatRoomDetailItemImage.visibility = View.VISIBLE
-                binding.chatRoomDetailItemName.visibility = View.VISIBLE
-                binding.chatRoomDetailItemLine.visibility = View.VISIBLE
-                binding.chatRoomDetailItemMessage.visibility = View.VISIBLE
-                binding.chatRoomDetailItemCreateTime.visibility = View.VISIBLE
-            }
+            binding.owner = viewModel.isRoomOwner(message.email)
             binding.product = message
             binding.root.setOnClickListener { onClickListener.onClick(message) }
             binding.executePendingBindings()
@@ -62,10 +49,11 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Message>() {
-        override fun areItemsTheSame(oldItem:Message, newItem: Message): Boolean {
+        override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
             return oldItem === newItem
         }
-        override fun areContentsTheSame(oldItem:Message, newItem: Message): Boolean {
+
+        override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
             return oldItem.createTime == newItem.createTime
         }
 
@@ -74,8 +62,11 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_ARTICLE -> ChatRoomDetailViewHolder(ItemChatroomMessageBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+            ITEM_VIEW_TYPE_ARTICLE -> ChatRoomDetailViewHolder(
+                ItemChatroomMessageBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+            )
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -84,7 +75,7 @@ class ChatRoomDetailAdapter(private val onClickListener: OnClickListener
 
         when (holder) {
             is ChatRoomDetailViewHolder -> {
-                holder.bind((getItem(position) as Message), onClickListener)
+                holder.bind((getItem(position) as Message), onClickListener,viewModel)
             }
         }
     }

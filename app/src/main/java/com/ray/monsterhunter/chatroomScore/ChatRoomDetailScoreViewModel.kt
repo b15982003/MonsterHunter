@@ -1,7 +1,5 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomScore
 
-import android.os.Handler
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,15 +17,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
-import com.ray.monsterhunter.util.UserManager
 
 
 class ChatRoomDetailScoreViewModel(
     private val repository: MonsterRepository,
     private val argument: ChatRoom
 ) : ViewModel() {
-
-    var saySomthing = MutableLiveData<String>()
 
     var liveUserOne = MutableLiveData<User>()
 
@@ -102,55 +97,39 @@ class ChatRoomDetailScoreViewModel(
     init {
         getLiveChatRoom()
 
-
-//        chatRoom.value?.teammate?.get(0)?.let {  }
         getUserOneArms()
         getLiveUserOneScore()
 
-////        if (chatRoom.value?.teammate?.get(1) != null) {
-            getUserTwoArms()
-            getLiveUserTwoScore()
-////        } else {
-////            Toast.makeText(MonsterApplication.instance, "只有你一個人喔", Toast.LENGTH_SHORT).show()
-////        }
-//
-////        if (chatRoom.value?.teammate?.get(2) != null) {
-            getUserThreeArms()
-            getLiveUserThreeScore()
-////        } else {
-////            Toast.makeText(MonsterApplication.instance, "只有兩個人喔", Toast.LENGTH_SHORT).show()
-////        }
-//
-////        if (chatRoom.value?.teammate?.get(3) != null) {
-            getUserFourArms()
-            getLiveUserFourScore()
-//        } else {
-//            Toast.makeText(MonsterApplication.instance, "只有三個人喔", Toast.LENGTH_SHORT).show()
-//        }
+        getUserTwoArms()
+        getLiveUserTwoScore()
+
+        getUserThreeArms()
+        getLiveUserThreeScore()
+
+        getUserFourArms()
+        getLiveUserFourScore()
 
         history.value?.documentId = chatRoom.value?.documentId
         history.value?.image = chatRoom.value?.image.toString()
         history.value?.monsterName = chatRoom.value?.monsterName.toString()
         history.value?.finishtime = chatRoom.value?.finishTime
         history.value?.missionResult = chatRoom.value?.missionResult.toString()
-
-//        Logger.d("history1111111111111 ${history.value?.user1}")
-//        Logger.d("history1111111111111 ${user1.value?.userId}")
-
     }
 
     fun pushHistory1() {
 
-        Logger.i("ok,${history.value}")
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = history.value?.let { user1.value?.email?.let { it1 ->
-                repository.pushHistory1(it,
-                    it1
-                )
-            } }) {
+            when (val result = history.value?.let {
+                user1.value?.email?.let { it1 ->
+                    repository.pushHistory1(
+                        it,
+                        it1
+                    )
+                }
+            }) {
                 is Result.Success -> {
 
                     _error.value = null
@@ -182,11 +161,14 @@ class ChatRoomDetailScoreViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = history.value?.let { user2.value?.email?.let { it1 ->
-                repository.pushHistory2(it,
-                    it1
-                )
-            } }) {
+            when (val result = history.value?.let {
+                user2.value?.email?.let { it1 ->
+                    repository.pushHistory2(
+                        it,
+                        it1
+                    )
+                }
+            }) {
                 is Result.Success -> {
 
                     _error.value = null
@@ -219,11 +201,14 @@ class ChatRoomDetailScoreViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = history.value?.let { user2.value?.email?.let { it1 ->
-                repository.pushHistory3(it,
-                    it1
-                )
-            } }) {
+            when (val result = history.value?.let {
+                user2.value?.email?.let { it1 ->
+                    repository.pushHistory3(
+                        it,
+                        it1
+                    )
+                }
+            }) {
                 is Result.Success -> {
 
                     _error.value = null
@@ -256,11 +241,14 @@ class ChatRoomDetailScoreViewModel(
 
             _status.value = LoadApiStatus.LOADING
 
-            when (val result = history.value?.let { user2.value?.email?.let { it1 ->
-                repository.pushHistory4(it,
-                    it1
-                )
-            } }) {
+            when (val result = history.value?.let {
+                user2.value?.email?.let { it1 ->
+                    repository.pushHistory4(
+                        it,
+                        it1
+                    )
+                }
+            }) {
                 is Result.Success -> {
 
                     _error.value = null

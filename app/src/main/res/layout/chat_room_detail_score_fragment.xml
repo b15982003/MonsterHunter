@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScoreViewModel" />
+            type="com.ray.monsterhunter.chatroomScore.ChatRoomDetailScoreViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".chattoomdetail.ChatRoomDetailScore">
+        tools:context=".chatroomScore.ChatRoomDetailScore">
 
         <TextView
             android:id="@+id/chatRoom_score_title"

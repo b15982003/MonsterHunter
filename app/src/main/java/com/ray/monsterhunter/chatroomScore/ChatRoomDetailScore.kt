@@ -1,4 +1,4 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomScore
 
 
 import android.os.Bundle
@@ -22,7 +22,9 @@ class ChatRoomDetailScore : Fragment() {
 
     private val viewModel by viewModels<ChatRoomDetailScoreViewModel> {
         getVmFactory(
-            ChatRoomDetailScoreArgs.fromBundle(requireArguments()).chatRoomDetail
+            ChatRoomDetailScoreArgs.fromBundle(
+                requireArguments()
+            ).chatRoomDetail
         )
     }
     lateinit var binding: ChatRoomDetailScoreFragmentBinding
@@ -32,7 +34,9 @@ class ChatRoomDetailScore : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Logger.d("ChatRoomDetailScore.onCreateView")
-        Logger.d("ChatRoomDetailScore.arg=${ChatRoomDetailScoreArgs.fromBundle(requireArguments()).chatRoomDetail}")
+        Logger.d("ChatRoomDetailScore.arg=${ChatRoomDetailScoreArgs.fromBundle(
+            requireArguments()
+        ).chatRoomDetail}")
 
         binding = ChatRoomDetailScoreFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
