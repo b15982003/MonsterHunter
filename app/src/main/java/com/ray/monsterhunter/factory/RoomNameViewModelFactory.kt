@@ -3,7 +3,7 @@ package com.ray.monsterhunter.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ray.monsterhunter.chatroomScore.ChatRoomDetailScoreViewModel
-import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel
+import com.ray.monsterhunter.chatroomdetail.ChatRoomDetailViewModel
 import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.source.MonsterRepository
 

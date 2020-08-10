@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/chatRoomDetail"
-        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetail"
+        android:name="com.ray.monsterhunter.chatroomdetail.ChatRoomDetail"
         android:label="ChatRoomDetail"
         tools:layout="@layout/chat_room_detail_fragment">
         <argument

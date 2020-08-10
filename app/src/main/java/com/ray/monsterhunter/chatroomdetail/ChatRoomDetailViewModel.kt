@@ -1,4 +1,4 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomdetail
 
 import android.os.Handler
 import android.speech.tts.TextToSpeech

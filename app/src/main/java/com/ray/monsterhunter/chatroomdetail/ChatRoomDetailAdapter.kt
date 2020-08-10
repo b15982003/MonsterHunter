@@ -1,17 +1,14 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomdetail
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.Message
 import com.ray.monsterhunter.databinding.ItemChatroomMessageBinding
 import com.ray.monsterhunter.util.TimeUtil
-import com.ray.monsterhunter.util.UserManager
 import java.util.*
 
 class ChatRoomDetailAdapter(

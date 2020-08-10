@@ -15,7 +15,7 @@
 
         <variable
             name="viewModel"
-            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel" />
+            type="com.ray.monsterhunter.chatroomdetail.ChatRoomDetailViewModel" />
 
         <variable
             name="owner"

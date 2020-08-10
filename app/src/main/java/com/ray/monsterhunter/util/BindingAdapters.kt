@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.chatroom.ChatRoomAdapter
-import com.ray.monsterhunter.chattoomdetail.ChatRoomDetailAdapter
+import com.ray.monsterhunter.chatroomdetail.ChatRoomDetailAdapter
 import com.ray.monsterhunter.crawlingdetail.CrawlingDetailAdapter
 import com.ray.monsterhunter.data.*
 import com.ray.monsterhunter.friend.item.FriendItemAdapter

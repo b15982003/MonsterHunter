@@ -13,8 +13,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -30,7 +29,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:paddingStart="8dp"
+               android:paddingEnd="14dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -38,10 +40,10 @@
                 <ImageView
                     android:id="@+id/home_data_image"
                     style="@style/home_data_title"
+                    imageUrl="@{product.image}"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:src="@drawable/ic_monster"
-                    imageUrl="@{product.image}"
                     app:layout_constraintBottom_toBottomOf="@id/home_monster_shape"
                     app:layout_constraintEnd_toEndOf="@id/home_monster_shape"
                     app:layout_constraintStart_toStartOf="@id/home_monster_shape"
@@ -84,8 +86,8 @@
                     style="@style/home_data_text"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="@{product.monsterType}"
                     android:layout_marginTop="8dp"
+                    android:text="@{product.monsterType}"
                     app:layout_constraintStart_toStartOf="@id/home_data_userId"
                     app:layout_constraintTop_toBottomOf="@id/home_data_userId"
                     tools:text="@string/testGo" />
@@ -94,26 +96,25 @@
                     android:id="@+id/home_data_type"
                     style="@style/home_data_button"
                     android:layout_width="70dp"
-                    android:layout_marginTop="32dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
                     android:background="@drawable/home_type_background"
                     android:gravity="center"
                     android:text="@{product.type}"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/home_data_creatTime"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:text="@string/testType" />
 
                 <TextView
                     android:id="@+id/home_data_creatTime"
                     style="@style/chatRoom_data_text"
-                    android:textColor="@color/gray_888888"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/home_data_type"
                     android:layout_marginTop="80dp"
-                    tools:text="345678900987654"
-                    />
+                    android:textColor="@color/gray_888888"
+                    app:layout_constraintEnd_toEndOf="@id/home_data_type"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="345678900987654" />
 
                 <TextView
                     android:id="@+id/home_data_text"
@@ -121,14 +122,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/chatroom_post_text_background"
-                    android:text="@{product.text}"
                     android:padding="8dp"
+                    android:text="@{product.text}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/home_data_image"
                     app:layout_constraintTop_toBottomOf="@id/home_data_creatTime"
-                    tools:text="@string/postDialog_text"
-                    />
+                    tools:text="@string/postDialog_text" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

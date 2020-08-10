@@ -1,10 +1,9 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomdetail
 
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,6 @@ import com.ray.monsterhunter.NavigationDirections
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.ChatRoomDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
 class ChatRoomDetail : Fragment() {
