@@ -12,7 +12,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.google.firebase.auth.FirebaseAuth
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.*
@@ -23,48 +22,36 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class enterChatRoom {
-
-
-    fun logout(){
-        FirebaseAuth.getInstance().signOut()
-        Thread.sleep(3000)
-    }
+class enterchatroom {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(LogInActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun enterChatRoom() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+    fun enterchatroom() {
         Thread.sleep(7000)
 
-        val appCompatTextView = onView(
-            allOf(
-                withId(R.id.google_sign_in_button), withText("Google SignIn"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.FrameLayout")),
-                        0
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatTextView.perform(click())
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(7000)
+//        val appCompatTextView = onView(
+//            allOf(
+//                withId(R.id.google_sign_in_button), withText("Google SignIn"),
+//                childAtPosition(
+//                    childAtPosition(
+//                        withClassName(`is`("android.widget.FrameLayout")),
+//                        0
+//                    ),
+//                    2
+//                ),
+//                isDisplayed()
+//            )
+//        )
+//        appCompatTextView.perform(click())
+//
+//        Thread.sleep(7000)
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_chatroom),
+                withId(R.id.navigation_chatroom), withContentDescription("chatRoom"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNav),
@@ -75,8 +62,7 @@ class enterChatRoom {
                 isDisplayed()
             )
         )
-        Thread.sleep(3000)
-
+        Thread.sleep(7000)
         bottomNavigationItemView.perform(click())
 
         val recyclerView = onView(
@@ -103,8 +89,6 @@ class enterChatRoom {
                 isDisplayed()
             )
         )
-        Thread.sleep(7000)
-
         appCompatImageView.perform(click())
 
         val appCompatTextView2 = onView(
@@ -122,27 +106,7 @@ class enterChatRoom {
         )
         appCompatTextView2.perform(click())
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         Thread.sleep(7000)
-
-        val appCompatImageView2 = onView(
-            allOf(
-                withId(R.id.chatRoom_detail_speaker),
-                childAtPosition(
-                    childAtPosition(
-                        withId(R.id.myNavHostFragment),
-                        0
-                    ),
-                    26
-                ),
-                isDisplayed()
-            )
-        )
-        Thread.sleep(7000)
-
-        appCompatImageView2.perform(click())
 
         val appCompatSpinner = onView(
             allOf(
@@ -157,8 +121,6 @@ class enterChatRoom {
                 isDisplayed()
             )
         )
-        Thread.sleep(7000)
-
         appCompatSpinner.perform(click())
 
         val textView = onData(anything())
@@ -171,12 +133,24 @@ class enterChatRoom {
                     )
                 )
             )
-            .atPosition(3)
-        Thread.sleep(7000)
-
+            .atPosition(2)
         textView.perform(click())
-    }
 
+        val appCompatImageView2 = onView(
+            allOf(
+                withId(R.id.chatRoom_detail_speaker),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.myNavHostFragment),
+                        0
+                    ),
+                    26
+                ),
+                isDisplayed()
+            )
+        )
+        appCompatImageView2.perform(click())
+    }
 
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int

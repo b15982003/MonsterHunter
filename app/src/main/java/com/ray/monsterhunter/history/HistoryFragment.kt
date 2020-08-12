@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.HistoryFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 
@@ -30,6 +33,8 @@ class HistoryFragment : Fragment() {
         binding.historyDataRecy.adapter = adapter
 
         viewModel.liveHistory.observe(viewLifecycleOwner, Observer {
+            binding.historyDataRecy.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fade_in)
+
             if (viewModel.liveHistory.value == listOf<String>()){
                 binding.historyListNoValue.visibility = View.VISIBLE
                 binding.historyListNoValueText.visibility = View.VISIBLE

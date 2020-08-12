@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
@@ -20,19 +21,36 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class navigate {
+class navigation2 {
 
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun navigate() {
+    fun navigation2() {
         Thread.sleep(7000)
+
+//        val appCompatTextView = onView(
+//            allOf(
+//                withId(R.id.google_sign_in_button), withText("Google SignIn"),
+//                childAtPosition(
+//                    childAtPosition(
+//                        withClassName(`is`("android.widget.FrameLayout")),
+//                        0
+//                    ),
+//                    2
+//                ),
+//                isDisplayed()
+//            )
+//        )
+//        appCompatTextView.perform(click())
+
+//        swipeDown()
 
         val bottomNavigationItemView = onView(
             allOf(
-                withId(R.id.navigation_chatroom),
+                withId(R.id.navigation_chatroom), withContentDescription("chatRoom"),
                 childAtPosition(
                     childAtPosition(
                         withId(R.id.bottomNav),
@@ -44,6 +62,38 @@ class navigate {
             )
         )
         bottomNavigationItemView.perform(click())
+
+        val bottomNavigationItemView2 = onView(
+            allOf(
+                withId(R.id.navigation_history), withContentDescription("history"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.bottomNav),
+                        0
+                    ),
+                    3
+                ),
+                isDisplayed()
+            )
+        )
+        Thread.sleep(7000)
+        bottomNavigationItemView2.perform(click())
+
+        val bottomNavigationItemView3 = onView(
+            allOf(
+                withId(R.id.navigation_profile), withContentDescription("profile"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.bottomNav),
+                        0
+                    ),
+                    4
+                ),
+                isDisplayed()
+            )
+        )
+        Thread.sleep(7000)
+        bottomNavigationItemView3.perform(click())
     }
 
     private fun childAtPosition(

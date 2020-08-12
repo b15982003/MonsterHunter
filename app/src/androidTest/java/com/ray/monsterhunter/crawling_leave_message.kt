@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.*
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.google.firebase.auth.FirebaseAuth
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`
@@ -23,44 +23,32 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class LogInActivityTest {
-
-    fun logout(){
-        FirebaseAuth.getInstance().signOut()
-        Thread.sleep(3000)
-    }
+class crawling_leave_message {
 
     @Rule
     @JvmField
-    var mActivityTestRule = ActivityTestRule(LogInActivity::class.java)
+    var mActivityTestRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun logInActivityTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        FirebaseAuth.getInstance().signOut()
-        Thread.sleep(7000)
-
-        val appCompatTextView = onView(
-            allOf(
-                withId(R.id.google_sign_in_button), withText("Google SignIn"),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("android.widget.FrameLayout")),
-                        0
-                    ),
-                    2
-                ),
-                isDisplayed()
-            )
-        )
-        appCompatTextView.perform(click())
-
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(7000)
+    fun crawling_leave_message() {
+//        Thread.sleep(7000)
+//
+//        val appCompatTextView = onView(
+//            allOf(
+//                withId(R.id.google_sign_in_button), withText("Google SignIn"),
+//                childAtPosition(
+//                    childAtPosition(
+//                        withClassName(`is`("android.widget.FrameLayout")),
+//                        0
+//                    ),
+//                    2
+//                ),
+//                isDisplayed()
+//            )
+//        )
+//        appCompatTextView.perform(click())
+//
+//        Thread.sleep(7000)
 
         val recyclerView = onView(
             allOf(
@@ -71,7 +59,13 @@ class LogInActivityTest {
                 )
             )
         )
-        Thread.sleep(2000)
+
+        Thread.sleep(7000)
+        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(3, scrollTo()))
+        Thread.sleep(7000)
+        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(3, click()))
+        Thread.sleep(7000)
+
 
         val appCompatEditText = onView(
             allOf(
@@ -86,8 +80,7 @@ class LogInActivityTest {
                 isDisplayed()
             )
         )
-
-        Thread.sleep(4000)
+        Thread.sleep(7000)
         appCompatEditText.perform(click())
 
         val appCompatEditText2 = onView(
@@ -103,8 +96,8 @@ class LogInActivityTest {
                 isDisplayed()
             )
         )
-        Thread.sleep(4000)
-        appCompatEditText2.perform(replaceText("好好"), closeSoftKeyboard())
+        Thread.sleep(7000)
+        appCompatEditText2.perform(replaceText("哈哈"), closeSoftKeyboard())
 
         val appCompatImageView = onView(
             allOf(
@@ -119,22 +112,15 @@ class LogInActivityTest {
                 isDisplayed()
             )
         )
-        Thread.sleep(4000)
+        Thread.sleep(7000)
         appCompatImageView.perform(click())
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(4000)
+        Thread.sleep(1000)
+
 
         pressBack()
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(2000)
-
-        val appCompatImageView2 = onView(
+        val appCompatImageView3 = onView(
             allOf(
                 withId(R.id.crawling_detail_back),
                 childAtPosition(
@@ -146,9 +132,8 @@ class LogInActivityTest {
                 )
             )
         )
-        Thread.sleep(4000)
-
-        appCompatImageView2.perform(scrollTo(), click())
+        Thread.sleep(7000)
+        appCompatImageView3.perform(scrollTo(), click())
     }
 
     private fun childAtPosition(
@@ -169,4 +154,3 @@ class LogInActivityTest {
         }
     }
 }
-

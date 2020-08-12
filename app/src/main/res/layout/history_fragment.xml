@@ -21,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:padding="4dp"
-            android:layoutAnimation="@anim/layout_animation_fade_in"
             app:history="@{viewModel.liveHistory}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
