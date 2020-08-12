@@ -368,7 +368,7 @@ class ChatRoomDetailViewModel(
     }
 
     fun returnTime(missionResult: String) {
-        _timing.value = null
+        _timing.value = "null"
         _chatRoom.value?.startTime == nulldata ?: timing.value
         _chatRoom.value?.endToScore = truedata
         _chatRoom.value?.missionResult = missionResult
