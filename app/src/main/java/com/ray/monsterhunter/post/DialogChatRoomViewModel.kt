@@ -22,6 +22,7 @@ import java.util.*
 
 class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
+
     val finalTime = MutableLiveData<Long>()
     val getTime = MutableLiveData<Long>()
 
@@ -106,15 +107,15 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         }
     }
 
-    fun getDate(year: Int, month: Int, day: Int){
+    fun getDate(year: Int, month: Int, day: Int) {
         val dateToStamp = TimeUtil.DateToStamp("$year-${month.plus(1)}-$day", Locale.TAIWAN)
         event.value?.dateTime?.date = dateToStamp
         years.value = year
-        months.value = month +1
+        months.value = month + 1
         days.value = day
     }
 
-    fun getTime(hour: Int, min: Int){
+    fun getTime(hour: Int, min: Int) {
         val timeToStamp = TimeUtil.TimeToStamp("$hour:$min", Locale.TAIWAN)
         event.value?.dateTime?.time = timeToStamp
         hours.value = hour
@@ -123,19 +124,14 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
             "${years.value}-${months.value}-${days.value} " +
                     "${hours.value}:${mins.value}"
         getTime.value = TimeUtil.DateToAllStamp(nowTime, Locale.TAIWAN)
-    }
-    // get UserManger have time
-    fun getWorkerMangerTime(addTime: String){
-        finalTime.value = getTime.value?.minus(TimeUtil.DateToAllStamp(addTime, Locale.TAIWAN))
+        Logger.d("1")
     }
 
-    fun isWorkerManger(){
-       finalTime.value?.let {it ->
-            (viewModelJob as MainViewModel).startWorkerManger(it)
-        }
-       event.value?.let { it ->
-            pushChatRoom(it)
-        }
+    // get UserManger have time
+    fun getWorkerMangerTime(addTime: String) {
+        finalTime.value = getTime.value?.minus(TimeUtil.DateToAllStamp(addTime, Locale.TAIWAN))
+        Logger.d("2")
+
     }
 
     fun leave(needRefresh: Boolean = false) {
@@ -168,7 +164,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         }
     }
 
-     fun setPostTypeName(id: Long){
+    fun setPostTypeName(id: Long) {
         when (id) {
             0L -> _event.value?.typeName = "出擊"
             1L -> _event.value?.typeName = "任務"
@@ -180,7 +176,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         }
     }
 
-    fun setMonsterType(id: Long){
+    fun setMonsterType(id: Long) {
         when (id) {
             0L -> {
                 _event.value?.monsterName = "隨機打"

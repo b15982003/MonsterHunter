@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
@@ -30,6 +31,8 @@ import java.util.*
 class DialogChatRoom : AppCompatDialogFragment() {
 
     private val viewModel by viewModels<DialogChatRoomViewModel> { getVmFactory() }
+    private val mainViewModel by viewModels<MainViewModel> { getVmFactory() }
+
     private lateinit var binding: DialogChatRoomFragmentBinding
     val calender = Calendar.getInstance()
 
@@ -55,6 +58,16 @@ class DialogChatRoom : AppCompatDialogFragment() {
         binding.chatRoomPostTimeText.setOnClickListener {
             timePicker()
         }
+
+        binding.chatRoomPostSentButton.setOnClickListener(){
+            viewModel.finalTime.value?.let { it ->
+                mainViewModel.startWorkerManger(it)
+            }
+            viewModel.event.value?.let { it ->
+                viewModel.pushChatRoom(it)
+            }
+        }
+
         // change monster image
         viewModel.postMonster.observe(viewLifecycleOwner, Observer {
             it?.let {
