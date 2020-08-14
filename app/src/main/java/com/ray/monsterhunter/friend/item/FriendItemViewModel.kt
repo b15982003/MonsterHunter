@@ -20,7 +20,8 @@ import com.ray.monsterhunter.util.UserManager
 
 class FriendItemViewModel(
     val repository: MonsterRepository,
-    val friendTypeFilter: FriendTypeFilter // Handle the type for each catalog item
+    val friendTypeFilter: FriendTypeFilter
+    // Handle the type for each catalog item
 ) : ViewModel() {
 
     val searchText: String? = UserManager.userData.email
@@ -49,9 +50,6 @@ class FriendItemViewModel(
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
-
-
     init {
         Logger.i("------------------------------------")
         Logger.i("[${this::class.simpleName}]${this}")
@@ -69,9 +67,7 @@ class FriendItemViewModel(
                 }
             }
             else -> getMyUser()
-
         }
-
     }
 
     fun getAllUser(searchText : String) {
@@ -86,28 +82,23 @@ class FriendItemViewModel(
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
                 is Result.Fail -> {
-
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
-
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
     }
 
@@ -123,28 +114,23 @@ class FriendItemViewModel(
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
                 is Result.Fail -> {
-
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 is Result.Error -> {
-
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
                 else -> {
-
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
     }
 

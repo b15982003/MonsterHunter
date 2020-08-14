@@ -36,6 +36,7 @@ class ChatRoomAdapter(
             binding.chatRoomListStartTimeDate.text = stampTpData
             binding.chatRoomListStartTime2.text = stampToTime
             binding.chatRoomListStartTime.text = AllStampTimeToDate
+            binding.chatRoomListPersonNumber.text = chatRoom.teammate.size.toString()+ "/4"
             binding.event = chatRoom
             binding.chatRoomListClose.setOnClickListener(){
                 if (chatRoom.userId == UserManager.userData.id){

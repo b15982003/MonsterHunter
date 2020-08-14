@@ -17,7 +17,6 @@ class HomeActivityAdapter(private val onClickListener: OnClickListener ) :
 
     class ActivityViewHolder(private var binding: ItemHomeActiviteBinding):
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(activity: Activity, onClickListener: OnClickListener) {
 
             binding.product = activity
@@ -33,7 +32,6 @@ class HomeActivityAdapter(private val onClickListener: OnClickListener ) :
         override fun areContentsTheSame(oldItem: Activity, newItem: Activity): Boolean {
             return oldItem.image == newItem.image
         }
-
         private const val ITEM_VIEW_TYPE_ARTICLE = 0x00
     }
 
@@ -46,7 +44,6 @@ class HomeActivityAdapter(private val onClickListener: OnClickListener ) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is ActivityViewHolder -> {
                 holder.bind((getItem(position) as Activity), onClickListener)

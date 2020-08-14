@@ -4,26 +4,26 @@
     <item
         android:id="@+id/navigation_chatroom"
         android:icon="@drawable/ic_nav_chatroom_selector"
-        android:title="" />
+        android:title="chatRoom" />
 
     <item
         android:id="@+id/navigation_friend"
         android:icon="@drawable/ic_nav_friend_selector"
-        android:title="" />
+        android:title="friend" />
 
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_nav_home_selector"
-        android:title="" />
+        android:title="home" />
 
     <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_nav_history_selector"
-        android:title="" />
+        android:title="history" />
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_nav_profile_selector"
-        android:title="" />
+        android:title="profile" />
 
 </menu>

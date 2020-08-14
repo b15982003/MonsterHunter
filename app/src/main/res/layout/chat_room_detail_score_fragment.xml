@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScoreViewModel" />
+            type="com.ray.monsterhunter.chatroomScore.ChatRoomDetailScoreViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".chattoomdetail.ChatRoomDetailScore">
+        tools:context=".chatroomScore.ChatRoomDetailScore">
 
         <TextView
             android:id="@+id/chatRoom_score_title"
@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/chatRoom_score_success_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_title"
             android:layout_marginTop="30dp"
@@ -43,8 +43,8 @@
 
         <ImageView
             android:id="@+id/chatRoom_score_failed_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/chatRoom_score_title"
             android:layout_marginTop="30dp"
@@ -55,8 +55,8 @@
         <TextView
             android:id="@+id/chatRoom_score_user1"
             style="@style/chatRoom_score_name"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="150dp"
+            android:layout_height="26dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/chatroom_score_name_bg"
@@ -111,8 +111,8 @@
         <TextView
             android:id="@+id/chatRoom_score_user2"
             style="@style/chatRoom_score_name"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="150dp"
+            android:layout_height="26dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/chatroom_score_name_bg"
             android:paddingHorizontal="8dp"
@@ -164,8 +164,8 @@
         <TextView
             android:id="@+id/chatRoom_score_user3"
             style="@style/chatRoom_score_name"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="150dp"
+            android:layout_height="26dp"
             android:layout_marginTop="60dp"
             android:background="@drawable/chatroom_score_name_bg"
             android:text="@{viewModel.liveUserThree.id}"
@@ -217,8 +217,8 @@
         <TextView
             android:id="@+id/chatRoom_score_user4"
             style="@style/chatRoom_score_name"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="150dp"
+            android:layout_height="26dp"
             android:layout_marginTop="60dp"
             android:paddingHorizontal="8dp"
             android:background="@drawable/chatroom_score_name_bg"
@@ -269,8 +269,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user1_plus"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_good"
@@ -282,8 +282,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user1_plus_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_good_no"
@@ -296,8 +296,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user1_less"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_bad"
@@ -309,8 +309,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user1_less_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_bad_no"
@@ -322,8 +322,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user2_plus"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_good"
@@ -335,8 +335,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user2_plus_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_good_no"
@@ -348,8 +348,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user2_less"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_bad"
@@ -361,8 +361,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user2_less_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_bad_no"
@@ -375,8 +375,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user3_plus"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_good"
@@ -388,8 +388,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user3_plus_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_good_no"
@@ -401,8 +401,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user3_less"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_bad"
@@ -414,8 +414,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user3_less_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_bad_no"
@@ -428,8 +428,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user4_plus"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_good"
@@ -441,8 +441,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user4_plus_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_good_no"
@@ -454,8 +454,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user4_less"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_bad"
@@ -467,8 +467,8 @@
         <ImageView
             android:id="@+id/chatRoom_score_user4_less_no"
             style="@style/chatRoom_score_name"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="16dp"
             android:gravity="center"
             android:src="@drawable/ic_chatroom_bad_no"
@@ -484,7 +484,7 @@
             style="@style/chatRoom_score_finishText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chatRoom_score_user4"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="70dp"
             android:text="@string/chatRoom_score_finish_text"
             android:gravity="center"
             />
@@ -505,8 +505,8 @@
         <TextView
             android:id="@+id/chatRoom_score_sent_button"
             style="@style/chatRoom_score_sent_button"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/scort_mission_button"
             android:gravity="center"

@@ -1,8 +1,10 @@
 package com.ray.monsterhunter
 
+import android.os.Parcel
+import android.os.Parcelable
 import org.junit.Test
-
 import org.junit.Assert.*
+import org.mockito.Mock
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -14,4 +16,12 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+//
+//    @Test
+//    fun sentMessage(){
+//        when()
+//
+//    }
 }
+

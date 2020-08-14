@@ -7,14 +7,15 @@
 
         <variable
             name="viewModel"
-            type="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailViewModel" />
+            type="com.ray.monsterhunter.chatroomdetail.ChatRoomDetailViewModel" />
+        <import type="android.view.View"/>
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".chattoomdetail.ChatRoomDetail">
+        tools:context=".chatroomdetail.ChatRoomDetail">
 
         <TextView
             android:id="@+id/chatRoom_detail_toolbar"
@@ -79,6 +80,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
+            android:onClick="@{() -> viewModel.startGameStatus()}"
             android:src="@drawable/ic_chatroom_start"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_toolbar"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_toolbar"
@@ -88,6 +90,7 @@
             android:id="@+id/chatRoom_detail_start_background"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             android:background="@color/gray_cccccc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chatRoom_detail_toolbar" />
@@ -99,6 +102,7 @@
             android:layout_height="40dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             android:gravity="center"
             android:text="@string/chatRoom_detail_navigate_text"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
@@ -113,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text=":"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_start_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +128,7 @@
             style="@style/chatRoom_Detail_secNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
             app:layout_constraintEnd_toStartOf="@+id/chatRoom_detail_secNumber"
             app:layout_constraintStart_toEndOf="@id/chatRoom_detail_line"
@@ -135,6 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/chatRoom_detail_tenSecNumber"
@@ -147,6 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
             app:layout_constraintEnd_toStartOf="@id/chatRoom_detail_minNumber"
             app:layout_constraintStart_toStartOf="parent"
@@ -158,6 +166,7 @@
             style="@style/chatRoom_Detail_secNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="@{viewModel.ready == true ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_line"
             app:layout_constraintEnd_toStartOf="@id/chatRoom_detail_line"
             app:layout_constraintStart_toEndOf="@id/chatRoom_detail_tenMinNumber"
@@ -174,6 +183,8 @@
             android:background="@drawable/chatroom_list_start_button"
             android:gravity="center"
             android:text="@string/chatRoom_detail_start_button"
+            android:onClick="@{() -> viewModel.checkTeammateNumber()}"
+            android:visibility='@{viewModel.ready == true &amp; viewModel.timing == "null" ? View.VISIBLE : View.GONE}'
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
             app:layout_constraintStart_toStartOf="@+id/chatRoom_detail_start_background"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_start_background" />
@@ -186,6 +197,8 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/chatroom_list_end_button"
+            android:onClick="@{() -> viewModel.endTimming()}"
+            android:visibility='@{viewModel.ready == true &amp; viewModel.timing == "true" ? View.VISIBLE : View.GONE}'
             android:gravity="center"
             android:text="@string/chatRoom_detail_end_button"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_start_background"
@@ -211,6 +224,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/gray_cccccc"
+            android:visibility='@{viewModel.timing == "false" ? View.VISIBLE : View.GONE}'
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chatRoom_detail_start_background" />
 
@@ -222,6 +236,8 @@
             android:layout_marginStart="16dp"
             android:background="@drawable/chatroom_list_start_button"
             android:gravity="center"
+            android:onClick='@{() -> viewModel.returnTime("true")}'
+            android:visibility='@{viewModel.timing == "false" ? View.VISIBLE : View.GONE}'
             android:text="@string/chatRoom_detail_mission_success"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_missionType_background"
             app:layout_constraintStart_toStartOf="@id/chatRoom_detail_missionType_background"
@@ -233,7 +249,10 @@
             android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
+            android:onClick='@{() -> viewModel.returnTime("false")}'
             android:background="@drawable/chatroom_list_end_button"
+            android:visibility='@{viewModel.timing == "false" ? View.VISIBLE : View.GONE}'
+
             android:gravity="center"
             android:text="@string/chatRoom_detail_mission_fail"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_missionType_background"
@@ -312,6 +331,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="16sp"
             android:src="@drawable/ic_speaker"
+            android:onClick="@{() -> viewModel.getSpeakerStatus()}"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_editText_background"
             app:layout_constraintStart_toStartOf="@id/chatRoom_detail_editText_background"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_editText_background" />
@@ -320,6 +340,7 @@
             android:id="@+id/chatRoom_detail_end_background"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:visibility="@{viewModel.speakerReady == true ?View.VISIBLE : View.INVISIBLE}"
             android:background="@color/chatRoom_detail_background"
             app:layout_constraintBottom_toTopOf="@id/chatRoom_detail_editText_background"
             app:layout_constraintStart_toStartOf="parent" />
@@ -331,6 +352,8 @@
             android:text="@string/chatRoom_detail_end_back"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
+            android:onClick='@{() -> viewModel.speakerGo("back")}'
+            android:visibility="@{viewModel.speakerReady == true ?View.VISIBLE : View.INVISIBLE}"
             style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
             android:background="@drawable/chatroom_detail_speaker_back"
@@ -345,6 +368,7 @@
             android:text="@string/chatRoom_detail_end_back"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
+            android:visibility="@{viewModel.speakerReady == true &amp; viewModel.speakerDoing == true ? View.VISIBLE : View.INVISIBLE}"
             style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
             android:background="@drawable/chatroom_detail_no_speark"
@@ -358,6 +382,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="8dp"
+            android:onClick='@{() -> viewModel.speakerGo("hit")}'
+            android:visibility="@{viewModel.speakerReady == true ?View.VISIBLE : View.INVISIBLE}"
             android:text="@string/chatRoom_detail_end_hit"
             style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
@@ -375,7 +401,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="8dp"
             android:text="@string/chatRoom_detail_end_hit"
-            style="@style/chatRoom_Detail_start_button"
+            android:visibility="@{viewModel.speakerReady == true &amp; viewModel.speakerDoing == true ? View.VISIBLE : View.INVISIBLE}"            style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
             android:background="@drawable/chatroom_detail_no_speark"
             app:layout_constraintTop_toTopOf="@id/chatRoom_detail_end_background"
@@ -387,6 +413,8 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/chatRoom_detail_end_mackUp"
+            android:onClick='@{() -> viewModel.speakerGo("mackUp")}'
+            android:visibility="@{viewModel.speakerReady == true ?View.VISIBLE : View.INVISIBLE}"
             style="@style/chatRoom_Detail_start_button"
             android:layout_marginStart="20dp"
             android:layout_marginBottom="8dp"
@@ -405,7 +433,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:background="@drawable/chatroom_detail_no_speark"
+            android:visibility="@{viewModel.speakerReady == true &amp; viewModel.speakerDoing == true ? View.VISIBLE : View.INVISIBLE}"            android:background="@drawable/chatroom_detail_no_speark"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_end_background"
             app:layout_constraintStart_toStartOf="@id/chatRoom_detail_end_background"
             />
@@ -416,7 +444,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
+            android:visibility="@{viewModel.speakerReady == true ?View.VISIBLE : View.INVISIBLE}"
             android:text="@string/chatRoom_detail_end_wait"
+            android:onClick='@{() -> viewModel.speakerGo("wait")}'
             style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
             android:background="@drawable/chatroom_detail_speaker_wait"
@@ -433,7 +463,7 @@
             android:layout_marginBottom="8dp"
             style="@style/chatRoom_Detail_start_button"
             android:gravity="center"
-            android:background="@drawable/chatroom_detail_no_speark"
+            android:visibility="@{viewModel.speakerReady == true &amp; viewModel.speakerDoing == true ? View.VISIBLE : View.INVISIBLE}"            android:background="@drawable/chatroom_detail_no_speark"
             app:layout_constraintEnd_toEndOf="@id/chatRoom_detail_end_background"
             app:layout_constraintBottom_toBottomOf="@id/chatRoom_detail_end_background"
             />

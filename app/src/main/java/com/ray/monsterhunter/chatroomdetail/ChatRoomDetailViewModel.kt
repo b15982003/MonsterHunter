@@ -1,7 +1,8 @@
-package com.ray.monsterhunter.chattoomdetail
+package com.ray.monsterhunter.chatroomdetail
 
 import android.os.Handler
 import android.speech.tts.TextToSpeech
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.ray.monsterhunter.data.source.Result
 import com.ray.monsterhunter.util.UserManager
+import com.ray.monsterhunter.util.nulldata
+import com.ray.monsterhunter.util.truedata
 import java.util.*
 
 class ChatRoomDetailViewModel(
@@ -27,15 +30,13 @@ class ChatRoomDetailViewModel(
     lateinit var runnable: Runnable
     private var handler = Handler()
     var timeCheck: Long = 0
-    var timeCheckTenSec: Long = 0
-    var timeTenSec: Long = 0
     private var tts: TextToSpeech? = null
 
-    private val _chatroom = MutableLiveData<ChatRoom>().apply {
+    private val _chatRoom = MutableLiveData<ChatRoom>().apply {
         value = argument
     }
     val chatRoom: LiveData<ChatRoom>
-        get() = _chatroom
+        get() = _chatRoom
 
 
     var liveChatRoom = MutableLiveData<ChatRoom>()
@@ -53,6 +54,10 @@ class ChatRoomDetailViewModel(
     private val _speakerReady = MutableLiveData<Boolean>(false)
     val speakerReady: LiveData<Boolean>
         get() = _speakerReady
+
+    private val _speakerDoing = MutableLiveData<Boolean>(false)
+    val speakerDoing: LiveData<Boolean>
+        get() = _speakerDoing
 
     private val _userArmsType = MutableLiveData<UserArms>().apply {
         value = UserArms()
@@ -113,18 +118,9 @@ class ChatRoomDetailViewModel(
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    fun getMessage() {
-
-    }
 
     init {
-        if (MonsterApplication.instance.isLiveMessage()) {
-            getLiveMessageResoult()
-
-        } else {
-            getMessage()
-
-        }
+        getLiveMessageResoult()
 
         user.value?.email = UserManager.userData.email
 
@@ -323,10 +319,32 @@ class ChatRoomDetailViewModel(
         }
     }
 
+    fun getOut() {
+        _leave.value = true
+    }
 
-    fun startTimming() {
-        _timing.value = "true"
-        _chatroom.value?.startTime = "true"
+    fun getOutFinish() {
+        _leave.value = false
+    }
+
+    fun getReady() {
+        _ready.value = true
+    }
+
+    fun endReady() {
+        _ready.value = false
+    }
+
+    fun checkTeammateNumber() {
+        if (liveChatRoom.value?.teammate?.size!! < 4) {
+            Toast.makeText(MonsterApplication.instance, "人數不足", Toast.LENGTH_SHORT).show()
+        } else {
+            startTimming()
+            timeNumberGo()
+        }
+    }
+
+    fun timeNumberGo() {
         runnable = Runnable {
             _timeSec.value = _timeSec.value?.plus(1)
             timeCheck = timeSec.value!!
@@ -335,60 +353,97 @@ class ChatRoomDetailViewModel(
         handler.postDelayed(runnable, 1000)
     }
 
+    fun startTimming() {
+        _timing.value = "true"
+        _chatRoom.value?.startTime = "true"
+
+    }
 
     fun endTimming() {
         _timing.value = "false"
-        _chatroom.value?.startTime = "false"
+        _chatRoom.value?.startTime = "false"
+        _chatRoom.value?.finishTime = timeCheck
         _timeSec.value = 0
         handler.removeCallbacks(runnable)
     }
 
-    fun getSpeakerReady(){
+    fun returnTime(missionResult: String) {
+        _timing.value = "null"
+        _chatRoom.value?.startTime == nulldata ?: timing.value
+        _chatRoom.value?.endToScore = truedata
+        _chatRoom.value?.missionResult = missionResult
+        endReady()
+        isGoon.value = false
+        endSpeakerReady()
+        Handler().postDelayed({
+            updateChatRoomInfo()
+        }, 500)
+    }
+
+    fun startGameStatus() {
+        if (chatRoom.value?.userId == UserManager.userData.id) {
+            if (ready.value == false) {
+                getReady()
+            } else {
+                if (timing.value != nulldata) {
+
+                    endReady()
+                } else {
+                    Toast.makeText(
+                        MonsterApplication.instance,
+                        MonsterApplication.instance.getString(R.string.chatRoom_detail_gaming),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            Toast.makeText(MonsterApplication.instance, "請找房主趕快開始", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun getSpeakerStatus() {
+        if (speakerReady.value == false) {
+            getSpeakerReady()
+        } else {
+            endSpeakerReady()
+        }
+    }
+
+    fun getSpeakerReady() {
         _speakerReady.value = true
     }
 
-    fun endSpeakerReady(){
+    fun endSpeakerReady() {
         _speakerReady.value = false
     }
 
-    fun speakerBack() {
-        chatRoom.value?.speaker = "back"
+    fun speakerDoing() {
+        _speakerDoing.value = true
     }
 
-    fun speakerHit() {
-        chatRoom.value?.speaker = "hit"
+    fun speakerFree() {
+        _speakerDoing.value = false
     }
 
-    fun speakerMackUp() {
-        chatRoom.value?.speaker = "mackUp"
-    }
-
-    fun speakerWait() {
-        chatRoom.value?.speaker = "wait"
+    fun speakerGo(talk: String) {
+        _chatRoom.value?.speaker = talk
+        speakerDoing()
+        updateChatRoomInfo()
+        Handler().postDelayed({
+            speakerEnd()
+            updateChatRoomInfo()
+        }, 7000)
     }
 
     fun speakerEnd() {
-        chatRoom.value?.speaker = "null"
+        _chatRoom.value?.speaker = "null"
+        speakerFree()
     }
 
-    fun returnStartTime() {
-        _timing.value = "null"
-    }
-
-    fun getready() {
-        _ready.value = true
-    }
-
-    fun endreadt() {
-        _ready.value = false
-    }
-
-    fun getOut() {
-        _leave.value = true
-    }
-
-    fun getOutFinish() {
-        _leave.value = false
+    fun isRoomOwner(email: String ): Boolean {
+        message.let {
+            return email == UserManager.userData.email
+        }
     }
 
     fun say(userSay: String) {
@@ -402,21 +457,16 @@ class ChatRoomDetailViewModel(
         //TextToSpeech.QUEUE_FLUSH:播放下一句時，前一句直接中斷
         //TextToSpeech.QUEUE_ADD:播放下一句時，等待前一句播完
         tts?.speak(userSay, TextToSpeech.QUEUE_FLUSH, null, null)
-        Logger.d("reallllllllllllll")
-
     }
 
     fun createLanguageTTS() {
         if (tts == null) {
-            Logger.d("laught1")
             tts = TextToSpeech(MonsterApplication.instance, TextToSpeech.OnInitListener { arg0 ->
                 // TTS 初始化成功
                 if (arg0 == TextToSpeech.SUCCESS) {
-                    Logger.d("laught2")
                     // 目前指定的【語系+國家】TTS, 已下載離線語音檔, 可以離線發音
                     if (tts!!.isLanguageAvailable(Locale.TRADITIONAL_CHINESE) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
                         tts!!.language = Locale.TRADITIONAL_CHINESE
-                        Logger.d("laught3")
                     }
                 }
             })
