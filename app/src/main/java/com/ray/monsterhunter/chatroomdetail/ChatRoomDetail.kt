@@ -47,17 +47,6 @@ class ChatRoomDetail : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-//        binding.chatRoomDetailStartButton.visibility = View.GONE
-//        binding.chatRoomDetailEndButton.visibility = View.GONE
-//        binding.chatRoomDetailStartBackground.visibility = View.GONE
-//        binding.chatRoomDetailMinNumber.visibility = View.GONE
-//        binding.chatRoomDetailTenMinNumber.visibility = View.GONE
-//        binding.chatRoomDetailSecNumber.visibility = View.GONE
-//        binding.chatRoomDetailTenSecNumber.visibility = View.GONE
-//        binding.chatRoomDetailLine.visibility = View.GONE
-//        binding.chatRoomDetailMissionTypeBackground.visibility = View.GONE
-//        binding.chatRoomDetailMissionTypeSuccess.visibility = View.GONE
-//        binding.chatRoomDetailMissionTypeFail.visibility = View.GONE
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
         binding.chatRoomDetailTimeEnd.visibility = View.GONE
@@ -67,12 +56,7 @@ class ChatRoomDetail : Fragment() {
         },viewModel)
 
         binding.chatRoomDetailTextMessageRecy.adapter = adapter
-
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
-
-
-
-
 
         binding.chatRoomDetailSentMessage.setOnClickListener() {
             viewModel.message.value?.let { it1 -> viewModel.sentMessage(it1) }
