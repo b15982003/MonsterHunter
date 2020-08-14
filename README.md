@@ -82,7 +82,6 @@
     
 * Firebase Authentication
 * Firestore
-* Storage
 ### Tools
 
 * Glide
