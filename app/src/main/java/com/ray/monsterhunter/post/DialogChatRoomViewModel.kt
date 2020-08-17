@@ -213,6 +213,57 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
                 postMonster.value = 6
                 _event.value?.image = ImageManger.imageData.monsterIcehit
             }
+            7L -> {
+                _event.value?.monsterName = "大兇豺龍"
+                postMonster.value = 7
+                _event.value?.image = ImageManger.imageData.monsterMoneyPap
+            }
+            8L -> {
+                _event.value?.monsterName = "土砂龍"
+                postMonster.value = 8
+                _event.value?.image = ImageManger.imageData.monsterEarthSand
+            }
+            9L -> {
+                _event.value?.monsterName = "大兇顎龍"
+                postMonster.value = 9
+                _event.value?.image = ImageManger.imageData.monsterBigTooth
+            }
+            10L -> {
+                _event.value?.monsterName = "角龍"
+                postMonster.value = 10
+                _event.value?.image = ImageManger.imageData.monsterHorned
+            }
+            11L -> {
+                _event.value?.monsterName = "岩賊龍"
+                postMonster.value = 11
+                _event.value?.image = ImageManger.imageData.monsterBlueDad
+            }
+            12L -> {
+                _event.value?.monsterName = "飛雷龍"
+                postMonster.value = 12
+                _event.value?.image = ImageManger.imageData.monsterThunder
+            }
+            13L -> {
+                _event.value?.monsterName = "炎王龍"
+                postMonster.value = 13
+                _event.value?.image = ImageManger.imageData.monsterFireKing
+            }
+            14L -> {
+                _event.value?.monsterName = "泥魚龍"
+                postMonster.value = 14
+                _event.value?.image = ImageManger.imageData.monsterSoilFish
+            }
+            15L -> {
+                _event.value?.monsterName = "毒妖鳥"
+                postMonster.value = 15
+                _event.value?.image = ImageManger.imageData.monsterPoison
+            }
+            16L -> {
+                _event.value?.monsterName = "屍套龍"
+                postMonster.value = 16
+                _event.value?.image = ImageManger.imageData.monsterZombie
+            }
+
         }
     }
 }

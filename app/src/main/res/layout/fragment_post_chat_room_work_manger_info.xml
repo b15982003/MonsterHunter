@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/chatRoom_post_time_out"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".dialog.PostChatRoomWorkMangerInfo">
+
+
+        <TextView
+            android:id="@+id/chatRoom_post_time_info"
+            style="@style/message"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:background="@drawable/chatroom_post_background"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chatRoom_post_time_title1"
+            style="@style/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/dialog_workManager_info_title1"
+            app:layout_constraintStart_toStartOf="@id/chatRoom_post_time_info"
+            app:layout_constraintTop_toTopOf="@id/chatRoom_post_time_info" />
+
+        <TextView
+            android:id="@+id/chatRoom_post_time_info1"
+            style="@style/message_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/dialog_workManager_info1"
+            app:layout_constraintEnd_toEndOf="@id/chatRoom_post_time_info"
+            app:layout_constraintStart_toStartOf="@id/chatRoom_post_time_title1"
+            app:layout_constraintTop_toBottomOf="@id/chatRoom_post_time_title1" />
+
+        <TextView
+            android:id="@+id/chatRoom_post_time_title2"
+            style="@style/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/dialog_workManager_info_title2"
+            app:layout_constraintStart_toStartOf="@id/chatRoom_post_time_info1"
+            app:layout_constraintTop_toBottomOf="@id/chatRoom_post_time_info1" />
+
+        <TextView
+            android:id="@+id/chatRoom_post_time_info2"
+            style="@style/message_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/dialog_workManager_info2"
+            app:layout_constraintEnd_toEndOf="@id/chatRoom_post_time_info"
+            app:layout_constraintStart_toStartOf="@id/chatRoom_post_time_title2"
+            app:layout_constraintTop_toBottomOf="@id/chatRoom_post_time_title2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

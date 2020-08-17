@@ -461,7 +461,17 @@ object MonsterRemoteDataSource : MonsterDataSource {
                             monsterIceteeth = monster.monsterIceteeth,
                             monsterRoomPost = monster.monsterRoomPost,
                             monsterUnico = monster.monsterUnico,
-                            monsterYellowBlack = monster.monsterYellowBlack
+                            monsterYellowBlack = monster.monsterYellowBlack,
+                            monsterBigTooth = monster.monsterBigTooth,
+                            monsterBlueDad = monster.monsterBlueDad,
+                            monsterEarthSand = monster.monsterEarthSand,
+                            monsterHorned = monster.monsterHorned,
+                            monsterMoneyPap = monster.monsterMoneyPap,
+                            monsterFireKing = monster.monsterFireKing,
+                            monsterPoison = monster.monsterPoison,
+                            monsterSoilFish = monster.monsterSoilFish,
+                            monsterThunder = monster.monsterThunder,
+                            monsterZombie = monster.monsterZombie
                         )
                         ImageManger.imageData = monster2
                     }

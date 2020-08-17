@@ -236,5 +236,15 @@
         <item name="android:textColor">@color/black_3f3a3a</item>
     </style>
 
+    <!-- dialog post chatRoom work message -->
+    <style name="message">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
+
+    <style name="message_info">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
 
 </resources>

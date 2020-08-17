@@ -84,6 +84,13 @@
             app:nullable="false" />
     </dialog>
 
+    <dialog
+        android:id="@+id/postChatRoomWorkMangerInfo"
+        android:name="com.ray.monsterhunter.dialog.PostChatRoomWorkMangerInfo"
+        android:label="PostChatRoomWorkMangerInfo">
+
+    </dialog>
+
     <fragment
         android:id="@+id/crawlingDetail"
         android:name="com.ray.monsterhunter.crawlingdetail.CrawlingDetail"
@@ -112,5 +119,6 @@
     <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
     <action android:id="@+id/action_global_dialogFriendDetail" app:destination="@id/dialogFriendDetail" />
     <action android:id="@+id/action_global_crawlingDetail" app:destination="@id/crawlingDetail" />
+    <action android:id="@+id/action_global_postChatRoomWorkMangerInfo" app:destination="@id/postChatRoomWorkMangerInfo" />
 
 </navigation>
