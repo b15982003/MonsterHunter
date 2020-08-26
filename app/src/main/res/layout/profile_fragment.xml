@@ -10,6 +10,7 @@
             type="com.ray.monsterhunter.profile.ProfileViewModel" />
 
         <import type="com.ray.monsterhunter.util.UserManager" />
+        <import type="android.view.View"/>
 
     </data>
 
@@ -62,20 +63,6 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_image_head"
                 tools:text="@string/chatRoom_test_text_short" />
 
-
-            <TextView
-                android:id="@+id/profile_signOut"
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/login_activity_signin_button"
-                android:gravity="center"
-                android:visibility="invisible"
-                android:text="@string/google_signOut"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/profile_all_game_text"
@@ -140,6 +127,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.a &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsA_ratingBar"
                     app:layout_constraintEnd_toEndOf="@id/profile_armsA"
                     app:layout_constraintStart_toStartOf="@id/profile_armsA"
@@ -201,6 +189,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.b &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsB_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsB"
                     app:layout_constraintStart_toStartOf="@id/profile_armsB"
@@ -261,6 +250,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.c &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsC_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsC"
                     app:layout_constraintStart_toStartOf="@id/profile_armsC"
@@ -321,6 +311,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.d &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsD_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsD"
                     app:layout_constraintStart_toStartOf="@id/profile_armsD"
@@ -382,6 +373,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.e &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsE_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsE"
                     app:layout_constraintStart_toStartOf="@id/profile_armsE"
@@ -443,6 +435,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.f &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsF_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsF"
                     app:layout_constraintStart_toStartOf="@id/profile_armsF"
@@ -504,6 +497,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.g &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsG_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsG"
                     app:layout_constraintStart_toStartOf="@id/profile_armsG"
@@ -566,6 +560,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.h &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsH_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsH"
                     app:layout_constraintStart_toStartOf="@id/profile_armsH"
@@ -628,6 +623,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.i &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsI_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsI"
                     app:layout_constraintStart_toStartOf="@id/profile_armsI"
@@ -690,6 +686,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.j &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsJ_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsJ"
                     app:layout_constraintStart_toStartOf="@id/profile_armsJ"
@@ -754,6 +751,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.k &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsK_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsK"
                     app:layout_constraintStart_toStartOf="@id/profile_armsK"
@@ -816,6 +814,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.l &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsL_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsL"
                     app:layout_constraintStart_toStartOf="@id/profile_armsL"
@@ -878,6 +877,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.m &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsM_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsM"
                     app:layout_constraintStart_toStartOf="@id/profile_armsM"
@@ -940,6 +940,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/profile_rating_text"
                     android:gravity="center"
+                    android:visibility="@{viewmodel.user.armsType.n &lt; 900 ? View.INVISIBLE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/profile_armsN_ratingBar"
                     app:layout_constraintEnd_toEndOf="@+id/profile_armsN"
                     app:layout_constraintStart_toStartOf="@id/profile_armsN"

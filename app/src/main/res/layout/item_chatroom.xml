@@ -190,6 +190,19 @@
                     tools:text="@string/chatRoom_test_text" />
 
                 <TextView
+                    android:id="@+id/chatRoom_list_personNumber"
+                    style="@style/home_data_button"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="4dp"
+                    android:background="@drawable/item_chatroom_personnumber"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toTopOf="@id/chatRoom_list_typeName"
+                    tools:text="@string/testType" />
+
+                <TextView
                     android:id="@+id/chatRoom_list_typeName"
                     style="@style/home_data_button"
                     android:layout_width="70dp"

@@ -25,17 +25,19 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
 
 
     private val viewModel by viewModels<FriendItemViewModel> { getVmFactory(friendTypeFilter) }
+    lateinit var binding : FriendItemFragmentBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        val binding = FriendItemFragmentBinding.inflate(inflater, container, false)
-
+        binding = FriendItemFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
         binding.viewModel = viewModel
 
-        var adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
-
+        val adapter = FriendItemAdapter(FriendItemAdapter.OnClickListener {
             findNavController().navigate(NavigationDirections.actionGlobalDialogFriendDetail(it))
         })
 
@@ -45,7 +47,7 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
             adapter.notifyDataSetChanged()
         })
 
-        if(friendTypeFilter == FriendTypeFilter.USERLIST) {
+        if (friendTypeFilter == FriendTypeFilter.USERLIST) {
             binding.friendListEdText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
@@ -55,8 +57,7 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
                     start: Int,
                     count: Int,
                     after: Int
-                ) {
-                }
+                ) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
@@ -69,7 +70,7 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
             })
         }
 
-        if(friendTypeFilter == FriendTypeFilter.FOLLOWINUSER){
+        if (friendTypeFilter == FriendTypeFilter.FOLLOWINUSER) {
             binding.friendListSearch.visibility = View.GONE
             binding.friendListEdText.visibility = View.GONE
             binding.friendListImage.visibility = View.GONE

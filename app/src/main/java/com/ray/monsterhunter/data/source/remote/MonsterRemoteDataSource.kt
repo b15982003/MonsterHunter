@@ -66,7 +66,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
     override suspend fun getActivitys(): Result<List<Activity>> = suspendCoroutine { continuation ->
         FirebaseFirestore.getInstance()
             .collection(PATH_ACTIVITY)
-//            .orderBy(KEY_START_TIME, Query.Direction.DESCENDING)
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -88,33 +87,31 @@ object MonsterRemoteDataSource : MonsterDataSource {
             }
     }
 
-    override suspend fun getAllUser(searchText:String): Result<List<User>> = suspendCoroutine { continuation ->
-        FirebaseFirestore.getInstance()
-            .collection(PATH_USER)
-            .orderBy("email")
-            .startAt(searchText)
-            .get()
-            .addOnCompleteListener{ task ->
-                if (task.isSuccessful) {
-                    val list = mutableListOf<User>()
-                    for (document in task.result!!) {
+    override suspend fun getAllUser(searchText: String): Result<List<User>> =
+        suspendCoroutine { continuation ->
+            FirebaseFirestore.getInstance()
+                .collection(PATH_USER)
+                .orderBy("email")
+                .startAt(searchText)
+                .get()
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val list = mutableListOf<User>()
+                        for (document in task.result!!) {
+                            val user = document.toObject(User::class.java)
+                            list.add(user)
+                        }
+                        continuation.resume(Result.Success(list))
 
-                        val user = document.toObject(User::class.java)
-                        list.add(user)
-                        Logger.d("allUserrepository${user}")
-
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                     }
-                    continuation.resume(Result.Success(list))
-
-                } else {
-                    task.exception?.let {
-                        continuation.resume(Result.Error(it))
-                        return@addOnCompleteListener
-                    }
-                    continuation.resume(Result.Fail(MonsterApplication.instance.getString(R.string.notGood)))
                 }
-            }
-    }
+        }
 
 
     override suspend fun getMyUser(document: String): Result<List<User>> =
@@ -128,11 +125,8 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     if (task.isSuccessful) {
                         val list = mutableListOf<User>()
                         for (document in task.result!!) {
-
                             val user = document.toObject(User::class.java)
                             list.add(user)
-                            Logger.d("MyUserrepository${user}")
-
                         }
                         continuation.resume(Result.Success(list))
 
@@ -210,9 +204,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     val message = document.toObject(Message::class.java)
                     list.add(message)
                 }
-
                 liveData.value = list
-                Logger.d("liveDatagg${liveData.value}")
             }
         return liveData
     }
@@ -234,7 +226,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     list.add(message)
                 }
                 liveData.value = list
-                Logger.d("livemessagr${liveData.value}")
             }
         return liveData
     }
@@ -246,18 +237,11 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .collection(PATH_CHATROOM)
             .document(document)
             .addSnapshotListener { snapshot, exception ->
-                Logger.d("exception=${exception}")
-                Logger.d("snapshot=${snapshot}")
-                Logger.d("liveChatRoom${document}")
-
-
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val chatRooms = snapshot?.toObject(ChatRoom::class.java)
                 liveDataChatRoom.value = chatRooms
-                Logger.d("liveDataChatRoom${liveDataChatRoom.value}")
             }
         return liveDataChatRoom
-
     }
 
     override fun getLiveUserOneScore(teammate: String): MutableLiveData<User> {
@@ -331,8 +315,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     for (document in task.result!!) {
                         var user = document.toObject(User::class.java)
                         user1 = user
-                        Logger.d("userIn12121212121212${user1}")
-                        Logger.d("userIn1233333333333333${user}")
                     }
                     continuation.resume(Result.Success(user1))
 
@@ -471,23 +453,27 @@ object MonsterRemoteDataSource : MonsterDataSource {
                 if (task.isSuccessful) {
                     var monsterUri1 = MonsterUri()
                     for (document in task.result!!) {
-
                         var monster = document.toObject(MonsterUri::class.java)
                         monsterUri1 = monster
-                        Logger.d("geeeeeeeeetttt ${monsterUri1}")
-
                         var monster2 = MonsterUri(
                             monsterFireDragon = monster.monsterFireDragon,
                             monsterIcehit = monster.monsterIcehit,
                             monsterIceteeth = monster.monsterIceteeth,
                             monsterRoomPost = monster.monsterRoomPost,
                             monsterUnico = monster.monsterUnico,
-                            monsterYellowBlack = monster.monsterYellowBlack
+                            monsterYellowBlack = monster.monsterYellowBlack,
+                            monsterBigTooth = monster.monsterBigTooth,
+                            monsterBlueDad = monster.monsterBlueDad,
+                            monsterEarthSand = monster.monsterEarthSand,
+                            monsterHorned = monster.monsterHorned,
+                            monsterMoneyPap = monster.monsterMoneyPap,
+                            monsterFireKing = monster.monsterFireKing,
+                            monsterPoison = monster.monsterPoison,
+                            monsterSoilFish = monster.monsterSoilFish,
+                            monsterThunder = monster.monsterThunder,
+                            monsterZombie = monster.monsterZombie
                         )
                         ImageManger.imageData = monster2
-
-                        Logger.d("geeeeeeeeetttt ${ImageManger.imageData}")
-
                     }
                     continuation.resume(Result.Success(monsterUri1))
 
@@ -630,7 +616,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .get()
             .addOnSuccessListener { task ->
                 if (task.isEmpty) {
-                    Logger.d("wwwwwwwwww${task}")
                     if (document != null) {
                         document
                             .set(user)
@@ -722,33 +707,34 @@ object MonsterRemoteDataSource : MonsterDataSource {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override suspend fun leaveMessage(
-        message : Message,document :String
+        message: Message, document: String
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val messages = FirebaseFirestore.getInstance().collection(PATH_CRAWLING)
-            val documentMessage =messages.document(document).collection(PATH_LEAVEMESSAGE).document()
+            val documentMessage =
+                messages.document(document).collection(PATH_LEAVEMESSAGE).document()
 
             message.createTime = Calendar.getInstance().timeInMillis
 
-                documentMessage
-                    .set(message)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            continuation.resume(Result.Success(true))
-                        } else {
-                            task.exception?.let {
-                                continuation.resume(Result.Error(it))
-                                return@addOnCompleteListener
-                            }
-                            continuation.resume(
-                                Result.Fail(
-                                    MonsterApplication.instance.getString(
-                                        R.string.notGood
-                                    )
+            documentMessage
+                .set(message)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        continuation.resume(Result.Success(true))
+                    } else {
+                        task.exception?.let {
+                            continuation.resume(Result.Error(it))
+                            return@addOnCompleteListener
+                        }
+                        continuation.resume(
+                            Result.Fail(
+                                MonsterApplication.instance.getString(
+                                    R.string.notGood
                                 )
                             )
-                        }
+                        )
                     }
+                }
         }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -786,7 +772,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     }
             }
         }
-
 
     override suspend fun cancelFriend(
         user: User
@@ -890,7 +875,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
     ): Result<Boolean> =
         suspendCoroutine { continuation ->
             val updateChatRoom = FirebaseFirestore.getInstance().collection(PATH_CHATROOM)
-//            val document = messages.document()
 
             updateChatRoom
                 .document(document)
@@ -898,8 +882,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
                     "finishTime",
                     chatRoom.value?.finishTime,
                     "startTime",
-                    chatRoom.value?.startTime,"speaker",chatRoom.value?.speaker
-
+                    chatRoom.value?.startTime, "speaker", chatRoom.value?.speaker
                 )
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -944,7 +927,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             val updateUserOne =
                 FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
 
             updateUserOne
                 .document(userId)
@@ -977,7 +959,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             val updateUserOne =
                 FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
 
             updateUserOne
                 .document(userId)
@@ -1010,7 +991,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             val updateUserOne =
                 FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
 
             updateUserOne
                 .document(userId)
@@ -1043,7 +1023,6 @@ object MonsterRemoteDataSource : MonsterDataSource {
         suspendCoroutine { continuation ->
             val updateUserOne =
                 FirebaseFirestore.getInstance().collection(PATH_USER)
-//            val document = messages.document()
 
             updateUserOne
                 .document(userId)

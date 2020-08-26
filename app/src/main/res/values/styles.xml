@@ -46,7 +46,7 @@
     </style>
 
     <style name="home_data_text">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -117,7 +117,7 @@
     </style>
 
     <style name="chatRoom_Detail_message">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black_3f3a3a</item>
     </style>
 
@@ -153,13 +153,13 @@
 
     <!-- chatRoomScore -->
     <style name="chatRoom_score_name">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="chatRoom_score_title">
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/orange_8b572a</item>
     </style>
@@ -170,7 +170,7 @@
     </style>
 
     <style name="chatRoom_score_sent_button">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/entertext</item>
     </style>
 
@@ -236,5 +236,15 @@
         <item name="android:textColor">@color/black_3f3a3a</item>
     </style>
 
+    <!-- dialog post chatRoom work message -->
+    <style name="message">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
+
+    <style name="message_info">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/gray_87_black</item>
+    </style>
 
 </resources>

@@ -21,12 +21,3 @@ data class History(
     var createTime : Long? = null
     ): Parcelable
 
-data class FriendScore(
-    var id : String = "",
-    var armsType: String = "",
-    var score : String = "",
-    var playnumber : String = ""
-)
-
-
-

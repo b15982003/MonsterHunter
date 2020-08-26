@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ray.monsterhunter.data.ChatRoom
 import com.ray.monsterhunter.data.Message
 import com.ray.monsterhunter.databinding.ItemCrawlingDetailLeaveMessageBinding
 import com.ray.monsterhunter.util.Logger
@@ -55,7 +54,6 @@ class CrawlingDetailAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is CrawlingDetailViewHolder -> {
                 Logger.i("position=$position, name=${getItem(position) as Message}")
@@ -67,7 +65,7 @@ class CrawlingDetailAdapter(
     override fun getItemViewType(position: Int): Int {
         return ITEM_VIEW_TYPE_ARTICLE
     }
-
+    // let flash out
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }

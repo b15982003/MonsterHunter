@@ -6,39 +6,33 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.ray.monsterhunter.MainActivity
+import com.ray.monsterhunter.MainViewModel
 import com.ray.monsterhunter.MonsterApplication
 import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.ImageManger
-import com.ray.monsterhunter.util.Logger
-import com.ray.monsterhunter.util.TimeUtil
 import com.ray.monsterhunter.util.UserManager
 import okhttp3.internal.format
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.*
 
 class DialogChatRoom : AppCompatDialogFragment() {
 
-
     private val viewModel by viewModels<DialogChatRoomViewModel> { getVmFactory() }
+    private val mainViewModel by viewModels<MainViewModel> { getVmFactory() }
+
     private lateinit var binding: DialogChatRoomFragmentBinding
     val calender = Calendar.getInstance()
 
@@ -57,6 +51,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
         binding = DialogChatRoomFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        // choose date & time
         binding.chatRoomPostDateText.setOnClickListener {
             datePicker()
         }
@@ -64,20 +59,22 @@ class DialogChatRoom : AppCompatDialogFragment() {
             timePicker()
         }
 
+        binding.chatRoomPostTimeInfo.setOnClickListener(){
+            findNavController().navigate(R.id.action_global_postChatRoomWorkMangerInfo)
+        }
 
-
-        viewModel.event.observe(viewLifecycleOwner, Observer {
-            it.roomName?.let {
-                Log.d("eeeeeeee", "${it}")
+        binding.chatRoomPostSentButton.setOnClickListener(){
+            viewModel.finalTime.value?.let { it ->
+                mainViewModel.startWorkerManger(it)
             }
-        })
+            viewModel.event.value?.let { it ->
+                viewModel.pushChatRoom(it)
+            }
+        }
 
-
-
+        // change monster image
         viewModel.postMonster.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Logger.d(viewModel.postMonster.value.toString())
-
                 binding.chatRoomPostImage.setImageResource(
                     when (viewModel.postMonster.value) {
                         1 -> R.drawable.ic_monster_roompost
@@ -86,14 +83,23 @@ class DialogChatRoom : AppCompatDialogFragment() {
                         4 -> R.drawable.ic_monster_firedragon
                         5 -> R.drawable.ic_monster_iceteeth
                         6 -> R.drawable.ic_monster_icehit
+                        7 -> R.drawable.ic_monster_money_pap
+                        8 -> R.drawable.ic_monster_earthsand
+                        9 -> R.drawable.ic_monster_bigtooth
+                        10 -> R.drawable.ic_monster_horned
+                        11 -> R.drawable.ic_monster_bluedad
+                        12 -> R.drawable.ic_monster_thunder
+                        13 -> R.drawable.ic_monster_fireking
+                        14 -> R.drawable.ic_monster_soilfish
+                        15 -> R.drawable.ic_monster_poison
+                        16 -> R.drawable.ic_monster_zombie
                         else -> R.drawable.ic_monster_roompost
                     }
                 )
-
                 viewModel.event.value?.userId = UserManager.userData.id.toString()
             }
         })
-//下拉式選單，不在main activity裡面所以使用yourapp
+
         val arms = arrayListOf(
             "皆可",
             "太刀", "大劍",
@@ -104,8 +110,8 @@ class DialogChatRoom : AppCompatDialogFragment() {
             "長槍", "斬擊斧", "狩獵笛"
         )
         val missionType = arrayListOf("選擇任務類型", "任務", "自由", "調查", "活動", "限時活動", "採集")
-        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
-        val adapter = ArrayAdapter(
+        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍","大兇豺龍","土砂龍","大兇顎龍","角龍","岩賊龍","飛雷龍","炎王龍","泥魚龍","毒妖鳥","屍套龍")
+        val adapterArmsType = ArrayAdapter(
             MonsterApplication.instance,
             android.R.layout.simple_spinner_dropdown_item,
             arms
@@ -121,221 +127,27 @@ class DialogChatRoom : AppCompatDialogFragment() {
             android.R.layout.simple_spinner_dropdown_item,
             monsterName
         )
-
-        binding.chatRoomPostArmsA.adapter = adapter
-        binding.chatRoomPostArmsB.adapter = adapter
-        binding.chatRoomPostArmsC.adapter = adapter
-        binding.chatRoomPostArmsD.adapter = adapter
+        // UI Spinner change
+        binding.chatRoomPostArmsA.adapter = adapterArmsType
+        binding.chatRoomPostArmsB.adapter = adapterArmsType
+        binding.chatRoomPostArmsC.adapter = adapterArmsType
+        binding.chatRoomPostArmsD.adapter = adapterArmsType
         binding.chatRoomPostTypeNameTextSpin.adapter = adapterActivityType
         binding.chatRoomPostMonsterNameTextSpin.adapter = adapterMonsterName
-
-        binding.chatRoomPostTypeNameTextSpin.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> viewModel.event.value?.typeName = "出擊"
-                        1L -> viewModel.event.value?.typeName = "任務"
-                        2L -> viewModel.event.value?.typeName = "自由"
-                        3L -> viewModel.event.value?.typeName = "調查"
-                        4L -> viewModel.event.value?.typeName = "活動"
-                        5L -> viewModel.event.value?.typeName = "限時活動"
-                        5L -> viewModel.event.value?.typeName = "採集"
-                    }
-                }
-            }
-
-
-        binding.chatRoomPostArmsA.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> viewModel.event.value?.armsType1 = "皆可"
-                        1L -> viewModel.event.value?.armsType1 = "太刀"
-                        2L -> viewModel.event.value?.armsType1 = "大劍"
-                        3L -> viewModel.event.value?.armsType1 = "弓箭"
-                        4L -> viewModel.event.value?.armsType1 = "充能斧"
-                        5L -> viewModel.event.value?.armsType1 = "輕弩"
-                        6L -> viewModel.event.value?.armsType1 = "雙劍"
-                        7L -> viewModel.event.value?.armsType1 = "操蟲棍"
-                        8L -> viewModel.event.value?.armsType1 = "重弩"
-                        9L -> viewModel.event.value?.armsType1 = "大錘"
-                        10L -> viewModel.event.value?.armsType1 = "銃槍"
-                        11L -> viewModel.event.value?.armsType1 = "單手劍"
-                        12L -> viewModel.event.value?.armsType1 = "長槍"
-                        13L -> viewModel.event.value?.armsType1 = "斬擊斧"
-                        14L -> viewModel.event.value?.armsType1 = "狩獵笛"
-
-                    }
-                }
-            }
-
-        binding.chatRoomPostArmsB.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> viewModel.event.value?.armsType2 = "皆可"
-                        1L -> viewModel.event.value?.armsType2 = "太刀"
-                        2L -> viewModel.event.value?.armsType2 = "大劍"
-                        3L -> viewModel.event.value?.armsType2 = "弓箭"
-                        4L -> viewModel.event.value?.armsType2 = "充能斧"
-                        5L -> viewModel.event.value?.armsType2 = "輕弩"
-                        6L -> viewModel.event.value?.armsType2 = "雙劍"
-                        7L -> viewModel.event.value?.armsType2 = "操蟲棍"
-                        8L -> viewModel.event.value?.armsType2 = "重弩"
-                        9L -> viewModel.event.value?.armsType2 = "大錘"
-                        10L -> viewModel.event.value?.armsType2 = "銃槍"
-                        11L -> viewModel.event.value?.armsType2 = "單手劍"
-                        12L -> viewModel.event.value?.armsType2 = "長槍"
-                        13L -> viewModel.event.value?.armsType2 = "斬擊斧"
-                        14L -> viewModel.event.value?.armsType2 = "狩獵笛"
-                    }
-                }
-            }
-
-        binding.chatRoomPostArmsC.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> viewModel.event.value?.armsType3 = "皆可"
-                        1L -> viewModel.event.value?.armsType3 = "太刀"
-                        2L -> viewModel.event.value?.armsType3 = "大劍"
-                        3L -> viewModel.event.value?.armsType3 = "弓箭"
-                        4L -> viewModel.event.value?.armsType3 = "充能斧"
-                        5L -> viewModel.event.value?.armsType3 = "輕弩"
-                        6L -> viewModel.event.value?.armsType3 = "雙劍"
-                        7L -> viewModel.event.value?.armsType3 = "操蟲棍"
-                        8L -> viewModel.event.value?.armsType3 = "重弩"
-                        9L -> viewModel.event.value?.armsType3 = "大錘"
-                        10L -> viewModel.event.value?.armsType3 = "銃槍"
-                        11L -> viewModel.event.value?.armsType3 = "單手劍"
-                        12L -> viewModel.event.value?.armsType3 = "長槍"
-                        13L -> viewModel.event.value?.armsType3 = "斬擊斧"
-                        14L -> viewModel.event.value?.armsType3 = "狩獵笛"
-                    }
-                }
-            }
-
-        binding.chatRoomPostArmsD.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> viewModel.event.value?.armsType4 = "皆可"
-                        1L -> viewModel.event.value?.armsType4 = "太刀"
-                        2L -> viewModel.event.value?.armsType4 = "大劍"
-                        3L -> viewModel.event.value?.armsType4 = "弓箭"
-                        4L -> viewModel.event.value?.armsType4 = "充能斧"
-                        5L -> viewModel.event.value?.armsType4 = "輕弩"
-                        6L -> viewModel.event.value?.armsType4 = "雙刀"
-                        7L -> viewModel.event.value?.armsType4 = "操蟲棍"
-                        8L -> viewModel.event.value?.armsType4 = "重弩"
-                        9L -> viewModel.event.value?.armsType4 = "大錘"
-                        10L -> viewModel.event.value?.armsType4 = "銃槍"
-                        11L -> viewModel.event.value?.armsType4 = "單手劍"
-                        12L -> viewModel.event.value?.armsType4 = "長槍"
-                        13L -> viewModel.event.value?.armsType4 = "斬擊斧"
-                        14L -> viewModel.event.value?.armsType4 = "狩獵笛"
-                    }
-                }
-            }
-
-
-
-        binding.chatRoomPostMonsterNameTextSpin.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (id) {
-                        0L -> {
-                            viewModel.event.value?.monsterName = "隨機打"
-                            viewModel.postMonster.value = 0
-                            viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
-                        }
-                        1L -> {
-                            viewModel.event.value?.monsterName = "滅盡龍"
-                            viewModel.postMonster.value = 1
-                            viewModel.event.value?.image = ImageManger.imageData.monsterRoomPost
-                        }
-                        2L -> {
-                            viewModel.event.value?.monsterName = "煌黑龍"
-                            viewModel.postMonster.value = 2
-                            viewModel.event.value?.image = ImageManger.imageData.monsterYellowBlack
-                        }
-                        3L -> {
-                            viewModel.event.value?.monsterName = "麒麟"
-                            viewModel.postMonster.value = 3
-                            viewModel.event.value?.image = ImageManger.imageData.monsterUnico
-                        }
-                        4L -> {
-                            viewModel.event.value?.monsterName = "火龍"
-                            viewModel.postMonster.value = 4
-                            viewModel.event.value?.image = ImageManger.imageData.monsterFireDragon
-                        }
-                        5L -> {
-                            viewModel.event.value?.monsterName = "冰牙龍"
-                            viewModel.postMonster.value = 5
-                            viewModel.event.value?.image = ImageManger.imageData.monsterIceteeth
-                        }
-                        6L -> {
-                            viewModel.event.value?.monsterName = "冰呪龍"
-                            viewModel.postMonster.value = 6
-                            viewModel.event.value?.image = ImageManger.imageData.monsterIcehit
-                        }
-                    }
-                }
-            }
+        // Info Spinner return
+        binding.chatRoomPostArmsA.onItemSelectedListener = getSpinnerItemListner(1)
+        binding.chatRoomPostArmsB.onItemSelectedListener = getSpinnerItemListner(2)
+        binding.chatRoomPostArmsC.onItemSelectedListener = getSpinnerItemListner(3)
+        binding.chatRoomPostArmsD.onItemSelectedListener = getSpinnerItemListner(4)
+        binding.chatRoomPostTypeNameTextSpin.onItemSelectedListener = getSpinnerItemListner(5)
+        binding.chatRoomPostMonsterNameTextSpin.onItemSelectedListener = getSpinnerItemListner(6)
+        // get now time
+        viewModel.getTime.observe(viewLifecycleOwner, Observer {
+            val localDate = LocalDate.now()
+            val localTime = LocalTime.now()
+            val addTime = "$localDate $localTime"
+            viewModel.getWorkerMangerTime(addTime)
+        })
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -343,48 +155,59 @@ class DialogChatRoom : AppCompatDialogFragment() {
                 viewModel.onLeft()
             }
         })
-
-        viewModel.dataTime.observe(viewLifecycleOwner, Observer {
-            viewModel.getTime.value = viewModel.datadate.value?.let { it1 ->
-                viewModel.dataTime.value?.plus(
-                    it1
-                )
-            }
-        })
-
-        viewModel.getTime.observe(viewLifecycleOwner, Observer {
-            var testTime = LocalDate.now()
-            var tstTime = LocalTime.now()
-            var addTime = "$testTime $tstTime"
-            viewModel.finalTime.value = viewModel.getTime.value?.minus(TimeUtil.DateToAllStamp(addTime, Locale.TAIWAN))
-
-        })
-
-        viewModel.finalTime.observe(viewLifecycleOwner, Observer {
-            it?.let {  }
-        })
-
-        binding.chatRoomPostSentButton.setOnClickListener(){
-            viewModel.finalTime.value?.let {
-                    it1 -> (activity as MainActivity).startWorkerManger(it1)
-            }
-            viewModel.event.value?.let { it1 -> viewModel.pushChatRoom(it1) }
-
-        }
-
         return binding.root
     }
 
+    private fun getSpinnerItemListner(number: Long): AdapterView.OnItemSelectedListener? {
+        return  object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                when (number) {
+                    1L -> viewModel.setArmsNameByMember(1, getArmsNameByNum(id))
+                    2L -> viewModel.setArmsNameByMember(2, getArmsNameByNum(id))
+                    3L -> viewModel.setArmsNameByMember(3, getArmsNameByNum(id))
+                    4L -> viewModel.setArmsNameByMember(4, getArmsNameByNum(id))
+                    5L -> viewModel.setPostTypeName(id)
+                    else -> viewModel.setMonsterType(id)
+                }
+            }
+        }
+    }
+
+    private fun getArmsNameByNum(id: Long): String {
+        return when (id) {
+            0L -> "皆可"
+            1L -> "太刀"
+            2L -> "大劍"
+            3L -> "弓箭"
+            4L -> "充能斧"
+            5L -> "輕弩"
+            6L -> "雙劍"
+            7L -> "操蟲棍"
+            8L -> "重弩"
+            9L -> "大錘"
+            10L -> "銃槍"
+            11L -> "單手劍"
+            12L -> "長槍"
+            13L -> "斬擊斧"
+            14L -> "狩獵笛"
+            else -> ""
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
     fun datePicker() {
         val dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             calender.set(year, month, day)
             format("yyyy-MM-dd")
-            val dateToStamp = TimeUtil.DateToStamp("$year-${month.plus(1)}-$day", Locale.TAIWAN)
-            viewModel.event.value?.dateTime?.date = dateToStamp
-            viewModel.year.value = year
-            viewModel.month.value = month +1
-            viewModel.day.value = day
-
+            viewModel.getDate(year, month, day)
             binding.chatRoomPostDateText.text = "$year-${month.plus(1)}-$day"
         }
         context?.let {
@@ -398,21 +221,14 @@ class DialogChatRoom : AppCompatDialogFragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun timePicker() {
         val timeListener = TimePickerDialog.OnTimeSetListener { _, hour, min ->
             calender.set(Calendar.HOUR_OF_DAY, hour)
             calender.set(Calendar.MINUTE, min)
             format("HH:mm")
-            val timeToStamp = TimeUtil.TimeToStamp("$hour:$min", Locale.TAIWAN)
-            viewModel.event.value?.dateTime?.time = timeToStamp
-            viewModel.hour.value = hour
-            viewModel.min.value = min
-            var nowTime =
-                "${viewModel.year.value}-${viewModel.month.value}-${viewModel.day.value} " +
-                        "${viewModel.hour.value}:${viewModel.min.value}"
-            viewModel.getTime.value = TimeUtil.DateToAllStamp(nowTime, Locale.TAIWAN)
+            viewModel.getTime(hour, min)
             binding.chatRoomPostTimeText.text = "$hour : $min "
-
         }
         TimePickerDialog(
             context,
@@ -422,11 +238,4 @@ class DialogChatRoom : AppCompatDialogFragment() {
             true
         ).show()
     }
-
-    fun format(format: String, view: View) {
-        val time = SimpleDateFormat(format, Locale.TAIWAN)
-        (view as EditText).setText(time.format(calender.time))
-    }
-
-
 }

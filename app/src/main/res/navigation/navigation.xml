@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/chatRoomDetail"
-        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetail"
+        android:name="com.ray.monsterhunter.chatroomdetail.ChatRoomDetail"
         android:label="ChatRoomDetail"
         tools:layout="@layout/chat_room_detail_fragment">
         <argument
@@ -64,7 +64,7 @@
 
     <fragment
         android:id="@+id/chatRoomDetailScore"
-        android:name="com.ray.monsterhunter.chattoomdetail.ChatRoomDetailScore"
+        android:name="com.ray.monsterhunter.chatroomScore.ChatRoomDetailScore"
         android:label="chat_room_detail_score_fragment"
         tools:layout="@layout/chat_room_detail_score_fragment" >
         <argument
@@ -82,6 +82,13 @@
             android:name="friendDetail"
             app:argType="com.ray.monsterhunter.data.User"
             app:nullable="false" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/postChatRoomWorkMangerInfo"
+        android:name="com.ray.monsterhunter.dialog.PostChatRoomWorkMangerInfo"
+        android:label="PostChatRoomWorkMangerInfo">
+
     </dialog>
 
     <fragment
@@ -112,5 +119,6 @@
     <action android:id="@+id/action_global_chatRoomDetailScore" app:destination="@id/chatRoomDetailScore" />
     <action android:id="@+id/action_global_dialogFriendDetail" app:destination="@id/dialogFriendDetail" />
     <action android:id="@+id/action_global_crawlingDetail" app:destination="@id/crawlingDetail" />
+    <action android:id="@+id/action_global_postChatRoomWorkMangerInfo" app:destination="@id/postChatRoomWorkMangerInfo" />
 
 </navigation>

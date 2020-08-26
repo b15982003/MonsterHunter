@@ -60,7 +60,7 @@
 
     <!-- ChatRoom detail -->
     <string name="chatRoom_detail_userId">紙火箭</string>
-    <string name="chatRoom_detail_message">安安你好！住哪！幾歲....</string>
+    <string name="chatRoom_detail_message">斬擊大騷動！！？取得洛克人票生產隨從裝備「洛克人貓系列」，讓隨從化身為彷彿從８bit世界走出來的洛克人吧！</string>
     <string name="chatRoom_detail_createTime">2020-07-15-12:00</string>
     <string name="chatRoom_detail_toolbar">聊天室名稱</string>
     <string name="chatRoom_detail_start_button">任務開始</string>
@@ -75,6 +75,7 @@
     <string name="chatRoom_detail_end_hit">打</string>
     <string name="chatRoom_detail_end_wait">等</string>
     <string name="chatRoom_detail_end_mackUp">補</string>
+    <string name="chatRoom_detail_gaming">遊戲進行中</string>
 
     <!--ChatRoom Score -->
     <string name="chatRoom_score_userName">紙火箭</string>
@@ -109,6 +110,23 @@
     <!-- crawling detail -->
     <string name="crawling_detail_leave_message">留言板 : </string>
 
+
+    <!-- dialog work info -->
+    <string name="dialog_workManager_info1">
+        讓想跟你組隊隊友知道你何時打算開始這個遊戲室，設定的時間到時我們會通知你開始遊戲。
+    </string>
+
+    <string name="dialog_workManager_info_title1">
+        選擇時間 :
+    </string>
+
+    <string name="dialog_workManager_info_title2">
+        不選擇時間 :
+    </string>
+
+    <string name="dialog_workManager_info2">
+    不設定開始時間將部會收到任何通知。
+    </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -25,35 +25,21 @@ class HistoryAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(history: History, onClickListener: OnClickListener) {
-            var AllStampTimeToDate = history.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            var AllStampTimeToDate =
+                history.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
             binding.historyListCreateTime.text = AllStampTimeToDate
 
-            binding.historyListMonsterShape.setBackgroundResource(
-                if (history.missionResult == "true"){
-                R.drawable.item_history_image_success_bg
-                }else{
-                    R.drawable.item_history_image_fail_bg
-                }
-            )
+            if (history.missionResult == "true"){
+                binding.historyListMonsterShape.setBackgroundResource(R.drawable.item_history_image_success_bg)
+                binding.historyListBackground.setBackgroundColor(Color.parseColor("#ABDAFC"))
+                binding.historyListMissionResult.text = "成功"
+            }else{
+                binding.historyListMonsterShape.setBackgroundResource(R.drawable.item_history_image_fail_bg)
+                binding.historyListBackground.setBackgroundColor(Color.parseColor("#F4C0C6"))
+                binding.historyListMissionResult.text = "失敗"
+            }
 
-            binding.historyListBackground.setBackgroundColor(
-                if (history.missionResult == "true") {
-                    Color.parseColor("#ABDAFC")
-
-                } else {
-                    Color.parseColor("#F4C0C6")
-                }
-            )
-
-            binding.historyListMissionResult.setText(
-                if (history.missionResult == "true") {
-                    "成功"
-
-                } else {
-                    "失敗"
-                }
-            )
             binding.product = history
             binding.root.setOnClickListener { onClickListener.onClick(history) }
             binding.executePendingBindings()
@@ -84,7 +70,6 @@ class HistoryAdapter(private val onClickListener: OnClickListener) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is HistoryViewHolder -> {
                 holder.bind((getItem(position) as History), onClickListener)

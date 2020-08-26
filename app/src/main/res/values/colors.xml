@@ -67,6 +67,7 @@
     <color name="chatRoom_detail_speaker_hit">@color/colorPrimaryDark</color>
     <color name="chatRoom_detail_speaker_mackUp">#D9CD90</color>
     <color name="chatRoom_detail_speaker_wait">#1E88A8</color>
+    <color name="chatRoom_detail_message_right">#FEE1C4</color>
 
     <!-- Chatroom Score -->
     <color name="chatRoom_score_name">@color/colorPrimaryDark</color>

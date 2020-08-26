@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.databinding.ItemFriendBinding
 
-class FriendItemAdapter(val onClickListener: OnClickListener ) :
-        ListAdapter<User, FriendItemAdapter.FriendItemViewHolder>(DiffCallback) {
+class FriendItemAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<User, FriendItemAdapter.FriendItemViewHolder>(DiffCallback) {
 
-    class FriendItemViewHolder(private var binding: ItemFriendBinding):
-            RecyclerView.ViewHolder(binding.root) {
+    class FriendItemViewHolder(private var binding: ItemFriendBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(user: User) {
             binding.user = user
             // This is important, because it forces the data binding to execute immediately,
@@ -31,9 +32,17 @@ class FriendItemAdapter(val onClickListener: OnClickListener ) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): FriendItemViewHolder {
-        return FriendItemViewHolder(ItemFriendBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FriendItemViewHolder {
+        return FriendItemViewHolder(
+            ItemFriendBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: FriendItemViewHolder, position: Int) {
@@ -44,7 +53,7 @@ class FriendItemAdapter(val onClickListener: OnClickListener ) :
         holder.bind(product)
     }
 
-    class OnClickListener(val clickListener: (user:User) -> Unit) {
-        fun onClick(user:User) = clickListener(user)
+    class OnClickListener(val clickListener: (user: User) -> Unit) {
+        fun onClick(user: User) = clickListener(user)
     }
 }

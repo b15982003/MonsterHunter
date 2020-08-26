@@ -19,15 +19,13 @@ import com.ray.monsterhunter.data.source.Result
 
 class CrawlingDetailViewModel(
     val repository: MonsterRepository,
-    val argument : Crawling
-)
-    : ViewModel() {
-
+    val argument: Crawling
+) : ViewModel() {
 
     private val _crawling = MutableLiveData<Crawling>().apply {
         value = argument
     }
-    val crawling : LiveData<Crawling>
+    val crawling: LiveData<Crawling>
         get() = _crawling
 
     private val _message = MutableLiveData<Message>().apply {
@@ -60,35 +58,22 @@ class CrawlingDetailViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
-    init{
+    init {
+        Logger.i("------------------------------------")
+        Logger.i("[${this::class.simpleName}]${this}")
+        Logger.i("------------------------------------")
         _message.value?.userId = UserManager.userData.id.toString()
         _message.value?.image = UserManager.userData.image.toString()
         _message.value?.email = UserManager.userData.email.toString()
+
         getLiveLeaveMessageResoult()
-
-        if (MonsterApplication.instance.isLiveMessage()) {
-            getLiveLeaveMessageResoult()
-
-        } else {
-            getMessage()
-
-        }
-
-    }
-
-    fun getMessage(){
-
     }
 
     fun getLiveLeaveMessageResoult() {
         liveMessage = crawling.value!!.id?.let { repository.getLiveLeaveMessage(it) }!!
-        Logger.d("liveMessage${liveMessage.value}")
-        Logger.d("liveMessage${crawling.value!!.id?.let { repository.getLiveLeaveMessage(it) }}")
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
-
     }
-
 
     fun leaveMessage(message: Message) {
 
@@ -98,22 +83,18 @@ class CrawlingDetailViewModel(
 
             when (val result = crawling.value?.id?.let { repository.leaveMessage(message, it) }) {
                 is Result.Success -> {
-                    Logger.i("ok,${message}")
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
-                    Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
                 is Result.Error -> {
-                    Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
                 else -> {
-                    Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                 }
