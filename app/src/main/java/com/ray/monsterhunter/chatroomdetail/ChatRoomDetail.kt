@@ -111,18 +111,19 @@ class ChatRoomDetail : Fragment() {
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
 
             it?.let {
-                if ( viewModel.liveChatRoom.value?.endToScore == "true") {
+                Handler().postDelayed({
+                    if ( viewModel.liveChatRoom.value?.endToScore == "true") {
 
-                    viewModel.isGoon.value = false
-                    viewModel.endSpeakerReady()
-                    Handler().postDelayed({
+                        viewModel.isGoon.value = false
+                        viewModel.endSpeakerReady()
                         findNavController().navigate(
                             NavigationDirections.actionGlobalChatRoomDetailScore(
                                 viewModel.chatRoom.value!!
                             )
                         )
-                    }, 2000)
-                }
+                    }
+                },1000)
+
 
                 // start word
                 if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true") {
