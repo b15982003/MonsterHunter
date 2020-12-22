@@ -118,9 +118,9 @@ dependencies {
     //jason動畫
     implementation 'com.airbnb.android:lottie:3.4.1'
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
-        transitive = true;
-    }
+//    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
+//        transitive = true;
+//    }
 
     // workermanger
     implementation "androidx.work:work-runtime-ktx:2.2.0"
