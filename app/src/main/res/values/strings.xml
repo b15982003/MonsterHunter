@@ -110,6 +110,23 @@
     <!-- crawling detail -->
     <string name="crawling_detail_leave_message">留言板 : </string>
 
+
+    <!-- dialog work info -->
+    <string name="dialog_workManager_info1">
+        讓想跟你組隊隊友知道你何時打算開始這個遊戲室，設定的時間到時我們會通知你開始遊戲。
+    </string>
+
+    <string name="dialog_workManager_info_title1">
+        選擇時間 :
+    </string>
+
+    <string name="dialog_workManager_info_title2">
+        不選擇時間 :
+    </string>
+
+    <string name="dialog_workManager_info2">
+    不設定開始時間將部會收到任何通知。
+    </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

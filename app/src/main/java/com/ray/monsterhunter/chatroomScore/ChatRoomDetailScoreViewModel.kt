@@ -645,5 +645,45 @@ class ChatRoomDetailScoreViewModel(
             }
         }
     }
+
+    fun goPlus(userArmsType : String, userNumber : MutableLiveData<User>){
+        when (userArmsType) {
+            "太刀" -> userNumber.value?.armsType?.A = userNumber.value?.armsType?.A?.plus(1)
+            "大劍" -> userNumber.value?.armsType?.B = userNumber.value?.armsType?.B?.plus(1)
+            "弓箭" -> userNumber.value?.armsType?.C = userNumber.value?.armsType?.C?.plus(1)
+            "充能斧" -> userNumber.value?.armsType?.D = userNumber.value?.armsType?.D?.plus(1)
+            "輕弩" -> userNumber.value?.armsType?.E = userNumber.value?.armsType?.E?.plus(1)
+            "雙劍" -> userNumber.value?.armsType?.F = userNumber.value?.armsType?.F?.plus(1)
+            "操蟲棍" -> userNumber.value?.armsType?.G = userNumber.value?.armsType?.G?.plus(1)
+            "重弩" -> userNumber.value?.armsType?.H = userNumber.value?.armsType?.H?.plus(1)
+            "大錘" -> userNumber.value?.armsType?.I = userNumber.value?.armsType?.I?.plus(1)
+            "銃槍" -> userNumber.value?.armsType?.J = userNumber.value?.armsType?.J?.plus(1)
+            "單手劍" -> userNumber.value?.armsType?.K = userNumber.value?.armsType?.K?.plus(1)
+            "長槍" -> userNumber.value?.armsType?.L = userNumber.value?.armsType?.L?.plus(1)
+            "斬擊斧" -> userNumber.value?.armsType?.M = userNumber.value?.armsType?.M?.plus(1)
+            "狩獵笛" -> userNumber.value?.armsType?.N = userNumber.value?.armsType?.N?.plus(1)
+            else -> "皆可"
+        }
+    }
+
+    fun goMinus(userArmsType : String, userNumber : MutableLiveData<User>){
+        when (userArmsType) {
+            "太刀" -> userNumber.value?.armsType?.A = userNumber.value?.armsType?.A?.minus(1)
+            "大劍" -> userNumber.value?.armsType?.B = userNumber.value?.armsType?.B?.minus(1)
+            "弓箭" -> userNumber.value?.armsType?.C = userNumber.value?.armsType?.C?.minus(1)
+            "充能斧" -> userNumber.value?.armsType?.D = userNumber.value?.armsType?.D?.minus(1)
+            "輕弩" -> userNumber.value?.armsType?.E = userNumber.value?.armsType?.E?.minus(1)
+            "雙劍" -> userNumber.value?.armsType?.F = userNumber.value?.armsType?.F?.minus(1)
+            "操蟲棍" -> userNumber.value?.armsType?.G = userNumber.value?.armsType?.G?.minus(1)
+            "重弩" -> userNumber.value?.armsType?.H = userNumber.value?.armsType?.H?.minus(1)
+            "大錘" -> userNumber.value?.armsType?.I = userNumber.value?.armsType?.I?.minus(1)
+            "銃槍" -> userNumber.value?.armsType?.J = userNumber.value?.armsType?.J?.minus(1)
+            "單手劍" -> userNumber.value?.armsType?.K = userNumber.value?.armsType?.K?.minus(1)
+            "長槍" -> userNumber.value?.armsType?.L = userNumber.value?.armsType?.L?.minus(1)
+            "斬擊斧" -> userNumber.value?.armsType?.M = userNumber.value?.armsType?.M?.minus(1)
+            "狩獵笛" -> userNumber.value?.armsType?.N = userNumber.value?.armsType?.N?.minus(1)
+            else -> "皆可"
+        }
+    }
 }
 

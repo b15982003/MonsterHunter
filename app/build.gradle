@@ -18,8 +18,8 @@ android {
         applicationId "com.ray.monsterhunter"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3
-        versionName "1.0.3"
+        versionCode 4
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -97,7 +97,7 @@ dependencies {
     // Fragment
     implementation "androidx.fragment:fragment:$version_fragment"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    debugImplementation ("androidx.fragment:fragment-testing:$version_fragment") {
+    debugImplementation("androidx.fragment:fragment-testing:$version_fragment") {
         exclude group: 'androidx.test', module: 'monitor'
     }
 
@@ -118,14 +118,14 @@ dependencies {
     //jason動畫
     implementation 'com.airbnb.android:lottie:3.4.1'
 
-    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
-        transitive = true;
-    }
+//    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
+//        transitive = true;
+//    }
 
     // workermanger
     implementation "androidx.work:work-runtime-ktx:2.2.0"
     implementation 'com.google.guava:guava:27.0.1-android'
-    
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'

@@ -165,9 +165,11 @@
                 <TextView
                     android:id="@+id/chatRoom_post_time_info"
                     android:background="@drawable/ic_question"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:alpha="0.8"
                     android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/chatRoom_post_date_title_text"
                     app:layout_constraintStart_toEndOf="@id/chatRoom_post_date_title_text"
                     app:layout_constraintTop_toTopOf="@id/chatRoom_post_date_title_text"
                     />

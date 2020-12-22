@@ -11,7 +11,7 @@ data class User(
     var friendlist: FriendList? = null,
     var email: String? = "",
     var armsType: ArmsType = ArmsType(),
-    var allFight : Long? = null,
+    var allFight : Long? = 0,
     var track : String? = "no"
 ) : Parcelable
 

@@ -59,6 +59,10 @@ class DialogChatRoom : AppCompatDialogFragment() {
             timePicker()
         }
 
+        binding.chatRoomPostTimeInfo.setOnClickListener(){
+            findNavController().navigate(R.id.action_global_postChatRoomWorkMangerInfo)
+        }
+
         binding.chatRoomPostSentButton.setOnClickListener(){
             viewModel.finalTime.value?.let { it ->
                 mainViewModel.startWorkerManger(it)
@@ -79,6 +83,16 @@ class DialogChatRoom : AppCompatDialogFragment() {
                         4 -> R.drawable.ic_monster_firedragon
                         5 -> R.drawable.ic_monster_iceteeth
                         6 -> R.drawable.ic_monster_icehit
+                        7 -> R.drawable.ic_monster_money_pap
+                        8 -> R.drawable.ic_monster_earthsand
+                        9 -> R.drawable.ic_monster_bigtooth
+                        10 -> R.drawable.ic_monster_horned
+                        11 -> R.drawable.ic_monster_bluedad
+                        12 -> R.drawable.ic_monster_thunder
+                        13 -> R.drawable.ic_monster_fireking
+                        14 -> R.drawable.ic_monster_soilfish
+                        15 -> R.drawable.ic_monster_poison
+                        16 -> R.drawable.ic_monster_zombie
                         else -> R.drawable.ic_monster_roompost
                     }
                 )
@@ -96,7 +110,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
             "長槍", "斬擊斧", "狩獵笛"
         )
         val missionType = arrayListOf("選擇任務類型", "任務", "自由", "調查", "活動", "限時活動", "採集")
-        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
+        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍","大兇豺龍","土砂龍","大兇顎龍","角龍","岩賊龍","飛雷龍","炎王龍","泥魚龍","毒妖鳥","屍套龍")
         val adapterArmsType = ArrayAdapter(
             MonsterApplication.instance,
             android.R.layout.simple_spinner_dropdown_item,
