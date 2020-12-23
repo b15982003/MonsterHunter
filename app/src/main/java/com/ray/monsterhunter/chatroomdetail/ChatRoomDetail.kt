@@ -109,7 +109,6 @@ class ChatRoomDetail : Fragment() {
         })
 
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
-
             it?.let {
                 Handler().postDelayed({
                     if ( viewModel.liveChatRoom.value?.endToScore == "true") {
