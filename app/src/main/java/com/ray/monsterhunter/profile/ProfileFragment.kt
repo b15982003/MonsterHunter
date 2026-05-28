@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ray.monsterhunter.LogInActivity
@@ -18,7 +21,6 @@ import com.ray.monsterhunter.databinding.ProfileFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-import kotlinx.android.synthetic.main.activity_main.*
 
 class ProfileFragment : Fragment() {
 
@@ -35,6 +37,12 @@ class ProfileFragment : Fragment() {
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top)
+            insets
+        }
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
             //draw start

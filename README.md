@@ -3,8 +3,9 @@
 
 討論魔物獵人世界並且輔助遊戲找尋隊友平台
 
-
-<a href="https://play.google.com/store/apps/details?id=com.ray.monsterhunter"><img src="https://camo.githubusercontent.com/9b43e9e7bdf73be90eaee8bf94cf61440638567e/68747470733a2f2f692e696d6775722e636f6d2f49353862574c642e706e67" width="230" height="90"></a>
+<a href="https://play.google.com/store/apps/details?id=com.ray.monsterhunter&pcampaignid=web_share">
+  <img src="https://www.pngall.com/wp-content/uploads/15/Google-Play-Logo-PNG-HD-Image.png" alt="立即在 Google Play 下載" width="200">
+</a>
 
 # 測試用帳號
 

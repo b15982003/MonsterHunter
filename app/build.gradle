@@ -1,143 +1,106 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: "androidx.navigation.safeargs.kotlin"
-apply plugin: 'io.fabric'
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.legacy.kapt)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.navigation.safeargs)
+}
 
 android {
-    compileSdkVersion 29
-
-    dataBinding {
-        enabled = true
-    }
-    buildToolsVersion "29.0.3"
+    namespace = 'com.ray.monsterhunter'
+    compileSdk = 36
 
     defaultConfig {
-        applicationId "com.ray.monsterhunter"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 5
-        versionName "1.0.5"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+        applicationId = "com.ray.monsterhunter"
+        minSdk = 31
+        targetSdk = 36
+        versionCode = 5
+        versionName = "1.0.5"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
+
+    buildFeatures {
+        dataBinding = true
+        buildConfig = true
+    }
+
     buildTypes {
         release {
-            //Logger
             buildConfigField("Boolean", "LOGGER_VISIABLE", "false")
-            minifyEnabled false
+            minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        //Logger
         debug {
             buildConfigField("Boolean", "LOGGER_VISIABLE", "true")
         }
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.core:core-ktx:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation libs.kotlin.parcelize.runtime
+    implementation libs.kotlinx.coroutines.android
 
-    // Constraint Layout
-    implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.recyclerview
+    implementation libs.androidx.cardview
+    implementation libs.androidx.legacy.support.v4
 
-    // Room and Lifecycle dependencies
-    implementation "androidx.room:room-runtime:$version_room"
-//    kapt "androidx.room:room-compiler:$version_room"
-
-
-    //recycleview
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "androidx.cardview:cardview:1.0.0"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
-
-    //viewmodel
-    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-
-    //navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.3.0-alpha06"
-    implementation "androidx.navigation:navigation-ui-ktx:2.3.0-alpha06"
-
-    // Moshi
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-
-//    // Retrofit with Moshi Converter
-//    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
-//    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
-
-    // Retrofit Coroutines Support
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
-
-    // Retrofit Logging Interceptor
-    implementation("com.squareup.okhttp3:logging-interceptor:4.0.1")
-
-    // Paging
-    implementation "androidx.paging:paging-runtime-ktx:$version_paging"
-
-    // Glide
-    implementation "com.github.bumptech.glide:glide:$version_glide"
-    kapt "com.github.bumptech.glide:compiler:$version_glide"
-
-    // Fragment
-    implementation "androidx.fragment:fragment:$version_fragment"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    debugImplementation("androidx.fragment:fragment-testing:$version_fragment") {
+    implementation libs.androidx.fragment.ktx
+    debugImplementation(libs.androidx.fragment.testing) {
         exclude group: 'androidx.test', module: 'monitor'
     }
 
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
 
-    // ViewModel and LiveData
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
 
-    //drawer heater
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation libs.androidx.paging.runtime.ktx
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.work.runtime.ktx
 
-    // Firebase Authentication (帳號驗證模組)
-    implementation 'com.google.firebase:firebase-auth:19.3.1'
-    implementation 'com.google.android.gms:play-services-auth:18.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    //Firebase
-    implementation 'com.google.firebase:firebase-firestore:21.4.3'
-    implementation 'com.google.firebase:firebase-analytics:17.4.3'
-    //jason動畫
-    implementation 'com.airbnb.android:lottie:3.4.1'
+    implementation libs.material
 
-//    compile('com.crashlytics.sdk.android:crashlytics:2.7.0-SNAPSHOT@aar') {
-//        transitive = true;
-//    }
+    // Firebase (BoM-managed versions)
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.firebase.firestore
+    implementation libs.firebase.analytics
+    implementation libs.play.services.auth
 
-    // workermanger
-    implementation "androidx.work:work-runtime-ktx:2.2.0"
-    implementation 'com.google.guava:guava:27.0.1-android'
+    implementation libs.glide
+    ksp libs.glide.ksp
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.15.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test:rules:1.1.0'
-    androidTestImplementation 'com.google.guava:guava:26.0-android'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0-rc02'
+    implementation libs.moshi
+    implementation libs.moshi.kotlin
+    implementation libs.okhttp.logging.interceptor
+    implementation libs.lottie
+    implementation libs.circleimageview
+    implementation libs.guava
 
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-//    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0-rc02'
-//
-//    androidTestImplementation 'androidx.test:monitor:1.3.0-rc03'
-//    androidTestImplementation 'androidx.test:rules:1.2.0'
-
+    testImplementation libs.junit
+    testImplementation libs.mockito.core
+    androidTestImplementation libs.androidx.espresso.core
+    androidTestImplementation libs.androidx.espresso.contrib
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.rules
 }

@@ -1,11 +1,15 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="ProgressTheme" parent="Widget.AppCompat.ProgressBar">
@@ -29,8 +33,9 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="DialogPost">
+    <style name="DialogPost" parent="Theme.MaterialComponents.Light.Dialog.Bridge">
         <item name="android:windowBackground">@color/translucent_80</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">

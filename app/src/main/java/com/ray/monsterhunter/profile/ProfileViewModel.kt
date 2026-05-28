@@ -50,10 +50,10 @@ class ProfileViewModel(var repository: MonsterRepository) : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getUser()
+        loadUser()
     }
 
-    fun getUser() {
+    fun loadUser() {
 
         coroutineScope.launch {
 
