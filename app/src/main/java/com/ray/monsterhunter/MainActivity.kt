@@ -5,21 +5,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.work.Constraints
-import androidx.work.NetworkType
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -30,8 +27,6 @@ import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.concurrent.TimeUnit
 
 
 class MainActivity : BaseActivity() {
@@ -51,6 +46,7 @@ class MainActivity : BaseActivity() {
                     getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
+
                 R.id.navigation_friend -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_friendFragment)
@@ -71,6 +67,7 @@ class MainActivity : BaseActivity() {
                     getToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
+
                 R.id.navigation_profile -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_profileFragment)
@@ -90,6 +87,7 @@ class MainActivity : BaseActivity() {
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_chatRoomFragment)
                     return@OnNavigationItemSelectedListener true
                 }
+
                 R.id.navigation_friend -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_friendFragment)
@@ -107,6 +105,7 @@ class MainActivity : BaseActivity() {
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_historyFragment)
                     return@OnNavigationItemSelectedListener true
                 }
+
                 R.id.navigation_profile -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_profileFragment)
@@ -129,6 +128,17 @@ class MainActivity : BaseActivity() {
 
         binding.bottomNav.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
         binding.drawerNavView.setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top)
+            insets
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNav) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = bars.bottom)
+            insets
+        }
 
 
         val navigationView = findViewById<View>(R.id.drawerNavView) as NavigationView
@@ -166,6 +176,7 @@ class MainActivity : BaseActivity() {
                     home.isChecked = true
                     CurrentFragmentType.HOME
                 }
+
                 R.id.chatRoomFragment -> CurrentFragmentType.CHATROOM
                 R.id.friendFragment -> CurrentFragmentType.FRIEND
                 R.id.historyFragment -> CurrentFragmentType.HISTORY
@@ -212,21 +223,20 @@ class MainActivity : BaseActivity() {
     }
 
     fun hiddingToolbar() {
-        toolbar.visibility = View.GONE
+        binding.toolbar.visibility = View.GONE
     }
 
     fun hiddingBottomnav() {
-        bottomNav.visibility = View.GONE
+        binding.bottomNav.visibility = View.GONE
     }
 
     fun getToolbar() {
-        toolbar.visibility = View.VISIBLE
+        binding.toolbar.visibility = View.VISIBLE
     }
 
     fun getBottomnav() {
-        bottomNav.visibility = View.VISIBLE
+        binding.bottomNav.visibility = View.VISIBLE
     }
-
 
 
 //        WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
@@ -235,7 +245,6 @@ class MainActivity : BaseActivity() {
 //                val status: String = it.state.name
 //                Toast.makeText(this,status, Toast.LENGTH_SHORT).show()
 //            })
-
 
 
 }

@@ -2,7 +2,7 @@ package com.ray.monsterhunter.data
 
 import android.os.Parcelable
 import androidx.navigation.NavType
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ArmsType(

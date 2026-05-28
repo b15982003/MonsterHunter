@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
@@ -23,7 +24,6 @@ import com.ray.monsterhunter.R
 import com.ray.monsterhunter.databinding.DialogChatRoomFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.UserManager
-import okhttp3.internal.format
 import java.time.LocalDate
 import java.time.LocalTime
 import java.util.*
@@ -39,6 +39,11 @@ class DialogChatRoom : AppCompatDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogPost)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(MATCH_PARENT, MATCH_PARENT)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -206,7 +211,6 @@ class DialogChatRoom : AppCompatDialogFragment() {
     fun datePicker() {
         val dateListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             calender.set(year, month, day)
-            format("yyyy-MM-dd")
             viewModel.getDate(year, month, day)
             binding.chatRoomPostDateText.text = "$year-${month.plus(1)}-$day"
         }
@@ -226,7 +230,6 @@ class DialogChatRoom : AppCompatDialogFragment() {
         val timeListener = TimePickerDialog.OnTimeSetListener { _, hour, min ->
             calender.set(Calendar.HOUR_OF_DAY, hour)
             calender.set(Calendar.MINUTE, min)
-            format("HH:mm")
             viewModel.getTime(hour, min)
             binding.chatRoomPostTimeText.text = "$hour : $min "
         }

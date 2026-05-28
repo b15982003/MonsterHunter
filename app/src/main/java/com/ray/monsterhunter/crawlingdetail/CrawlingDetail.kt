@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
@@ -33,6 +36,14 @@ class CrawlingDetail : Fragment() {
         binding = CrawlingDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
+            v.updatePadding(top = bars.top, bottom = maxOf(bars.bottom, ime.bottom))
+            insets
+        }
+
         binding.crawlingDetailBack.setOnClickListener() {
             findNavController().navigateUp()
         }
@@ -62,10 +73,12 @@ class CrawlingDetail : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as MainActivity).hiddingToolbar()
+        (activity as MainActivity).hiddingBottomnav()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).getToolbar()
+        (activity as MainActivity).getBottomnav()
     }
 }

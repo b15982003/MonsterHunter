@@ -2,8 +2,8 @@ package com.ray.monsterhunter.data
 
 import android.os.Parcelable
 import androidx.lifecycle.MutableLiveData
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 
 @Parcelize

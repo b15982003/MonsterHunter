@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -33,6 +37,7 @@ class ChatRoomDetail : Fragment() {
         )
     }
     lateinit var binding: ChatRoomDetailFragmentBinding
+    private var previousStartTime: String? = null
 
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -46,6 +51,12 @@ class ChatRoomDetail : Fragment() {
         binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = bars.top, bottom = bars.bottom)
+            insets
+        }
 
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
@@ -65,15 +76,18 @@ class ChatRoomDetail : Fragment() {
             }, 500)
         }
 
-        binding.chatRoomDetailToolbarBack.setOnClickListener() {
-
-            viewModel.outLeave()
-            viewModel.userArmsType.value?.let { it1 -> viewModel.cancelUser(it1) }
-            Handler().postDelayed({
-                findNavController().navigateUp()
-            }, 500)
-
+        binding.chatRoomDetailToolbarBack.setOnClickListener {
+            leaveRoom()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    leaveRoom()
+                }
+            },
+        )
 
         viewModel.emptySeat.observe(viewLifecycleOwner, Observer {
             if (it == true) {
@@ -124,8 +138,14 @@ class ChatRoomDetail : Fragment() {
                 },1000)
 
 
-                // start word
-                if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "true") {
+                val currentStartTime = viewModel.liveChatRoom.value?.startTime
+                val notOwner = viewModel.chatRoom.value?.userId != UserManager.userData.id
+                val notFinished = viewModel.liveChatRoom.value?.endToScore == "false"
+                val isFirstEmission = previousStartTime == null
+                val startedTransition = previousStartTime != "true" && currentStartTime == "true"
+                val endedTransition = previousStartTime == "true" && currentStartTime == "false"
+
+                if (notOwner && notFinished && startedTransition) {
                     binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
                     binding.chatRoomDetailTimeStart.visibility = View.VISIBLE
                     binding.chatRoomDetailTimeEnd.visibility = View.GONE
@@ -133,8 +153,7 @@ class ChatRoomDetail : Fragment() {
                         binding.chatRoomDetailTimeBg.visibility = View.GONE
                         binding.chatRoomDetailTimeStart.visibility = View.GONE
                     }, 1000)
-                } else if (viewModel.chatRoom.value?.userId != UserManager.userData.id && viewModel.liveChatRoom.value?.endToScore == "false" && viewModel.liveChatRoom.value?.startTime == "false") {
-                    // end word
+                } else if (notOwner && notFinished && endedTransition && !isFirstEmission) {
                     binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
                     binding.chatRoomDetailTimeStart.visibility = View.GONE
                     binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
@@ -144,6 +163,7 @@ class ChatRoomDetail : Fragment() {
                         binding.chatRoomDetailTimeEnd.visibility = View.GONE
                     }, 1000)
                 }
+                previousStartTime = currentStartTime
 
                 if (viewModel.speakerReady.value == true) {
                     if (viewModel.liveChatRoom.value?.speaker != "null") {
@@ -195,7 +215,7 @@ class ChatRoomDetail : Fragment() {
         )
         val adapterArmsType = ArrayAdapter(
             MonsterApplication.instance,
-            R.layout.support_simple_spinner_dropdown_item,
+            android.R.layout.simple_spinner_dropdown_item,
             arms
         )
 
@@ -286,6 +306,18 @@ class ChatRoomDetail : Fragment() {
         (activity as MainActivity).hiddingBottomnav()
         (activity as MainActivity).hiddingToolbar()
 
+    }
+
+    private var hasLeft = false
+
+    private fun leaveRoom() {
+        if (hasLeft) return
+        hasLeft = true
+        viewModel.outLeave()
+        viewModel.userArmsType.value?.let { viewModel.cancelUser(it) }
+        Handler().postDelayed({
+            if (isAdded) findNavController().navigateUp()
+        }, 500)
     }
 
     override fun onDestroy() {

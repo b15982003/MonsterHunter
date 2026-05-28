@@ -327,7 +327,7 @@ class ChatRoomDetailViewModel(
         _leave.value = false
     }
 
-    fun getReady() {
+    fun startReady() {
         _ready.value = true
     }
 
@@ -383,7 +383,7 @@ class ChatRoomDetailViewModel(
     fun startGameStatus() {
         if (chatRoom.value?.userId == UserManager.userData.id) {
             if (ready.value == false) {
-                getReady()
+                startReady()
             } else {
                 if (timing.value != nulldata) {
 
@@ -403,13 +403,13 @@ class ChatRoomDetailViewModel(
 
     fun getSpeakerStatus() {
         if (speakerReady.value == false) {
-            getSpeakerReady()
+            startSpeakerReady()
         } else {
             endSpeakerReady()
         }
     }
 
-    fun getSpeakerReady() {
+    fun startSpeakerReady() {
         _speakerReady.value = true
     }
 

@@ -4,15 +4,18 @@ package com.ray.monsterhunter
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
+import android.os.Looper
+import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -20,98 +23,83 @@ import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
-import kotlinx.android.synthetic.main.fragment_log_in_activity.*
-import kotlinx.android.synthetic.main.fragment_log_in_activity.view.*
 
 
-@Suppress("DEPRECATION")
 class LogInActivity : AppCompatActivity() {
     val viewModel by viewModels<MainViewModel> { getVmFactory() }
-    var auth: FirebaseAuth? = null
-    var googleSignInClient: GoogleSignInClient? = null
-    var GOOGLE_LOGIN_CODE = 9001
+    private var auth: FirebaseAuth? = null
+    private var googleSignInClient: GoogleSignInClient? = null
+
+    private val signInLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            handleSignInResult(result.data)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_log_in_activity)
         auth = FirebaseAuth.getInstance()
 
-        google_sign_in_button.setOnClickListener {
-            //First step
-            googleLogin()
-        }
-
-        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("1057474322422-96rtu3su5rou898acu7nqsqpbr8m3lpi.apps.googleusercontent.com")
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        findViewById<View>(R.id.google_sign_in_button).setOnClickListener {
+            googleLogin()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        Logger.d("checkIn11")
         moveMainPage(auth?.currentUser)
     }
 
-    fun googleLogin() {
-        Logger.d("checkIn22")
-        var signInIntent = googleSignInClient?.signInIntent
-        startActivityForResult(signInIntent, GOOGLE_LOGIN_CODE)
+    private fun googleLogin() {
+        val signInIntent = googleSignInClient?.signInIntent ?: return
+        signInLauncher.launch(signInIntent)
     }
 
-
-    //google get token
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GOOGLE_LOGIN_CODE) {
-            var result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-            if (result != null) {
-                if (result.isSuccess) {
-                    var account = result.signInAccount
-
-                    var user = User(
-                        image = account?.photoUrl.toString(),
-                        id = account?.displayName,
-                        email = account?.email
-                    )
-                    UserManager.userData = user
-
-
-                    //Second step
-                    Handler().postDelayed({
-                        firebaseAuthWithGoogle(account)
-                    }, 500)
-                    Logger.d("checkIn1")
-                }
-            }
+    private fun handleSignInResult(data: Intent?) {
+        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        try {
+            val account = task.getResult(ApiException::class.java) ?: return
+            UserManager.userData = User(
+                image = account.photoUrl?.toString(),
+                id = account.displayName,
+                email = account.email,
+            )
+            Handler(Looper.getMainLooper()).postDelayed({
+                firebaseAuthWithGoogle(account)
+            }, 500)
+        } catch (e: ApiException) {
+            Logger.w("Google sign-in failed: code=${e.statusCode} msg=${e.localizedMessage}", e)
+            Toast.makeText(
+                this,
+                "Google 登入失敗：${e.statusCode}",
+                Toast.LENGTH_LONG,
+            ).show()
         }
     }
 
-    //get token to firebase verification
-    fun firebaseAuthWithGoogle(account: GoogleSignInAccount?) {
-        var credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth?.signInWithCredential(credential)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Logger.d("checkIn2")
-                    //Login
                     moveMainPage(task.result?.user)
                 } else {
-                    //Show the error message
+                    Logger.d("Firebase auth failed: ${task.exception?.message}")
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
                 }
             }
     }
 
-    fun moveMainPage(user: FirebaseUser?) {
+    private fun moveMainPage(user: FirebaseUser?) {
         if (user != null) {
-            Logger.d("checkIn3")
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
     }
-
-
 }
