@@ -75,7 +75,7 @@ class DialogPostViewModel(
 
             when (val result = repository.publish(crawling)) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     leave(true)
                 }
@@ -151,7 +151,7 @@ class DialogPostViewModel(
     }
 
     fun onLeft() {
-        _leave.value = null
+        _leave.value = false
     }
 
 }

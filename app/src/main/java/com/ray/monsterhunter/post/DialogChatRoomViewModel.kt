@@ -84,7 +84,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
             when (val result = repository.pushChatRoom(chatRoom)) {
                 is Result.Success -> {
                     Logger.i("ok,${chatRoom}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     leave(true)
                 }
@@ -139,7 +139,7 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
     }
 
     fun onLeft() {
-        _leave.value = null
+        _leave.value = false
     }
 
     fun nothing() {

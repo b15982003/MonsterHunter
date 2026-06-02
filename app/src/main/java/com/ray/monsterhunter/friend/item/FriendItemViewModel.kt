@@ -79,7 +79,7 @@ class FriendItemViewModel(
 
             _userList.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
@@ -111,7 +111,7 @@ class FriendItemViewModel(
 
             _userList.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }

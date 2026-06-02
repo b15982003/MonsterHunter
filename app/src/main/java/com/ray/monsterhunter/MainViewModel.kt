@@ -87,7 +87,7 @@ class MainViewModel(val repository: MonsterRepository) : ViewModel() {
             when (val result = repository.pushUser(user)) {
                 is Result.Success -> {
                     Logger.i("okkkkkk,${user}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
 //                    leave(true)
                 }
@@ -120,7 +120,7 @@ class MainViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _user.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -159,7 +159,7 @@ class MainViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _image.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -203,7 +203,7 @@ class MainViewModel(val repository: MonsterRepository) : ViewModel() {
         }
 
         fun onLeft() {
-            _leave.value = null
+            _leave.value = false
         }
 
     }
