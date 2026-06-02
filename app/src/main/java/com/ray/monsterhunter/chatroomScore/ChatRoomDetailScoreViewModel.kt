@@ -132,7 +132,7 @@ class ChatRoomDetailScoreViewModel(
             }) {
                 is Result.Success -> {
 
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -171,7 +171,7 @@ class ChatRoomDetailScoreViewModel(
             }) {
                 is Result.Success -> {
 
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -211,7 +211,7 @@ class ChatRoomDetailScoreViewModel(
             }) {
                 is Result.Success -> {
 
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -251,7 +251,7 @@ class ChatRoomDetailScoreViewModel(
             }) {
                 is Result.Success -> {
 
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -284,7 +284,7 @@ class ChatRoomDetailScoreViewModel(
 
             _user1.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -323,7 +323,7 @@ class ChatRoomDetailScoreViewModel(
 
             _user2.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -363,7 +363,7 @@ class ChatRoomDetailScoreViewModel(
 
             _user3.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -403,7 +403,7 @@ class ChatRoomDetailScoreViewModel(
 
             _user4.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -488,7 +488,7 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -524,7 +524,7 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -561,7 +561,7 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -597,7 +597,7 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -627,7 +627,7 @@ class ChatRoomDetailScoreViewModel(
             when (val result =
                 repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {

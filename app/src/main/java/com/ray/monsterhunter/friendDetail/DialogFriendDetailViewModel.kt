@@ -65,7 +65,7 @@ class DialogFriendDetailViewModel(
 
             when (val result = user.value?.let { repository.postFriend(it) }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -93,7 +93,7 @@ class DialogFriendDetailViewModel(
 
             when (val result = user.value?.let { repository.cancelFriend(it) }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -134,6 +134,6 @@ class DialogFriendDetailViewModel(
     }
 
     fun onLeft() {
-        _leave.value = null
+        _leave.value = false
     }
 }

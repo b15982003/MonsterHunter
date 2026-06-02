@@ -239,7 +239,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .addSnapshotListener { snapshot, exception ->
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val chatRooms = snapshot?.toObject(ChatRoom::class.java)
-                liveDataChatRoom.value = chatRooms
+                liveDataChatRoom.value = chatRooms ?: ChatRoom()
             }
         return liveDataChatRoom
     }
@@ -252,7 +252,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .document(teammate)
             .addSnapshotListener { snapshot, exception ->
                 val users = snapshot?.toObject(User::class.java)
-                liveDataOne.value = users
+                liveDataOne.value = users ?: User()
             }
         return liveDataOne
 
@@ -267,7 +267,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .addSnapshotListener { snapshot, exception ->
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
-                liveDataOne.value = users
+                liveDataOne.value = users ?: User()
             }
         return liveDataOne
 
@@ -282,7 +282,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .addSnapshotListener { snapshot, exception ->
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
-                liveDataOne.value = users
+                liveDataOne.value = users ?: User()
             }
         return liveDataOne
 
@@ -297,7 +297,7 @@ object MonsterRemoteDataSource : MonsterDataSource {
             .addSnapshotListener { snapshot, exception ->
                 Logger.d(snapshot?.id + " => " + snapshot?.data)
                 val users = snapshot?.toObject(User::class.java)
-                liveDataOne.value = users
+                liveDataOne.value = users ?: User()
             }
         return liveDataOne
 

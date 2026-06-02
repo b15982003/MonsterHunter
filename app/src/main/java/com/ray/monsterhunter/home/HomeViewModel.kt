@@ -67,7 +67,7 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _crawlings.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
 
@@ -102,7 +102,7 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
 
             _activityImage.value = when (result) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }

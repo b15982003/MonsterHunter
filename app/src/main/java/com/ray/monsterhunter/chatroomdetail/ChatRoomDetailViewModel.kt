@@ -165,7 +165,7 @@ class ChatRoomDetailViewModel(
             when (val result = repository.sentMessage(message, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -196,7 +196,7 @@ class ChatRoomDetailViewModel(
             when (val result = repository.getUserArms(userArmsType, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -226,7 +226,7 @@ class ChatRoomDetailViewModel(
             when (val result =
                 repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -253,7 +253,7 @@ class ChatRoomDetailViewModel(
             when (val result = repository.update1(teammateList, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
@@ -283,7 +283,7 @@ class ChatRoomDetailViewModel(
             when (val result = repository.cancelUser(userArmsType, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     Logger.i("ok,${message}")
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {

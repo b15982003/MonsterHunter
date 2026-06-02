@@ -32,29 +32,21 @@ class WorkerManager(context: Context, workerParams: WorkerParameters) : Worker(c
 
         val intent = Intent(MonsterApplication.instance, LauncherActivity::class.java)
         val pendingIntent =
-            PendingIntent.getActivity(MonsterApplication.instance, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+            PendingIntent.getActivity(MonsterApplication.instance, 0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            channel =
-                NotificationChannel(channelId, "MyChannel", NotificationManager.IMPORTANCE_DEFAULT)
-            channel.enableLights(true)
-            channel.lightColor = Color.GREEN
-            channel.enableVibration(false)
-            manager.createNotificationChannel(channel)
-            builder = Notification.Builder(MonsterApplication.instance, channelId)
-                .setSmallIcon(R.drawable.ic_note)
-                .setContentTitle("守護你的約定")
-                .setContentText("${userName} 快去創建房間與你的隊友一起屠龍吧！！")
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-        } else {
-            builder = Notification.Builder(MonsterApplication.instance)
-                .setSmallIcon(R.drawable.ic_note)
-                .setContentTitle("守護你的約定")
-                .setContentText("${userName} 快去創建房間與你的隊友一起屠龍吧！！")
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-        }
+        channel =
+            NotificationChannel(channelId, "MyChannel", NotificationManager.IMPORTANCE_DEFAULT)
+        channel.enableLights(true)
+        channel.lightColor = Color.GREEN
+        channel.enableVibration(false)
+        manager.createNotificationChannel(channel)
+        builder = Notification.Builder(MonsterApplication.instance, channelId)
+            .setSmallIcon(R.drawable.ic_note)
+            .setContentTitle("守護你的約定")
+            .setContentText("${userName} 快去創建房間與你的隊友一起屠龍吧！！")
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
         manager.notify(1234, builder.build())
 
 

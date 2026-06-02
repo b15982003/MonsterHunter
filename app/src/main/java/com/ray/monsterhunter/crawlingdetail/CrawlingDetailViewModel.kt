@@ -83,7 +83,7 @@ class CrawlingDetailViewModel(
 
             when (val result = crawling.value?.id?.let { repository.leaveMessage(message, it) }) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {

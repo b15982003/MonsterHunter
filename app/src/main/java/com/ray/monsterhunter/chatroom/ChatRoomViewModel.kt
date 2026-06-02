@@ -66,7 +66,7 @@ class ChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
 
             when (val result = repository.deleteRoom(document)) {
                 is Result.Success -> {
-                    _error.value = null
+                    _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
                 is Result.Fail -> {
