@@ -14,8 +14,7 @@ import java.util.*
 class ChatRoomDetailAdapter(
     private val onClickListener: OnClickListener,
     val viewModel: ChatRoomDetailViewModel
-) :
-    ListAdapter<Message, RecyclerView.ViewHolder>(DiffCallback) {
+) : ListAdapter<Message, RecyclerView.ViewHolder>(DiffCallback) {
 
     class OnClickListener(val clickListener: (message: Message) -> Unit) {
         fun onClick(message: Message) = clickListener(message)
@@ -23,20 +22,18 @@ class ChatRoomDetailAdapter(
 
     class ChatRoomDetailViewHolder(
         private var binding: ItemChatroomMessageBinding
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
             message: Message,
             onClickListener: OnClickListener,
             viewModel: ChatRoomDetailViewModel
         ) {
-
-            var AllStampTimeToDate =
+            val allStampTimeToDate =
                 message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
-            binding.chatRoomDetailItemCreateTime.text = AllStampTimeToDate
-            binding.chatRoomDetailItemCreateTimeRight.text = AllStampTimeToDate
+            binding.chatRoomDetailItemCreateTime.text = allStampTimeToDate
+            binding.chatRoomDetailItemCreateTimeRight.text = allStampTimeToDate
 
             binding.owner = viewModel.isRoomOwner(message.email)
             binding.product = message
@@ -64,15 +61,15 @@ class ChatRoomDetailAdapter(
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
+
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         when (holder) {
             is ChatRoomDetailViewHolder -> {
-                holder.bind((getItem(position) as Message), onClickListener,viewModel)
+                holder.bind((getItem(position) as Message), onClickListener, viewModel)
             }
         }
     }
@@ -80,5 +77,4 @@ class ChatRoomDetailAdapter(
     override fun getItemViewType(position: Int): Int {
         return ITEM_VIEW_TYPE_ARTICLE
     }
-
 }
