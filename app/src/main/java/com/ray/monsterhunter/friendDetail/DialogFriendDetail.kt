@@ -64,14 +64,14 @@ class DialogFriendDetail : AppCompatDialogFragment() {
         })
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                findNavController().navigateUp()
+            if (it == true) {
                 viewModel.onLeft()
+                findNavController().navigateUp()
             }
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            if (viewModel.user.value?.track == "true"){
+            if (viewModel.user.value?.track == "true") {
                 viewModel.getFollow()
             }
         })

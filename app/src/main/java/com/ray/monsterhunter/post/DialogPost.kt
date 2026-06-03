@@ -36,14 +36,23 @@ class DialogPost : AppCompatDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DialogPostFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
 
-        val missionType = arrayListOf("選擇文章類型", "最新活動", "心情分享", "魔物分析", "攻略分析", "神人搜尋", "趣事分享")
-        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
+        val missionType = arrayListOf(
+            "選擇文章類型",
+            "最新活動",
+            "心情分享",
+            "魔物分析",
+            "攻略分析",
+            "神人搜尋",
+            "趣事分享"
+        )
+        val monsterName =
+            arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍")
 
         val adapterActivityType = ArrayAdapter(
             MonsterApplication.instance,
@@ -65,9 +74,9 @@ class DialogPost : AppCompatDialogFragment() {
         binding.postDialogActivityType.onItemSelectedListener = getSpinnerListner(2)
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
-            it?.let { needRefresh ->
-                findNavController().navigateUp()
+            if (it == true) {
                 viewModel.onLeft()
+                findNavController().navigateUp()
             }
         })
 
