@@ -17,7 +17,6 @@ import com.ray.monsterhunter.ext.getVmFactory
 
 
 class DialogFriendDetail : AppCompatDialogFragment() {
-
     private val viewModel by viewModels<DialogFriendDetailViewModel> {
         getVmFactory(
             DialogFriendDetailArgs.fromBundle(requireArguments()).friendDetail
@@ -38,7 +37,7 @@ class DialogFriendDetail : AppCompatDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogFriendDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -50,7 +49,7 @@ class DialogFriendDetail : AppCompatDialogFragment() {
                 viewModel.getFollow()
                 viewModel.postFriend()
             } else {
-                viewModel.cencelFollow()
+                viewModel.cancelFollow()
                 viewModel.cancelFriend()
             }
         }

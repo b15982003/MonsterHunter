@@ -21,4 +21,4 @@ data class ArmsType(
     var M: Long? = 5,
     var N: Long? = 5,
     var O: Long? = 5
-) :Parcelable
+) : Parcelable
