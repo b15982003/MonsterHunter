@@ -38,7 +38,6 @@
         android:name="com.ray.monsterhunter.post.DialogPost"
         android:label="dailog_post_fragment"
         tools:layout="@layout/dialog_post_fragment" >
-
     </dialog>
 
     <dialog

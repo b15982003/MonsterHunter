@@ -46,7 +46,6 @@ class ChatRoomDetailScoreViewModel(
         value = History()
     }
 
-
     private val _user1 = MutableLiveData<UserArms>().apply {
         value = UserArms()
     }
@@ -93,7 +92,6 @@ class ChatRoomDetailScoreViewModel(
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
     init {
         getLiveChatRoom()
 
@@ -117,11 +115,8 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun pushHistory1() {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = history.value?.let {
                 user1.value?.email?.let { it1 ->
                     repository.pushHistory1(
@@ -131,20 +126,22 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -155,12 +152,8 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun pushHistory2() {
-
-        Logger.i("ok,${history.value}")
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = history.value?.let {
                 user2.value?.email?.let { it1 ->
                     repository.pushHistory2(
@@ -170,20 +163,22 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -195,12 +190,9 @@ class ChatRoomDetailScoreViewModel(
 
 
     fun pushHistory3() {
-
         Logger.i("ok,${history.value}")
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = history.value?.let {
                 user2.value?.email?.let { it1 ->
                     repository.pushHistory3(
@@ -210,20 +202,22 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -235,12 +229,8 @@ class ChatRoomDetailScoreViewModel(
 
 
     fun pushHistory4() {
-
-        Logger.i("ok,${history.value}")
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = history.value?.let {
                 user2.value?.email?.let { it1 ->
                     repository.pushHistory4(
@@ -250,20 +240,22 @@ class ChatRoomDetailScoreViewModel(
                 }
             }) {
                 is Result.Success -> {
-
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -276,12 +268,9 @@ class ChatRoomDetailScoreViewModel(
 
     fun getUserOneArms() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result =
                 repository.getUserOneArms(chatRoom.value!!.teammate[0], chatRoom.value!!.documentId)
-
             _user1.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
@@ -289,65 +278,58 @@ class ChatRoomDetailScoreViewModel(
                     result.data
 
                 }
-                is Result.Fail -> {
 
+                is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                is Result.Error -> {
 
+                is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                else -> {
 
+                else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
-
     }
 
     fun getUserTwoArms() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result =
                 repository.getUserOneArms(chatRoom.value!!.teammate[1], chatRoom.value!!.documentId)
-
             _user2.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
-                is Result.Fail -> {
 
+                is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                is Result.Error -> {
 
+                is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                else -> {
 
+                else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
 
 
@@ -355,82 +337,68 @@ class ChatRoomDetailScoreViewModel(
 
     fun getUserThreeArms() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result =
                 repository.getUserOneArms(chatRoom.value!!.teammate[2], chatRoom.value!!.documentId)
-
             _user3.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
-                is Result.Fail -> {
 
+                is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                is Result.Error -> {
 
+                is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                else -> {
 
+                else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
-
-
     }
 
     fun getUserFourArms() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result =
                 repository.getUserOneArms(chatRoom.value!!.teammate[3], chatRoom.value!!.documentId)
-
             _user4.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
-
                 }
-                is Result.Fail -> {
 
+                is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                is Result.Error -> {
 
+                is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
-                else -> {
 
+                else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
             }
-//            _refreshStatus.value = false
         }
-
-
     }
 
     fun getLiveChatRoom() {
@@ -441,9 +409,6 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun getLiveUserOneScore() {
-        Logger.d("getLiveUserOneScore")
-
-
         liveUserOne = repository.getLiveUserOneScore(chatRoom.value!!.teammate[0])
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
@@ -451,38 +416,29 @@ class ChatRoomDetailScoreViewModel(
     }
 
     fun getLiveUserTwoScore() {
-        Logger.d("getLiveUserTwoScore")
         liveUserTwo = repository.getLiveUserOneScore(chatRoom.value!!.teammate[1])
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
-
     }
 
     fun getLiveUserThreeScore() {
-        Logger.d("getLiveUserThreeScore")
         liveUserThree = repository.getLiveUserOneScore(chatRoom.value!!.teammate[2])
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
-
     }
 
     fun getLiveUserFourScore() {
-        Logger.d("getLiveUserFourScore")
         liveUserFour = repository.getLiveUserOneScore(chatRoom.value!!.teammate[3])
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
-
     }
 
     fun updateUserOne() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = liveUserOne.value?.armsType?.let {
                 liveUserOne.value?.email?.let { it1 ->
                     liveUserOne.value!!.allFight?.let { it2 ->
-
                         repository.updateUserOne(it1, it, it2)
                     }
                 }
@@ -491,16 +447,19 @@ class ChatRoomDetailScoreViewModel(
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -512,9 +471,7 @@ class ChatRoomDetailScoreViewModel(
 
     fun updateUserTwo() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = liveUserTwo.value?.armsType?.let {
                 liveUserTwo.value?.email?.let { it1 ->
                     liveUserTwo.value!!.allFight?.let { it2 ->
@@ -527,16 +484,19 @@ class ChatRoomDetailScoreViewModel(
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -549,13 +509,10 @@ class ChatRoomDetailScoreViewModel(
 
     fun updateUserThree() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = liveUserThree.value?.armsType?.let {
                 liveUserThree.value?.email?.let { it1 ->
                     liveUserThree.value!!.allFight?.let { it2 ->
-
                         repository.updateUserThree(it1, it, it2)
                     }
                 }
@@ -564,16 +521,19 @@ class ChatRoomDetailScoreViewModel(
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -585,13 +545,10 @@ class ChatRoomDetailScoreViewModel(
 
     fun updateUserFour() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = liveUserFour.value?.armsType?.let {
                 liveUserFour.value?.email?.let { it1 ->
                     liveUserFour.value!!.allFight?.let { it2 ->
-
                         repository.updateUserFour(it1, it, it2)
                     }
                 }
@@ -600,16 +557,19 @@ class ChatRoomDetailScoreViewModel(
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     Logger.i("fail")
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     Logger.i("error")
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     Logger.i("no")
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
@@ -621,23 +581,24 @@ class ChatRoomDetailScoreViewModel(
 
     fun updateChatRoomInfo() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result =
                 repository.updateChatRoomInfo(chatRoom, chatRoom.value!!.documentId)) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -646,7 +607,7 @@ class ChatRoomDetailScoreViewModel(
         }
     }
 
-    fun goPlus(userArmsType : String, userNumber : MutableLiveData<User>){
+    fun goPlus(userArmsType: String, userNumber: MutableLiveData<User>) {
         when (userArmsType) {
             "太刀" -> userNumber.value?.armsType?.A = userNumber.value?.armsType?.A?.plus(1)
             "大劍" -> userNumber.value?.armsType?.B = userNumber.value?.armsType?.B?.plus(1)
@@ -666,7 +627,7 @@ class ChatRoomDetailScoreViewModel(
         }
     }
 
-    fun goMinus(userArmsType : String, userNumber : MutableLiveData<User>){
+    fun goMinus(userArmsType: String, userNumber: MutableLiveData<User>) {
         when (userArmsType) {
             "太刀" -> userNumber.value?.armsType?.A = userNumber.value?.armsType?.A?.minus(1)
             "大劍" -> userNumber.value?.armsType?.B = userNumber.value?.armsType?.B?.minus(1)

@@ -34,11 +34,11 @@ class DialogChatRoom : AppCompatDialogFragment() {
     private val mainViewModel by viewModels<MainViewModel> { getVmFactory() }
 
     private lateinit var binding: DialogChatRoomFragmentBinding
-    val calender = Calendar.getInstance()
+    val calender: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogPost)
+        setStyle(STYLE_NORMAL, R.style.DialogPost)
     }
 
     override fun onStart() {
@@ -46,17 +46,16 @@ class DialogChatRoom : AppCompatDialogFragment() {
         dialog?.window?.setLayout(MATCH_PARENT, MATCH_PARENT)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogChatRoomFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        // choose date & time
+
         binding.chatRoomPostDateText.setOnClickListener {
             datePicker()
         }
@@ -64,11 +63,11 @@ class DialogChatRoom : AppCompatDialogFragment() {
             timePicker()
         }
 
-        binding.chatRoomPostTimeInfo.setOnClickListener(){
+        binding.chatRoomPostTimeInfo.setOnClickListener() {
             findNavController().navigate(R.id.action_global_postChatRoomWorkMangerInfo)
         }
 
-        binding.chatRoomPostSentButton.setOnClickListener(){
+        binding.chatRoomPostSentButton.setOnClickListener() {
             viewModel.finalTime.value?.let { it ->
                 mainViewModel.startWorkerManger(it)
             }
@@ -114,8 +113,27 @@ class DialogChatRoom : AppCompatDialogFragment() {
             "大錘", "銃槍", "單手劍",
             "長槍", "斬擊斧", "狩獵笛"
         )
-        val missionType = arrayListOf("選擇任務類型", "任務", "自由", "調查", "活動", "限時活動", "採集")
-        val monsterName = arrayListOf("選擇魔物類型", "滅盡龍", "煌黑龍", "麒麟", "火龍", "冰牙龍", "冰呪龍","大兇豺龍","土砂龍","大兇顎龍","角龍","岩賊龍","飛雷龍","炎王龍","泥魚龍","毒妖鳥","屍套龍")
+        val missionType =
+            arrayListOf("選擇任務類型", "任務", "自由", "調查", "活動", "限時活動", "採集")
+        val monsterName = arrayListOf(
+            "選擇魔物類型",
+            "滅盡龍",
+            "煌黑龍",
+            "麒麟",
+            "火龍",
+            "冰牙龍",
+            "冰呪龍",
+            "大兇豺龍",
+            "土砂龍",
+            "大兇顎龍",
+            "角龍",
+            "岩賊龍",
+            "飛雷龍",
+            "炎王龍",
+            "泥魚龍",
+            "毒妖鳥",
+            "屍套龍"
+        )
         val adapterArmsType = ArrayAdapter(
             MonsterApplication.instance,
             android.R.layout.simple_spinner_dropdown_item,
@@ -155,16 +173,17 @@ class DialogChatRoom : AppCompatDialogFragment() {
         })
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                findNavController().navigateUp()
+            if (it == true) {
                 viewModel.onLeft()
+                findNavController().navigateUp()
             }
         })
+
         return binding.root
     }
 
     private fun getSpinnerItemListner(number: Long): AdapterView.OnItemSelectedListener? {
-        return  object : AdapterView.OnItemSelectedListener {
+        return object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 

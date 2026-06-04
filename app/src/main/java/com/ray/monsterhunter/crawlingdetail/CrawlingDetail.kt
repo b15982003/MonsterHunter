@@ -14,12 +14,10 @@ import androidx.navigation.fragment.findNavController
 import com.ray.monsterhunter.MainActivity
 import com.ray.monsterhunter.databinding.CrawlingDetailFragmentBinding
 import com.ray.monsterhunter.ext.getVmFactory
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
 class CrawlingDetail : Fragment() {
-
     private val viewModel by viewModels<CrawlingDetailViewModel> {
         getVmFactory(
             CrawlingDetailArgs.fromBundle(
@@ -31,8 +29,7 @@ class CrawlingDetail : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = CrawlingDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -62,23 +59,23 @@ class CrawlingDetail : Fragment() {
 
         binding.crawlingDetailLeaveMessageRecy.adapter = adapter
         // time change to UI
-        val AllStampTimeToDate =
-            viewModel.crawling.value?.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+        val allStampTimeToDate =
+            viewModel.crawling.value?.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
-        binding.crawlingDetailCreateTime.text = AllStampTimeToDate
+        binding.crawlingDetailCreateTime.text = allStampTimeToDate
 
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as MainActivity).hiddingToolbar()
-        (activity as MainActivity).hiddingBottomnav()
+        (activity as MainActivity).hidingToolbar()
+        (activity as MainActivity).hidingBottommost()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         (activity as MainActivity).getToolbar()
-        (activity as MainActivity).getBottomnav()
+        (activity as MainActivity).getBottommost()
     }
 }

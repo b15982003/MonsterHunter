@@ -8,7 +8,6 @@ import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
-import com.ray.monsterhunter.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -27,11 +26,11 @@ class DialogFriendDetailViewModel(
     val user: LiveData<User>
         get() = _user
 
-    val _leave = MutableLiveData<Boolean>()
+    private val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
         get() = _leave
 
-    val _follow = MutableLiveData<Boolean>(false)
+    private val _follow = MutableLiveData<Boolean>(false)
     val follow: LiveData<Boolean>
         get() = _follow
 
@@ -40,42 +39,33 @@ class DialogFriendDetailViewModel(
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
-
     val error: LiveData<String>
         get() = _error
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
-    init {
-
-    }
-
     fun postFriend() {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = user.value?.let { repository.postFriend(it) }) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -86,24 +76,24 @@ class DialogFriendDetailViewModel(
 
 
     fun cancelFriend() {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = user.value?.let { repository.cancelFriend(it) }) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -117,15 +107,11 @@ class DialogFriendDetailViewModel(
         viewModelJob.cancel()
     }
 
-    fun nothing() {
-
-    }
-
     fun getFollow() {
         _follow.value = true
     }
 
-    fun cencelFollow() {
+    fun cancelFollow() {
         _follow.value = false
     }
 

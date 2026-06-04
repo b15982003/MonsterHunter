@@ -9,7 +9,6 @@ import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 open class BaseActivity : AppCompatActivity(), CoroutineScope {
-
     val job = Job()
 
     override val coroutineContext: CoroutineContext
@@ -17,7 +16,5 @@ open class BaseActivity : AppCompatActivity(), CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setupStatusBar()
     }
-
 }

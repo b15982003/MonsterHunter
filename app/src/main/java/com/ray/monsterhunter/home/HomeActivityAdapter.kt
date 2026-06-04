@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.databinding.ItemHomeActiviteBinding
 
-class HomeActivityAdapter(private val onClickListener: OnClickListener ) :
+class HomeActivityAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Activity, RecyclerView.ViewHolder>(DiffCallback) {
 
-    class OnClickListener(val clickListener: (activity : Activity) -> Unit) {
+    class OnClickListener(val clickListener: (activity: Activity) -> Unit) {
         fun onClick(activity: Activity) = clickListener(activity)
     }
 
-    class ActivityViewHolder(private var binding: ItemHomeActiviteBinding):
+    class ActivityViewHolder(private var binding: ItemHomeActiviteBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(activity: Activity, onClickListener: OnClickListener) {
 
@@ -29,16 +29,22 @@ class HomeActivityAdapter(private val onClickListener: OnClickListener ) :
         override fun areItemsTheSame(oldItem: Activity, newItem: Activity): Boolean {
             return oldItem === newItem
         }
+
         override fun areContentsTheSame(oldItem: Activity, newItem: Activity): Boolean {
             return oldItem.image == newItem.image
         }
+
         private const val ITEM_VIEW_TYPE_ARTICLE = 0x00
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_ARTICLE -> ActivityViewHolder(ItemHomeActiviteBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+            ITEM_VIEW_TYPE_ARTICLE -> ActivityViewHolder(
+                ItemHomeActiviteBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+            )
+
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }

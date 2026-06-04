@@ -7,7 +7,7 @@
 
         <import type="android.view.View" />
 
-        <import type="com.ray.monsterhunter.util.UserManager"/>
+        <import type="com.ray.monsterhunter.util.UserManager" />
 
         <variable
             name="viewModel"
@@ -17,8 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="@{() -> viewModel.leave(false)}"
-        >
+        android:onClick="@{() -> viewModel.leave(false)}">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -30,7 +29,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_publish"
@@ -85,9 +83,9 @@
                         android:gravity="top|start"
                         android:hint="@string/crawlingName"
                         android:imeOptions="actionNext"
-                        android:maxLength="10"
                         android:inputType="text"
                         android:lines="1"
+                        android:maxLength="10"
                         android:text="@={viewModel.crawling.roomname}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,8 +155,6 @@
                     app:layout_constraintStart_toStartOf="@id/post_dialog_monster_shape"
                     app:layout_constraintTop_toTopOf="@+id/post_dialog_monster_shape" />
 
-
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/post_dialog_textcontent"
                     style="@style/TextInputLayoutStyle"
@@ -200,8 +196,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </ScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

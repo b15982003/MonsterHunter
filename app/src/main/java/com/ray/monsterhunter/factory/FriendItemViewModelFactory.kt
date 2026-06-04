@@ -15,11 +15,10 @@ class FriendItemViewModelFactory constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) = with(modelClass) {
         when {
             isAssignableFrom(FriendItemViewModel::class.java) ->
-               FriendItemViewModel(repository,friendTypeFilter)
-
+                FriendItemViewModel(repository, friendTypeFilter)
 
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-    }as T
+    } as T
 }

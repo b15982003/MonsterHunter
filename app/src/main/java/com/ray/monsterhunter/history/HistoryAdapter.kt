@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ray.monsterhunter.R
-import com.ray.monsterhunter.data.Activity
 import com.ray.monsterhunter.data.History
 import com.ray.monsterhunter.databinding.ItemHistoryBinding
-import com.ray.monsterhunter.databinding.ItemHomeActiviteBinding
 import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
@@ -25,16 +23,16 @@ class HistoryAdapter(private val onClickListener: OnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(history: History, onClickListener: OnClickListener) {
-            var AllStampTimeToDate =
-                history.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            val allStampTimeToDate =
+                history.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
-            binding.historyListCreateTime.text = AllStampTimeToDate
+            binding.historyListCreateTime.text = allStampTimeToDate
 
-            if (history.missionResult == "true"){
+            if (history.missionResult == "true") {
                 binding.historyListMonsterShape.setBackgroundResource(R.drawable.item_history_image_success_bg)
                 binding.historyListBackground.setBackgroundColor(Color.parseColor("#ABDAFC"))
                 binding.historyListMissionResult.text = "成功"
-            }else{
+            } else {
                 binding.historyListMonsterShape.setBackgroundResource(R.drawable.item_history_image_fail_bg)
                 binding.historyListBackground.setBackgroundColor(Color.parseColor("#F4C0C6"))
                 binding.historyListMissionResult.text = "失敗"
@@ -65,6 +63,7 @@ class HistoryAdapter(private val onClickListener: OnClickListener) :
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
+
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }

@@ -23,16 +23,13 @@ import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
 class ProfileFragment : Fragment() {
-
     private lateinit var binding: ProfileFragmentBinding
-
     private val viewModel by viewModels<ProfileViewModel> { getVmFactory() }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -45,64 +42,49 @@ class ProfileFragment : Fragment() {
         }
 
         viewModel.user.observe(viewLifecycleOwner, Observer {
-            //draw start
-            it?.let { User ->
-                (User.armsType.A?.div(60))?.toFloat()?.let {
-                    binding.profileArmsARatingBar.setRating(it)
+            it?.let { user ->
+                (user.armsType.A?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsARatingBar.rating = it
                 }
-                (User.armsType.B?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsBRatingBar.setRating(it)
+                (user.armsType.B?.div(60))?.toFloat()?.let { it ->
+                    binding.profileArmsBRatingBar.rating = it
                 }
-                (User.armsType.C?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsCRatingBar.setRating(it)
+                (user.armsType.C?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsCRatingBar.rating = it
                 }
-                (User.armsType.D?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsDRatingBar.setRating(it)
+                (user.armsType.D?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsDRatingBar.rating = it
                 }
-                (User.armsType.E?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsERatingBar.setRating(it)
+                (user.armsType.E?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsERatingBar.rating = it
                 }
-                (User.armsType.F?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsFRatingBar.setRating(it)
+                (user.armsType.F?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsFRatingBar.rating = it
                 }
-                (User.armsType.G?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsGRatingBar.setRating(it)
+                (user.armsType.G?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsGRatingBar.rating = it
                 }
-                (User.armsType.H?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsHRatingBar.setRating(it)
+                (user.armsType.H?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsHRatingBar.rating = it
                 }
-                (User.armsType.I?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsIRatingBar.setRating(it)
+                (user.armsType.I?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsIRatingBar.rating = it
                 }
-                (User.armsType.J?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsJRatingBar.setRating(it)
+                (user.armsType.J?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsJRatingBar.rating = it
                 }
-                (User.armsType.K?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsKRatingBar.setRating(it)
+                (user.armsType.K?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsKRatingBar.rating = it
                 }
-                (User.armsType.L?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsLRatingBar.setRating(it)
+                (user.armsType.L?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsLRatingBar.rating = it
                 }
-                (User.armsType.M?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsMRatingBar.setRating(it)
+                (user.armsType.M?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsMRatingBar.rating = it
                 }
-                (User.armsType.N?.div(60))?.toFloat()?.let {
-                    it
-                    binding.profileArmsNRatingBar.setRating(it)
+                (user.armsType.N?.div(60))?.toFloat()?.let {it ->
+                    binding.profileArmsNRatingBar.rating = it
                 }
-
             }
         })
         return binding.root

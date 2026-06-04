@@ -27,8 +27,6 @@ import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.UserManager
 
 class ChatRoomDetail : Fragment() {
-
-
     private val viewModel by viewModels<ChatRoomDetailViewModel> {
         getVmFactory(
             ChatRoomDetailArgs.fromBundle(
@@ -43,11 +41,12 @@ class ChatRoomDetail : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        val adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
+        }, viewModel)
 
         //初始化
         viewModel.createLanguageTTS()
-
         binding = ChatRoomDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -61,10 +60,6 @@ class ChatRoomDetail : Fragment() {
         binding.chatRoomDetailTimeBg.visibility = View.GONE
         binding.chatRoomDetailTimeStart.visibility = View.GONE
         binding.chatRoomDetailTimeEnd.visibility = View.GONE
-
-
-        val adapter = ChatRoomDetailAdapter(ChatRoomDetailAdapter.OnClickListener {
-        },viewModel)
 
         binding.chatRoomDetailTextMessageRecy.adapter = adapter
         binding.chatRoomDetailArmsImage.setImageResource(R.drawable.ic_arms_spear)
@@ -99,7 +94,8 @@ class ChatRoomDetail : Fragment() {
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {
             if (it == true) {
-                Toast.makeText(MonsterApplication.instance, "人員已經滿了", Toast.LENGTH_LONG).show()
+                Toast.makeText(MonsterApplication.instance, "人員已經滿了", Toast.LENGTH_LONG)
+                    .show()
                 findNavController().navigateUp()
                 viewModel.getOutFinish()
             }
@@ -125,7 +121,7 @@ class ChatRoomDetail : Fragment() {
         viewModel.liveChatRoom.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Handler().postDelayed({
-                    if ( viewModel.liveChatRoom.value?.endToScore == "true") {
+                    if (viewModel.liveChatRoom.value?.endToScore == "true") {
 
                         viewModel.isGoon.value = false
                         viewModel.endSpeakerReady()
@@ -135,8 +131,7 @@ class ChatRoomDetail : Fragment() {
                             )
                         )
                     }
-                },1000)
-
+                }, 1000)
 
                 val currentStartTime = viewModel.liveChatRoom.value?.startTime
                 val notOwner = viewModel.chatRoom.value?.userId != UserManager.userData.id
@@ -153,7 +148,7 @@ class ChatRoomDetail : Fragment() {
                         binding.chatRoomDetailTimeBg.visibility = View.GONE
                         binding.chatRoomDetailTimeStart.visibility = View.GONE
                     }, 1000)
-                } else if (notOwner && notFinished && endedTransition && !isFirstEmission) {
+                } else if (notOwner && notFinished && endedTransition) {
                     binding.chatRoomDetailTimeBg.visibility = View.VISIBLE
                     binding.chatRoomDetailTimeStart.visibility = View.GONE
                     binding.chatRoomDetailTimeEnd.visibility = View.VISIBLE
@@ -223,9 +218,7 @@ class ChatRoomDetail : Fragment() {
 
         binding.chatRoomDetailArmsSpinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
 
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -238,63 +231,76 @@ class ChatRoomDetail : Fragment() {
                             viewModel.userArmsType.value?.armsType = "皆可"
                             viewModel.userArms.value = 0
                         }
+
                         1L -> {
                             viewModel.userArmsType.value?.armsType = "太刀"
                             viewModel.userArms.value = 1
                         }
+
                         2L -> {
                             viewModel.userArmsType.value?.armsType = "大劍"
                             viewModel.userArms.value = 2
                         }
+
                         3L -> {
                             viewModel.userArmsType.value?.armsType = "弓箭"
                             viewModel.userArms.value = 3
                         }
+
                         4L -> {
                             viewModel.userArmsType.value?.armsType = "充能斧"
                             viewModel.userArms.value = 4
                         }
+
                         5L -> {
                             viewModel.userArmsType.value?.armsType = "輕弩"
                             viewModel.userArms.value = 5
                         }
+
                         6L -> {
                             viewModel.userArmsType.value?.armsType = "雙劍"
                             viewModel.userArms.value = 6
                         }
+
                         7L -> {
                             viewModel.userArmsType.value?.armsType = "操蟲棍"
                             viewModel.userArms.value = 7
                         }
+
                         8L -> {
                             viewModel.userArmsType.value?.armsType = "重弩"
                             viewModel.userArms.value = 8
                         }
+
                         9L -> {
                             viewModel.userArmsType.value?.armsType = "大錘"
                             viewModel.userArms.value = 9
                         }
+
                         10L -> {
                             viewModel.userArmsType.value?.armsType = "銃槍"
                             viewModel.userArms.value = 10
                         }
+
                         11L -> {
                             viewModel.userArmsType.value?.armsType = "單手劍"
                             viewModel.userArms.value = 11
                         }
+
                         12L -> {
                             viewModel.userArmsType.value?.armsType = "長槍"
                             viewModel.userArms.value = 12
                         }
+
                         13L -> {
                             viewModel.userArmsType.value?.armsType = "斬擊斧"
                             viewModel.userArms.value = 13
                         }
+
                         14L -> {
                             viewModel.userArmsType.value?.armsType = "狩獵笛"
                             viewModel.userArms.value = 14
                         }
-
                     }
                 }
             }
@@ -303,9 +309,8 @@ class ChatRoomDetail : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as MainActivity).hiddingBottomnav()
-        (activity as MainActivity).hiddingToolbar()
-
+        (activity as MainActivity).hidingBottommost()
+        (activity as MainActivity).hidingToolbar()
     }
 
     private var hasLeft = false
@@ -322,9 +327,8 @@ class ChatRoomDetail : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        (activity as MainActivity).getBottomnav()
+        (activity as MainActivity).getBottommost()
         (activity as MainActivity).getToolbar()
-        viewModel.canceltts()
-
+        viewModel.cancelTts()
     }
 }

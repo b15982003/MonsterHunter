@@ -15,11 +15,10 @@ class UserViewModelFactory constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>) = with(modelClass) {
         when {
             isAssignableFrom(DialogFriendDetailViewModel::class.java) ->
-                DialogFriendDetailViewModel(repository,user)
-
+                DialogFriendDetailViewModel(repository, user)
 
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-    }as T
+    } as T
 }

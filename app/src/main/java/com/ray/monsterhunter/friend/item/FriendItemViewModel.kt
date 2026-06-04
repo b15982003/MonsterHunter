@@ -21,7 +21,6 @@ import com.ray.monsterhunter.util.UserManager
 class FriendItemViewModel(
     val repository: MonsterRepository,
     val friendTypeFilter: FriendTypeFilter
-    // Handle the type for each catalog item
 ) : ViewModel() {
 
     val searchText: String? = UserManager.userData.email
@@ -35,7 +34,6 @@ class FriendItemViewModel(
 
     // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
-
     val error: LiveData<String>
         get() = _error
 
@@ -47,13 +45,9 @@ class FriendItemViewModel(
 
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        Logger.i("------------------------------------")
-        Logger.i("[${this::class.simpleName}]${this}")
-        Logger.i("------------------------------------")
         if (searchText != null) {
             getUserList(searchText)
         }
@@ -61,38 +55,37 @@ class FriendItemViewModel(
 
     fun getUserList(searchText: String) {
         when (friendTypeFilter) {
-            FriendTypeFilter.USERLIST ->{
-                if (searchText != null){
-                    getAllUser(searchText)
-                }
+            FriendTypeFilter.USERLIST -> {
+                getAllUser(searchText)
             }
+
             else -> getMyUser()
         }
     }
 
-    fun getAllUser(searchText : String) {
+    fun getAllUser(searchText: String) {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result = repository.getAllUser(searchText)
-
             _userList.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -104,27 +97,27 @@ class FriendItemViewModel(
 
     fun getMyUser() {
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             val result = repository.getMyUser(UserManager.userData.email!!)
-
             _userList.value = when (result) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     result.data
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                     null
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR

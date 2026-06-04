@@ -11,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      >
+        android:layout_height="match_parent">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/home_loading_image"
@@ -45,8 +44,8 @@
             android:id="@+id/home_data_recy"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="4dp"
             android:overScrollMode="never"
+            android:padding="4dp"
             app:crawlings="@{viewModel.crawlings}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +53,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/home_activity_recy"
             tools:listitem="@layout/item_home" />
-
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -80,17 +78,11 @@
             android:id="@+id/activity_not"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/ic_activity_plus"
-            />
-
-
-
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

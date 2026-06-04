@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DateTime(
     var date: Long? = null,
-    var time :Long? = null
+    var time: Long? = null
 ) : Parcelable

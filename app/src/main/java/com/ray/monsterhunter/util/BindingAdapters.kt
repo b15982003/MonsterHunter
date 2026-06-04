@@ -22,7 +22,7 @@ import com.ray.monsterhunter.network.LoadApiStatus
 
 
 @BindingAdapter("crawlings")
-fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, crawlings: List<Crawling>?) {
     crawlings?.let {
         recyclerView.adapter?.apply {
             when (this) {
@@ -33,11 +33,11 @@ fun bindRecyclerView(recyclerView: RecyclerView, crawlings : List<Crawling>?) {
 }
 
 @BindingAdapter("chatRoom")
-fun bindChatRoomRecycleView(recyclerView: RecyclerView,chatRoom: List<ChatRoom>?){
+fun bindChatRoomRecycleView(recyclerView: RecyclerView, chatRoom: List<ChatRoom>?) {
     Logger.d("bindChatRoomRecycleView, chatRoom=$chatRoom")
     chatRoom?.let {
         recyclerView.adapter?.apply {
-            when (this){
+            when (this) {
                 is ChatRoomAdapter -> submitList(it)
             }
         }
@@ -57,10 +57,10 @@ fun bindHistoryRecyclerView(recyclerView: RecyclerView, history: List<History>?)
 
 
 @BindingAdapter("chatRoomMessage")
-fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,message: List<Message>?){
+fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView, message: List<Message>?) {
     message?.let {
         recyclerView.adapter?.apply {
-            when (this){
+            when (this) {
                 is ChatRoomDetailAdapter -> submitList(it)
             }
         }
@@ -68,10 +68,10 @@ fun bindChatRoomMessageRecycleView(recyclerView: RecyclerView,message: List<Mess
 }
 
 @BindingAdapter("crawlingleaveMessage")
-fun bindCrawlingMessageRecycleView(recyclerView: RecyclerView,message: List<Message>?){
+fun bindCrawlingMessageRecycleView(recyclerView: RecyclerView, message: List<Message>?) {
     message?.let {
         recyclerView.adapter?.apply {
-            when (this){
+            when (this) {
                 is CrawlingDetailAdapter -> submitList(it)
             }
         }
@@ -79,7 +79,7 @@ fun bindCrawlingMessageRecycleView(recyclerView: RecyclerView,message: List<Mess
 }
 
 @BindingAdapter("activity")
-fun bindActivityRecyclerView(recyclerView: RecyclerView, activity : List<Activity>?) {
+fun bindActivityRecyclerView(recyclerView: RecyclerView, activity: List<Activity>?) {
     activity?.let {
         recyclerView.adapter?.apply {
             when (this) {
@@ -90,7 +90,7 @@ fun bindActivityRecyclerView(recyclerView: RecyclerView, activity : List<Activit
 }
 
 @BindingAdapter("getAllUser")
-fun bindGetAllUserRecyclerView(recyclerView: RecyclerView, user : List<User>?) {
+fun bindGetAllUserRecyclerView(recyclerView: RecyclerView, user: List<User>?) {
     user?.let {
         recyclerView.adapter?.apply {
             when (this) {
@@ -121,6 +121,7 @@ fun bindApiErrorMessage(view: TextView, message: String?) {
         null, "" -> {
             view.visibility = View.GONE
         }
+
         else -> {
             view.text = message
             view.visibility = View.VISIBLE
@@ -137,7 +138,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ic_other_fire)
-                    .error(R.drawable.ic_monster))
+                    .error(R.drawable.ic_monster)
+            )
             .into(imgView)
     }
 }

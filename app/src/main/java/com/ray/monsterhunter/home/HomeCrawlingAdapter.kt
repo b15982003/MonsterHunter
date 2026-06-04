@@ -11,20 +11,21 @@ import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
 
-class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
+class HomeCrawlingAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Crawling, RecyclerView.ViewHolder>(DiffCallback) {
 
-    class OnClickListener(val clickListener: (crawling:Crawling) -> Unit) {
-        fun onClick(crawling:Crawling) = clickListener(crawling)
+    class OnClickListener(val clickListener: (crawling: Crawling) -> Unit) {
+        fun onClick(crawling: Crawling) = clickListener(crawling)
     }
 
-    class CrawlingViewHolder(private var binding: ItemHomeBinding):
+    class CrawlingViewHolder(private var binding: ItemHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(crawling: Crawling, onClickListener: OnClickListener) {
-            var AllStampTimeToDate = crawling.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            val allStampTimeToDate =
+                crawling.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
-            binding.homeDataCreatTime.text = AllStampTimeToDate
+            binding.homeDataCreatTime.text = allStampTimeToDate
             binding.product = crawling
             binding.root.setOnClickListener { onClickListener.onClick(crawling) }
             binding.executePendingBindings()
@@ -35,6 +36,7 @@ class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
         override fun areItemsTheSame(oldItem: Crawling, newItem: Crawling): Boolean {
             return oldItem === newItem
         }
+
         override fun areContentsTheSame(oldItem: Crawling, newItem: Crawling): Boolean {
             return oldItem.id == newItem.id
         }
@@ -44,8 +46,12 @@ class HomeCrawlingAdapter(private val onClickListener: OnClickListener ) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_ARTICLE -> CrawlingViewHolder(ItemHomeBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+            ITEM_VIEW_TYPE_ARTICLE -> CrawlingViewHolder(
+                ItemHomeBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+            )
+
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }

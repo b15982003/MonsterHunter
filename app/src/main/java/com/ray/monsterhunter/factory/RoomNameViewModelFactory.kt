@@ -10,13 +10,13 @@ import com.ray.monsterhunter.data.source.MonsterRepository
 
 class RoomNameViewModelFactory constructor(
     private val repository: MonsterRepository,
-    private val chatRoom : ChatRoom
+    private val chatRoom: ChatRoom
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) = with(modelClass) {
         when {
             isAssignableFrom(ChatRoomDetailViewModel::class.java) ->
-               ChatRoomDetailViewModel(repository,chatRoom)
+                ChatRoomDetailViewModel(repository, chatRoom)
 
             isAssignableFrom(ChatRoomDetailScoreViewModel::class.java) ->
                 ChatRoomDetailScoreViewModel(
@@ -24,9 +24,8 @@ class RoomNameViewModelFactory constructor(
                     chatRoom
                 )
 
-
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-    }as T
+    } as T
 }

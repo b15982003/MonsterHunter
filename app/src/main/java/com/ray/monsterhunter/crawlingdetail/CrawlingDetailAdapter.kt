@@ -16,16 +16,16 @@ class CrawlingDetailAdapter(
 ) :
     ListAdapter<Message, RecyclerView.ViewHolder>(DiffCallback) {
 
-    class OnClickListener(val clickListener: (message : Message) -> Unit) {
+    class OnClickListener(val clickListener: (message: Message) -> Unit) {
         fun onClick(message: Message) = clickListener(message)
     }
 
-    class CrawlingDetailViewHolder(private var binding: ItemCrawlingDetailLeaveMessageBinding):
-        RecyclerView.ViewHolder(binding.root) {
-
+    class CrawlingDetailViewHolder(
+        private var binding: ItemCrawlingDetailLeaveMessageBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message, onClickListener: OnClickListener) {
-
-            var AllStampTimeToDate = message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+            var AllStampTimeToDate =
+                message.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
             binding.leaveMessageCreateTime.text = AllStampTimeToDate
             binding.product = message
@@ -38,17 +38,21 @@ class CrawlingDetailAdapter(
         override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
             return oldItem === newItem
         }
+
         override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
             return oldItem == newItem
         }
-
         private const val ITEM_VIEW_TYPE_ARTICLE = 0x00
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_VIEW_TYPE_ARTICLE -> CrawlingDetailViewHolder(ItemCrawlingDetailLeaveMessageBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+            ITEM_VIEW_TYPE_ARTICLE -> CrawlingDetailViewHolder(
+                ItemCrawlingDetailLeaveMessageBinding.inflate(
+                    LayoutInflater.from(parent.context), parent, false
+                )
+            )
+
             else -> throw ClassCastException("Unknown viewType $viewType")
         }
     }
@@ -65,9 +69,9 @@ class CrawlingDetailAdapter(
     override fun getItemViewType(position: Int): Int {
         return ITEM_VIEW_TYPE_ARTICLE
     }
+
     // let flash out
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
-
 }
