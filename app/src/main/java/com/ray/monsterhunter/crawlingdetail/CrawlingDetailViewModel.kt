@@ -35,7 +35,6 @@ class CrawlingDetailViewModel(
         get() = _message
 
     var liveMessage = MutableLiveData<List<Message>>()
-
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
@@ -43,57 +42,49 @@ class CrawlingDetailViewModel(
 
     // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
-
     val error: LiveData<String>
         get() = _error
 
     private val _refreshStatus = MutableLiveData<Boolean>()
-
     val refreshStatus: LiveData<Boolean>
         get() = _refreshStatus
 
     private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
 
     init {
-        Logger.i("------------------------------------")
-        Logger.i("[${this::class.simpleName}]${this}")
-        Logger.i("------------------------------------")
         _message.value?.userId = UserManager.userData.id.toString()
         _message.value?.image = UserManager.userData.image.toString()
         _message.value?.email = UserManager.userData.email.toString()
-
-        getLiveLeaveMessageResoult()
+        getLiveLeaveMessageResult()
     }
 
-    fun getLiveLeaveMessageResoult() {
+    fun getLiveLeaveMessageResult() {
         liveMessage = crawling.value!!.id?.let { repository.getLiveLeaveMessage(it) }!!
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false
     }
 
     fun leaveMessage(message: Message) {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = crawling.value?.id?.let { repository.leaveMessage(message, it) }) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -101,5 +92,4 @@ class CrawlingDetailViewModel(
             }
         }
     }
-
 }

@@ -5,7 +5,6 @@ import com.ray.monsterhunter.data.source.MonsterRepository
 
 class FriendViewModel(
     val repository: MonsterRepository
-
 ) : ViewModel() {
     // TODO: Implement the ViewModel
 }

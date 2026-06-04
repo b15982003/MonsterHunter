@@ -22,16 +22,14 @@ import com.ray.monsterhunter.friend.FriendTypeFilter
 
 
 class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragment() {
-
-
     private val viewModel by viewModels<FriendItemViewModel> { getVmFactory(friendTypeFilter) }
-    lateinit var binding : FriendItemFragmentBinding
+    lateinit var binding: FriendItemFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FriendItemFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -57,12 +55,11 @@ class FriendItemFragment(private val friendTypeFilter: FriendTypeFilter) : Fragm
                     start: Int,
                     count: Int,
                     after: Int
-                ) {}
+                ) {
+                }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
                     val searchText: String = binding.friendListEdText.text.toString()
-
                     if (searchText != null || searchText != "") {
                         viewModel.getAllUser(searchText)
                     }

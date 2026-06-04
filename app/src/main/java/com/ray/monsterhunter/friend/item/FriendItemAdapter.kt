@@ -16,8 +16,6 @@ class FriendItemAdapter(val onClickListener: OnClickListener) :
 
         fun bind(user: User) {
             binding.user = user
-            // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
             binding.executePendingBindings()
         }
     }

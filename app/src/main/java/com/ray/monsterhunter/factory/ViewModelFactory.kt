@@ -45,9 +45,8 @@ class ViewModelFactory constructor(
                 HistoryViewModel(repository)
 
 
-
             else ->
                 throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
-    }as T
+    } as T
 }

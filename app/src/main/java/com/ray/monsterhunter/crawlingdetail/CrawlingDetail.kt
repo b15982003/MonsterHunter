@@ -19,7 +19,6 @@ import com.ray.monsterhunter.util.TimeUtil
 import java.util.*
 
 class CrawlingDetail : Fragment() {
-
     private val viewModel by viewModels<CrawlingDetailViewModel> {
         getVmFactory(
             CrawlingDetailArgs.fromBundle(
@@ -31,8 +30,7 @@ class CrawlingDetail : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         binding = CrawlingDetailFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -62,10 +60,10 @@ class CrawlingDetail : Fragment() {
 
         binding.crawlingDetailLeaveMessageRecy.adapter = adapter
         // time change to UI
-        val AllStampTimeToDate =
+        val allStampTimeToDate =
             viewModel.crawling.value?.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
 
-        binding.crawlingDetailCreateTime.text = AllStampTimeToDate
+        binding.crawlingDetailCreateTime.text = allStampTimeToDate
 
         return binding.root
     }

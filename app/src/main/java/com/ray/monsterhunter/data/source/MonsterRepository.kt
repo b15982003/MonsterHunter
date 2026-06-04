@@ -17,7 +17,7 @@ interface MonsterRepository {
 
     fun getLiveMessage(document: String): MutableLiveData<List<Message>>
 
-    fun getLiveLeaveMessage(document:String): MutableLiveData<List<Message>>
+    fun getLiveLeaveMessage(document: String): MutableLiveData<List<Message>>
 
     fun getLiveUserOneScore(teammate: String): MutableLiveData<User>
 
@@ -39,7 +39,7 @@ interface MonsterRepository {
 
     suspend fun getUserFourArms(document: String, teammate: String): Result<UserArms>
 
-    suspend fun getAllUser(searchText:String): Result<List<User>>
+    suspend fun getAllUser(searchText: String): Result<List<User>>
 
     suspend fun getMyUser(document: String): Result<List<User>>
 
@@ -47,15 +47,15 @@ interface MonsterRepository {
 
     suspend fun publish(crawling: Crawling): Result<Boolean>
 
-    suspend fun deleteRoom(document:String): Result<Boolean>
+    suspend fun deleteRoom(document: String): Result<Boolean>
 
     suspend fun sentMessage(message: Message, document: String): Result<Boolean>
 
-    suspend fun leaveMessage(message : Message,document :String): Result<Boolean>
+    suspend fun leaveMessage(message: Message, document: String): Result<Boolean>
 
-    suspend fun postFriend(user : User): Result<Boolean>
+    suspend fun postFriend(user: User): Result<Boolean>
 
-    suspend fun cancelFriend(user : User): Result<Boolean>
+    suspend fun cancelFriend(user: User): Result<Boolean>
 
     suspend fun getUserArms(userArmsType: UserArms, document: String): Result<Boolean>
 
@@ -65,25 +65,39 @@ interface MonsterRepository {
 
     suspend fun updateChatRoomInfo(chatRoom: LiveData<ChatRoom>, document: String): Result<Boolean>
 
-    suspend fun updateUserOne(userId: String, userOneScore: ArmsType,allFight : Long): Result<Boolean>
+    suspend fun updateUserOne(
+        userId: String,
+        userOneScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean>
 
-    suspend fun updateUserTwo(userId: String, userTwoScore: ArmsType,allFight : Long): Result<Boolean>
+    suspend fun updateUserTwo(
+        userId: String,
+        userTwoScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean>
 
-    suspend fun updateUserThree(userId: String, userThreeScore: ArmsType,allFight : Long): Result<Boolean>
+    suspend fun updateUserThree(
+        userId: String,
+        userThreeScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean>
 
-    suspend fun updateUserFour(userId: String, userFourScore: ArmsType ,allFight : Long): Result<Boolean>
+    suspend fun updateUserFour(
+        userId: String,
+        userFourScore: ArmsType,
+        allFight: Long
+    ): Result<Boolean>
 
     suspend fun pushUser(user: User): Result<Boolean>
 
     suspend fun pushChatRoom(chatRoom: ChatRoom): Result<Boolean>
 
-    suspend fun pushHistory1(history: History,email:String): Result<Boolean>
+    suspend fun pushHistory1(history: History, email: String): Result<Boolean>
 
-    suspend fun pushHistory2(history: History,email:String): Result<Boolean>
+    suspend fun pushHistory2(history: History, email: String): Result<Boolean>
 
-    suspend fun pushHistory3(history: History,email:String): Result<Boolean>
+    suspend fun pushHistory3(history: History, email: String): Result<Boolean>
 
-    suspend fun pushHistory4(history: History,email:String): Result<Boolean>
-
-
+    suspend fun pushHistory4(history: History, email: String): Result<Boolean>
 }

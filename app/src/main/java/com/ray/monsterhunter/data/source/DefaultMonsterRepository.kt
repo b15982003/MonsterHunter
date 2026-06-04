@@ -7,7 +7,6 @@ import com.ray.monsterhunter.data.*
 class DefaultMonsterRepository(
     private val remoteDataSource: MonsterDataSource,
     private val localDataSource: MonsterDataSource
-
 ) : MonsterRepository {
 
     override suspend fun getCrawlings(): Result<List<Crawling>> {
@@ -172,6 +171,4 @@ class DefaultMonsterRepository(
     override suspend fun pushHistory4(history: History,email:String): Result<Boolean> {
         return remoteDataSource.pushHistory4(history,email)
     }
-
-
 }

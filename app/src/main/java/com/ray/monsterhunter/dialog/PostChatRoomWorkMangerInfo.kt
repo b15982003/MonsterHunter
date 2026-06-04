@@ -27,17 +27,13 @@ class PostChatRoomWorkMangerInfo : AppCompatDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentPostChatRoomWorkMangerInfoBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-
-        binding.chatRoomPostTimeOut.setOnClickListener(){
+        binding.chatRoomPostTimeOut.setOnClickListener() {
             dismiss()
         }
-
-
         return binding.root
     }
-
 }

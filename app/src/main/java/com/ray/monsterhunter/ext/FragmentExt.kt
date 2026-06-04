@@ -11,28 +11,26 @@ import com.ray.monsterhunter.friend.FriendTypeFilter
 
 fun Fragment.getVmFactory(): ViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-
     return ViewModelFactory(repository)
 }
 
 fun Fragment.getVmFactory(chatRoom: ChatRoom): RoomNameViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-    return RoomNameViewModelFactory(repository,chatRoom)
+    return RoomNameViewModelFactory(repository, chatRoom)
 }
 
 fun Fragment.getVmFactory(friendTypeFilter: FriendTypeFilter): FriendItemViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-
-    return FriendItemViewModelFactory(repository,friendTypeFilter)
+    return FriendItemViewModelFactory(repository, friendTypeFilter)
 }
 
-fun Fragment.getVmFactory(user : User): UserViewModelFactory {
+fun Fragment.getVmFactory(user: User): UserViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-    return UserViewModelFactory(repository,user)
+    return UserViewModelFactory(repository, user)
 }
 
 fun Fragment.getVmFactory(crawling: Crawling): CrawlingDetailViewModelFactory {
     val repository = (requireContext().applicationContext as MonsterApplication).repository
-    return CrawlingDetailViewModelFactory(repository,crawling)
+    return CrawlingDetailViewModelFactory(repository, crawling)
 }
 

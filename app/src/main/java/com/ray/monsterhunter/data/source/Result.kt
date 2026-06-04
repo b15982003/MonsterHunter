@@ -1,7 +1,6 @@
 package com.ray.monsterhunter.data.source
 
 
-
 sealed class Result<out R> {
 
     data class Success<out T>(val data: T) : Result<T>()

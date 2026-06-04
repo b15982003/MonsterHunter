@@ -10,5 +10,4 @@ data class UserArms(
     var image: String = "",
     var email: String = "",
     var armsType: String = ""
-
 ) : Parcelable
