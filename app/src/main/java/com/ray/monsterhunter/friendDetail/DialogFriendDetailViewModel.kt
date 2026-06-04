@@ -8,7 +8,6 @@ import com.ray.monsterhunter.R
 import com.ray.monsterhunter.data.User
 import com.ray.monsterhunter.data.source.MonsterRepository
 import com.ray.monsterhunter.network.LoadApiStatus
-import com.ray.monsterhunter.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

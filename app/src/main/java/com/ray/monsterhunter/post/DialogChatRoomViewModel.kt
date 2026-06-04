@@ -112,9 +112,8 @@ class DialogChatRoomViewModel(val repository: MonsterRepository) : ViewModel() {
         event.value?.dateTime?.time = timeToStamp
         hours.value = hour
         mins.value = min
-        val nowTime =
-            "${years.value}-${months.value}-${days.value} " +
-                    "${hours.value}:${mins.value}"
+        val nowTime = "${years.value}-${months.value}-${days.value} " +
+                "${hours.value}:${mins.value}"
         getTime.value = TimeUtil.dateToAllStamp(nowTime, Locale.TAIWAN)
     }
 

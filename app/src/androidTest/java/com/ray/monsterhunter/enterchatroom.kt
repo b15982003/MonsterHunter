@@ -31,24 +31,6 @@ class enterchatroom {
     @Test
     fun enterchatroom() {
         Thread.sleep(7000)
-
-//        val appCompatTextView = onView(
-//            allOf(
-//                withId(R.id.google_sign_in_button), withText("Google SignIn"),
-//                childAtPosition(
-//                    childAtPosition(
-//                        withClassName(`is`("android.widget.FrameLayout")),
-//                        0
-//                    ),
-//                    2
-//                ),
-//                isDisplayed()
-//            )
-//        )
-//        appCompatTextView.perform(click())
-//
-//        Thread.sleep(7000)
-
         val bottomNavigationItemView = onView(
             allOf(
                 withId(R.id.navigation_chatroom), withContentDescription("chatRoom"),
@@ -122,19 +104,6 @@ class enterchatroom {
             )
         )
         appCompatSpinner.perform(click())
-
-        val textView = onData(anything())
-            .inAdapterView(
-                allOf(
-                    withId(R.id.select_dialog_listview),
-                    childAtPosition(
-                        withId(R.id.contentPanel),
-                        0
-                    )
-                )
-            )
-            .atPosition(2)
-        textView.perform(click())
 
         val appCompatImageView2 = onView(
             allOf(
