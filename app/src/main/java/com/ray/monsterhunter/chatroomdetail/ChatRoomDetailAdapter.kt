@@ -30,7 +30,7 @@ class ChatRoomDetailAdapter(
             viewModel: ChatRoomDetailViewModel
         ) {
             val allStampTimeToDate =
-                message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+                message.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
             binding.chatRoomDetailItemCreateTime.text = allStampTimeToDate
             binding.chatRoomDetailItemCreateTimeRight.text = allStampTimeToDate

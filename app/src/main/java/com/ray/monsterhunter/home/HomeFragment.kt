@@ -19,7 +19,6 @@ import java.util.*
 
 
 class HomeFragment : Fragment() {
-
     private lateinit var binding: HomeFragmentBinding
     private val viewModel by viewModels<HomeViewModel> { getVmFactory() }
 

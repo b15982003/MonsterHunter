@@ -309,8 +309,8 @@ class ChatRoomDetail : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as MainActivity).hiddingBottomnav()
-        (activity as MainActivity).hiddingToolbar()
+        (activity as MainActivity).hidingBottommost()
+        (activity as MainActivity).hidingToolbar()
     }
 
     private var hasLeft = false
@@ -327,7 +327,7 @@ class ChatRoomDetail : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        (activity as MainActivity).getBottomnav()
+        (activity as MainActivity).getBottommost()
         (activity as MainActivity).getToolbar()
         viewModel.cancelTts()
     }

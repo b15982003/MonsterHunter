@@ -21,7 +21,6 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
     val crawlings: LiveData<List<Crawling>>
         get() = _crawlings
 
-
     private var _activityImage = MutableLiveData<List<Activity>>()
     val activityImage: LiveData<List<Activity>>
         get() = _activityImage
@@ -31,17 +30,14 @@ class HomeViewModel(val repository: MonsterRepository) : ViewModel() {
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
     val error: LiveData<String>
         get() = _error
 
-    // status for the loading icon of swl
     private val _refreshStatus = MutableLiveData<Boolean>()
     val refreshStatus: LiveData<Boolean>
         get() = _refreshStatus
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 

@@ -37,11 +37,10 @@ class HistoryViewModel(
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-
-        getLiveHistoryResoult()
+        getLiveHistoryResult()
     }
 
-    fun getLiveHistoryResoult(){
+    fun getLiveHistoryResult() {
         liveHistory = repository.getLiveHistory()
         _status.value = LoadApiStatus.DONE
         _refreshStatus.value = false

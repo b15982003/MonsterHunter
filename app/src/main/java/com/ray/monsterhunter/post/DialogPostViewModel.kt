@@ -20,9 +20,7 @@ import kotlinx.coroutines.launch
 class DialogPostViewModel(
     private val repository: MonsterRepository
 ) : ViewModel() {
-
-
-    val _leave = MutableLiveData<Boolean>()
+    private val _leave = MutableLiveData<Boolean>()
     val leave: LiveData<Boolean>
         get() = _leave
 
@@ -36,25 +34,17 @@ class DialogPostViewModel(
     val user: LiveData<User>
         get() = _user
 
-
-    // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
-
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
-
     val error: LiveData<String>
         get() = _error
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     init {
         getUserInPost()
@@ -66,27 +56,26 @@ class DialogPostViewModel(
         crawling.value?.user?.email = UserManager.userData.email
     }
 
-
     fun publish(crawling: Crawling) {
-
         coroutineScope.launch {
-
             _status.value = LoadApiStatus.LOADING
-
             when (val result = repository.publish(crawling)) {
                 is Result.Success -> {
                     _error.value = ""
                     _status.value = LoadApiStatus.DONE
                     leave(true)
                 }
+
                 is Result.Fail -> {
                     _error.value = result.error
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 is Result.Error -> {
                     _error.value = result.exception.toString()
                     _status.value = LoadApiStatus.ERROR
                 }
+
                 else -> {
                     _error.value = MonsterApplication.instance.getString(R.string.notGood)
                     _status.value = LoadApiStatus.ERROR
@@ -104,7 +93,7 @@ class DialogPostViewModel(
                 3L -> it.type = "魔物分析"
                 4L -> it.type = "攻略分析"
                 5L -> it.type = "神人搜尋"
-                5L -> it.type = "趣事分享"
+                6L -> it.type = "趣事分享"
             }
         }
     }
@@ -116,28 +105,34 @@ class DialogPostViewModel(
                     it.monsterType = "隨機攻打生物"
                     it.image = ImageManger.imageData.monsterRoomPost
                 }
+
                 1L -> {
                     it.monsterType = "滅盡龍"
                     it.image = ImageManger.imageData.monsterRoomPost
                 }
+
                 2L -> {
                     it.monsterType = "煌黑龍"
                     it.image =
                         ImageManger.imageData.monsterYellowBlack
                 }
+
                 3L -> {
                     it.monsterType = "麒麟"
                     it.image = ImageManger.imageData.monsterUnico
                 }
+
                 4L -> {
                     it.monsterType = "火龍"
                     it.image =
                         ImageManger.imageData.monsterFireDragon
                 }
+
                 5L -> {
                     it.monsterType = "冰牙龍"
                     it.image = ImageManger.imageData.monsterIceteeth
                 }
+
                 6L -> {
                     it.monsterType = "冰呪龍"
                     it.image = ImageManger.imageData.monsterIcehit
@@ -153,5 +148,4 @@ class DialogPostViewModel(
     fun onLeft() {
         _leave.value = false
     }
-
 }

@@ -46,17 +46,16 @@ class DialogChatRoom : AppCompatDialogFragment() {
         dialog?.window?.setLayout(MATCH_PARENT, MATCH_PARENT)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DialogChatRoomFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        // choose date & time
+
         binding.chatRoomPostDateText.setOnClickListener {
             datePicker()
         }
@@ -179,7 +178,7 @@ class DialogChatRoom : AppCompatDialogFragment() {
                 findNavController().navigateUp()
             }
         })
-        
+
         return binding.root
     }
 

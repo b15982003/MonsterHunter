@@ -32,11 +32,11 @@ class ChatRoomAdapter(
             viewModel: ChatRoomViewModel
         ) {
             val allStampTimeToDate =
-                chatRoom.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+                chatRoom.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
             val stampTpData =
-                chatRoom.dateTime?.date?.let { TimeUtil.StampToDate(it, Locale.TAIWAN) }
+                chatRoom.dateTime?.date?.let { TimeUtil.stampToDate(it, Locale.TAIWAN) }
             val stampToTime =
-                chatRoom.dateTime?.time?.let { TimeUtil.StampToTime(it, Locale.TAIWAN) }
+                chatRoom.dateTime?.time?.let { TimeUtil.stampToTime(it, Locale.TAIWAN) }
 
             binding.chatRoomListStartTimeDate.text = stampTpData
             binding.chatRoomListStartTime2.text = stampToTime

@@ -13,8 +13,8 @@ import androidx.work.WorkerParameters
 import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
-class WorkerManager(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
-
+class WorkerManager(context: Context, workerParams: WorkerParameters) :
+    Worker(context, workerParams) {
     //建頻道
     lateinit var manager: NotificationManager
     lateinit var builder: Notification.Builder
@@ -22,18 +22,21 @@ class WorkerManager(context: Context, workerParams: WorkerParameters) : Worker(c
     private val channelId = "chanel101"
     private val description = "test Notification"
 
-        override fun doWork(): Result {
-            getchanel(UserManager.userData.id!!)
-            return Result.success()
-        }
+    override fun doWork(): Result {
+        getchanel(UserManager.userData.id!!)
+        return Result.success()
+    }
 
-    fun getchanel(userName : String) {
-        manager = MonsterApplication.instance.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun getchanel(userName: String) {
+        manager =
+            MonsterApplication.instance.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val intent = Intent(MonsterApplication.instance, LauncherActivity::class.java)
         val pendingIntent =
-            PendingIntent.getActivity(MonsterApplication.instance, 0, intent,
-                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(
+                MonsterApplication.instance, 0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
 
         channel =
             NotificationChannel(channelId, "MyChannel", NotificationManager.IMPORTANCE_DEFAULT)
@@ -48,7 +51,5 @@ class WorkerManager(context: Context, workerParams: WorkerParameters) : Worker(c
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
         manager.notify(1234, builder.build())
-
-
     }
-    }
+}

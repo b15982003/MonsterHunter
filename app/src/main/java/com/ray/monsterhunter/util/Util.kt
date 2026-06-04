@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi
 import com.ray.monsterhunter.MonsterApplication
 
 object Util {
-
     fun isInternetConnected(): Boolean {
         val cm = MonsterApplication.instance
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -20,7 +19,6 @@ object Util {
         return MonsterApplication.instance.getString(resourceId)
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun getColor(resourceId: Int): Int {
         return MonsterApplication.instance.getColor(resourceId)
     }

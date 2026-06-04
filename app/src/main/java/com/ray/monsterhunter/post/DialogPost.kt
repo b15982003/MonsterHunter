@@ -41,7 +41,6 @@ class DialogPost : AppCompatDialogFragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-
         val missionType = arrayListOf(
             "選擇文章類型",
             "最新活動",
@@ -68,9 +67,7 @@ class DialogPost : AppCompatDialogFragment() {
         binding.postDialogActivityType.adapter = adapterActivityType
         binding.postDialogMonstername.adapter = adapterMonsterName
 
-        // choose Monster type
         binding.postDialogMonstername.onItemSelectedListener = getSpinnerListner(1)
-        // choose active type
         binding.postDialogActivityType.onItemSelectedListener = getSpinnerListner(2)
 
         viewModel.leave.observe(viewLifecycleOwner, Observer {

@@ -21,24 +21,24 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = HistoryFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        val adapter = HistoryAdapter(HistoryAdapter.OnClickListener{
-        })
+        val adapter = HistoryAdapter(HistoryAdapter.OnClickListener {})
 
         binding.historyDataRecy.adapter = adapter
 
         viewModel.liveHistory.observe(viewLifecycleOwner, Observer {
-            binding.historyDataRecy.layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fade_in)
+            binding.historyDataRecy.layoutAnimation =
+                AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fade_in)
 
-            if (viewModel.liveHistory.value == listOf<String>()){
+            if (viewModel.liveHistory.value == listOf<String>()) {
                 binding.historyListNoValue.visibility = View.VISIBLE
                 binding.historyListNoValueText.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.historyListNoValue.visibility = View.GONE
                 binding.historyListNoValueText.visibility = View.GONE
             }

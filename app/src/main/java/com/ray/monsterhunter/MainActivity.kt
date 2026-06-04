@@ -25,12 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.ray.monsterhunter.databinding.ActivityMainBinding
 import com.ray.monsterhunter.ext.getVmFactory
 import com.ray.monsterhunter.util.CurrentFragmentType
-import com.ray.monsterhunter.util.Logger
 import com.ray.monsterhunter.util.UserManager
 
 
 class MainActivity : BaseActivity() {
-
     val viewModel by viewModels<MainViewModel> { getVmFactory() }
     private lateinit var binding: ActivityMainBinding
     private var actionBarDrawerToggle: ActionBarDrawerToggle? = null
@@ -71,7 +69,7 @@ class MainActivity : BaseActivity() {
                 R.id.navigation_profile -> {
 
                     findNavController(R.id.myNavHostFragment).navigate(R.id.action_global_profileFragment)
-                    hiddingToolbar()
+                    hidingToolbar()
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -117,9 +115,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val db = FirebaseFirestore.getInstance()
-
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -143,8 +139,8 @@ class MainActivity : BaseActivity() {
 
         val navigationView = findViewById<View>(R.id.drawerNavView) as NavigationView
         val headerLayout = navigationView.inflateHeaderView(R.layout.item_drawer_heater)
-        var ivHeaderPhoto: ImageView = headerLayout.findViewById(R.id.profile_image)
-        var userName: TextView = headerLayout.findViewById(R.id.profile_userId)
+        val ivHeaderPhoto: ImageView = headerLayout.findViewById(R.id.profile_image)
+        val userName: TextView = headerLayout.findViewById(R.id.profile_userId)
 
         UserManager.userData.id = FirebaseAuth.getInstance().currentUser?.displayName
         UserManager.userData.email = FirebaseAuth.getInstance().currentUser?.email
@@ -154,17 +150,11 @@ class MainActivity : BaseActivity() {
         setupDrawer()
         userName.text = UserManager.userData.id
         Glide.with(navigationView).load(UserManager.userData.image).into(ivHeaderPhoto)
-        //addData()
-
-
     }
 
     override fun onStart() {
         super.onStart()
-//        viewModel.getUser()
         viewModel.getImageMonster()
-        Logger.d(viewModel.image.value.toString())
-
     }
 
 
@@ -187,15 +177,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupDrawer() {
-
-        // set up toolbar
         val navController = this.findNavController(R.id.myNavHostFragment)
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = null
-
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
         NavigationUI.setupWithNavController(binding.drawerNavView, navController)
-
         actionBarDrawerToggle = object : ActionBarDrawerToggle(
             this,
             binding.drawerLayout,
@@ -214,7 +200,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
@@ -222,11 +207,11 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun hiddingToolbar() {
+    fun hidingToolbar() {
         binding.toolbar.visibility = View.GONE
     }
 
-    fun hiddingBottomnav() {
+    fun hidingBottommost() {
         binding.bottomNav.visibility = View.GONE
     }
 
@@ -234,18 +219,8 @@ class MainActivity : BaseActivity() {
         binding.toolbar.visibility = View.VISIBLE
     }
 
-    fun getBottomnav() {
+    fun getBottommost() {
         binding.bottomNav.visibility = View.VISIBLE
     }
-
-
-//        WorkManager.getInstance(this).getWorkInfoByIdLiveData(request.id)
-//            .observe(this, Observer {
-//
-//                val status: String = it.state.name
-//                Toast.makeText(this,status, Toast.LENGTH_SHORT).show()
-//            })
-
-
 }
 

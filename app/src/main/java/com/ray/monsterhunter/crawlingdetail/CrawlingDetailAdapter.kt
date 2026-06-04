@@ -25,7 +25,7 @@ class CrawlingDetailAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(message: Message, onClickListener: OnClickListener) {
             var AllStampTimeToDate =
-                message.createTime?.let { TimeUtil.AllStampToDate(it, Locale.TAIWAN) }
+                message.createTime?.let { TimeUtil.allStampToDate(it, Locale.TAIWAN) }
 
             binding.leaveMessageCreateTime.text = AllStampTimeToDate
             binding.product = message
